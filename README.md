@@ -32,3 +32,7 @@ concept of **Test Driven Development** (TDD), the use of **reflection**.
 - Application of the principles of object-oriented programming
 - Creating a hierarchy of classes and inheritance
 - Component testing
+
+![Java OOP - October 2020 - Certificate](https://user-images.githubusercontent.com/76119513/156914042-9419d563-332c-46e6-9afb-40b49ba7d769.jpeg)
+
+
