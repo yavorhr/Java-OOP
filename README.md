@@ -4,35 +4,26 @@
 
 ## Course Description
 
-The [Java OOP](https://softuni.bg/trainings/3010/java-oop-october-2020) The Java OOP course highlights the studying of
-the **principles of object-oriented programming (OOP)**, work with **classes and objects**, use of **object-oriented
-modeling**, and build **class hierarchies**. **The basic principles of OOP** such as **abstraction** (interfaces,
-abstract classes), **encapsulation**, **inheritance** and **polymorphism** are studied widely. The course will go into
-the most commonly used **design patterns**. Attention will be paid to component testing (writing unit tests) and the
-concept of **Test Driven Development** (TDD), the use of **reflection**.
-
-## Course content
-
-- Working with Abstraction
-- Inheritance 
-- Encapsulation
-- Interfaces and Abstraction 
-- Polymorphism
-- SOLID
-- Reflection and Annotation 
-- Unit Testing 
-- Test Driven Development 
-- Design Patterns 
+The [Databases](https://softuni.bg/trainings/3010/java-oop-october-2020) are the standard way to use dynamic information in modern applications, making them an integral part of almost any application. The course emphasizes the fundamentals of the databases and will introduce you to one of the most widely used database management systems (DBMS - database management system), in the development of modern applications - **MySQL**. You will acquire skills for working with **relational databases**, and will focus on basic functionalities such as working with **tables**, **grouping functions**, **transactions**, **procedures** and more. This course provides the basics on working with the database and it makes it easier to understand how it is funcitoning in real environment.
 
 ## Acquired skills
 
-- Understanding the object-oriented programming paradigm
-- Data encapsulation
-- Using Reflection
-- Application of the principles of object-oriented programming
-- Creating a hierarchy of classes and inheritance
-- Component testing
+- Transaction management
+- Using the ACID model 
+- Fundamental knowledge of databases
+- Relationship management in DB
+- Use of procedures and functions
+- Creating basic Back-End architectures
 
-![Java OOP - October 2020 - Certificate](https://user-images.githubusercontent.com/76119513/156914042-9419d563-332c-46e6-9afb-40b49ba7d769.jpeg)
+## Course content
+
+- Databases Introduction. Data Definition and Datatypes 
+- Basic CRUD 
+- Built-in Functions
+- Data Aggregation
+- Table Relations 
+- Subqueries and JOINs 
+- Database Programmability and Transactions 
+
 
 
