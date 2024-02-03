@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/07.  Reflection and Annotation/Exercise/03. BarracksWars - A New Factory/03. BarracksWars - A New Factory.iml" filepath="$PROJECT_DIR$/07.  Reflection and Annotation/Exercise/03. BarracksWars - A New Factory/03. BarracksWars - A New Factory.iml" />
+      <module fileurl="file://$PROJECT_DIR$/06. SOLID/06. SOLID.iml" filepath="$PROJECT_DIR$/06. SOLID/06. SOLID.iml" />
+      <module fileurl="file://$PROJECT_DIR$/09.  Unit Testing/09.  Unit Testing.iml" filepath="$PROJECT_DIR$/09.  Unit Testing/09.  Unit Testing.iml" />
+      <module fileurl="file://$PROJECT_DIR$/01.  Working with Abstraction/Exercise/Exercise.iml" filepath="$PROJECT_DIR$/01.  Working with Abstraction/Exercise/Exercise.iml" />
+      <module fileurl="file://$PROJECT_DIR$/05. Polymorphism/Exercise/Exercise1.iml" filepath="$PROJECT_DIR$/05. Polymorphism/Exercise/Exercise1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/03. Encapsulation/Exercise/Exercise2.iml" filepath="$PROJECT_DIR$/03. Encapsulation/Exercise/Exercise2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/02. Inheritance/Exercise/Exercise3.iml" filepath="$PROJECT_DIR$/02. Inheritance/Exercise/Exercise3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/04.  Interfaces and Abstraction/Exercise/Exercise4.iml" filepath="$PROJECT_DIR$/04.  Interfaces and Abstraction/Exercise/Exercise4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/07.  Reflection and Annotation/Exercise/Exercise5.iml" filepath="$PROJECT_DIR$/07.  Reflection and Annotation/Exercise/Exercise5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Java-OOP.iml" filepath="$PROJECT_DIR$/.idea/Java-OOP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/04.  Interfaces and Abstraction/Lab/Lab.iml" filepath="$PROJECT_DIR$/04.  Interfaces and Abstraction/Lab/Lab.iml" />
+      <module fileurl="file://$PROJECT_DIR$/05. Polymorphism/Lab/Lab1.iml" filepath="$PROJECT_DIR$/05. Polymorphism/Lab/Lab1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/03. Encapsulation/Lab/Lab2.iml" filepath="$PROJECT_DIR$/03. Encapsulation/Lab/Lab2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/01.  Working with Abstraction/Lab/Lab3.iml" filepath="$PROJECT_DIR$/01.  Working with Abstraction/Lab/Lab3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/07.  Reflection and Annotation/Lab/Lab4.iml" filepath="$PROJECT_DIR$/07.  Reflection and Annotation/Lab/Lab4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/02. Inheritance/Lab/Lab5.iml" filepath="$PROJECT_DIR$/02. Inheritance/Lab/Lab5.iml" />
+    </modules>
+  </component>
+</project>
