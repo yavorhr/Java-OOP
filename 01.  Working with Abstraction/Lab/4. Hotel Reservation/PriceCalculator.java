@@ -1,18 +1,17 @@
-public class PriceCalculator {
-    private double pricePerDay;
-    private int days;
-    private Season season;
-    private Discount discount;
+package enums;
 
-    public PriceCalculator(double pricePerDay,  int days, Season season, Discount discount) {
-        this.season = season;
-        this.discount = discount;
-        this.pricePerDay = pricePerDay;
-        this.days = days;
+public enum Discount {
+    VIP(0.2),
+    SecondVisit(0.1),
+    None(0.0);
+
+    double discountAmount;
+
+    Discount(double discountAmount) {
+        this.discountAmount = discountAmount;
     }
 
     public double calculatePrice() {
-        return this.days * this.pricePerDay * this.season.getMultiplier()
-                * (1.00 - (discount.getDiscount() / 100.00));
+        return discountAmount;
     }
 }
