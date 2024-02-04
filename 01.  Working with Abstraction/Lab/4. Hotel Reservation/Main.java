@@ -1,21 +1,24 @@
-import java.util.*;
+import enums.Discount;
+import enums.Season;
+
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        String[] input = scanner.nextLine().split("\\s+");
-        double pricePerDay = Double.parseDouble(input[0]);
-        int days = Integer.parseInt(input[1]);
-        String seasonString = input[2];
-        String discountString = input[3];
+        String[] tokens = scanner.nextLine().split(" ");
+        double pricePerDay = Double.parseDouble(tokens[0]);
+        int days = Integer.parseInt(tokens[1]);
+        String dayOfWeek = tokens[2];
+        String discountType = tokens[3];
 
-        Season season = Season.valueOf(seasonString.toUpperCase());
-        Discount discount = Discount.valueOf(discountString);
+        Season season = Season.valueOf(dayOfWeek.toUpperCase());
+        Discount discount = Discount.valueOf(discountType);
 
         PriceCalculator priceCalculator = new PriceCalculator(pricePerDay, days, season, discount);
-        System.out.printf("%.2f",priceCalculator.calculatePrice());
+        double result = priceCalculator.calculatePrice();
 
-
+        System.out.printf("%.2f", result);
     }
 }
