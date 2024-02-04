@@ -1,17 +1,24 @@
+import enums.CardRank;
+import enums.CardSuit;
+
 public class Card {
-    private CardRanks number;
-    private CardSuits color;
+    private CardRank cardRank;
+    private CardSuit cardSuit;
     private int power;
 
-    public Card(CardRanks number, CardSuits color) {
-        this.number = number;
-        this.color = color;
-        this.power = number.getPower() + color.getPower();
+    public Card(CardRank cardRank, CardSuit cardSuit) {
+        this.cardRank = cardRank;
+        this.cardSuit = cardSuit;
+        setPower();
+    }
+
+    public void setPower() {
+        this.power = cardRank.getPower() + cardSuit.getPower();
     }
 
     @Override
     public String toString() {
-        String cardName = this.number + " of " + this.color;
-        return String.format("Card name: %s; Card power: %d", cardName, this.power);
+        return String.format("Card name: %s of %s; Card power: %d", this.cardRank, this.cardSuit, this.power);
     }
+
 }
