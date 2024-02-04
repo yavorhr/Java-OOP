@@ -2,60 +2,65 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
+    static int stars = 0;
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-            int[] dimestions = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-            int x = dimestions[0];
-            int y = dimestions[1];
+        int[][] matrix = readMatrix(scanner);
 
-            int[][] matrix = new int[x][y];
+        String input = scanner.nextLine();
+        while (!"Let the Force be with you".equals(input)) {
+            int[] heroCoordinates = readArray(scanner);
+            int[] evilCoordinates = readArray(scanner);
 
-            int value = 0;
-            for (int i = 0; i < x; i++)
-            {
-                for (int j = 0; j < y; j++)
-                {
-                    matrix[i][j] = value++;
-                }
+            if (validCoordinates(heroCoordinates, matrix) && validCoordinates(evilCoordinates, matrix)) {
+                collectStars(matrix, heroCoordinates, evilCoordinates);
+            } else {
+                System.out.println("Invalid coordinates");
             }
 
-            String command = scanner.nextLine();
-            long sum = 0;
-            while (!command.equals("Let the Force be with you"))
-            {
-                int[] ivoS = Arrays.stream(command.split(" ")).mapToInt(Integer::parseInt).toArray();
-                int[] evil = Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
-                int xE = evil[0];
-                int yE = evil[1];
+            input = scanner.nextLine();
+        }
 
-                while (xE >= 0 && yE >= 0)
-                {
-                    if (xE >= 0 && xE < matrix.length && yE >= 0 && yE < matrix[0].length)
-                    {
-                        matrix[xE] [yE] = 0;
-                    }
-                    xE--;
-                    yE--;
-                }
+    }
 
-                int xI = ivoS[0];
-                int yI = ivoS[1];
+    private static boolean validCoordinates(int[] coordinates, int[][] matrix) {
+        int row = coordinates[0];
+        int col = coordinates[1];
 
-                while (xI >= 0 && yI < matrix[1].length)
-                {
-                    if (xI < matrix.length && yI >= 0 && yI < matrix[0].length)
-                    {
-                        sum += matrix[xI][yI];
-                    }
+        return row >= 0 && row < matrix.length && col >= 0 && col < matrix[row].length;
+    }
 
-                    yI++;
-                    xI--;
-                }
+    private static void collectStars(int[][] matrix, int[] heroCoordinates, int[] evilCoordinates) {
+        int startRow = heroCoordinates[0];
+        int startCol = heroCoordinates[1];
 
-                command = scanner.nextLine();
+        for (int row = startRow; row >= 0; row--) {
+            for (int col = startCol; col >= 0 ; col--) {
+                System.out.print(matrix[row][col]);
             }
+        }
+    }
 
-        System.out.println(sum);
+    private static int[][] readMatrix(Scanner scanner) {
+        int[] dimension = readArray(scanner.nextLine());
+        int rows = dimension[0];
+        int cols = dimension[1];
+
+        int[][] matrix = new int[rows][cols];
+
+        int value = 0;
+
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                matrix[row][col] = value++;
+            }
+        }
+        return matrix;
+    }
+
+    private static int[] readArray(Scanner scanner) {
+        return Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
     }
 }
