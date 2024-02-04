@@ -1,10 +1,19 @@
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
 
-        System.out.println("Card Ranks:");
-        for (CardRanks suit : CardRanks.values()) {
-            System.out.println(String.format("Ordinal value: %d; Name value: %s", suit.ordinal(), suit));
-        }
-        System.out.println();
+        printOutput();
+    }
+
+    private static void printOutput() {
+        StringBuilder sb = new StringBuilder("Card Ranks:\n");
+
+        Arrays.stream(Card
+                .values())
+                .forEach(c ->
+                        sb.append(String.format("Ordinal value: %d; Name value: %s\n", c.ordinal(), c)));
+
+        System.out.println(sb);
     }
 }
