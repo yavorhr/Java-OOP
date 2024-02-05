@@ -7,22 +7,22 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int[][] matrix = readMatrix(scanner);
+        int[][] matrix = readMatrix(scanner.nextLine());
 
         String input = scanner.nextLine();
         while (!"Let the Force be with you".equals(input)) {
-            int[] heroCoordinates = readArray(scanner);
-            int[] evilCoordinates = readArray(scanner);
+            int[] heroCoordinates = readArray(input);
+            int[] evilCoordinates = readArray(scanner.nextLine());
 
             if (validCoordinates(heroCoordinates, matrix) && validCoordinates(evilCoordinates, matrix)) {
                 collectStars(matrix, heroCoordinates, evilCoordinates);
             } else {
                 System.out.println("Invalid coordinates");
             }
-
             input = scanner.nextLine();
         }
 
+        System.out.println(stars);
     }
 
     private static boolean validCoordinates(int[] coordinates, int[][] matrix) {
@@ -34,17 +34,24 @@ public class Main {
 
     private static void collectStars(int[][] matrix, int[] heroCoordinates, int[] evilCoordinates) {
         int startRow = heroCoordinates[0];
-        int startCol = heroCoordinates[1];
+        int evilCol = evilCoordinates[1];
 
-        for (int row = startRow; row >= 0; row--) {
-            for (int col = startCol; col >= 0 ; col--) {
-                System.out.print(matrix[row][col]);
+        for (int index = 0; index <= startRow; index++) {
+            int heroValue = matrix[startRow - index][index];
+            int evilValue = matrix[startRow - index][evilCol - index];
+
+            if (!areDiagonalsAreIntercepted(heroValue, evilValue)) {
+                stars += matrix[startRow - index][index];
             }
         }
     }
 
-    private static int[][] readMatrix(Scanner scanner) {
-        int[] dimension = readArray(scanner.nextLine());
+    private static boolean areDiagonalsAreIntercepted(int hero, int evil) {
+        return hero == evil;
+    }
+
+    private static int[][] readMatrix(String input) {
+        int[] dimension = readArray(input);
         int rows = dimension[0];
         int cols = dimension[1];
 
@@ -60,7 +67,7 @@ public class Main {
         return matrix;
     }
 
-    private static int[] readArray(Scanner scanner) {
-        return Arrays.stream(scanner.nextLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+    private static int[] readArray(String input) {
+        return Arrays.stream(input.split(" ")).mapToInt(Integer::parseInt).toArray();
     }
 }
