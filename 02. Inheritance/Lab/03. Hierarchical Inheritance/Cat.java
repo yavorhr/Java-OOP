@@ -1,10 +1,6 @@
-public class Cat extends Animal {
-
-    public Cat() {
-    }
+public class Cat extends Animal{
 
     public void meow(){
         System.out.println("meowing...");
     }
-
 }
