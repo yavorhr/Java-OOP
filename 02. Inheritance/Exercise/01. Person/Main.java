@@ -1,3 +1,5 @@
+import person.Child;
+
 import java.util.Scanner;
 
 public class Main {
@@ -7,9 +9,12 @@ public class Main {
         String name = scanner.nextLine();
         int age = Integer.parseInt(scanner.nextLine());
 
-        Child child = new Child(name, age);
+        Child child = new Child(name,age);
+
         System.out.println(child.getName());
         System.out.println(child.getAge());
 
+        //@toString from base class
+        System.out.println(child);
     }
 }
