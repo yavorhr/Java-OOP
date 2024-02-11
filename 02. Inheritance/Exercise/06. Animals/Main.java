@@ -1,58 +1,69 @@
+import animals.*;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        String typeAnimal = scanner.nextLine();
-        //Frog, Dog, Cat, Kitten, Tomcat
-        while (!typeAnimal.equals("Beast!")) {
-            String[] animalData = scanner.nextLine().split("\\s+");
-            String name = animalData[0];
-            int age = Integer.parseInt(animalData[1]);
-            String gender = animalData[2];
+        String animalType = scanner.nextLine();
+        while (!"Beast!".equals(animalType)) {
+            String[] tokens = scanner.nextLine().split(" ");
+            String name = tokens[0];
+            int age = Integer.parseInt(tokens[1]);
+            String gender = tokens[2];
 
             try {
-                if (age < 0) {
-                    throw new IllegalArgumentException("Invalid input!");
+                if (age <= 0) {
+                    throw new IllegalStateException("Invalid input!");
                 }
 
-                if (!animalData[2].equals("Male") && !animalData[2].equals("Female")) {
-                    throw new IllegalArgumentException("Invalid input!");
+                if (!gender.equals("Male") && !gender.equals("Female")) {
+                    throw new IllegalStateException("Invalid input!");
                 }
-            } catch (IllegalArgumentException exception) {
-                System.out.println("Invalid input");
-                typeAnimal = scanner.nextLine();
+
+            } catch (IllegalStateException e) {
+                System.out.println(e.getMessage());
+                animalType = scanner.nextLine();
                 continue;
             }
 
+            Object animalObj = getObject(animalType, name, age, gender);
+            printResult(animalType, animalObj);
 
-
-            switch (typeAnimal) {
-                case "Frog":
-                    Frog frog = new Frog(name, age, gender);
-                    System.out.println(frog.toString());
-                    break;
-                case "Dog":
-                    Dog dog = new Dog(name, age, gender);
-                    System.out.println(dog.toString());
-                    break;
-                case "Cat":
-                    Cat cat = new Cat(name, age, gender);
-                    System.out.println(cat.toString());
-                    break;
-                case "Kitten":
-                    Kitten kitten = new Kitten(name, age);
-                    System.out.println(kitten.toString());
-                    break;
-                case "Tomcat":
-                    Tomcat tomcat = new Tomcat(name, age);
-                    System.out.println(tomcat.toString());
-                    break;
-            }
-
-            typeAnimal = scanner.nextLine();
+            animalType = scanner.nextLine();
         }
     }
-}
 
+    private static void printResult(String animalType, Object currentAnimal) {
+        System.out.println(animalType);
+        System.out.println(currentAnimal.toString());
+
+        if (currentAnimal instanceof Tomcat tomcat) {
+            tomcat.produceSound();
+        } else if (currentAnimal instanceof Kitten kitten) {
+            kitten.produceSound();
+        } else if (currentAnimal instanceof Frog frog) {
+            frog.produceSound();
+        } else if (currentAnimal instanceof Dog dog) {
+            dog.produceSound();
+        }
+    }
+
+    private static Object getObject(String animalType, String name, int age, String gender) {
+        Object animal = null;
+
+        switch (animalType) {
+            case "Cat" -> {
+                if (gender.equals("Female")) {
+                    animal = new Kitten(name, age);
+                }
+                animal = new Tomcat(name, age);
+            }
+
+            case "Dog" -> animal = new Dog(name, age, gender);
+            case "Frog" -> animal = new Frog(name, age, gender);
+        }
+
+        return animal;
+    }
+}
