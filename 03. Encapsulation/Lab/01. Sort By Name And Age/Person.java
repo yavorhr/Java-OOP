@@ -3,11 +3,10 @@ public class Person {
     private String lastName;
     private int age;
 
-    public Person(String name, String lastName, int age) {
-        this.firstName = name;
+    public Person(String firstName, String lastName, int age) {
+        this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
-
     }
 
     public String getFirstName() {
@@ -24,6 +23,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return String.format("%s %s is %d years old.", this.firstName, this.lastName, this.age);
+        return String.format("%s %s is %d years old.",
+                this.firstName, this.lastName, this.age);
     }
 }
