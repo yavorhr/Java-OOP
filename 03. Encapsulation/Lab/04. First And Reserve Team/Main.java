@@ -1,31 +1,43 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        Scanner scanner = new Scanner(System.in);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(reader.readLine());
 
-        List<Person> playersLIst = new ArrayList<>();
-        int n = Integer.parseInt(scanner.nextLine());
-        for (int i = 0; i < n; i++) {
-            String[] personData = scanner.nextLine().split("\\s+");
-            String firstName = personData[0];
-            String lastName = personData[1];
-            int age = Integer.parseInt(personData[2]);
-            double salary = Double.parseDouble(personData[3]);
+        Team team = new Team("Eagles");
 
-            Person person = new Person(firstName, lastName, age, salary);
-            playersLIst.add(person);
+        while (n-- > 0) {
+            try {
+                String[] input = reader.readLine().split(" ");
+                addToTeam(team, input);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
 
-        Team team = new Team("Black eagles");
-        for (Person player : playersLIst){
-            team.addPlayer(player);
-        }
+        printOutput(team);
+    }
 
-        System.out.println("First team have " + team.getFirstTeam().size() + " players");
-        System.out.println("Reserve team have " + team.getReserveTeam().size() + " players");
+    private static void printOutput(Team team) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(String.format("""
+            First team have %d players
+            Reserve team have %d players
+            """, team.getFirstTeam().size(), team.getReserveTeam().size()));
+        System.out.print(sb);
+    }
+
+    private static void addToTeam(Team team, String[] input) {
+        String firstName = input[0];
+        String lastName = input[1];
+        int age = Integer.parseInt(input[2]);
+        double salary = Double.parseDouble(input[3]);
+
+        team.addPlayer(new Person(firstName, lastName, age, salary));
     }
 }
