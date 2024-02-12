@@ -8,7 +8,6 @@ public class Team {
     private List<Person> reserveTeam;
 
     public Team(String name) {
-        this.name = name;
         this.firstTeam = new ArrayList<>();
         this.reserveTeam = new ArrayList<>();
     }
@@ -17,7 +16,7 @@ public class Team {
         if (person.getAge() < 40) {
             this.firstTeam.add(person);
         } else {
-            reserveTeam.add(person);
+            this.reserveTeam.add(person);
         }
     }
 
