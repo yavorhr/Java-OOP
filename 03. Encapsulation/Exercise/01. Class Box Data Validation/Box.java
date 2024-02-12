@@ -4,51 +4,42 @@ public class Box {
     private double height;
 
     public Box(double length, double width, double height) {
-        this.setLength(length);
-        this.setWidth(width);
-        this.setHeight(height);
-    }
-
-    private void setHeight(double height) {
-        if (isGreaterThanZero(height)) {
-            this.height = height;
-        } else {
-            throw new IllegalArgumentException("Height cannot be zero or negative.");
-        }
+        setLength(length);
+        setWidth(width);
+        setHeight(height);
     }
 
     private void setLength(double length) {
-        if (!isGreaterThanZero(length)) {
-            throw new IllegalArgumentException("Length cannot be zero or negative.");
-        } else {
-            this.length = length;
-        }
+        validateInput("Length", length);
+        this.length = length;
     }
 
     private void setWidth(double width) {
-        if (!isGreaterThanZero(width)) {
-            throw new IllegalArgumentException("Width cannot be zero or negative.");
-        } else {
-            this.width = width;
-        }
+        validateInput("Width", width);
+        this.width = width;
     }
 
-    private boolean isGreaterThanZero(double val) {
-        return val > 0;
+    private void setHeight(double height) {
+        validateInput("Height", height);
+        this.height = height;
     }
 
     public double calculateSurfaceArea() {
-        return (2 * (length * width)) + (2 * (length * height)) + (2 * (width * height));
+        return (2 * (this.length * this.width)) + (2 * (this.length * this.height)) + (2 * (this.width * this.height));
     }
 
-    // 2lh + 2wh
     public double calculateLateralSurfaceArea() {
-        return (2 * (length * height)) + (2 * (width * height));
+        return (2 * (this.length * this.height)) + (2 * (this.width * this.height));
     }
 
-    // lwh
     public double calculateVolume() {
-        return length * height * width;
+        return this.length * this.height * this.width;
 
+    }
+
+    private void validateInput(String prefix, double value) {
+        if (value <= 0) {
+            throw new IllegalStateException(prefix + " cannot be zero or negative.");
+        }
     }
 }
