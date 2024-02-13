@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
 
         String name = scanner.nextLine();
@@ -9,13 +9,11 @@ public class Main {
 
         try {
             Chicken chicken = new Chicken(name, age);
-            System.out.println(chicken.toString());
-        } catch (IllegalArgumentException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println(chicken);
+            System.out.println(chicken.productPerDay());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
+
     }
 }
-
-
-
-
