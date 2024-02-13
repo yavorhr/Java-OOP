@@ -13,11 +13,23 @@ public class Person {
         this.products = new ArrayList<>();
     }
 
+    public void buyProduct(Product product) {
+        if (product.getCost() > this.money) {
+            throw new IllegalArgumentException(this.name + " can't afford " + product.getName());
+        }
+        this.products.add(product);
+        this.money -= product.getCost();
+    }
+
     private void setName(String name) {
         if (!NameValidator.isValid(name)) {
             throw new IllegalArgumentException(ConstantMessages.INVALID_NAME_EXCEPTION_MESSAGE);
         }
         this.name = name;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     private void setMoney(double money) {
@@ -27,25 +39,12 @@ public class Person {
         this.money = money;
     }
 
-    public void buyProduct(Product product) {
-        if (product.getCost() > this.money) {
-            throw new IllegalArgumentException(name + " can't afford " + product.getName());
-        }
-        this.products.add(product);
-        this.money -= product.getCost();
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
     @Override
     public String toString() {
-        String productsOutput = this.products.isEmpty()
-                ? "Nothing bought"
-                : this.products.stream().map(Product::getName)
-                .collect(Collectors.joining(", "));
+        return String.format("%s - %s", this.name, this.products.size() == 0 ? "Nothing bought" : getProducts(this.products));
+    }
 
-        return name + " - " + productsOutput;
+    private String getProducts(List<Product> products) {
+        return products.stream().map(Product::getName).collect(Collectors.joining(", "));
     }
 }
