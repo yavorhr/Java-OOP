@@ -1,37 +1,55 @@
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        String input = scanner.nextLine();
-        String[] tokens = input.split("\\s+");
+        String[] pizzaTokens = getTokens(scanner);
+        String[] doughTokens = getTokens(scanner);
+
         try {
-            Pizza pizza = new Pizza(tokens[1], Integer.parseInt(tokens[2]));
-            tokens = scanner.nextLine().split("\\s+");
-            Dough dough = new Dough(tokens[1], tokens[2], Double.parseDouble(tokens[3]));
+            Pizza pizza = getPizza(pizzaTokens);
+            Dough dough = getDough(doughTokens);
             pizza.setDough(dough);
 
-            input = scanner.nextLine();
-            while (!input.equals("END")) {
-                tokens = input.split("\\s+");
-                Topping topping = new Topping(tokens[1], Double.parseDouble(tokens[2]));
+            String input = scanner.nextLine();
+            while (!"END".equals(input)) {
+                String[] toppingTokens = input.split("\\s+");
+                Topping topping = getTopping(toppingTokens);
                 pizza.addTopping(topping);
 
                 input = scanner.nextLine();
             }
 
-            System.out.println(pizza.toString());
-        } catch (IllegalArgumentException exception) {
-            System.out.println(exception.getMessage());
+            System.out.println(pizza);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
+
+    }
+
+    private static Topping getTopping(String[] toppingTokens) {
+        String name = toppingTokens[1];
+        double weight = Double.parseDouble(toppingTokens[2]);
+        return new Topping(name, weight);
+    }
+
+    private static Dough getDough(String[] tokens) {
+        String name = tokens[1];
+        String type = tokens[2];
+        double weight = Double.parseDouble(tokens[3]);
+
+        return new Dough(name, type, weight);
+    }
+
+    private static String[] getTokens(Scanner scanner) {
+        return scanner.nextLine().split("\\s+");
+    }
+
+    private static Pizza getPizza(String[] tokens) {
+        String pizzaName = tokens[1];
+        int toppingsCount = Integer.parseInt(tokens[2]);
+
+        return new Pizza(pizzaName, toppingsCount);
     }
 }
-
-
-
-
