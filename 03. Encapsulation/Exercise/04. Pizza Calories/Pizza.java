@@ -7,49 +7,43 @@ public class Pizza {
     private List<Topping> toppings;
 
     public Pizza(String name, int numberOfToppings) {
-        setName(name);
-        setToppings(numberOfToppings);
-
-    }
-
-    private void setToppings(int toppingsCount) {
-        if (toppingsCount < 0 || toppingsCount > 10) {
-            throw new IllegalArgumentException("Number of toppings should be in range [0..10].");
-        }
-        this.toppings = new ArrayList<>(toppingsCount);
+        this.setName(name);
+        this.setToppings(numberOfToppings);
     }
 
     private void setName(String name) {
-        if (name == null || name.trim().isEmpty() || name.length() > 15) {
-            throw new IllegalArgumentException("Pizza name should be between 1 and 15 symbols.");
+        if (!Validator.isPizzaNameValid(name)) {
+            throw new IllegalArgumentException(ConstantMessages.INVALID_PIZZA_NAME);
         }
         this.name = name;
     }
 
-    public void setDough(Dough dought) {
-        this.dough = dought;
+    public void setDough(Dough dough) {
+        this.dough = dough;
     }
 
-    public String getName() {
-        return this.name;
+    public void setToppings(int toppings) {
+        if (!Validator.numberOfToppingsIsAllowed(toppings)) {
+            throw new IllegalArgumentException(ConstantMessages.INVALID_NUMBER_OF_TOPPINGS);
+        }
+        this.toppings = new ArrayList<>(toppings);
     }
 
     public void addTopping(Topping topping) {
+        if (this.toppings.size() >= 10) {
+            throw new IllegalArgumentException(ConstantMessages.INVALID_NUMBER_OF_TOPPINGS);
+        }
         this.toppings.add(topping);
     }
 
     public double getOverallCalories() {
-        //return this.dought.calculateCalories() + this.toppings.stream().mapToDouble(Topping::calculateCalories).sum();
-        double calories = this.dough.calculateCalories();
-
-        for (Topping topping : toppings) {
-            calories += topping.calculateCalories();
-        }
-        return calories;
+        double toppingsCalories = this.toppings.stream().mapToDouble(Topping::calculateCalories).sum();
+        double doughCal = this.dough.calculateCalories();
+        return toppingsCalories + +doughCal;
     }
 
     @Override
     public String toString() {
-        return String.format("%s - %.2f", name, getOverallCalories());
+        return String.format("%s - %.2f", this.name, this.getOverallCalories());
     }
 }
