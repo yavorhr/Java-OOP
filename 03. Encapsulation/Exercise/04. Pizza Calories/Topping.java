@@ -1,8 +1,6 @@
 import java.util.Map;
-import java.util.Set;
 
 public class Topping {
-
     private static final Map<String, Double> TOPPING_TYPES_WITH_MODIFIERS = Map.of("Meat", 1.2,
             "Veggies", 0.8,
             "Cheese", 1.1,
@@ -11,21 +9,29 @@ public class Topping {
     private String toppingType;
     private double weight;
 
-    public Topping(String setToppingType, double weight) {
-        this.setToppingType (setToppingType);
+    public Topping(String toppingType, double weight) {
+        this.setToppingType(toppingType);
         this.setWeight(weight);
     }
 
-    private void setToppingType (String toppingType) {
+    public String getToppingType() {
+        return this.toppingType;
+    }
+
+    private void setToppingType(String toppingType) {
         if (!TOPPING_TYPES_WITH_MODIFIERS.containsKey(toppingType)) {
-            throw new IllegalArgumentException("Cannot place " + toppingType + " on top of your pizza.");
+            throw new IllegalArgumentException(ConstantMessages.invalidTopping(toppingType));
         }
         this.toppingType = toppingType;
     }
 
+    public double getWeight() {
+        return this.weight;
+    }
+
     private void setWeight(double weight) {
-        if (weight < 1 || weight > 50) {
-            throw new IllegalArgumentException(this.toppingType + " weight should be in the range [1..50].");
+        if (!Validator.isToppingWeightInRange(weight)) {
+            throw new IllegalArgumentException(ConstantMessages.invalidToppingWeight(this.toppingType));
         }
         this.weight = weight;
     }
