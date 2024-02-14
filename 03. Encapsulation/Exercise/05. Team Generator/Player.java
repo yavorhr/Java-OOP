@@ -1,15 +1,15 @@
 public class Player {
   private String name;
   private int endurance;
-  private int spring;
+  private int sprint;
   private int dribble;
   private int passing;
   private int shooting;
 
-  public Player(String name, int endurance, int spring, int dribble, int passing, int shooting) {
+  public Player(String name, int endurance, int sprint, int dribble, int passing, int shooting) {
     this.setName(name);
     this.endurance = endurance;
-    this.spring = spring;
+    this.sprint = sprint;
     this.dribble = dribble;
     this.passing = passing;
     this.shooting = shooting;
@@ -29,19 +29,31 @@ public class Player {
     this.endurance = endurance;
   }
 
-  private void setSpring(int spring) {
-    this.spring = spring;
+  private void setSprint(int sprint) {
+    if (!Validator.validateStat(sprint)) {
+      throw new IllegalArgumentException(ConstantMessages.invalidStatInout("Sprint"));
+    }
+    this.sprint = sprint;
   }
 
   private void setDribble(int dribble) {
+    if (!Validator.validateStat(dribble)) {
+      throw new IllegalArgumentException(ConstantMessages.invalidStatInout("Dribble"));
+    }
     this.dribble = dribble;
   }
 
   private void setPassing(int passing) {
+    if (!Validator.validateStat(passing)) {
+      throw new IllegalArgumentException(ConstantMessages.invalidStatInout("Passing"));
+    }
     this.passing = passing;
   }
 
   private void setShooting(int shooting) {
+    if (!Validator.validateStat(shooting)) {
+      throw new IllegalArgumentException(ConstantMessages.invalidStatInout("Shooting"));
+    }
     this.shooting = shooting;
   }
 
