@@ -61,7 +61,11 @@ public class Player {
     return this.name;
   }
 
-  public double overallSkillLevel(){
+  public double overallSkillLevel() {
+    return this.calcSkillLevel();
+  }
 
+  private double calcSkillLevel() {
+    return this.endurance + this.sprint + this.shooting + this.dribble + this.passing / 5.00;
   }
 }
