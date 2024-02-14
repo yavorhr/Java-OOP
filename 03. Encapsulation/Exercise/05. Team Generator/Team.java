@@ -30,6 +30,10 @@ public class Team {
   }
 
   public double getRating() {
+    return this.calcRating();
+  }
 
+  private double calcRating() {
+    return this.players.stream().mapToDouble(Player::overallSkillLevel).sum();
   }
 }
