@@ -1,43 +1,42 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        List<Buyer> buyers = new ArrayList<>();
-        int peopleCount = Integer.parseInt(scanner.nextLine());
-        for (int i = 0; i < peopleCount; i++) {
-            String[] tokens = scanner.nextLine().split("\\s+");
-            if (tokens.length == 4) {
-                Citizen citizen = new Citizen(tokens[0], Integer.parseInt(tokens[1]), tokens[2], tokens[3]);
-                citizen.buyFood();
-                buyers.add(citizen);
-            } else if (tokens.length == 3) {
-                Rebel rebel = new Rebel(tokens[0], Integer.parseInt(tokens[1]), tokens[2]);
-                rebel.buyFood();
-                buyers.add(rebel);
-            }
+        int n = scanner.nextInt();
+        scanner.nextLine();
+
+        Map<String, Buyer> buyers = new HashMap<>();
+
+        while (n-- > 0) {
+            String[] tokens = scanner.nextLine().split(" ");
+            addBuyersToList(buyers, tokens);
         }
 
-        int foodSum = 0;
-        String name = scanner.nextLine();
-
-        while (!name.equalsIgnoreCase("end")) {
-            for (Buyer buyer : buyers) {
-                if (buyer.getName().equalsIgnoreCase(name)) {
-                    foodSum += buyer.getFood();
-                }
+        String input = scanner.nextLine();
+        while (!"End".equals(input)) {
+            if (buyers.containsKey(input)) {
+                Buyer buyer = buyers.get(input);
+                buyer.buyFood();
             }
-            name = scanner.nextLine();
+            input = scanner.nextLine();
         }
-        System.out.println(foodSum);
+        printBoughtFood(buyers);
+
+    }
+
+    private static void printBoughtFood(Map<String,Buyer> buyers) {
+        double food =   buyers.values().stream().mapToDouble(Buyer::getFood).sum();
+        System.out.printf("%.0f", food);
+    }
+
+    private static void addBuyersToList(Map<String, Buyer> buyers, String[] tokens) {
+        if (tokens.length == 4) {
+            buyers.put(tokens[0], new Citizen(tokens[0], Integer.parseInt(tokens[1]), tokens[2], tokens[3]));
+        } else {
+            buyers.put(tokens[0], new Rebel(tokens[0], Integer.parseInt(tokens[1]), tokens[2]));
+        }
     }
 }
-
-
-
-
-
 
