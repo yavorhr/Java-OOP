@@ -1,8 +1,7 @@
+import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-public class Smartphone implements Callable, Browsable {
+public class Smartphone implements Browsable, Callable {
     private List<String> numbers;
     private List<String> urls;
 
@@ -10,35 +9,34 @@ public class Smartphone implements Callable, Browsable {
         this.numbers = numbers;
         this.urls = urls;
     }
-    
-    @Override
-    public String call() {
-        StringBuilder sb = new StringBuilder();
-        Pattern pattern = Pattern.compile("^[0-9]+$");
-
-        for (String number : this.numbers) {
-            Matcher matcher = pattern.matcher(number);
-            if (matcher.find()) {
-                sb.append("Calling... ").append(number).append(System.lineSeparator());
-            } else {
-                sb.append("Invalid number!").append(System.lineSeparator());
-            }
-        }
-        return sb.toString().trim();
-    }
 
     @Override
     public String browse() {
         StringBuilder sb = new StringBuilder();
-        Pattern pattern = Pattern.compile("^[^0-9]+$");
+
         for (String url : this.urls) {
-            Matcher matcher = pattern.matcher(url);
-            if (matcher.find()) {
-                sb.append(String.format("Browsing: %s!",url)).append(System.lineSeparator());
+            if (Validator.invalidUrl(url)) {
+                sb.append("Invalid URL!\n");
+
             } else {
-                sb.append("Invalid URL!").append(System.lineSeparator());
+                sb.append(String.format("Browsing: %s!\n", url));
             }
         }
-        return sb.toString().trim();
+
+        return sb.toString();
+    }
+
+    @Override
+    public String call() {
+        StringBuilder sb = new StringBuilder();
+
+        for (String number : this.numbers) {
+            if (Validator.validNumber(number)) {
+                sb.append(String.format("Calling... %s\n", number));
+            } else {
+                sb.append("Invalid number!\n");
+            }
+        }
+        return sb.toString();
     }
 }
