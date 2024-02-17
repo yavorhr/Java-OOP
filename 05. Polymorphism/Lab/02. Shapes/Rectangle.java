@@ -1,38 +1,35 @@
 public class Rectangle extends Shape {
-    private Double height;
-    private Double width;
+    private double height;
+    private double width;
 
-    public Rectangle(Double height, Double width) {
-        this.setHeight(height);
-        this.setWidth(width);
+    public Rectangle(double height, double width) {
+        setHeight(height);
+        setWidth(width);
         this.calculateArea();
         this.calculatePerimeter();
     }
 
-    private void setHeight(Double height) {
-        this.height = height;
-    }
-
-    public Double getHeight() {
-        return this.height;
-    }
-    
-    private void setWidth(Double width) {
-        this.width = width;
-    }
-
-    public Double getWidth() {
-        return this.width;
-    }
-
     @Override
     public void calculatePerimeter() {
-     setPerimeter(this.height * 2 + this.width*2);
+        super.setPerimeter(this.height * 2 + this.width * 2);
     }
 
     @Override
     public void calculateArea() {
-        setArea(this.height * this.width);
+        super.setArea(this.height * this.width);
+    }
+
+    private void setHeight(double height) {
+        if (Validator.validateInput(height)) {
+            throw new IllegalArgumentException(ConstantMessages.NOT_VALID_INPUT);
+        }
+        this.height = height;
+    }
+
+    private void setWidth(double width) {
+        if (Validator.validateInput(width)) {
+            throw new IllegalArgumentException(ConstantMessages.NOT_VALID_INPUT);
+        }
+        this.width = width;
     }
 }
-
