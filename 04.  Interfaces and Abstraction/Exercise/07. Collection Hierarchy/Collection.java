@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Collection implements MyList{
+public abstract class Collection implements Addable {
   private int maxSize = 100;
   private List<String> list;
 
@@ -24,4 +24,3 @@ public abstract class Collection implements MyList{
   public void setList(List<String> list) {
     this.list = list;
   }
-}
