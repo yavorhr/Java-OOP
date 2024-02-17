@@ -21,5 +21,3 @@ public abstract class Shape {
         return this.area;
     }
 }
-
-
