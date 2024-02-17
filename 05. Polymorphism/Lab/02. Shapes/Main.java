@@ -1,8 +1,7 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
 
         Shape rectangle = new Rectangle(2D, 4D);
         Shape circle = new Circle(5D);
@@ -12,8 +11,11 @@ public class Main {
 
         System.out.println(circle.getArea());
         System.out.println(circle.getPerimeter());
+
     }
 }
+
+
 
 
 
