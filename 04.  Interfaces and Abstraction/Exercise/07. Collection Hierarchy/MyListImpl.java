@@ -1,9 +1,4 @@
-public class MyListImpl extends Collection implements MyList, AddRemovable, Addable{
-
-  @Override
-  public int getUsed() {
-    return super.getList().size();
-  }
+public class MyListImpl extends Collection implements MyList{
 
   @Override
   public String remove() {
@@ -16,8 +11,13 @@ public class MyListImpl extends Collection implements MyList, AddRemovable, Adda
   @Override
   public int add(String string) {
     if (super.getMaxSize() > super.getList().size()) {
-      super.getList().add( string);
+      super.getList().add(0, string);
     }
+    return super.getList().indexOf(string);
+  }
+
+  @Override
+  public int getUsed() {
     return super.getList().size();
   }
 }
