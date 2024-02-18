@@ -1,14 +1,14 @@
 public class Truck extends Vehicle {
-    private static final double AIR_CONDITIONER_ADDITIONAL_CONSUMPTION = 1.6;
+    protected static final double AIR_CONDITIONER_ADDITIONAL_CONSUMPTION = 1.6;
+    protected static final double MAX_REFUEL_PERCENTAGE = 0.95;
 
-    public Truck(double fuel, double consumption) {
-        super(fuel, consumption + AIR_CONDITIONER_ADDITIONAL_CONSUMPTION);
+    public Truck(double fuelQuantity, double fuelConsumption) {
+        super(fuelQuantity, fuelConsumption + AIR_CONDITIONER_ADDITIONAL_CONSUMPTION);
     }
 
     @Override
-    public void refuel(double liters) {
-        super.refuel(liters * 0.95);
+    protected void refuel(double liters) {
+        super.refuel(liters * MAX_REFUEL_PERCENTAGE);
     }
 }
-
 
