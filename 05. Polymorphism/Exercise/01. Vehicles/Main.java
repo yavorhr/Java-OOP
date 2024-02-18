@@ -1,43 +1,58 @@
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        Map<String, Vehicle> vehicleMap = new LinkedHashMap<>();
-        String[] tokens = scanner.nextLine().split("\\s+");
+        Vehicle car = getVehicle(scanner);
+        Vehicle truck = getVehicle(scanner);
 
-        Vehicle car = new Car(Double.parseDouble(tokens[1]), Double.parseDouble(tokens[2]));
-        vehicleMap.put("Car", car);
-        tokens = scanner.nextLine().split("\\s+");
-        Vehicle truck = new Truck(Double.parseDouble(tokens[1]), Double.parseDouble(tokens[2]));
-        vehicleMap.put("Truck", truck);
+        int n = scanner.nextInt();
+        scanner.nextLine();
 
-        int commandsCount = Integer.parseInt(scanner.nextLine());
-        while (commandsCount-- > 0) {
-            String command = scanner.nextLine();
-            String[] params = command.split("\\s+");
+        while (n-- > 0) {
+            String[] tokens = scanner.nextLine().split(" ");
+            String command = tokens[0];
+            String type = tokens[1];
+            double liters = Double.parseDouble(tokens[2]);
 
-            double argument = Double.parseDouble(params[2]);
-
-            if (command.contains("Drive")) {
-                System.out.println(vehicleMap.get(params[1]).drive(argument));
-            } else {
-                vehicleMap.get(params[1]).refuel(argument);
+            try {
+                switch (command) {
+                    case "Drive" -> driveVehicle(type.equals("Car") ? car : truck, liters);
+                    case "Refuel" -> refuelVehicle(type.equals("Car") ? car : truck, liters);
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
 
         }
-        for (Vehicle vehicle : vehicleMap.values()) {
-            System.out.println(vehicle.toString());
+        printOutput(car,truck);
+    }
+
+    private static void printOutput(Vehicle car, Vehicle truck) {
+        System.out.println(car);
+        System.out.println(truck);
+    }
+
+    private static void refuelVehicle(Vehicle vehicle, double distance) {
+        vehicle.refuel(distance);
+    }
+
+    private static void driveVehicle(Vehicle vehicle, double distance) {
+        System.out.println( vehicle.drive(distance));
+    }
+
+    private static Vehicle getVehicle(Scanner scanner) {
+        String[] tokens = scanner.nextLine().split(" ");
+        String type = tokens[0];
+        double distance = Double.parseDouble(tokens[1]);
+        double litersPerKm = Double.parseDouble(tokens[2]);
+
+        if (type.equals("Car")) {
+            return new Car(distance, litersPerKm);
         }
+        return new Truck(distance, litersPerKm);
     }
 }
-
-
-
-
-
 
 
