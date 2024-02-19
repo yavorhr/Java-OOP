@@ -15,21 +15,20 @@ public abstract class Vehicle {
     double requiredFuel = distance * this.fuelConsumption;
 
     if (Validator.isFuelEnoughToDrive(requiredFuel, this.fuelQuantity)) {
-      throw new IllegalArgumentException(String.format("%s needs refueling", this.getClass().getSimpleName()));
+      throw new IllegalArgumentException(ConstantMessages.vehicleNeedsRefuel(this.getClass().getSimpleName()));
     }
     this.fuelQuantity -= requiredFuel;
 
-    DecimalFormat formatter = new DecimalFormat("##.##");
-    return String.format("%s travelled %s km", this.getClass().getSimpleName(), formatter.format(distance));
+    return ConstantMessages.vehicleTravelledKm(this.getClass().getSimpleName(), distance);
   }
 
   protected void refuel(double liters) {
     if (Validator.negativeValue(liters)) {
-      throw new IllegalArgumentException("Fuel must be a positive number");
+      throw new IllegalArgumentException(ConstantMessages.MUST_BE_POSITIVE);
     }
 
     if (Validator.tankCapacityIsExceeded(this.fuelQuantity, liters, this.tankCapacity)) {
-      throw new IllegalArgumentException("Cannot fit fuel in tank");
+      throw new IllegalArgumentException(ConstantMessages.CANNOT_FIT_FUEL);
     }
     this.fuelQuantity += liters;
   }
@@ -44,7 +43,7 @@ public abstract class Vehicle {
 
   private void setFuelQuantity(double fuelQuantity) {
     if (Validator.negativeValue(fuelQuantity)) {
-      throw new IllegalArgumentException("Fuel must be a positive number");
+      throw new IllegalArgumentException(ConstantMessages.MUST_BE_POSITIVE);
     }
     this.fuelQuantity += fuelQuantity;
   }
