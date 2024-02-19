@@ -1,69 +1,64 @@
 import java.text.DecimalFormat;
 
-public class Vehicle {
-    private double fuel;
-    private double consumption;
-    private double tankCapacity;
+public abstract class Vehicle {
+  private double fuelQuantity;
+  private double fuelConsumption;
+  private double tankCapacity;
 
-    protected Vehicle(double fuel, double consumption, double tankCapacity) {
-        this.tankCapacity = tankCapacity;
-        this.setFuel(fuel);
-        this.consumption = consumption;
-    }
-
-  public Vehicle(double fuelQuantity, double consumption) {
+  protected Vehicle(double fuelQuantity, double fuelConsumption, double tankCapacity) {
+    setFuelQuantity(fuelQuantity);
+    this.fuelConsumption = fuelConsumption;
+    this.tankCapacity = tankCapacity;
   }
 
-  protected void addConsumption(double additionalConsumption){
-        this.consumption += additionalConsumption;
+  public String drive(double distance) {
+    double requiredFuel = distance * this.fuelConsumption;
+    if (requiredFuel > this.fuelQuantity) {
+      throw new IllegalArgumentException(String.format("%s needs refueling", this.getClass().getSimpleName()));
+    }
+    this.fuelQuantity -= requiredFuel;
+
+    DecimalFormat formatter = new DecimalFormat("##.##");
+
+    return String.format("%s travelled %s km", this.getClass().getSimpleName(), formatter.format(distance));
+  }
+
+  protected void refuel(double liters) {
+    if (liters <= 0) {
+      throw new IllegalArgumentException("Fuel must be a positive number");
     }
 
-    protected void subtractConsumption (double subtraction){
-        this.consumption -= subtraction;
+    if (this.fuelQuantity + liters > this.tankCapacity) {
+      throw new IllegalArgumentException("Cannot fit fuel in tank");
     }
+    this.fuelQuantity += liters;
+  }
 
-    private void setFuel(double fuel) {
-        validateHasEnoughFreeTank(fuel);
-        validateNoneNegativeAmount(fuel);
-        this.fuel = fuel;
+  protected void addConsumption(){
+    this.fuelConsumption += Bus.AIR_CONDITIONER_ADDITIONAL_CONSUMPTION;
+  }
+
+  protected void subtractConsumption(){
+    this.fuelConsumption -= Bus.AIR_CONDITIONER_ADDITIONAL_CONSUMPTION;
+  }
+
+  private void setFuelQuantity(double fuelQuantity) {
+    if (fuelQuantity <= 0) {
+      throw new IllegalArgumentException("Fuel must be a positive number");
     }
+    this.fuelQuantity += fuelQuantity;
+  }
 
-    private void validateNoneNegativeAmount(double fuel) {
-        if (fuel <= 0) {
-            throw new IllegalArgumentException("Fuel must be a positive number");
-        }
-    }
+  public void setFuelConsumption(double fuelConsumption) {
+    this.fuelConsumption = fuelConsumption;
+  }
 
-    private void validateHasEnoughFreeTank(double additionalFuel) {
-        if (additionalFuel > this.tankCapacity) {
-            throw new IllegalArgumentException("Cannot fit fuel in tank");
-        }
-    }
+  public double getFuelConsumption() {
+    return fuelConsumption;
+  }
 
-    public String drive(double distance) {
-        double fuelNeeded = distance * this.consumption;
-        if (fuelNeeded > this.fuel) {
-            return this.getClass().getSimpleName() + " needs refueling";
-        }
-        this.setFuel(this.fuel - fuelNeeded);
-
-        DecimalFormat formatter = new DecimalFormat("##.##");
-        return String.format("%s travelled %s km", this.getClass().getSimpleName(), formatter.format(distance));
-    }
-
-    public void refuel(double fuel) {
-        validateNoneNegativeAmount(fuel);
-        validateHasEnoughFreeTank(fuel);
-        this.setFuel(this.fuel + fuel);
-    }
-
-    @Override
-    public String toString() {
-        return String.format("%s: %.2f", this.getClass().getSimpleName(), this.fuel);
-    }
+  @Override
+  public String toString() {
+    return String.format("%s: %.2f", this.getClass().getSimpleName(), this.fuelQuantity);
+  }
 }
-
-
-
-
-
