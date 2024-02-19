@@ -1,73 +1,67 @@
-import wildFarm.Animals.*;
-import wildFarm.Food.Food;
-import wildFarm.Food.Meat;
-import wildFarm.Food.Vegetable;
+import Animal.*;
+import Food.*;
 
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        String evenLine = scanner.nextLine();
-        List<Animal> animalList = new ArrayList<>();
+        String input = scanner.nextLine();
+        while (!"End".equals(input)) {
+            String[] animalTokens = input.split(" ");
+            String[] vegetableTokens = scanner.nextLine().split(" ");
 
-        while (!evenLine.equals("End")) {
-            String oddLine = scanner.nextLine();
-            Animal animal = createAnimal(evenLine.split("\\s+"));
-            animal.makeSound();
-
-            Food food = createFood(oddLine.split("\\s+"));
+            Animal animal = null;
             try {
+                animal = createAnimal(animalTokens);
+                Food food = createFood(vegetableTokens);
                 animal.eat(food);
-            } catch (IllegalArgumentException exception){
-                System.out.println(exception.getMessage());
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
 
-            animalList.add(animal);
+            printAnimal(animal);
+            input = scanner.nextLine();
+        }
+    }
 
-            evenLine = scanner.nextLine();
+    private static void printAnimal(Animal animal) {
+        System.out.println(animal);
+    }
+
+
+    private static Food createFood(String[] tokens) {
+        String type = tokens[0];
+        int quantity = Integer.parseInt(tokens[1]);
+
+        Food food = null;
+
+        switch (type) {
+            case "Vegetable" -> food = new Vegetable(quantity);
+            case "Meat" -> food = new Meat(quantity);
         }
 
-        for (Animal animal : animalList) {
-            System.out.println(animal.toString());
-
-        }
+        return food;
     }
 
     private static Animal createAnimal(String[] tokens) {
-        switch (tokens[0]) {
-            case "Mouse":
-                return new Mouse(tokens[1], "Mouse", Double.parseDouble(tokens[2]), tokens[3]);
-            case "Tiger":
-                return new Tiger(tokens[1], "Tiger", Double.parseDouble(tokens[2]), tokens[3]);
-            case "Zebra":
-                return new Zebra(tokens[1], "Zebra", Double.parseDouble(tokens[2]), tokens[3]);
-            case "Cat":
-                return new Cat(tokens[1], "Cat", Double.parseDouble(tokens[2]), tokens[3], tokens[4]);
-            default:
-                throw new IllegalStateException("Unknown animal type" + tokens[0]);
+        String type = tokens[0];
+        String name = tokens[1];
+        double weight = Double.parseDouble(tokens[2]);
+        String region = tokens[3];
 
+        Animal animal = null;
+
+        switch (type) {
+            case "Cat" -> animal = new Cat(type, name, weight, tokens[4], region);
+            case "Tiger" -> animal = new Tiger(type, name, weight, region);
+            case "Mouse" -> animal = new Mouse(type, name, weight, region);
+            case "Zebra" -> animal = new Zebra(type, name, weight, region);
         }
+
+        return animal;
     }
-
-    private static Food createFood(String[] tokens) {
-        int quantity = Integer.parseInt(tokens[1]);
-        return (tokens[0].equals("Meat")
-                ? new Meat(quantity)
-                : new Vegetable(quantity));
-
-    }
-
 }
-
-
-
-
-
-
 
 
