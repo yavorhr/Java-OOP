@@ -1,32 +1,33 @@
-package wildFarm.Animals;
+package Animal;
 
-import wildFarm.Food.Food;
-
-import java.text.DecimalFormat;
+import Food.*;
 
 public abstract class Animal {
-    private String animalName;
-    private String animalType;
-    private double animalWeight;
-    private int foodEaten;
-    private String livingRegion;
+    String animalType;
+    String animalName;
+    double animalWeight;
+    int foodEaten;
 
-    public Animal(String animalName, String animalType, double animalWeight, String livingRegion) {
-        this.animalName = animalName;
+    public Animal(String animalType, String animalName, double animalWeight) {
         this.animalType = animalType;
+        this.animalName = animalName;
         this.animalWeight = animalWeight;
-        this.livingRegion = livingRegion;
+        foodEaten = 0;
+        this.makeSound();
     }
 
-    public abstract void makeSound();
+    abstract void makeSound();
 
     public void eat(Food food) {
-        this.foodEaten += food.getQuantity();
+        foodEaten += food.getQuantity();
     }
 
     @Override
     public String toString() {
-        DecimalFormat formatter = new DecimalFormat("##.##");
-        return String.format("%s[%s, %s, %s, %d]", this.animalType, this.animalName, formatter.format(this.animalWeight), this.livingRegion, this.foodEaten);
+        return String.format("%s[%s, %.1f, Asia, %d]",
+                this.animalType,
+                this.animalName,
+                this.animalWeight,
+                this.foodEaten);
     }
 }
