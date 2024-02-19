@@ -1,6 +1,4 @@
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -8,61 +6,62 @@ public class Main {
 
         Map<String, Vehicle> vehicleMap = new LinkedHashMap<>();
 
-        vehicleMap.put("Car", createVehicle(scanner.nextLine()));
-        vehicleMap.put("Truck", createVehicle(scanner.nextLine()));
+        vehicleMap.put("Car", createVehicle(scanner));
+        vehicleMap.put("Truck", createVehicle(scanner));
+        vehicleMap.put("Bus", createVehicle(scanner));
 
-        Bus bus = createBus(scanner.nextLine());
+        int n = scanner.nextInt();
+        scanner.nextLine();
 
-        vehicleMap.put("Bus", bus);
+        while (n-- > 0) {
+            String[] tokens = scanner.nextLine().split(" ");
+            String command = tokens[0];
+            String type = tokens[1];
+            double value = Double.parseDouble(tokens[2]);
 
-        int commandsCount = Integer.parseInt(scanner.nextLine());
-        while (commandsCount-- > 0) {
-            String command = scanner.nextLine();
-            String[] params = command.split("\\s+");
-
-            double argument = Double.parseDouble(params[2]);
-            if (command.contains("Drive") && command.contains("Bus")) {
-                System.out.println(bus.driveWithPassengers(argument));
-            } else if (command.contains("Drive")) {
-                System.out.println(vehicleMap.get(params[1]).drive(argument));
-            } else {
-                try {
-                    vehicleMap.get(params[1]).refuel(argument);
-                } catch (IllegalArgumentException exception) {
-                    System.out.println(exception.getMessage());
+            try {
+                switch (command) {
+                    case "Drive", "DriveEmpty" -> driveVehicle(vehicleMap.get(type), value, command);
+                    case "Refuel" -> refuelVehicle(vehicleMap.get(type), value);
                 }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
-        }
 
-        for (Vehicle vehicle : vehicleMap.values()) {
-            System.out.println(vehicle.toString());
+        }
+        printOutput(vehicleMap);
+    }
+
+    private static void printOutput(Map<String, Vehicle> vehicleMap) {
+        vehicleMap.values().forEach(System.out::println);
+    }
+
+    private static void refuelVehicle(Vehicle vehicle, double liters) {
+        vehicle.refuel(liters);
+    }
+
+    private static void driveVehicle(Vehicle vehicle, double distance, String command) {
+        if (vehicle instanceof Bus && command.equals("Drive")){
+            System.out.println(((Bus) vehicle).driveWithPassengers(distance));
+        } else {
+            System.out.println(vehicle.drive(distance));
         }
     }
 
-    private static Bus createBus(String input) {
-        String[] tokens = input.split("\\s+");
-        return new Bus(Double.parseDouble(tokens[1]), Double.parseDouble(tokens[2]), Double.parseDouble(tokens[3]));
-    }
+    private static Vehicle createVehicle(Scanner scanner) {
+        String[] tokens = scanner.nextLine().split(" ");
+        String type = tokens[0];
+        double distance = Double.parseDouble(tokens[1]);
+        double litersPerKm = Double.parseDouble(tokens[2]);
+        double tankCapacity = Double.parseDouble(tokens[3]);
 
-    private static Vehicle createVehicle(String input) {
-        String[] tokens = input.split("\\s+");
-        switch (tokens[0]) {
-            case "Car":
-                return new Car(Double.parseDouble(tokens[1]), Double.parseDouble(tokens[2]), Double.parseDouble(tokens[3]));
-            case "Truck":
-                return new Truck(Double.parseDouble(tokens[1]), Double.parseDouble(tokens[2]), Double.parseDouble(tokens[3]));
-            case "Bus":
-                return createBus(input);
-            default:
-                throw new IllegalStateException("Unknown vehicle type for " + tokens[0]);
+        if (type.equals("Car")) {
+            return new Car(distance, litersPerKm, tankCapacity);
+        } else if (type.equals("Bus")) {
+            return new Bus(distance, litersPerKm, tankCapacity);
         }
+        return new Truck(distance, litersPerKm, tankCapacity);
     }
 }
-
-
-
-
-
-
 
 

@@ -11,7 +11,10 @@ public class Vehicle {
         this.consumption = consumption;
     }
 
-    protected void addConsumption(double additionalConsumption){
+  public Vehicle(double fuelQuantity, double consumption) {
+  }
+
+  protected void addConsumption(double additionalConsumption){
         this.consumption += additionalConsumption;
     }
 
