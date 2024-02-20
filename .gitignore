@@ -3,3 +3,9 @@
 03. Encapsulation/Exercise/~$. Java-OOP-Encapsulation-Exercises.docx
 05. Polymorphism/Exercise/~$. Java-OOP-Polymorphism-Exercises.docx
 05. Polymorphism/Lab/03. Animals/Main.java
+06. SOLID/Lab/SolidLab-Skeleton/src/solidLab/p01_SingleResponsibility/p01_DrawingShape/Rectangle.java
+06. SOLID/Lab/SolidLab-Skeleton/src/solidLab/p01_SingleResponsibility/p01_DrawingShape/Main.java
+06. SOLID/Lab/SolidLab-Skeleton/src/solidLab/p01_SingleResponsibility/p01_DrawingShape/interfaces/Shape.java
+06. SOLID/Lab/SolidLab-Skeleton/src/solidLab/p01_SingleResponsibility/p01_DrawingShape/interfaces/DrawingRepository.java
+06. SOLID/Lab/SolidLab-Skeleton/src/solidLab/p01_SingleResponsibility/p01_DrawingShape/interfaces/DrawingManager.java
+06. SOLID/Lab/SolidLab-Skeleton/src/solidLab/p01_SingleResponsibility/p01_DrawingShape/DrawingManagerImpl.java
