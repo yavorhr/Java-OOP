@@ -36,6 +36,22 @@ public class Main {
     }
 
     String input = scanner.nextLine();
+    while (!"End".equals(input)) {
+      String[] tokens = input.split("\\|");
+      ReportLevel reportLevel = ReportLevel.valueOf(tokens[0]);
+      String date = tokens[1];
+      String message = tokens[2];
+
+      switch (reportLevel) {
+        case INFO -> logger.logInfo(date, message);
+        case WARNING -> logger.logWarning(date, message);
+        case ERROR -> logger.logError(date, message);
+        case CRITICAL -> logger.logCritical(date, message);
+        case FATAL -> logger.logFatal(date, message);
+        default -> throw new IllegalStateException("Unknown enum value for " + reportLevel);
+      }
+      input = scanner.nextLine();
+    }
 
   }
 }
