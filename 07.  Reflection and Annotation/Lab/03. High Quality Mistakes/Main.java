@@ -19,12 +19,13 @@ public class Main {
     public static void main(String[] args) throws ClassNotFoundException {
 
         Class<?> reflectionClass = Class.forName("Reflection");
+
         Set<Field> fields = new TreeSet<>(Comparator.comparing(Field::getName));
 
         Set<Method> getters = new TreeSet<>(new MethodComparatorByName());
         Set<Method> setters = new TreeSet<>(new MethodComparatorByName());
 
-        //филтрираме грешните полета
+        // filter the !private fields
         fields.addAll(Arrays.stream(reflectionClass.getDeclaredFields())
                 .filter(f -> !Modifier.isPrivate(f.getModifiers()))
                 .collect(Collectors.toList()));
@@ -34,6 +35,7 @@ public class Main {
                 .collect(Collectors.joining(System.lineSeparator())));
 
         Method[] declaredMethods = reflectionClass.getDeclaredMethods();
+
         for (Method method : declaredMethods) {
             if (method.getName().startsWith("get") && !Modifier.isPublic(method.getModifiers())) {
                 getters.add(method);
