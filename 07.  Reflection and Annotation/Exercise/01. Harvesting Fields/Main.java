@@ -8,13 +8,11 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        //по-бърз е от scanner.nextLine();
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         Class<RichSoilLand> richSoilLandClass = RichSoilLand.class;
         List<Field> fields = Arrays.asList(richSoilLandClass.getDeclaredFields());
 
-        //за да не печатаме всеки път в while(), копираме резултата от API в StringBuilder();
         StringBuilder output = new StringBuilder();
 
         String input = reader.readLine();
@@ -32,6 +30,7 @@ public class Main {
 
             input = reader.readLine();
         }
+        
         System.out.print(output);
     }
 }

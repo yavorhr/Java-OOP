@@ -13,8 +13,8 @@ public class Main {
 
     Class<?> reflectionClass = Class.forName("Reflection");
 
-
     Annotation[] annotations = reflectionClass.getAnnotations();
+
     for (Annotation a: annotations) {
       System.out.println(a);
     }
