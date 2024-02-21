@@ -21,7 +21,6 @@ public class Main {
         Set<Method> getters = new TreeSet<>(new MethodComparatorByName());
         Set<Method> setters = new TreeSet<>(new MethodComparatorByName());
 
-
         for (Method method : declaredMethods) {
             if (method.getName().startsWith("get")
                     && method.getParameterCount() == 0
