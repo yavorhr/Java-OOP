@@ -30,7 +30,7 @@ public class Main {
 
             input = reader.readLine();
         }
-        
+
         System.out.print(output);
     }
 }

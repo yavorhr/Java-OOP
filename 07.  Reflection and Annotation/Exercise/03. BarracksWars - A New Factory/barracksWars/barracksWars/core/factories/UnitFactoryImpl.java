@@ -16,7 +16,7 @@ public class UnitFactoryImpl implements UnitFactory {
         Unit unit = null;
 
         try {
-            //future proof code - можем да добавяме нови герои, без да пишем допълнителен код
+            //future proof code
             Class<?> clazz = Class.forName(UNITS_PACKAGE_NAME + unitType);
             unit = (Unit) clazz.getDeclaredConstructor().newInstance();
         } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
