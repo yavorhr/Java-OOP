@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2978c85e-e974-4f19-a3d3-f3689e4c064d" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1aLgS4eaBAWuRwk4YyYcQbacuyt" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../easterRace 22 Aug 2020/Garage" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.PlayerTests.testGetGun">
+    <configuration name="PlayerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="HalfLife" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="halfLife.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="halfLife" />
+      <option name="MAIN_CLASS_NAME" value="halfLife.PlayerTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PlayerTests.testGetGun" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="HalfLife" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="halfLife.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="halfLife" />
+      <option name="MAIN_CLASS_NAME" value="halfLife.PlayerTests" />
+      <option name="METHOD_NAME" value="testGetGun" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PlayerTests.testGetGunShouldThrExceptionNotFoundGun" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="HalfLife" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="halfLife.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="halfLife" />
+      <option name="MAIN_CLASS_NAME" value="halfLife.PlayerTests" />
+      <option name="METHOD_NAME" value="testGetGunShouldThrExceptionNotFoundGun" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PlayerTests.testRemoveGunShouldThrExceptionNotExistingGun" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="HalfLife" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="halfLife.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="halfLife" />
+      <option name="MAIN_CLASS_NAME" value="halfLife.PlayerTests" />
+      <option name="METHOD_NAME" value="testRemoveGunShouldThrExceptionNotExistingGun" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PlayerTests.testRemoveGunWorksCorrect" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="HalfLife" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="halfLife.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="halfLife" />
+      <option name="MAIN_CLASS_NAME" value="halfLife.PlayerTests" />
+      <option name="METHOD_NAME" value="testRemoveGunWorksCorrect" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.PlayerTests.testGetGun" />
+        <item itemvalue="JUnit.PlayerTests" />
+        <item itemvalue="JUnit.PlayerTests.testGetGunShouldThrExceptionNotFoundGun" />
+        <item itemvalue="JUnit.PlayerTests.testRemoveGunShouldThrExceptionNotExistingGun" />
+        <item itemvalue="JUnit.PlayerTests.testRemoveGunWorksCorrect" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2978c85e-e974-4f19-a3d3-f3689e4c064d" name="Default Changelist" comment="" />
+      <created>1586520284600</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1586520284600</updated>
+      <workItem from="1586520287952" duration="440000" />
+      <workItem from="1586549254640" duration="154000" />
+      <workItem from="1586630016771" duration="302000" />
+      <workItem from="1586630359683" duration="39000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/HalfLife$PlayerTests.ic" NAME="PlayerTests Coverage Results" MODIFIED="1608302718575" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>halfLife.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/HalfLife$PlayerTests_testUnmodifiableCollection.ic" NAME="PlayerTests.testUnmodifiableCollection Coverage Results" MODIFIED="1608300207143" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>halfLife.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/HalfLife$PlayerTests_testTakeDamageShouldThrowExWhenPlayerIsDead.ic" NAME="PlayerTests.testTakeDamageShouldThrowExWhenPlayerIsDead Coverage Results" MODIFIED="1608300806710" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>halfLife.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/HalfLife$PlayerTests_testGetGunShouldThrExceptionNotFoundGun.ic" NAME="PlayerTests.testGetGunShouldThrExceptionNotFoundGun Coverage Results" MODIFIED="1608301752915" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>halfLife.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/HalfLife$PlayerTests_testSetUserNameShouldThrowExWhenNull.ic" NAME="PlayerTests.testSetUserNameShouldThrowExWhenNull Coverage Results" MODIFIED="1608299741061" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>halfLife.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/HalfLife$PlayerTests_testSetUserNameWorksCorrect.ic" NAME="PlayerTests.testSetUserNameWorksCorrect Coverage Results" MODIFIED="1608300846405" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>halfLife.*</FILTER>
+    </SUITE>
+  </component>
+</project>
