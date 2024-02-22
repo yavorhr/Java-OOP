@@ -6,6 +6,4 @@ public interface Executable {
 
 	String execute() throws ExecutionControl.NotImplementedException;
 
-
-
 }
