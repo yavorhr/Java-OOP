@@ -19,9 +19,13 @@ public class DatabaseTest {
     this.database = new Database(PERSONS);
   }
 
+  // Constructor
+  //1. Constructor works correct
+  //2. Try to initialize Database with empty Person[];
+  //3. Try to initialize with array with more than 16 elements
   @Test
   public void testInitializeDatabaseSuccessfully() {
-    Assert.assertTrue("Count of elements is not correct", this.database.getElements().length > 0 && this.database.getElements().length <= 16);
+    Assert.assertTrue("Count of people is not correct", this.database.getElements().length > 0 && this.database.getElements().length <= 16);
   }
 
   @Test(expected = OperationNotSupportedException.class)
@@ -36,6 +40,9 @@ public class DatabaseTest {
     new Database(arrInput);
   }
 
+  // Add
+  //1. Add with null element
+  //2. Add works correct
   @Test(expected = OperationNotSupportedException.class)
   public void testAddNullElement() throws OperationNotSupportedException {
     this.database.add(null);
@@ -51,6 +58,9 @@ public class DatabaseTest {
     Assert.assertEquals("Miro", lastPerson.getUsername());
   }
 
+  // Remove
+  //1. Try remove from empty collection
+  //2. Remove works correct
   @Test(expected = OperationNotSupportedException.class)
   public void testRemoveElementFromEmptyArray() throws OperationNotSupportedException {
     Person[] persons = new Person[0];
@@ -65,7 +75,6 @@ public class DatabaseTest {
   }
 
   //Find by username
-
   @Test(expected = OperationNotSupportedException.class)
   public void testFindByUserNameWithNullArgument() throws OperationNotSupportedException {
     this.database.findByUsername(null);
@@ -83,7 +92,6 @@ public class DatabaseTest {
   }
 
   //Find by id
-
   @Test(expected = OperationNotSupportedException.class)
   public void testFindByIdWithNotValidId() throws OperationNotSupportedException {
     Person ivan = this.database.findById(55);
