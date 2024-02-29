@@ -10,12 +10,13 @@ import javax.xml.crypto.Data;
 public class DatabaseTest {
 
   private Database database;
+  private static final Integer[] NUMBERS = {1, 2, 3, 4};
 
   @Before
   public void initializeDatabase() throws OperationNotSupportedException {
-    this.database = new Database(1, 2, 3, 4);
+    this.database = new Database(NUMBERS);
   }
-  //I. Test Constructor
+  // Test Constructor
   // 1. test length
   // 2. test elements
   // a) < 16 -> OperationNotSupportedException
@@ -25,7 +26,6 @@ public class DatabaseTest {
 
   @Test
   public void testInitializeDatabaseSuccessfully() throws OperationNotSupportedException {
-    Integer[] numbers = this.database.getElements();
     Assert.assertTrue("Count of elements is not correct", this.database.getElements().length > 0 && this.database.getElements().length <= 16);
   }
 
@@ -44,6 +44,7 @@ public class DatabaseTest {
   //II. Test add method
   //1. add null element
   //2. add method works correct
+
   @Test(expected = OperationNotSupportedException.class)
   public void testAddNullElement() throws OperationNotSupportedException {
     this.database.add(null);
@@ -52,7 +53,11 @@ public class DatabaseTest {
   @Test
   public void testAddMethodWorksCorrect() throws OperationNotSupportedException {
     this.database.add(13);
+    Integer[] numbers = this.database.getElements();
+    int lastElement = numbers[numbers.length - 1];
+
     Assert.assertEquals(5, this.database.getElements().length);
+    Assert.assertEquals(13, lastElement);
   }
 
   @Test(expected = OperationNotSupportedException.class)
