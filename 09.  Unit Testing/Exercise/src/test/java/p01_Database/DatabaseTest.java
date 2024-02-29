@@ -40,6 +40,18 @@ public class DatabaseTest {
     Integer[] arrInput = new Integer[17];
     new Database(arrInput);
   }
-  
+  //II. Test add method
+  //1. add null element
+  //2. add method works correct
+  @Test(expected = OperationNotSupportedException.class)
+  public void testAddNullElement() throws OperationNotSupportedException {
+    this.database.add(null);
+  }
+
+  @Test
+  public void testAddMethodWorksCorrect() throws OperationNotSupportedException {
+    this.database.add(13);
+    Assert.assertEquals(5, this.database.getElements().length);
+  }
 }
 
