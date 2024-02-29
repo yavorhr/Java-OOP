@@ -81,5 +81,18 @@ public class DatabaseTest {
   public void testFindByUserNameNotExistingUserInDatabase() throws OperationNotSupportedException {
     Person ivan = this.database.findByUsername("No_such_username");
   }
+
+  //Find by id
+
+  @Test(expected = OperationNotSupportedException.class)
+  public void testFindByIdWithNotValidId() throws OperationNotSupportedException {
+    Person ivan = this.database.findById(55);
+  }
+
+  @Test
+  public void testFindByIdWorksCorrect() throws OperationNotSupportedException {
+    Person person = this.database.findById(1);
+    Assert.assertEquals(1, person.getId());
+  }
 }
 
