@@ -40,6 +40,7 @@ public class DatabaseTest {
     Integer[] arrInput = new Integer[17];
     new Database(arrInput);
   }
+
   //II. Test add method
   //1. add null element
   //2. add method works correct
@@ -52,6 +53,19 @@ public class DatabaseTest {
   public void testAddMethodWorksCorrect() throws OperationNotSupportedException {
     this.database.add(13);
     Assert.assertEquals(5, this.database.getElements().length);
+  }
+
+  @Test(expected = OperationNotSupportedException.class)
+  public void testRemoveElementFromEmptyArray() throws OperationNotSupportedException {
+    Integer[] arrInput = new Integer[0];
+    Database db = new Database(arrInput);
+    db.remove();
+  }
+
+  @Test
+  public void testRemoveElementWorksCorrect() throws OperationNotSupportedException {
+    this.database.remove();
+    Assert.assertEquals(3, this.database.getElements().length);
   }
 }
 
