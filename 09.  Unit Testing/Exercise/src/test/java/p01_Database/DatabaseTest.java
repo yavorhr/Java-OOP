@@ -5,10 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import javax.naming.OperationNotSupportedException;
-import javax.xml.crypto.Data;
 
 public class DatabaseTest {
-
   private Database database;
   private static final Integer[] NUMBERS = {1, 2, 3, 4};
 
@@ -59,6 +57,8 @@ public class DatabaseTest {
     Assert.assertEquals(5, this.database.getElements().length);
     Assert.assertEquals(13, lastElement);
   }
+
+  //III. Test remove method
 
   @Test(expected = OperationNotSupportedException.class)
   public void testRemoveElementFromEmptyArray() throws OperationNotSupportedException {
