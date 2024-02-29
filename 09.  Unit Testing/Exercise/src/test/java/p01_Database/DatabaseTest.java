@@ -15,12 +15,7 @@ public class DatabaseTest {
     this.database = new Database(NUMBERS);
   }
   // Test Constructor
-  // 1. test length
-  // 2. test elements
-  // a) < 16 -> OperationNotSupportedException
-  // b) > 16 -> OperationNotSupportedException
-  // c) == 16
-  // 3. test lastIndex
+  p04_BubbleSortTest
 
   @Test
   public void testInitializeDatabaseSuccessfully() throws OperationNotSupportedException {
