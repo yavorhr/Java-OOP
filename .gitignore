@@ -9,3 +9,12 @@
 06. SOLID/Lab/SolidLab-Skeleton/src/solidLab/p01_SingleResponsibility/p01_DrawingShape/interfaces/DrawingRepository.java
 06. SOLID/Lab/SolidLab-Skeleton/src/solidLab/p01_SingleResponsibility/p01_DrawingShape/interfaces/DrawingManager.java
 06. SOLID/Lab/SolidLab-Skeleton/src/solidLab/p01_SingleResponsibility/p01_DrawingShape/DrawingManagerImpl.java
+10. Test Driven Development/Lab/INStock/pom.xml
+10. Test Driven Development/Lab/INStock/.idea/misc.xml
+10. Test Driven Development/Lab/INStock/.idea/modules.xml
+10. Test Driven Development/Lab/INStock/inStock.iml
+10. Test Driven Development/Lab/INStock/.idea/libraries/Maven__org_mockito_mockito_all_1_9_5.xml
+10. Test Driven Development/Lab/INStock/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml
+10. Test Driven Development/Lab/INStock/.idea/libraries/Maven__junit_junit_4_12.xml
+10. Test Driven Development/Lab/INStock/.idea/jarRepositories.xml
+10. Test Driven Development/Lab/INStock/.idea/compiler.xml
