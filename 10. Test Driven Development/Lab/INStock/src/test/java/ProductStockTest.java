@@ -110,6 +110,21 @@ public class ProductStockTest {
     this.stock.changeQuantity(product.getLabel(), product.getQuantity() + 10);
   }
 
+  @Test
+  public void testFindByLabelShouldReturnCorrectItem() {
+    Product product = createProduct();
+    this.stock.add(product);
+    Product byLabel = this.stock.findByLabel(product.getLabel());
+
+    Assert.assertNotNull(byLabel);
+    Assert.assertEquals(byLabel.getLabel(), product.getLabel());
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testFindByLabelWithNoSuchProductPresent() {
+    fillProductsToStock(10);
+    this.stock.findByLabel("invalid_label");
+  }
 
   // Helpers
   private Product createProduct() {
