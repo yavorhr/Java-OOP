@@ -2,6 +2,12 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
+
 
 public class ProductStockTest {
   private ProductStock stock;
@@ -126,6 +132,36 @@ public class ProductStockTest {
     this.stock.findByLabel("invalid_label");
   }
 
+  @Test
+  public void testFindFirstByAlphabeticalOrderShouldReturnCorrectNumberOfProducts() {
+    fillProductsToStock(10);
+    Iterable<Product> iterableProducts = this.stock.findFirstByAlphabeticalOrder(6);
+
+    Assert.assertNotNull(iterableProducts);
+    Assert.assertEquals(6, createListFromIterable(iterableProducts).size());
+  }
+
+  @Test
+  public void testFindFirstByAlphabeticalOrderShouldReturnCorrectNumberOfProductsAndTheyAreOrderedAlphabetically() {
+    fillProductsToStock(10);
+    Iterable<Product> iterableProducts = this.stock.findFirstByAlphabeticalOrder(6);
+    Assert.assertNotNull(iterableProducts);
+
+    List<Product> returnedProducts = createListFromIterable(iterableProducts);
+
+    Assert.assertEquals(6, returnedProducts.size());
+
+    Set<String> expectedLabels = returnedProducts.stream()
+            .map(Product::getLabel)
+            .collect(Collectors.toCollection(TreeSet::new));
+
+    int index = 0;
+    for (String expectedLabel : expectedLabels) {
+      Assert.assertEquals(expectedLabel, returnedProducts.get(index).getLabel());
+    }
+
+  }
+
   // Helpers
   private Product createProduct() {
     return new Product("test_label", 3.00, 1);
@@ -146,6 +182,16 @@ public class ProductStockTest {
     for (Product product : products) {
       this.stock.add(product);
     }
+  }
+
+  private List<Product> createListFromIterable(Iterable<Product> products) {
+    List<Product> result = new ArrayList<>();
+
+    for (Product product : products) {
+      result.add(product);
+    }
+
+    return result;
   }
 
 }
