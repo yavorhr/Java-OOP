@@ -18,6 +18,16 @@ public class ProductStockTest {
     Assert.assertEquals(1, stock.getCount());
   }
 
+  @Test
+  public void testContainsShouldReturnCorrectBooleanForAllClasses(){
+    Product product = new Product("test_label", 3.00, 1);
+    Assert.assertFalse(stock.contains(product));
 
+    stock.add(product);
+    Assert.assertTrue(stock.contains(product));
+
+    product.setLabel("not_present_label");
+    Assert.assertFalse(stock.contains(product));
+  }
 
 }
