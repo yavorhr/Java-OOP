@@ -12,6 +12,9 @@ public class Product implements Comparable<Product> {
         this.quantity = quantity;
     }
 
+    public Product() {
+    }
+
     public String getLabel() {
         return this.label;
     }
