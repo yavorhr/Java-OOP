@@ -144,11 +144,11 @@ public class ProductStockTest {
   @Test
   public void testFindFirstByAlphabeticalOrderShouldReturnCorrectNumberOfProductsAndTheyAreOrderedAlphabetically() {
     fillProductsToStock(10);
+
     Iterable<Product> iterableProducts = this.stock.findFirstByAlphabeticalOrder(6);
     Assert.assertNotNull(iterableProducts);
 
     List<Product> returnedProducts = createListFromIterable(iterableProducts);
-
     Assert.assertEquals(6, returnedProducts.size());
 
     Set<String> expectedLabels = returnedProducts.stream()
@@ -159,7 +159,17 @@ public class ProductStockTest {
     for (String expectedLabel : expectedLabels) {
       Assert.assertEquals(expectedLabel, returnedProducts.get(index).getLabel());
     }
+  }
 
+  @Test
+  public void testFindFirstByAlphabeticalOrderShouldReturnEmptyCollection() {
+    fillProductsToStock(10);
+
+    Iterable<Product> iterableProducts = this.stock.findFirstByAlphabeticalOrder(6);
+    Assert.assertNotNull(iterableProducts);
+
+    List<Product> list = createListFromIterable(iterableProducts);
+    Assert.assertTrue(list.isEmpty());
   }
 
   // Helpers
@@ -184,13 +194,12 @@ public class ProductStockTest {
     }
   }
 
-  private List<Product> createListFromIterable(Iterable<Product> products) {
-    List<Product> result = new ArrayList<>();
+  private <T> List<T> createListFromIterable(Iterable<T> products) {
+    List<T> result = new ArrayList<>();
 
-    for (Product product : products) {
+    for (T product : products) {
       result.add(product);
     }
-
     return result;
   }
 
