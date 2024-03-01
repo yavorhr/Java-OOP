@@ -19,8 +19,8 @@ public class ProductStockTest {
   }
 
   @Test
-  public void testContainsShouldReturnCorrectBooleanForAllClasses(){
-    Product product = new Product("test_label", 3.00, 1);
+  public void testContainsShouldReturnCorrectBooleanForAllClasses() {
+    Product product = createProduct();
     Assert.assertFalse(stock.contains(product));
 
     stock.add(product);
@@ -30,4 +30,16 @@ public class ProductStockTest {
     Assert.assertFalse(stock.contains(product));
   }
 
+  @Test
+  public void testAddProductShouldStoreTheCorrectProduct() {
+    Product product = createProduct();
+    stock.add(product);
+    Assert.assertTrue(stock.contains(product));
+  }
+
+
+
+  private Product createProduct() {
+    return new Product("test_label", 3.00, 1);
+  }
 }
