@@ -90,6 +90,27 @@ public class ProductStockTest {
     this.stock.find(this.stock.getCount());
   }
 
+  @Test
+  public void testChangeQuantityShouldSetNewQuantityToCorrectProduct() {
+    Product product = createProduct();
+    this.stock.add(product);
+
+    int newQuantity = product.getQuantity() + 10;
+    this.stock.changeQuantity(product.getLabel(), newQuantity);
+
+    Product findByIndex = this.stock.find(0);
+    Assert.assertNotNull(findByIndex);
+
+    Assert.assertEquals(newQuantity, findByIndex.getQuantity());
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testChangeQuantityForItemNotPresent() {
+    Product product = createProduct();
+    this.stock.changeQuantity(product.getLabel(), product.getQuantity() + 10);
+  }
+
+
   // Helpers
   private Product createProduct() {
     return new Product("test_label", 3.00, 1);
