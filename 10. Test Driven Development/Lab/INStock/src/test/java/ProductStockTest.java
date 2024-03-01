@@ -172,6 +172,55 @@ public class ProductStockTest {
     Assert.assertTrue(list.isEmpty());
   }
 
+  @Test
+  public void testFindAllInPriceRangeShouldReturnCorrectItemsWithCorrectOrders() {
+    Product product1 = new Product("test_label_1", 1, 1);
+    Product product2 = new Product("test_label_2", 2, 1);
+    Product product5 = new Product("test_label_5", 5, 1);
+    Product product6 = new Product("test_label_6", 6, 1);
+    Product product7 = new Product("test_label_7", 7, 1);
+    Product product9 = new Product("test_label_9", 9, 1);
+    Product product10 = new Product("test_label_10", 10, 1);
+    Product product11 = new Product("test_label_11", 11, 1);
+
+    this.stock.add(product1);
+    this.stock.add(product2);
+    this.stock.add(product5);
+    this.stock.add(product6);
+    this.stock.add(product7);
+    this.stock.add(product9);
+    this.stock.add(product10);
+    this.stock.add(product11);
+
+    Iterable<Product> products = this.stock.findAllInRange(5, 10);
+    Assert.assertNotNull(products);
+
+    List<Product> listFromIterable = createListFromIterable(products);
+    Assert.assertEquals(4, listFromIterable.size());
+
+    Assert.assertEquals(10, listFromIterable.get(0).getPrice(), 0);
+    Assert.assertEquals(9, listFromIterable.get(1).getPrice(), 0);
+    Assert.assertEquals(7, listFromIterable.get(2).getPrice(), 0);
+    Assert.assertEquals(6, listFromIterable.get(3).getPrice(), 0);
+  }
+
+  @Test
+  public void testFindAllInPriceRangeShouldReturnEmptyCollectionWhenNotInRange() {
+    Product product1 = new Product("test_label_1", 1, 1);
+    Product product2 = new Product("test_label_2", 2, 1);
+    Product product11 = new Product("test_label_11", 11, 1);
+
+    this.stock.add(product1);
+    this.stock.add(product2);
+    this.stock.add(product11);
+
+    Iterable<Product> products = this.stock.findAllInRange(5, 10);
+    Assert.assertNotNull(products);
+
+    List<Product> listFromIterable = createListFromIterable(products);
+    Assert.assertTrue(listFromIterable.isEmpty());
+  }
+
   // Helpers
   private Product createProduct() {
     return new Product("test_label", 3.00, 1);
