@@ -62,6 +62,33 @@ public class ProductStockTest {
     Assert.assertEquals(product.getLabel(), foundByIndex.getLabel());
   }
 
+  @Test
+  public void testFindByIdShouldReturnCorrectIfMiddleInStock() {
+    fillProductsToStock(5);
+    Product product = createProduct();
+    stock.add(product);
+
+    Product foundByIndex = stock.find(this.stock.getCount() - 1);
+
+    Assert.assertNotNull(foundByIndex);
+    Assert.assertEquals(product.getLabel(), foundByIndex.getLabel());
+  }
+
+  @Test(expected = IndexOutOfBoundsException.class)
+  public void testFindByNegativeIndex() {
+    this.stock.find(-1);
+  }
+
+  @Test(expected = IndexOutOfBoundsException.class)
+  public void testFindByIndexWhenEmptyStock() {
+    this.stock.find(0);
+  }
+
+  @Test(expected = IndexOutOfBoundsException.class)
+  public void testFindByIndexGreaterThanSize() {
+    fillProductsToStock(3);
+    this.stock.find(this.stock.getCount());
+  }
 
   // Helpers
   private Product createProduct() {
@@ -84,4 +111,5 @@ public class ProductStockTest {
       this.stock.add(product);
     }
   }
+
 }
