@@ -75,6 +75,27 @@ public class ChainBlockImplTest {
     this.chainBlock.removeTransactionById(0);
   }
 
+  // getByTransactionStatus(status)
+  @Test
+  public void testGetByTransactionStatusShouldWorksCorrect() {
+    Chainblock chainblock = new ChainblockImpl();
+    chainblock.add(new TransactionImpl(1, TransactionStatus.FAILED, "Tom", "Dimitar", 5000));
+    chainblock.add(new TransactionImpl(2, TransactionStatus.ABORTED, "George", "MIhail", 5000));
+
+    Iterable<Transaction> iterable = chainblock.getByTransactionStatus(TransactionStatus.FAILED);
+    List<Transaction> transactions = createListFromIterator(iterable);
+
+    Assert.assertEquals(1, transactions.size());
+    Assert.assertEquals(TransactionStatus.FAILED, transactions.get(0).getTransactionStatus());
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void estGetByTransactionStatusNoMatchingTransactionsShouldThrowError(){
+    Chainblock chainblock = new ChainblockImpl();
+    chainblock.add(new TransactionImpl(1, TransactionStatus.FAILED, "Tom", "Dimitar", 5000));
+    chainblock.getByTransactionStatus(TransactionStatus.SUCCESSFUL);
+  }
+
   // Helpers
   private Transaction createTransaction(int id, TransactionStatus status, String from, String to, double amount) {
     return new TransactionImpl(id, status, from, to, amount);
@@ -90,4 +111,12 @@ public class ChainBlockImplTest {
     return transactions;
   }
 
+  private List<Transaction> createListFromIterator(Iterable<Transaction> iterable) {
+    List<Transaction> transactions = new ArrayList<>();
+
+    for (Transaction tr : iterable) {
+      transactions.add(tr);
+    }
+    return transactions;
+  }
 }
