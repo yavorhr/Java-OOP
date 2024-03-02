@@ -13,13 +13,13 @@ public class ChainBlockImplTest {
   @Before
   public void setUp() {
     this.chainBlock = new ChainblockImpl();
-    this.chainBlock.add(createTransaction(1, TransactionStatus.ABORTED, "01012020", "31012020", 300));
-    this.chainBlock.add(createTransaction(2, TransactionStatus.FAILED, "01032020", "31032020", 500));
-    this.chainBlock.add(createTransaction(3, TransactionStatus.SUCCESSFUL, "01102020", "31102020", 600));
-    this.chainBlock.add(createTransaction(4, TransactionStatus.UNAUTHORIZED, "15072024", "31072024", 700));
-    this.chainBlock.add(createTransaction(5, TransactionStatus.SUCCESSFUL, "13092023", "15092023", 1000));
-    this.chainBlock.add(createTransaction(6, TransactionStatus.UNAUTHORIZED, "22082023", "24082023", 1500));
-    this.chainBlock.add(createTransaction(7, TransactionStatus.FAILED, "26032022", "28032022", 2000));
+    this.chainBlock.add(createTransaction(1, TransactionStatus.ABORTED, "Hulk", "IronMan", 300));
+    this.chainBlock.add(createTransaction(2, TransactionStatus.FAILED, "Hulk", "SpiderMan", 500));
+    this.chainBlock.add(createTransaction(3, TransactionStatus.SUCCESSFUL, "Werewolf", "Jene", 600));
+    this.chainBlock.add(createTransaction(4, TransactionStatus.UNAUTHORIZED, "Batman", "Robin", 700));
+    this.chainBlock.add(createTransaction(5, TransactionStatus.SUCCESSFUL, "Batman", "CatWoman", 1000));
+    this.chainBlock.add(createTransaction(6, TransactionStatus.UNAUTHORIZED, "CaptainAmerica", "Hulk", 1500));
+    this.chainBlock.add(createTransaction(7, TransactionStatus.FAILED, "Magnitto", "Prof.X", 2000));
   }
 
   // add, contains & getCount
@@ -46,7 +46,7 @@ public class ChainBlockImplTest {
   // changeTransactionStatus(id, Status)
   @Test
   public void testChangeTransactionStatusWorksCorrect() {
-    List<Transaction> transactions = createListFromIterator();
+    List<Transaction> transactions = createTransactionListFromIterable();
     Transaction transaction = transactions.get(0);
     Assert.assertEquals(TransactionStatus.ABORTED, transaction.getTransactionStatus());
 
@@ -78,22 +78,37 @@ public class ChainBlockImplTest {
   // getByTransactionStatus(status)
   @Test
   public void testGetByTransactionStatusShouldWorksCorrect() {
-    Chainblock chainblock = new ChainblockImpl();
-    chainblock.add(new TransactionImpl(1, TransactionStatus.FAILED, "Tom", "Dimitar", 5000));
-    chainblock.add(new TransactionImpl(2, TransactionStatus.ABORTED, "George", "MIhail", 5000));
+    Iterable<Transaction> iterable = this.chainBlock.getByTransactionStatus(TransactionStatus.FAILED);
+    List<Transaction> transactions = createTransactionListFromIterable(iterable);
 
-    Iterable<Transaction> iterable = chainblock.getByTransactionStatus(TransactionStatus.FAILED);
-    List<Transaction> transactions = createListFromIterator(iterable);
-
-    Assert.assertEquals(1, transactions.size());
+    Assert.assertEquals(2, transactions.size());
     Assert.assertEquals(TransactionStatus.FAILED, transactions.get(0).getTransactionStatus());
+    Assert.assertEquals(TransactionStatus.FAILED, transactions.get(1).getTransactionStatus());
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void estGetByTransactionStatusNoMatchingTransactionsShouldThrowError(){
+  public void estGetByTransactionStatusNoMatchingTransactionsShouldThrowError() {
     Chainblock chainblock = new ChainblockImpl();
     chainblock.add(new TransactionImpl(1, TransactionStatus.FAILED, "Tom", "Dimitar", 5000));
     chainblock.getByTransactionStatus(TransactionStatus.SUCCESSFUL);
+  }
+
+  // getAllSendersWithTransactionStatus(status)
+  @Test
+  public void testGetAllSendersWithTransactionStatusWorksCorrect() {
+    Iterable<String> iterable = this.chainBlock.getAllSendersWithTransactionStatus(TransactionStatus.FAILED);
+    List<String> senders = createStringListFromIterable(iterable);
+
+    Assert.assertEquals(2, senders.size());
+    Assert.assertEquals("Hulk", senders.get(0));
+    Assert.assertEquals("Magnitto", senders.get(1));
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testGetAllSendersWithTransactionStatusEmptyReturnShouldThrowError() {
+    Chainblock chainblock = new ChainblockImpl();
+    chainblock.add(new TransactionImpl(1, TransactionStatus.FAILED, "Tom", "Dimitar", 5000));
+    chainblock.getAllSendersWithTransactionStatus(TransactionStatus.SUCCESSFUL);
   }
 
   // Helpers
@@ -101,7 +116,7 @@ public class ChainBlockImplTest {
     return new TransactionImpl(id, status, from, to, amount);
   }
 
-  private List<Transaction> createListFromIterator() {
+  private List<Transaction> createTransactionListFromIterable() {
     Iterator<Transaction> iterable = this.chainBlock.iterator();
     List<Transaction> transactions = new ArrayList<>();
 
@@ -111,11 +126,20 @@ public class ChainBlockImplTest {
     return transactions;
   }
 
-  private List<Transaction> createListFromIterator(Iterable<Transaction> iterable) {
+  private List<Transaction> createTransactionListFromIterable(Iterable<Transaction> iterable) {
     List<Transaction> transactions = new ArrayList<>();
 
     for (Transaction tr : iterable) {
       transactions.add(tr);
+    }
+    return transactions;
+  }
+
+  private List<String> createStringListFromIterable(Iterable<String> iterable) {
+    List<String> transactions = new ArrayList<>();
+
+    for (String string : iterable) {
+      transactions.add(string);
     }
     return transactions;
   }
