@@ -38,7 +38,7 @@ public class Instock implements ProductStock {
     public void changeQuantity(String label, int quantity) {
         for (Product product : this.products) {
             if (product.getLabel().equals(label)) {
-                product.setLabel(label);
+                product.setQuantity(quantity);
                 return;
             }
         }
@@ -47,7 +47,7 @@ public class Instock implements ProductStock {
 
     @Override
     public Product find(int index) {
-        return this.products.get(0);
+        return this.products.get(index);
     }
 
     @Override
@@ -65,6 +65,7 @@ public class Instock implements ProductStock {
         if (count > this.getCount()) {
             return new ArrayList<>();
         }
+
         return this.products.stream()
                 .sorted(Comparator.comparing(Product::getLabel))
                 .limit(count)
