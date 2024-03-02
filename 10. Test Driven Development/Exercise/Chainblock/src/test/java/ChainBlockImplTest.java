@@ -60,6 +60,21 @@ public class ChainBlockImplTest {
     chainBlock.changeTransactionStatus(transaction.getId(), TransactionStatus.SUCCESSFUL);
   }
 
+  // changeTransactionStatus(id, Status)
+  @Test
+  public void testRemoveByIdWorksCorrect() {
+    Assert.assertEquals(7, this.chainBlock.getCount());
+    this.chainBlock.removeTransactionById(1);
+
+    Assert.assertEquals(6, this.chainBlock.getCount());
+    Assert.assertFalse(this.chainBlock.contains(1));
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testRemoveByIdNoneExistingTransactionShoulThrowError() {
+    this.chainBlock.removeTransactionById(0);
+  }
+
   // Helpers
   private Transaction createTransaction(int id, TransactionStatus status, String from, String to, double amount) {
     return new TransactionImpl(id, status, from, to, amount);
