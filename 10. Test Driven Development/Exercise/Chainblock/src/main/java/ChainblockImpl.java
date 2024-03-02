@@ -88,7 +88,16 @@ public class ChainblockImpl implements Chainblock {
     }
 
     public Iterable<String> getAllSendersWithTransactionStatus(TransactionStatus status) {
-        return null;
+        List<String> senders = this.transactions.stream()
+                .filter(t -> t.getTransactionStatus().equals(status))
+                .map(Transaction::getSender)
+                .collect(Collectors.toList());
+
+        if (senders.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+
+        return senders;
     }
 
     public Iterable<String> getAllReceiversWithTransactionStatus(TransactionStatus status) {
