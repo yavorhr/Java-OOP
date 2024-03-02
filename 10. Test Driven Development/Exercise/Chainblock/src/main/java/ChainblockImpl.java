@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ChainblockImpl implements Chainblock {
 
@@ -41,7 +42,12 @@ public class ChainblockImpl implements Chainblock {
 
 
     public void changeTransactionStatus(int id, TransactionStatus newStatus) {
+        if (!this.contains(id)) {
+            throw new IllegalArgumentException();
+        }
 
+        Transaction transactionById = this.getById(id);
+        transactionById.setTransactionStatus(newStatus);
     }
 
     public void removeTransactionById(int id) {
@@ -49,7 +55,16 @@ public class ChainblockImpl implements Chainblock {
     }
 
     public Transaction getById(int id) {
-        return null;
+        if (!this.contains(id)) {
+            throw new IllegalArgumentException();
+        }
+
+        return this.transactions.stream()
+                .filter(t -> t.getId() == id)
+                .collect(Collectors.toList())
+                .stream()
+                .findFirst()
+                .orElse(null);
     }
 
     public Iterable<Transaction> getByTransactionStatus(TransactionStatus status) {
@@ -93,6 +108,6 @@ public class ChainblockImpl implements Chainblock {
     }
 
     public Iterator<Transaction> iterator() {
-        return null;
+        return this.transactions.iterator();
     }
 }
