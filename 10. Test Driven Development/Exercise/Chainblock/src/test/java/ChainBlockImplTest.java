@@ -2,6 +2,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 
 public class ChainBlockImplTest {
   private ChainblockImpl chainBlock;
@@ -39,10 +43,36 @@ public class ChainBlockImplTest {
     this.chainBlock.add(new TransactionImpl(7, TransactionStatus.FAILED, "22032024", "25032024", 5000));
   }
 
+  // changeTransactionStatus(id, Status)
+  @Test
+  public void testChangeTransactionStatusWorksCorrect() {
+    List<Transaction> transactions = createListFromIterator();
+    Transaction transaction = transactions.get(0);
+    Assert.assertEquals(TransactionStatus.ABORTED, transaction.getTransactionStatus());
+
+    chainBlock.changeTransactionStatus(transaction.getId(), TransactionStatus.SUCCESSFUL);
+    Assert.assertEquals(TransactionStatus.SUCCESSFUL, transaction.getTransactionStatus());
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testChangeTransactionStatusOfNoneExistingTransactionShouldThrowError() {
+    Transaction transaction = createTransaction(8, TransactionStatus.FAILED, "26032022", "28032022", 1300);
+    chainBlock.changeTransactionStatus(transaction.getId(), TransactionStatus.SUCCESSFUL);
+  }
 
   // Helpers
-
   private Transaction createTransaction(int id, TransactionStatus status, String from, String to, double amount) {
     return new TransactionImpl(id, status, from, to, amount);
   }
+
+  private List<Transaction> createListFromIterator() {
+    Iterator<Transaction> iterable = this.chainBlock.iterator();
+    List<Transaction> transactions = new ArrayList<>();
+
+    while (iterable.hasNext()) {
+      transactions.add(iterable.next());
+    }
+    return transactions;
+  }
+
 }
