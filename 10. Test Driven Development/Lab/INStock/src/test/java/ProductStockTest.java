@@ -2,10 +2,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -34,8 +31,7 @@ public class ProductStockTest {
     stock.add(product);
     Assert.assertTrue(stock.contains(product));
 
-    product.setLabel("not_present_label");
-    Assert.assertFalse(stock.contains(product));
+    Assert.assertFalse(stock.contains(new Product("not_present_label",3.00, 1)));
   }
 
   @Test
@@ -151,7 +147,7 @@ public class ProductStockTest {
 
     int index = 0;
     for (String expectedLabel : expectedLabels) {
-      Assert.assertEquals(expectedLabel, returnedProducts.get(index).getLabel());
+      Assert.assertEquals(expectedLabel, returnedProducts.get(index++).getLabel());
     }
   }
 
@@ -159,7 +155,7 @@ public class ProductStockTest {
   public void testFindFirstByAlphabeticalOrderShouldReturnEmptyCollection() {
     fillProductsToStock(10);
 
-    Iterable<Product> iterableProducts = this.stock.findFirstByAlphabeticalOrder(6);
+    Iterable<Product> iterableProducts = this.stock.findFirstByAlphabeticalOrder(11);
     Assert.assertNotNull(iterableProducts);
 
     List<Product> list = createListFromIterable(iterableProducts);
@@ -289,10 +285,10 @@ public class ProductStockTest {
     List<Product> products = createListFromIterable(iterable);
     Assert.assertEquals(4, products.size());
 
-    Assert.assertEquals(9, products.get(0).getPrice(), 0);
-    Assert.assertEquals(8, products.get(1).getPrice(), 0);
-    Assert.assertEquals(7, products.get(2).getPrice(), 0);
-    Assert.assertEquals(6, products.get(3).getPrice(), 0);
+    Assert.assertEquals(8, products.get(0).getPrice(), 0);
+    Assert.assertEquals(7, products.get(1).getPrice(), 0);
+    Assert.assertEquals(6, products.get(2).getPrice(), 0);
+    Assert.assertEquals(5, products.get(3).getPrice(), 0);
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -367,7 +363,7 @@ public class ProductStockTest {
     this.stock.add(product7);
     this.stock.add(product8);
 
-    Iterable<Product> iterable = this.stock.getIterable();
+    Iterator<Product> iterable = this.stock.iterator();
     Assert.assertNotNull(iterable);
 
     List<Product> products = createListFromIterable(iterable);
@@ -376,7 +372,7 @@ public class ProductStockTest {
 
   @Test
   public void testGetIterableShouldReturnEmptyCollection() {
-    Iterable<Product> iterable = this.stock.getIterable();
+    Iterator<Product> iterable = this.stock.iterator();
     Assert.assertNotNull(iterable);
 
     List<Product> products = createListFromIterable(iterable);
@@ -410,6 +406,15 @@ public class ProductStockTest {
 
     for (T product : products) {
       result.add(product);
+    }
+    return result;
+  }
+
+  private <T> List<T> createListFromIterable(Iterator<T> products) {
+    List<T> result = new ArrayList<>();
+
+    while (products.hasNext()) {
+      result.add(products.next());
     }
     return result;
   }
