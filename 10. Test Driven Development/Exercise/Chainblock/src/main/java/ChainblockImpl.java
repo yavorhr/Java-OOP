@@ -51,7 +51,13 @@ public class ChainblockImpl implements Chainblock {
     }
 
     public void removeTransactionById(int id) {
+        if (!this.contains(id)) {
+            throw new IllegalArgumentException();
+        }
 
+        Transaction byId = this.getById(id);
+
+        this.transactions.remove(byId);
     }
 
     public Transaction getById(int id) {
