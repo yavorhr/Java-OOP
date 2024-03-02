@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -74,7 +75,16 @@ public class ChainblockImpl implements Chainblock {
     }
 
     public Iterable<Transaction> getByTransactionStatus(TransactionStatus status) {
-        return null;
+        List<Transaction> collect = this.transactions.stream()
+                .filter(t -> t.getTransactionStatus().equals(status))
+                .sorted(Comparator.comparing(Transaction::getAmount).reversed())
+                .collect(Collectors.toList());
+
+        if (collect.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+
+        return collect;
     }
 
     public Iterable<String> getAllSendersWithTransactionStatus(TransactionStatus status) {
