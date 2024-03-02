@@ -18,9 +18,18 @@ public class TransactionImpl implements Comparable<TransactionImpl>, Transaction
         return 0;
     }
 
-
     @Override
     public int getId() {
         return this.id;
+    }
+
+    @Override
+    public TransactionStatus getTransactionStatus() {
+        return this.status;
+    }
+
+    @Override
+    public void setTransactionStatus(TransactionStatus newStatus) {
+        this.status = newStatus;
     }
 }
