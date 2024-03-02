@@ -17,6 +17,7 @@ public class ProductStockTest {
     this.stock = new Instock();
   }
 
+  // add(Product) & count()
   @Test
   public void testCountShouldReturnCorrectSize() {
     Assert.assertEquals(0, stock.getCount());
@@ -24,6 +25,7 @@ public class ProductStockTest {
     Assert.assertEquals(1, stock.getCount());
   }
 
+  // contains
   @Test
   public void testContainsShouldReturnCorrectBooleanForAllClasses() {
     Product product = createProduct();
@@ -43,10 +45,9 @@ public class ProductStockTest {
     Assert.assertTrue(stock.contains(product));
   }
 
-  // Test for valid product first in DS last in DS and in the middle of DS
-  // Test IndexOutOfBounds for less than 0 and greater or equal to size
+  // find(int)
   @Test
-  public void testFindByIdShouldReturnCorrectIfFirstItemInStock() {
+  public void testFindByIndexShouldReturnCorrectIfFirstItemInStock() {
     Product product = createProduct();
     stock.add(product);
 
@@ -57,19 +58,7 @@ public class ProductStockTest {
   }
 
   @Test
-  public void testFindByIdShouldReturnCorrectIfLastItemInStock() {
-    fillProductsToStock(5);
-    Product product = createProduct();
-    stock.add(product);
-
-    Product foundByIndex = stock.find(this.stock.getCount() - 1);
-
-    Assert.assertNotNull(foundByIndex);
-    Assert.assertEquals(product.getLabel(), foundByIndex.getLabel());
-  }
-
-  @Test
-  public void testFindByIdShouldReturnCorrectIfMiddleInStock() {
+  public void testFindByIndexShouldReturnCorrectIfLastItemInStock() {
     fillProductsToStock(5);
     Product product = createProduct();
     stock.add(product);
@@ -81,7 +70,7 @@ public class ProductStockTest {
   }
 
   @Test(expected = IndexOutOfBoundsException.class)
-  public void testFindByNegativeIndex() {
+  public void testFindByIndexNegativeIndex() {
     this.stock.find(-1);
   }
 
@@ -96,6 +85,7 @@ public class ProductStockTest {
     this.stock.find(this.stock.getCount());
   }
 
+  // changeQuantity(String,int)
   @Test
   public void testChangeQuantityShouldSetNewQuantityToCorrectProduct() {
     Product product = createProduct();
@@ -104,10 +94,10 @@ public class ProductStockTest {
     int newQuantity = product.getQuantity() + 10;
     this.stock.changeQuantity(product.getLabel(), newQuantity);
 
-    Product findByIndex = this.stock.find(0);
-    Assert.assertNotNull(findByIndex);
+    Product productByIndex = this.stock.find(0);
+    Assert.assertNotNull(productByIndex);
 
-    Assert.assertEquals(newQuantity, findByIndex.getQuantity());
+    Assert.assertEquals(newQuantity, productByIndex.getQuantity());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -116,14 +106,16 @@ public class ProductStockTest {
     this.stock.changeQuantity(product.getLabel(), product.getQuantity() + 10);
   }
 
+  // indByLabel(String)
   @Test
-  public void testFindByLabelShouldReturnCorrectItem() {
+  public void testFindByLabelShouldReturnCorrectProduct() {
     Product product = createProduct();
     this.stock.add(product);
-    Product byLabel = this.stock.findByLabel(product.getLabel());
 
-    Assert.assertNotNull(byLabel);
-    Assert.assertEquals(byLabel.getLabel(), product.getLabel());
+    Product productByLabel = this.stock.findByLabel(product.getLabel());
+    Assert.assertNotNull(productByLabel);
+
+    Assert.assertEquals(productByLabel.getLabel(), product.getLabel());
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -132,12 +124,14 @@ public class ProductStockTest {
     this.stock.findByLabel("invalid_label");
   }
 
+  // findFirstByAlphabeticalOrder(int)
   @Test
   public void testFindFirstByAlphabeticalOrderShouldReturnCorrectNumberOfProducts() {
     fillProductsToStock(10);
-    Iterable<Product> iterableProducts = this.stock.findFirstByAlphabeticalOrder(6);
 
+    Iterable<Product> iterableProducts = this.stock.findFirstByAlphabeticalOrder(6);
     Assert.assertNotNull(iterableProducts);
+
     Assert.assertEquals(6, createListFromIterable(iterableProducts).size());
   }
 
@@ -172,6 +166,7 @@ public class ProductStockTest {
     Assert.assertTrue(list.isEmpty());
   }
 
+  // findAllInPriceRange(double,double)
   @Test
   public void testFindAllInPriceRangeShouldReturnCorrectItemsWithCorrectOrders() {
     Product product1 = new Product("test_label_1", 1, 1);
@@ -221,6 +216,7 @@ public class ProductStockTest {
     Assert.assertTrue(listFromIterable.isEmpty());
   }
 
+  // findAllByPrice(double)
   @Test
   public void testFindAllByPriceShouldReturnOnlyCorrectPricedProducts() {
     Product product1 = new Product("test_label_1", 1, 1);
@@ -266,6 +262,7 @@ public class ProductStockTest {
     Assert.assertTrue(products.isEmpty());
   }
 
+  // findFirstMostExpensiveProducts(int)
   @Test
   public void testFindFirstMostExpensiveProductsWorksCorrect() {
     Product product1 = new Product("test_label_1", 1, 1);
@@ -304,6 +301,7 @@ public class ProductStockTest {
     this.stock.findFirstMostExpensiveProducts(15);
   }
 
+  // findAllByQuantity(int)
   @Test
   public void testFindAllByQuantityReturnCorrectProducts() {
     Product product1 = new Product("test_label_1", 1, 1);
@@ -348,6 +346,7 @@ public class ProductStockTest {
     Assert.assertTrue(products.isEmpty());
   }
 
+  // getIterable<Product>()
   @Test
   public void testGetIterableShouldReturnCorrectProducts() {
     Product product1 = new Product("test_label_1", 1, 1);
@@ -373,12 +372,13 @@ public class ProductStockTest {
 
     List<Product> products = createListFromIterable(iterable);
     Assert.assertEquals(8, products.size());
-
   }
 
   @Test
   public void testGetIterableShouldReturnEmptyCollection() {
     Iterable<Product> iterable = this.stock.getIterable();
+    Assert.assertNotNull(iterable);
+
     List<Product> products = createListFromIterable(iterable);
     Assert.assertTrue(products.isEmpty());
   }
