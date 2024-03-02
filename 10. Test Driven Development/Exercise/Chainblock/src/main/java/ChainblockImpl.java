@@ -101,7 +101,16 @@ public class ChainblockImpl implements Chainblock {
     }
 
     public Iterable<String> getAllReceiversWithTransactionStatus(TransactionStatus status) {
-        return null;
+        List<String> senders = this.transactions.stream()
+                .filter(t -> t.getTransactionStatus().equals(status))
+                .map(Transaction::getReceiver)
+                .collect(Collectors.toList());
+
+        if (senders.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+
+        return senders;
     }
 
     public Iterable<Transaction> getAllOrderedByAmountDescendingThenById() {
