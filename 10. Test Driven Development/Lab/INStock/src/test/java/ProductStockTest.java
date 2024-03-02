@@ -348,6 +348,40 @@ public class ProductStockTest {
     Assert.assertTrue(products.isEmpty());
   }
 
+  @Test
+  public void testGetIterableShouldReturnCorrectProducts() {
+    Product product1 = new Product("test_label_1", 1, 1);
+    Product product2 = new Product("test_label_2", 2, 1);
+    Product product3 = new Product("test_label_3", 3, 1);
+    Product product4 = new Product("test_label_4", 4, 1);
+    Product product5 = new Product("test_label_5", 5, 1);
+    Product product6 = new Product("test_label_6", 6, 10);
+    Product product7 = new Product("test_label_7", 7, 10);
+    Product product8 = new Product("test_label_8", 8, 10);
+
+    this.stock.add(product1);
+    this.stock.add(product2);
+    this.stock.add(product3);
+    this.stock.add(product4);
+    this.stock.add(product5);
+    this.stock.add(product6);
+    this.stock.add(product7);
+    this.stock.add(product8);
+
+    Iterable<Product> iterable = this.stock.getIterable();
+    Assert.assertNotNull(iterable);
+
+    List<Product> products = createListFromIterable(iterable);
+    Assert.assertEquals(8, products.size());
+
+  }
+
+  @Test
+  public void testGetIterableShouldReturnEmptyCollection() {
+    Iterable<Product> iterable = this.stock.getIterable();
+    List<Product> products = createListFromIterable(iterable);
+    Assert.assertTrue(products.isEmpty());
+  }
 
   // Helpers
   private Product createProduct() {
