@@ -1,21 +1,44 @@
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
-public class ChainblockImpl implements Chainblock{
+public class ChainblockImpl implements Chainblock {
+
+    private List<Transaction> transactions;
+
+    public ChainblockImpl() {
+        this.transactions = new ArrayList<>();
+    }
+
     public int getCount() {
-        return 0;
+        return this.transactions.size();
     }
 
     public void add(Transaction transaction) {
-
+        if (this.contains(transaction.getId())) {
+            throw new IllegalArgumentException();
+        }
+        this.transactions.add(transaction);
     }
 
     public boolean contains(Transaction transaction) {
+        for (Transaction trans : this.transactions) {
+            if (trans.getId() == transaction.getId()) {
+                return true;
+            }
+        }
         return false;
     }
 
     public boolean contains(int id) {
+        for (Transaction trans : this.transactions) {
+            if (trans.getId() == id) {
+                return true;
+            }
+        }
         return false;
     }
+
 
     public void changeTransactionStatus(int id, TransactionStatus newStatus) {
 
