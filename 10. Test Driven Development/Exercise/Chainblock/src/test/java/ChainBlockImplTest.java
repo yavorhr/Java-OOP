@@ -111,6 +111,24 @@ public class ChainBlockImplTest {
     chainblock.getAllSendersWithTransactionStatus(TransactionStatus.SUCCESSFUL);
   }
 
+  // getAllReceiversWithTransactionStatus(status)
+  @Test
+  public void testGetAllReceiversWithTransactionStatusWorksCorrect() {
+    Iterable<String> iterable = this.chainBlock.getAllReceiversWithTransactionStatus(TransactionStatus.FAILED);
+    List<String> receivers = createStringListFromIterable(iterable);
+
+    Assert.assertEquals(2, receivers.size());
+    Assert.assertEquals("SpiderMan", receivers.get(0));
+    Assert.assertEquals("Prof.X", receivers.get(1));
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testGetAllReceiversWithTransactionStatusEmptyReturnShouldThrowError() {
+    Chainblock chainblock = new ChainblockImpl();
+    chainblock.add(new TransactionImpl(1, TransactionStatus.FAILED, "Tom", "Dimitar", 5000));
+    chainblock.getAllReceiversWithTransactionStatus(TransactionStatus.SUCCESSFUL);
+  }
+
   // Helpers
   private Transaction createTransaction(int id, TransactionStatus status, String from, String to, double amount) {
     return new TransactionImpl(id, status, from, to, amount);
