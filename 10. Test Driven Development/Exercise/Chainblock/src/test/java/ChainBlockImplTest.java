@@ -155,6 +155,11 @@ public class ChainBlockImplTest {
     Assert.assertEquals(700, transactionsBySender.get(1).getAmount(), 0);
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testGetBySenderOrderedByAmountDescendingShouldThrowErrorWhenEmtpyCollection() {
+    this.chainBlock.getBySenderOrderedByAmountDescending("invalid_sender");
+  }
+
   // Helpers
   private Transaction createTransaction(int id, TransactionStatus status, String from, String to, double amount) {
     return new TransactionImpl(id, status, from, to, amount);
