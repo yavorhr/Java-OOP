@@ -178,8 +178,22 @@ public class ChainBlockImplTest {
     this.chainBlock.getByReceiverOrderedByAmountThenById("invalid_sender");
   }
 
+  // getByTransactionStatusAndMaximumAmount(status, amount)
 
+  @Test
+  public void testGetByTransactionStatusAndMaximumAmount() {
+    Iterable<Transaction> iterable = this.chainBlock.getByTransactionStatusAndMaximumAmount(TransactionStatus.FAILED, 700);
+    List<Transaction> transactions = createTransactionListFromIterable(iterable);
 
+    Assert.assertEquals(1, transactions.size());
+    Assert.assertEquals(TransactionStatus.FAILED, transactions.get(0).getTransactionStatus());
+    Assert.assertEquals(500, transactions.get(0).getAmount(),0);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testGetByTransactionStatusAndMaximumAmountShouldThrowErrorWhenEmptyCollection() {
+    this.chainBlock.getByTransactionStatusAndMaximumAmount(TransactionStatus.FAILED, 100);
+  }
 
   // Helpers
   private Transaction createTransaction(int id, TransactionStatus status, String from, String to, double amount) {
