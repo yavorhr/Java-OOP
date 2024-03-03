@@ -156,7 +156,7 @@ public class ChainBlockImplTest {
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void testGetBySenderOrderedByAmountDescendingShouldThrowErrorWhenEmptyCollection() {
+  public void testGetBySenderOrderedByAmountDescendingShouldThrowErrorWhenEmptyCollectionIsReturned() {
     this.chainBlock.getBySenderOrderedByAmountDescending("invalid_sender");
   }
 
@@ -174,7 +174,7 @@ public class ChainBlockImplTest {
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void testGetByReceiverOrderedByAmountThenByIdShouldThrowErrorWhenEmptyCollection() {
+  public void testGetByReceiverOrderedByAmountThenByIdShouldThrowErrorWhenEmptyCollectionIsReturned() {
     this.chainBlock.getByReceiverOrderedByAmountThenById("invalid_sender");
   }
 
@@ -191,7 +191,7 @@ public class ChainBlockImplTest {
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void testGetByTransactionStatusAndMaximumAmountShouldThrowErrorWhenEmptyCollection() {
+  public void testGetByTransactionStatusAndMaximumAmountShouldThrowErrorWhenEmptyCollectionIsReturned() {
     this.chainBlock.getByTransactionStatusAndMaximumAmount(TransactionStatus.FAILED, 100);
   }
 
@@ -210,11 +210,28 @@ public class ChainBlockImplTest {
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void testGetBySenderAndMinimumAmountDescendingShouldThrowErrorWhenEmptyCollection() {
+  public void testGetBySenderAndMinimumAmountDescendingShouldThrowErrorWhenEmptyCollectionIsReturned() {
     this.chainBlock.getBySenderAndMinimumAmountDescending("Hulk", 5000);
   }
 
+  // getByReceiverAndAmountRange(receiver, lo, hi) (status, amount)
 
+  @Test
+  public void testGetByReceiverAndAmountRangeShouldWorkCorrect() {
+    Iterable<Transaction> iterable = this.chainBlock.getByReceiverAndAmountRange("Hulk", 1000, 1501);
+    List<Transaction> transactions = createTransactionListFromIterable(iterable);
+
+    Assert.assertEquals(2, transactions.size());
+
+    Assert.assertEquals("Hulk", transactions.get(0).getReceiver());
+    Assert.assertEquals(1500, transactions.get(0).getAmount(), 0);
+    Assert.assertEquals(1000, transactions.get(1).getAmount(), 0);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testGetByReceiverAndAmountRangeShouldThrowErrorWhenEmptyCollectionIsReturned() {
+    this.chainBlock.getByReceiverAndAmountRange("Hulk", 1501, 1502);
+  }
 
 
   // Helpers
