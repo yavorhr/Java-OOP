@@ -187,7 +187,7 @@ public class ChainBlockImplTest {
 
     Assert.assertEquals(1, transactions.size());
     Assert.assertEquals(TransactionStatus.FAILED, transactions.get(0).getTransactionStatus());
-    Assert.assertEquals(500, transactions.get(0).getAmount(),0);
+    Assert.assertEquals(500, transactions.get(0).getAmount(), 0);
   }
 
   @Test(expected = IllegalArgumentException.class)
@@ -231,6 +231,21 @@ public class ChainBlockImplTest {
   @Test(expected = IllegalArgumentException.class)
   public void testGetByReceiverAndAmountRangeShouldThrowErrorWhenEmptyCollectionIsReturned() {
     this.chainBlock.getByReceiverAndAmountRange("Hulk", 1501, 1502);
+  }
+
+  // getByReceiverAndAmountRange(receiver, lo, hi) (status, amount)
+
+  @Test
+  public void testGetAllInAmountRangeShouldWorksCorrect() {
+    Iterable<Transaction> iterable = this.chainBlock.getAllInAmountRange(300, 2000);
+    List<Transaction> transactions = createTransactionListFromIterable(iterable);
+
+    Assert.assertEquals(7, transactions.size());
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testGetAllInAmountRangeShouldThrowErrorWhenEmptyCol() {
+    this.chainBlock.getAllInAmountRange(2500, 3000);
   }
 
 
