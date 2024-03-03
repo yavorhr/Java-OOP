@@ -75,16 +75,16 @@ public class ChainblockImpl implements Chainblock {
     }
 
     public Iterable<Transaction> getByTransactionStatus(TransactionStatus status) {
-        List<Transaction> collect = this.transactions.stream()
+        List<Transaction> transactions = this.transactions.stream()
                 .filter(t -> t.getTransactionStatus().equals(status))
                 .sorted(Comparator.comparing(Transaction::getAmount).reversed())
                 .collect(Collectors.toList());
 
-        if (collect.isEmpty()) {
+        if (transactions.isEmpty()) {
             throw new IllegalArgumentException();
         }
 
-        return collect;
+        return transactions;
     }
 
     public Iterable<String> getAllSendersWithTransactionStatus(TransactionStatus status) {
@@ -113,6 +113,7 @@ public class ChainblockImpl implements Chainblock {
         return senders;
     }
 
+
     public Iterable<Transaction> getAllOrderedByAmountDescendingThenById() {
         return this.transactions.stream()
                 .sorted((t1, t2) -> {
@@ -126,18 +127,49 @@ public class ChainblockImpl implements Chainblock {
     }
 
     public Iterable<Transaction> getBySenderOrderedByAmountDescending(String sender) {
-        return this.transactions.stream()
+
+        List<Transaction> transactionsBySender = this.transactions.stream()
                 .filter(t -> t.getSender().equals(sender))
                 .sorted((t1, t2) -> Double.compare(t2.getAmount(), t1.getAmount()))
                 .collect(Collectors.toList());
+
+        if (transactionsBySender.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+
+        return transactionsBySender;
     }
 
     public Iterable<Transaction> getByReceiverOrderedByAmountThenById(String receiver) {
-        return null;
+        List<Transaction> transactionsByReceiver = this.transactions.stream()
+                .filter(t -> t.getReceiver().equals(receiver))
+                .sorted((t1, t2) -> {
+                    int result = Double.compare(t2.getAmount(), t1.getAmount());
+                    if (result == 0) {
+                        result = Integer.compare(t1.getId(), t2.getId());
+                    }
+                    return result;
+                })
+                .collect(Collectors.toList());
+
+        if (transactionsByReceiver.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+
+        return transactionsByReceiver;
     }
 
     public Iterable<Transaction> getByTransactionStatusAndMaximumAmount(TransactionStatus status, double amount) {
-        return null;
+        List<Transaction> transactions = this.transactions.stream()
+                .filter(t -> t.getTransactionStatus().equals(status) && t.getAmount() <= amount)
+                .sorted(Comparator.comparing(Transaction::getAmount).reversed())
+                .collect(Collectors.toList());
+
+        if (transactions.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+
+        return transactions;
     }
 
     public Iterable<Transaction> getBySenderAndMinimumAmountDescending(String sender, double amount) {
