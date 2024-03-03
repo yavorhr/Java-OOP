@@ -17,7 +17,7 @@ public class ChainBlockImplTest {
     this.chainBlock.add(createTransaction(2, TransactionStatus.FAILED, "Hulk", "SpiderMan", 500));
     this.chainBlock.add(createTransaction(3, TransactionStatus.SUCCESSFUL, "Werewolf", "Jene", 600));
     this.chainBlock.add(createTransaction(4, TransactionStatus.UNAUTHORIZED, "Batman", "Robin", 700));
-    this.chainBlock.add(createTransaction(5, TransactionStatus.SUCCESSFUL, "Batman", "CatWoman", 1000));
+    this.chainBlock.add(createTransaction(5, TransactionStatus.SUCCESSFUL, "Batman", "Hulk", 1000));
     this.chainBlock.add(createTransaction(6, TransactionStatus.UNAUTHORIZED, "CaptainAmerica", "Hulk", 1500));
     this.chainBlock.add(createTransaction(7, TransactionStatus.FAILED, "Magnitto", "Prof.X", 2000));
   }
@@ -156,9 +156,30 @@ public class ChainBlockImplTest {
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void testGetBySenderOrderedByAmountDescendingShouldThrowErrorWhenEmtpyCollection() {
+  public void testGetBySenderOrderedByAmountDescendingShouldThrowErrorWhenEmptyCollection() {
     this.chainBlock.getBySenderOrderedByAmountDescending("invalid_sender");
   }
+
+  // getByReceiverOrderedByAmountThenById(receiver)
+  @Test
+  public void testGetByReceiverOrderedByAmountThenByIdShouldWorkCorrect() {
+    Iterable<Transaction> iterable = this.chainBlock.getByReceiverOrderedByAmountThenById("Hulk");
+    List<Transaction> transactionsByReceiver = createTransactionListFromIterable(iterable);
+
+    Assert.assertEquals(2, transactionsByReceiver.size());
+
+    Assert.assertEquals("Hulk", transactionsByReceiver.get(0).getReceiver());
+    Assert.assertEquals(1500, transactionsByReceiver.get(0).getAmount(), 0);
+    Assert.assertEquals(1000, transactionsByReceiver.get(1).getAmount(), 0);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testGetByReceiverOrderedByAmountThenByIdShouldThrowErrorWhenEmptyCollection() {
+    this.chainBlock.getByReceiverOrderedByAmountThenById("invalid_sender");
+  }
+
+
+
 
   // Helpers
   private Transaction createTransaction(int id, TransactionStatus status, String from, String to, double amount) {
