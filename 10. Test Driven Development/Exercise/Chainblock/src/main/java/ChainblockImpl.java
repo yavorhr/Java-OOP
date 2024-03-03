@@ -186,7 +186,22 @@ public class ChainblockImpl implements Chainblock {
     }
 
     public Iterable<Transaction> getByReceiverAndAmountRange(String receiver, double lo, double hi) {
-        return null;
+        List<Transaction> transactions = this.transactions.stream()
+                .filter(t -> t.getReceiver().equals(receiver) && t.getAmount() >= lo && t.getAmount() < hi)
+                .sorted((t1, t2) -> {
+                    int result = Double.compare(t2.getAmount(), t1.getAmount());
+                    if (result == 0) {
+                        result = Integer.compare(t1.getId(), t2.getId());
+                    }
+                    return result;
+                })
+                .collect(Collectors.toList());
+
+        if (transactions.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+
+        return transactions;
     }
 
     public Iterable<Transaction> getAllInAmountRange(double lo, double hi) {
