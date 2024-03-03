@@ -205,7 +205,15 @@ public class ChainblockImpl implements Chainblock {
     }
 
     public Iterable<Transaction> getAllInAmountRange(double lo, double hi) {
-        return null;
+        List<Transaction> transactions = this.transactions.stream()
+                .filter(t -> t.getAmount() >= lo && t.getAmount() <= hi)
+                .collect(Collectors.toList());
+
+        if (transactions.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+
+        return transactions;
     }
 
     public Iterator<Transaction> iterator() {
