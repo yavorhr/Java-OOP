@@ -129,6 +129,19 @@ public class ChainBlockImplTest {
     chainblock.getAllReceiversWithTransactionStatus(TransactionStatus.SUCCESSFUL);
   }
 
+  // getAllOrderedByAmountDescendingThenById()
+  @Test
+  public void testGetAllOrderedByAmountDescendingThenById() {
+    Iterable<Transaction> iterable = this.chainBlock.getAllOrderedByAmountDescendingThenById();
+    List<Transaction> transactions = createTransactionListFromIterable(iterable);
+    int lastIndex = transactions.size() - 1;
+
+    Assert.assertEquals("Magnitto", transactions.get(0).getSender());
+    Assert.assertEquals("Hulk", transactions.get(lastIndex).getSender());
+    Assert.assertEquals(2000, transactions.get(0).getAmount(),0);
+    Assert.assertEquals(300, transactions.get(lastIndex).getAmount(),0);
+  }
+
   // Helpers
   private Transaction createTransaction(int id, TransactionStatus status, String from, String to, double amount) {
     return new TransactionImpl(id, status, from, to, amount);
