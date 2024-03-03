@@ -195,6 +195,28 @@ public class ChainBlockImplTest {
     this.chainBlock.getByTransactionStatusAndMaximumAmount(TransactionStatus.FAILED, 100);
   }
 
+  // getBySenderAndMinimumAmountDescending(status, amount)
+
+  @Test
+  public void testGetBySenderAndMinimumAmountDescendingShouldWorksCorrect() {
+    Iterable<Transaction> iterable = this.chainBlock.getBySenderAndMinimumAmountDescending("Hulk", 300);
+    List<Transaction> transactions = createTransactionListFromIterable(iterable);
+
+    Assert.assertEquals(2, transactions.size());
+
+    Assert.assertEquals("Hulk", transactions.get(0).getSender());
+    Assert.assertEquals(500, transactions.get(0).getAmount(), 0);
+    Assert.assertEquals(300, transactions.get(1).getAmount(), 0);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testGetBySenderAndMinimumAmountDescendingShouldThrowErrorWhenEmptyCollection() {
+    this.chainBlock.getBySenderAndMinimumAmountDescending("Hulk", 5000);
+  }
+
+
+
+
   // Helpers
   private Transaction createTransaction(int id, TransactionStatus status, String from, String to, double amount) {
     return new TransactionImpl(id, status, from, to, amount);
