@@ -71,7 +71,7 @@ public class ChainBlockImplTest {
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void testRemoveByIdNoneExistingTransactionShoulThrowError() {
+  public void testRemoveByIdNoneExistingTransactionShouldThrowError() {
     this.chainBlock.removeTransactionById(0);
   }
 
@@ -138,8 +138,21 @@ public class ChainBlockImplTest {
 
     Assert.assertEquals("Magnitto", transactions.get(0).getSender());
     Assert.assertEquals("Hulk", transactions.get(lastIndex).getSender());
-    Assert.assertEquals(2000, transactions.get(0).getAmount(),0);
-    Assert.assertEquals(300, transactions.get(lastIndex).getAmount(),0);
+    Assert.assertEquals(2000, transactions.get(0).getAmount(), 0);
+    Assert.assertEquals(300, transactions.get(lastIndex).getAmount(), 0);
+  }
+
+  // getBySenderOrderedByAmountDescending()
+  @Test
+  public void testGetBySenderOrderedByAmountDescendingShouldWorkCorrect() {
+    Iterable<Transaction> iterable = this.chainBlock.getBySenderOrderedByAmountDescending("Batman");
+    List<Transaction> transactionsBySender = createTransactionListFromIterable(iterable);
+
+    Assert.assertEquals(2, transactionsBySender.size());
+
+    Assert.assertEquals("Batman", transactionsBySender.get(0).getSender());
+    Assert.assertEquals(1000, transactionsBySender.get(0).getAmount(), 0);
+    Assert.assertEquals(700, transactionsBySender.get(1).getAmount(), 0);
   }
 
   // Helpers
