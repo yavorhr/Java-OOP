@@ -114,11 +114,22 @@ public class ChainblockImpl implements Chainblock {
     }
 
     public Iterable<Transaction> getAllOrderedByAmountDescendingThenById() {
-        return null;
+        return this.transactions.stream()
+                .sorted((t1, t2) -> {
+                    int result = Double.compare(t2.getAmount(), t1.getAmount());
+                    if (result == 0) {
+                        result = Integer.compare(t1.getId(), t2.getId());
+                    }
+                    return result;
+                })
+                .collect(Collectors.toList());
     }
 
     public Iterable<Transaction> getBySenderOrderedByAmountDescending(String sender) {
-        return null;
+        return this.transactions.stream()
+                .filter(t -> t.getSender().equals(sender))
+                .sorted((t1, t2) -> Double.compare(t2.getAmount(), t1.getAmount()))
+                .collect(Collectors.toList());
     }
 
     public Iterable<Transaction> getByReceiverOrderedByAmountThenById(String receiver) {
