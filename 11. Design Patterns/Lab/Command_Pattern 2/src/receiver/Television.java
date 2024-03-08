@@ -10,7 +10,6 @@ public class Television implements ElectronicDevice {
   @Override
   public void on() {
     System.out.println("TV is on");
-
   }
 
   @Override

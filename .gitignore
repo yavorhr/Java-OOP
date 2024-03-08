@@ -22,3 +22,13 @@
 07.  Reflection and Annotation/Exercise/03. BarracksWars - A New Factory/.idea/vcs.xml
 07.  Reflection and Annotation/Exercise/03. BarracksWars - A New Factory/.idea/misc.xml
 11. Design Patterns/Lab/~$13. Java-OOP-Design-Patterns.pptx
+*.xml
+07.  Reflection and Annotation/Lab/03. High Quality Mistakes/03. High Quality Mistakes.iml
+11. Design Patterns/Lab/Command_Pattern 2/.idea/vcs.xml
+11. Design Patterns/Lab/Command_Pattern 2/src/command/Command.java
+11. Design Patterns/Lab/Command_Pattern 2/src/command/TurnTVOff.java
+11. Design Patterns/Lab/Command_Pattern 2/src/invoker/DeviceButton.java
+11. Design Patterns/Lab/Command_Pattern 2/src/receiver/Television.java
+13. Exams practice/Java OOP Regular Exam - 16 August 2020/01. High Quality Structure/~$. High Quality Structure_Problem Description.docx
+*.iml
+07.  Reflection and Annotation/Lab/03. High Quality Mistakes/03. High Quality Mistakes.iml

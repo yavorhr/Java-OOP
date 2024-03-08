@@ -2,7 +2,7 @@ package command;
 
 import receiver.ElectronicDevice;
 
-public class TurnTVOff implements Command{
+public class TurnTVOff implements Command {
   private ElectronicDevice theDevice;
 
   public TurnTVOff(ElectronicDevice theDevice) {

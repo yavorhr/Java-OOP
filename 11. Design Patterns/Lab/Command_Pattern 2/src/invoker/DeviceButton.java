@@ -9,7 +9,6 @@ public class DeviceButton {
     this.theCommand = theCommand;
   }
 
-
   public void press() {
     theCommand.execute();
   }
