@@ -19,9 +19,10 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addComputer(String computerType, int id, String manufacturer, String model, double price) throws ClassNotFoundException, NoSuchMethodException {
-    if (this.computers.stream().anyMatch(c -> c.getId() == id)) {
+    if (doesComputerExist(id)) {
       throw new IllegalArgumentException(ExceptionMessages.EXISTING_COMPUTER_ID);
     }
+
     Computer computer = ComputerFactory.createComputer(ComputerType.valueOf(computerType), id, manufacturer, model, price);
     computers.add(computer);
     return String.format(OutputMessages.ADDED_COMPUTER, id);
@@ -60,5 +61,9 @@ public class ControllerImpl implements Controller {
   @Override
   public String getComputerData(int id) {
     return null;
+  }
+
+  private boolean doesComputerExist(int id) {
+    return this.computers.stream().anyMatch(c -> c.getId() == id);
   }
 }
