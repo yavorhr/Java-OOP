@@ -1,5 +1,7 @@
 package onlineShop.models.products.components;
 
-public interface Component {
+import onlineShop.models.products.Product;
+
+public interface Component extends Product {
     int getGeneration();
 }

@@ -1,6 +1,7 @@
 package onlineShop.models.products.computers;
 
 import onlineShop.models.products.BaseProduct;
+import onlineShop.models.products.Product;
 import onlineShop.models.products.components.Component;
 import onlineShop.models.products.peripherals.Peripheral;
 
@@ -50,5 +51,12 @@ public abstract class BaseComputer extends BaseProduct implements Computer {
   @Override
   public Peripheral removePeripheral(String peripheralType) {
     return null;
+  }
+
+  protected double getComponentsAverage(){
+    return this.components.stream()
+            .mapToDouble(Product::getOverallPerformance)
+            .average()
+            .orElse(0);
   }
 }
