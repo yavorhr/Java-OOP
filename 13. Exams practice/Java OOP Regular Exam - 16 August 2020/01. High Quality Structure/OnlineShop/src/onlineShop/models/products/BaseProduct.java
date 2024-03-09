@@ -1,5 +1,8 @@
 package onlineShop.models.products;
 
+import onlineShop.common.constants.ExceptionMessages;
+import onlineShop.validator.Validator;
+
 public abstract class BaseProduct implements Product {
   private int id;
   private String manufacturer;
@@ -8,11 +11,11 @@ public abstract class BaseProduct implements Product {
   private double overallPerformance;
 
   protected BaseProduct(int id, String manufacturer, String model, double price, double overallPerformance) {
-    this.id = id;
-    this.manufacturer = manufacturer;
-    this.model = model;
-    this.price = price;
-    this.overallPerformance = overallPerformance;
+    this.setId(id);
+    this.setManufacturer(manufacturer);
+    this.setModel(model);
+    this.setPrice(price);
+    this.setOverallPerformance(overallPerformance);
   }
 
   @Override
@@ -44,4 +47,30 @@ public abstract class BaseProduct implements Product {
   public String toString() {
     return "Overall Performance: {overall performance}. Price: {price} - {product type}: {manufacturer} {model} (Id: {id})";
   }
+
+  public void setId(int id) {
+    Validator.throwErrIfInvalidId(id);
+    this.id = id;
+  }
+
+  public void setManufacturer(String manufacturer) {
+    Validator.throwErrIfInvalidManufacturer(manufacturer);
+    this.manufacturer = manufacturer;
+  }
+
+  public void setModel(String model) {
+    Validator.throwErrIvInvalidModel(model);
+    this.model = model;
+  }
+
+  public void setPrice(double price) {
+    Validator.throwErrIfInvalidPrice(price);
+    this.price = price;
+  }
+
+  public void setOverallPerformance(double overallPerformance) {
+    Validator.throwErrIfInvalidPerformance(overallPerformance);
+    this.overallPerformance = overallPerformance;
+  }
+
 }

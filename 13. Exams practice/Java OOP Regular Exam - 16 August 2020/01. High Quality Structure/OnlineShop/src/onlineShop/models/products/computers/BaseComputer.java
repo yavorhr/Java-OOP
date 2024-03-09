@@ -34,12 +34,12 @@ public abstract class BaseComputer extends BaseProduct implements Computer {
 
   @Override
   public void addComponent(Component component) {
-
+    this.components.add(component);
   }
 
   @Override
   public Component removeComponent(String componentType) {
-    return null;
+   return null;
   }
 
   @Override
