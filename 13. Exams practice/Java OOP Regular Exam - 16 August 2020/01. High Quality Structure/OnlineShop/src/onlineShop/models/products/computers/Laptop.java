@@ -6,7 +6,7 @@ public class Laptop extends BaseComputer {
   protected Laptop(int id, String manufacturer, String model, double price, double overallPerformance) {
     super(id, manufacturer, model, price, overallPerformance * OVERALL_PERFORMANCE);
   }
-  
+
   @Override
   public double getOverallPerformance() {
     if (super.getComponents().isEmpty()) {
