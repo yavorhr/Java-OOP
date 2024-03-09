@@ -34,14 +34,14 @@ public class EngineImpl implements Engine {
                     break;
                 }
 
-            } catch (IOException | IllegalArgumentException | NullPointerException e) {
+            } catch (IOException | IllegalArgumentException | NullPointerException | ClassNotFoundException | NoSuchMethodException e) {
                 result = e.getMessage();
             }
             this.writer.writeLine(result);
         }
     }
 
-    private String processInput() throws IOException {
+    private String processInput() throws IOException, ClassNotFoundException, NoSuchMethodException {
         String input = this.reader.readLine();
         String[] tokens = input.split("\\s");
 

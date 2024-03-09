@@ -3,8 +3,8 @@ package onlineShop.models.products.computers;
 public class Laptop extends BaseComputer {
   public static final double OVERALL_PERFORMANCE = 10;
 
-  protected Laptop(int id, String manufacturer, String model, double price, double overallPerformance) {
-    super(id, manufacturer, model, price, overallPerformance * OVERALL_PERFORMANCE);
+  public Laptop(int id, String manufacturer, String model, double price) {
+    super(id, manufacturer, model, price, OVERALL_PERFORMANCE);
   }
 
   @Override

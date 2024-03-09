@@ -1,13 +1,30 @@
 package onlineShop.core;
 
+import Factory.ComputerFactory;
+import onlineShop.common.constants.ExceptionMessages;
+import onlineShop.common.constants.OutputMessages;
+import onlineShop.common.enums.ComputerType;
 import onlineShop.core.interfaces.Controller;
+import onlineShop.models.products.computers.Computer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ControllerImpl implements Controller {
+  List<Computer> computers;
 
+  public ControllerImpl() {
+    this.computers = new ArrayList<>();
+  }
 
   @Override
-  public String addComputer(String computerType, int id, String manufacturer, String model, double price) {
-    return null;
+  public String addComputer(String computerType, int id, String manufacturer, String model, double price) throws ClassNotFoundException, NoSuchMethodException {
+    if (this.computers.stream().anyMatch(c -> c.getId() == id)) {
+      throw new IllegalArgumentException(ExceptionMessages.EXISTING_COMPUTER_ID);
+    }
+    Computer computer = ComputerFactory.createComputer(ComputerType.valueOf(computerType), id, manufacturer, model, price);
+    computers.add(computer);
+    return String.format(OutputMessages.ADDED_COMPUTER, id);
   }
 
   @Override

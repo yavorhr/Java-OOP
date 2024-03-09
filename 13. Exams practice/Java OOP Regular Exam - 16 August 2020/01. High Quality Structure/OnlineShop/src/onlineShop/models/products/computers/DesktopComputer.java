@@ -3,8 +3,8 @@ package onlineShop.models.products.computers;
 public class DesktopComputer extends BaseComputer {
   public static final double OVERALL_PERFORMANCE = 15;
 
-  protected DesktopComputer(int id, String manufacturer, String model, double price, double overallPerformance) {
-    super(id, manufacturer, model, price, overallPerformance * OVERALL_PERFORMANCE);
+  public DesktopComputer(Integer id, String manufacturer, String model, double price) {
+    super(id, manufacturer, model, price, OVERALL_PERFORMANCE);
   }
 
   @Override
@@ -12,8 +12,8 @@ public class DesktopComputer extends BaseComputer {
     if (super.getComponents().isEmpty()) {
       return OVERALL_PERFORMANCE;
     }
-
     double componentsAvgPerformance = super.getComponentsAverage();
+
     return OVERALL_PERFORMANCE + componentsAvgPerformance;
   }
 }

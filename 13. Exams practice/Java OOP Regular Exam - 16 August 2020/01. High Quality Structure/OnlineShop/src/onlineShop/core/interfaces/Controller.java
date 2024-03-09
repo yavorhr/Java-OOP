@@ -1,7 +1,7 @@
 package onlineShop.core.interfaces;
 
 public interface Controller {
-    String addComputer(String computerType, int id, String manufacturer, String model, double price);
+    String addComputer(String computerType, int id, String manufacturer, String model, double price) throws ClassNotFoundException, NoSuchMethodException;
 
     String addPeripheral(int computerId, int id, String peripheralType, String manufacturer, String model, double price, double overallPerformance, String connectionType);
 
