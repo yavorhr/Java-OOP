@@ -1,36 +1,61 @@
 package onlineShop.core;
 
 import Factory.ComputerFactory;
+import Factory.PeripheralFactory;
 import onlineShop.common.constants.ExceptionMessages;
 import onlineShop.common.constants.OutputMessages;
 import onlineShop.common.enums.ComputerType;
+import onlineShop.common.enums.PeripheralType;
 import onlineShop.core.interfaces.Controller;
+import onlineShop.models.products.components.Component;
 import onlineShop.models.products.computers.Computer;
+import onlineShop.models.products.peripherals.Peripheral;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ControllerImpl implements Controller {
-  List<Computer> computers;
+  Map<Integer, Computer> computers;
+  Map<Integer, Component> components;
+  Map<Integer, Peripheral> peripherals;
 
   public ControllerImpl() {
-    this.computers = new ArrayList<>();
+    this.computers = new HashMap<>();
   }
 
   @Override
   public String addComputer(String computerType, int id, String manufacturer, String model, double price) throws ClassNotFoundException, NoSuchMethodException {
-    if (doesComputerExist(id)) {
+    if (doesProductExist(id, "computer")) {
       throw new IllegalArgumentException(ExceptionMessages.EXISTING_COMPUTER_ID);
     }
 
     Computer computer = ComputerFactory.createComputer(ComputerType.valueOf(computerType), id, manufacturer, model, price);
-    computers.add(computer);
+    computers.put(id, computer);
+
     return String.format(OutputMessages.ADDED_COMPUTER, id);
   }
 
   @Override
   public String addPeripheral(int computerId, int id, String peripheralType, String manufacturer, String model, double price, double overallPerformance, String connectionType) {
-    return null;
+    if (doesProductExist(id, "computer")) {
+      throw new IllegalArgumentException(ExceptionMessages.NOT_EXISTING_COMPUTER_ID);
+    }
+
+    if (doesProductExist(id, "peripheral")) {
+      throw new IllegalArgumentException(ExceptionMessages.EXISTING_PERIPHERAL_ID);
+    }
+
+    Computer computer = getComputerById(id);
+    Peripheral peripheral = PeripheralFactory.createPeripheral(PeripheralType.valueOf(peripheralType),
+            id,
+            manufacturer,
+            model,
+            price,
+            overallPerformance,
+            connectionType);
+
+    computer.addPeripheral(peripheral);
+    return String.format(OutputMessages.ADDED_PERIPHERAL, peripheralType, id, computerId);
   }
 
   @Override
@@ -40,7 +65,9 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addComponent(int computerId, int id, String componentType, String manufacturer, String model, double price, double overallPerformance, int generation) {
-    return null;
+    if (doesProductExist(id, "component")) {
+      throw new IllegalArgumentException(ExceptionMessages.EXISTING_COMPONENT_ID);
+    }
   }
 
   @Override
@@ -63,7 +90,18 @@ public class ControllerImpl implements Controller {
     return null;
   }
 
-  private boolean doesComputerExist(int id) {
-    return this.computers.stream().anyMatch(c -> c.getId() == id);
+  private boolean doesProductExist(int id, String product) {
+    boolean result = false;
+
+    switch (product) {
+      case "computer" -> result = this.computers.values().stream().anyMatch(comp -> comp.getId() == id);
+      case "component" -> result = this.components.values().stream().anyMatch(c -> c.getId() == id);
+      case "peripheral" -> result = this.peripherals.values().stream().anyMatch(p -> p.getId() == id);
+    }
+    return result;
+  }
+
+  private Computer getComputerById(int id) {
+    return this.computers.get(id);
   }
 }
