@@ -12,7 +12,7 @@ public class ComponentFactory {
 
       case CentralProcessingUnit -> component = new CentralProcessingUnit(id,manufacturer,model,price,overallPerformance,generation);
       case Motherboard -> component = new Motherboard(id,manufacturer,model,price,overallPerformance,generation);
-      case PowerSupply -> component = new PowerSupply(id,manufacturer,model,price,overallPerformance,generation)
+      case PowerSupply -> component = new PowerSupply(id,manufacturer,model,price,overallPerformance,generation);
       case RandomAccessMemory -> component = new RandomAccessMemory(id,manufacturer,model,price,overallPerformance,generation);
       case SolidStateDrive -> component = new SolidStateDrive(id,manufacturer,model,price,overallPerformance,generation);
       case VideoCard -> component = new VideoCard(id,manufacturer,model,price,overallPerformance,generation);
