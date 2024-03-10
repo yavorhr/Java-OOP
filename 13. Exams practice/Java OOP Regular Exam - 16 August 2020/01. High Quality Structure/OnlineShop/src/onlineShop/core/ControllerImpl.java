@@ -9,6 +9,7 @@ import onlineShop.common.enums.ComponentType;
 import onlineShop.common.enums.ComputerType;
 import onlineShop.common.enums.PeripheralType;
 import onlineShop.core.interfaces.Controller;
+import onlineShop.models.products.Product;
 import onlineShop.models.products.components.Component;
 import onlineShop.models.products.computers.Computer;
 import onlineShop.models.products.peripherals.Peripheral;
@@ -63,7 +64,26 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String removePeripheral(String peripheralType, int computerId) {
-    return null;
+    if (doesProductExistById(computerId, "computer")) {
+      throw new IllegalArgumentException(ExceptionMessages.NOT_EXISTING_COMPUTER_ID);
+    }
+
+    Computer computer = getComputerById(computerId);
+    List<Peripheral> peripherals = computer.getPeripherals();
+
+    if (peripherals.isEmpty() || !doesProductExistByType(peripherals, peripheralType)) {
+      throw new IllegalArgumentException(String.format(ExceptionMessages.NOT_EXISTING_PERIPHERAL,
+              peripheralType,
+              computer.getClass().getSimpleName(),
+              computerId));
+    }
+
+    Peripheral peripheral = getProductByType(peripherals, peripheralType);
+
+    this.peripherals.remove(peripheral.getId());
+    computer.getPeripherals().remove(peripheral);
+
+    return String.format(OutputMessages.REMOVED_PERIPHERAL, peripheralType, peripheral.getId());
   }
 
   @Override
@@ -105,7 +125,7 @@ public class ControllerImpl implements Controller {
               computerId));
     }
 
-    Component component = getComponentByType(componentType);
+    Component component = getProductByType(components, componentType);
 
     this.components.remove(component.getId());
     computer.getComponents().remove(component);
@@ -128,6 +148,8 @@ public class ControllerImpl implements Controller {
     return null;
   }
 
+  // Helpers
+
   private <T> boolean doesProductExistByType(List<T> collection, String type) {
     return collection.stream().anyMatch(c -> c.getClass().getSimpleName().equals(type));
   }
@@ -147,8 +169,8 @@ public class ControllerImpl implements Controller {
     return this.computers.get(id);
   }
 
-  private Component getComponentByType(String type) {
-    return this.components.values().stream()
+  private <T extends Product> T getProductByType(List<T> list, String type) {
+    return list.stream()
             .filter(c -> c.getClass().getSimpleName().equals(type))
             .limit(1)
             .findFirst()
