@@ -25,6 +25,8 @@ public class ControllerImpl implements Controller {
 
   public ControllerImpl() {
     this.computers = new HashMap<>();
+    this.components = new HashMap<>();
+    this.peripherals = new HashMap<>();
   }
 
   @Override
@@ -41,7 +43,7 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addPeripheral(int computerId, int id, String peripheralType, String manufacturer, String model, double price, double overallPerformance, String connectionType) {
-    if (doesProductExistById(id, "computer")) {
+    if (!doesProductExistById(computerId, "computer")) {
       throw new IllegalArgumentException(ExceptionMessages.NOT_EXISTING_COMPUTER_ID);
     }
 
@@ -88,7 +90,7 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addComponent(int computerId, int id, String componentType, String manufacturer, String model, double price, double overallPerformance, int generation) {
-    if (doesProductExistById(id, "computer")) {
+    if (!doesProductExistById(computerId, "computer")) {
       throw new IllegalArgumentException(ExceptionMessages.NOT_EXISTING_COMPUTER_ID);
     }
 
@@ -96,7 +98,7 @@ public class ControllerImpl implements Controller {
       throw new IllegalArgumentException(ExceptionMessages.EXISTING_COMPONENT_ID);
     }
 
-    Computer computer = getComputerById(id);
+    Computer computer = getComputerById(computerId);
 
     Component component = ComponentFactory.createComponent(ComponentType.valueOf(componentType), id,
             manufacturer,
@@ -158,9 +160,9 @@ public class ControllerImpl implements Controller {
     boolean result = false;
 
     switch (product) {
-      case "computer" -> result = this.computers.values().stream().anyMatch(comp -> comp.getId() == id);
-      case "component" -> result = this.components.values().stream().anyMatch(c -> c.getId() == id);
-      case "peripheral" -> result = this.peripherals.values().stream().anyMatch(p -> p.getId() == id);
+      case "computer" -> result = this.computers.containsKey(id);
+      case "component" -> result = this.components.containsKey(id);
+      case "peripheral" -> result = this.peripherals.containsKey(id);
     }
     return result;
   }
@@ -176,4 +178,5 @@ public class ControllerImpl implements Controller {
             .findFirst()
             .orElse(null);
   }
+
 }
