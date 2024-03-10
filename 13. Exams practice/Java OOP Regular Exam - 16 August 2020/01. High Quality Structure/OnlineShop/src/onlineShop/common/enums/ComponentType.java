@@ -7,5 +7,4 @@ public enum ComponentType {
   RandomAccessMemory,
   SolidStateDrive,
   VideoCard,
-
 }

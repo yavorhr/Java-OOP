@@ -1,9 +1,11 @@
 package onlineShop.core;
 
+import Factory.ComponentFactory;
 import Factory.ComputerFactory;
 import Factory.PeripheralFactory;
 import onlineShop.common.constants.ExceptionMessages;
 import onlineShop.common.constants.OutputMessages;
+import onlineShop.common.enums.ComponentType;
 import onlineShop.common.enums.ComputerType;
 import onlineShop.common.enums.PeripheralType;
 import onlineShop.core.interfaces.Controller;
@@ -65,9 +67,25 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addComponent(int computerId, int id, String componentType, String manufacturer, String model, double price, double overallPerformance, int generation) {
+    if (doesProductExist(id, "computer")) {
+      throw new IllegalArgumentException(ExceptionMessages.NOT_EXISTING_COMPUTER_ID);
+    }
+
     if (doesProductExist(id, "component")) {
       throw new IllegalArgumentException(ExceptionMessages.EXISTING_COMPONENT_ID);
     }
+
+    Computer computer = getComputerById(id);
+
+    Component component = ComponentFactory.createComponent(ComponentType.valueOf(componentType), id,
+            manufacturer,
+            model,
+            price,
+            overallPerformance,
+            generation);
+
+    computer.addComponent(component);
+    return String.format(OutputMessages.ADDED_COMPONENT, componentType, id, computerId);
   }
 
   @Override
