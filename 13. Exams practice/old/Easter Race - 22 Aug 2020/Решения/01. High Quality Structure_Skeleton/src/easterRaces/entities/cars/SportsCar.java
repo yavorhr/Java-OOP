@@ -3,8 +3,9 @@ package easterRaces.entities.cars;
 import static easterRaces.common.ExceptionMessages.INVALID_HORSE_POWER;
 
 public class SportsCar extends BaseCar {
+    private static final double CUBIC_CENTIMETERS = 3000;
     public SportsCar(String model, int horsePower) {
-        super(model, 3000);
+        super(model, CUBIC_CENTIMETERS);
         setHorsePower(horsePower);
     }
 

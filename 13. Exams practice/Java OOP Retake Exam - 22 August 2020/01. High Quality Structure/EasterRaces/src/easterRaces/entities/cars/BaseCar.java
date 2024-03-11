@@ -11,6 +11,10 @@ public abstract class BaseCar implements Car {
     this.cubicCentimeters = cubicCentimeters;
   }
 
+  public BaseCar(String model) {
+    this.setModel(model);
+  }
+
   @Override
   public String getModel() {
     return this.model;
@@ -25,4 +29,23 @@ public abstract class BaseCar implements Car {
   public double getCubicCentimeters() {
     return this.cubicCentimeters;
   }
+
+  public void setModel(String model) {
+    this.model = model;
+  }
+
+  public void setHorsePower(int horsePower) {
+    this.horsePower = horsePower;
+  }
+
+  public void setCubicCentimeters(double cubicCentimeters) {
+    this.cubicCentimeters = cubicCentimeters;
+  }
+
+  @Override
+  public double calculateRacePoints(int laps) {
+    return 0;
+  }
+
+
 }
