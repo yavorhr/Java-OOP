@@ -24,12 +24,14 @@ public class ComputerManager {
 
     public void addComputer(Computer computer) {
         this.validateNullValue(computer, CAN_NOT_BE_NULL_MESSAGE);
+
         boolean flag = this
                 .computers
                 .stream()
                 .filter(c -> c.getManufacturer().equals(computer.getManufacturer()) && c.getModel().equals(computer.getModel()))
                 .findFirst()
                 .orElse(null) != null;
+
         if (flag) {
             throw new IllegalArgumentException("This computer already exists.");
         }
