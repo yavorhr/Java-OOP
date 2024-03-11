@@ -17,7 +17,6 @@ public class ComputerFactory {
       case DesktopComputer -> computer = new DesktopComputer(id, manufacturer, model, price);
       default -> throw new IllegalArgumentException(ExceptionMessages.INVALID_COMPONENT_TYPE);
     }
-
     return computer;
   }
 }

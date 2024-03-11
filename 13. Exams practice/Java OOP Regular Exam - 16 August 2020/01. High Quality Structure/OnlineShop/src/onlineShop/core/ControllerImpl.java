@@ -31,7 +31,7 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addComputer(String computerType, int id, String manufacturer, String model, double price) throws ClassNotFoundException, NoSuchMethodException {
-    if (doesProductExistById(id, "computer")) {
+    if (doesProductExistById(id, this.computers)) {
       throw new IllegalArgumentException(ExceptionMessages.EXISTING_COMPUTER_ID);
     }
 
@@ -43,15 +43,15 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addPeripheral(int computerId, int id, String peripheralType, String manufacturer, String model, double price, double overallPerformance, String connectionType) {
-    if (!doesProductExistById(computerId, "computer")) {
+    if (!doesProductExistById(computerId, this.computers)) {
       throw new IllegalArgumentException(ExceptionMessages.NOT_EXISTING_COMPUTER_ID);
     }
 
-    if (doesProductExistById(id, "peripheral")) {
+    if (doesProductExistById(id, this.peripherals)) {
       throw new IllegalArgumentException(ExceptionMessages.EXISTING_PERIPHERAL_ID);
     }
 
-    Computer computer = getComputerById(id);
+    Computer computer = getComputerById(computerId);
     Peripheral peripheral = PeripheralFactory.createPeripheral(PeripheralType.valueOf(peripheralType),
             id,
             manufacturer,
@@ -66,7 +66,7 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String removePeripheral(String peripheralType, int computerId) {
-    if (doesProductExistById(computerId, "computer")) {
+    if (doesProductExistById(computerId, this.computers)) {
       throw new IllegalArgumentException(ExceptionMessages.NOT_EXISTING_COMPUTER_ID);
     }
 
@@ -90,11 +90,11 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addComponent(int computerId, int id, String componentType, String manufacturer, String model, double price, double overallPerformance, int generation) {
-    if (!doesProductExistById(computerId, "computer")) {
+    if (!doesProductExistById(computerId, this.computers)) {
       throw new IllegalArgumentException(ExceptionMessages.NOT_EXISTING_COMPUTER_ID);
     }
 
-    if (doesProductExistById(id, "component")) {
+    if (doesProductExistById(id, this.components)) {
       throw new IllegalArgumentException(ExceptionMessages.EXISTING_COMPONENT_ID);
     }
 
@@ -113,7 +113,7 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String removeComponent(String componentType, int computerId) {
-    if (doesProductExistById(computerId, "computer")) {
+    if (doesProductExistById(computerId, this.computers)) {
       throw new IllegalArgumentException(ExceptionMessages.NOT_EXISTING_COMPUTER_ID);
     }
 
@@ -137,7 +137,8 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String buyComputer(int id) {
-    return null;
+    Computer computer = this.computers.remove(id);
+    return computer.toString();
   }
 
   @Override
@@ -156,15 +157,8 @@ public class ControllerImpl implements Controller {
     return collection.stream().anyMatch(c -> c.getClass().getSimpleName().equals(type));
   }
 
-  private boolean doesProductExistById(int id, String product) {
-    boolean result = false;
-
-    switch (product) {
-      case "computer" -> result = this.computers.containsKey(id);
-      case "component" -> result = this.components.containsKey(id);
-      case "peripheral" -> result = this.peripherals.containsKey(id);
-    }
-    return result;
+  private <T> boolean doesProductExistById(int id, Map<Integer, T> map) {
+    return map.containsKey(id);
   }
 
   private Computer getComputerById(int id) {
@@ -178,5 +172,4 @@ public class ControllerImpl implements Controller {
             .findFirst()
             .orElse(null);
   }
-
 }

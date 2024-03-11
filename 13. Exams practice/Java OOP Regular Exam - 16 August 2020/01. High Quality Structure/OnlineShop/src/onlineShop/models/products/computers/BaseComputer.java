@@ -28,11 +28,6 @@ public abstract class BaseComputer extends BaseProduct implements Computer {
   }
 
   @Override
-  public String toString() {
-    return "not implemented";
-  }
-
-  @Override
   public List<Component> getComponents() {
     return this.components;
   }
@@ -103,10 +98,46 @@ public abstract class BaseComputer extends BaseProduct implements Computer {
     return this.peripherals.remove(index);
   }
 
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append(String.format("Overall Performance: %.2f. Price: %.2f - %s: %s %s (Id: %d",
+            this.getOverallPerformance(),
+            this.getPrice(),
+            this.getClass().getSimpleName(),
+            this.getManufacturer(),
+            this.getModel(),
+            this.getId()))
+            .append(System.lineSeparator());
+
+    sb.append(String.format("Components (%d):", this.components.size()))
+            .append(System.lineSeparator());
+
+    this.components.forEach(c -> sb.append(c).append(System.lineSeparator()));
+
+    sb.append(String.format("Peripherals (%d); Average Overall Performance (%.2f):",
+            this.peripherals.size(),
+            this.getPeripheralsAverage()
+    ))
+            .append(System.lineSeparator());
+
+    this.peripherals.forEach(sb::append);
+
+    return sb.toString().trim();
+  }
+
   protected double getComponentsAverage() {
     return this.components.stream()
             .mapToDouble(Product::getOverallPerformance)
             .average()
             .orElse(0);
   }
+
+  private double getPeripheralsAverage() {
+    return this.peripherals.stream()
+            .mapToDouble(Product::getOverallPerformance)
+            .average()
+            .orElse(0);
+  }
+
 }
