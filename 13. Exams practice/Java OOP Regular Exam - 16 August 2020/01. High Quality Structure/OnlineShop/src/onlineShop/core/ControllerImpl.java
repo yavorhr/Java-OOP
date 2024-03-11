@@ -65,7 +65,6 @@ public class ControllerImpl implements Controller {
     }
 
     Computer computer = getComputerById(computerId);
-
     Peripheral peripheral = PeripheralFactory.createPeripheral(PeripheralType.valueOf(peripheralType),
             id,
             manufacturer,
@@ -121,7 +120,6 @@ public class ControllerImpl implements Controller {
     }
 
     Computer computer = getComputerById(computerId);
-
     Component component = ComponentFactory.createComponent(ComponentType.valueOf(componentType), id,
             manufacturer,
             model,
@@ -152,7 +150,6 @@ public class ControllerImpl implements Controller {
     }
 
     Component component = getProductByType(components, componentType);
-
     this.components.remove(component.getId());
     computer.getComponents().remove(component);
 
@@ -195,10 +192,11 @@ public class ControllerImpl implements Controller {
     return this.computers.get(id).toString();
   }
 
-  // Helpers
+  // Helper functions
 
   private <T> boolean doesProductExistByType(List<T> collection, String type) {
-    return collection.stream().anyMatch(c -> c.getClass().getSimpleName().equals(type));
+    return collection.stream()
+            .anyMatch(c -> c.getClass().getSimpleName().equals(type));
   }
 
   private <T> boolean doesProductExistById(int id, Map<Integer, T> map) {
