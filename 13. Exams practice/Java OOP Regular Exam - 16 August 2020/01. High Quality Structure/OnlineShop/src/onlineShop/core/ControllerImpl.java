@@ -75,6 +75,7 @@ public class ControllerImpl implements Controller {
             connectionType);
 
     computer.addPeripheral(peripheral);
+    this.peripherals.put(id, peripheral);
 
     return String.format(OutputMessages.ADDED_PERIPHERAL, peripheralType, id, computerId);
   }
@@ -129,8 +130,9 @@ public class ControllerImpl implements Controller {
             generation);
 
     computer.addComponent(component);
-    return String.format(OutputMessages.ADDED_COMPONENT, componentType, id, computerId);
+    this.components.put(id, component);
 
+    return String.format(OutputMessages.ADDED_COMPONENT, componentType, id, computerId);
   }
 
   @Override
