@@ -45,7 +45,13 @@ public abstract class BaseProduct implements Product {
 
   @Override
   public String toString() {
-    return "Overall Performance: {overall performance}. Price: {price} - {product type}: {manufacturer} {model} (Id: {id})";
+    return String.format("Overall Performance: %.2f. Price: %.2f - %s: %s %s (Id: %d)",
+            this.getOverallPerformance(),
+            this.getPrice(),
+            this.getClass().getSimpleName(),
+            this.getManufacturer(),
+            this.getModel(),
+            this.getId());
   }
 
   public void setId(int id) {
