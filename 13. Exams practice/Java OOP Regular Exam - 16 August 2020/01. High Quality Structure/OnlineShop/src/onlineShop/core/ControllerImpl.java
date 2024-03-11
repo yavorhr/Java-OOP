@@ -35,11 +35,18 @@ public class ControllerImpl implements Controller {
       throw new IllegalArgumentException(ExceptionMessages.EXISTING_COMPUTER_ID);
     }
 
+    try {
+      ComputerType.valueOf(computerType);
+    } catch (IllegalArgumentException e) {
+      throw new IllegalArgumentException(ExceptionMessages.INVALID_COMPUTER_TYPE);
+    }
+
     Computer computer = ComputerFactory.createComputer(ComputerType.valueOf(computerType), id, manufacturer, model, price);
     computers.put(id, computer);
 
     return String.format(OutputMessages.ADDED_COMPUTER, id);
   }
+
 
   @Override
   public String addPeripheral(int computerId, int id, String peripheralType, String manufacturer, String model, double price, double overallPerformance, String connectionType) {
@@ -51,7 +58,14 @@ public class ControllerImpl implements Controller {
       throw new IllegalArgumentException(ExceptionMessages.EXISTING_PERIPHERAL_ID);
     }
 
+    try {
+      PeripheralType.valueOf(peripheralType);
+    } catch (IllegalArgumentException e) {
+      throw new IllegalArgumentException(ExceptionMessages.INVALID_PERIPHERAL_TYPE);
+    }
+
     Computer computer = getComputerById(computerId);
+
     Peripheral peripheral = PeripheralFactory.createPeripheral(PeripheralType.valueOf(peripheralType),
             id,
             manufacturer,
@@ -61,12 +75,13 @@ public class ControllerImpl implements Controller {
             connectionType);
 
     computer.addPeripheral(peripheral);
+
     return String.format(OutputMessages.ADDED_PERIPHERAL, peripheralType, id, computerId);
   }
 
   @Override
   public String removePeripheral(String peripheralType, int computerId) {
-    if (doesProductExistById(computerId, this.computers)) {
+    if (!doesProductExistById(computerId, this.computers)) {
       throw new IllegalArgumentException(ExceptionMessages.NOT_EXISTING_COMPUTER_ID);
     }
 
@@ -98,6 +113,12 @@ public class ControllerImpl implements Controller {
       throw new IllegalArgumentException(ExceptionMessages.EXISTING_COMPONENT_ID);
     }
 
+    try {
+      ComponentType.valueOf(componentType);
+    } catch (IllegalArgumentException e) {
+      throw new IllegalArgumentException(ExceptionMessages.INVALID_COMPONENT_TYPE);
+    }
+
     Computer computer = getComputerById(computerId);
 
     Component component = ComponentFactory.createComponent(ComponentType.valueOf(componentType), id,
@@ -109,11 +130,12 @@ public class ControllerImpl implements Controller {
 
     computer.addComponent(component);
     return String.format(OutputMessages.ADDED_COMPONENT, componentType, id, computerId);
+
   }
 
   @Override
   public String removeComponent(String componentType, int computerId) {
-    if (doesProductExistById(computerId, this.computers)) {
+    if (!doesProductExistById(computerId, this.computers)) {
       throw new IllegalArgumentException(ExceptionMessages.NOT_EXISTING_COMPUTER_ID);
     }
 

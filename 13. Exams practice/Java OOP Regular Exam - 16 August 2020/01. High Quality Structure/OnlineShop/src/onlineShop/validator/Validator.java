@@ -4,7 +4,7 @@ import onlineShop.common.constants.ExceptionMessages;
 
 public class Validator {
   public static void throwErrIfInvalidId(int id) {
-    if (id < 0) {
+    if (id <= 0) {
       throw new IllegalArgumentException(ExceptionMessages.INVALID_PRODUCT_ID);
     }
   }

@@ -14,7 +14,6 @@ public class PeripheralFactory {
       case Keyboard -> peripheral = new Keyboard(id, manufacturer, model, price, overallPerformance, connectionType);
       case Monitor -> peripheral = new Monitor(id, manufacturer, model, price, overallPerformance, connectionType);
       case Mouse -> peripheral = new Mouse(id, manufacturer, model, price, overallPerformance, connectionType);
-      default -> throw new IllegalArgumentException(ExceptionMessages.INVALID_PERIPHERAL_TYPE);
     }
 
     return peripheral;

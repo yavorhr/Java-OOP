@@ -16,7 +16,6 @@ public class ComponentFactory {
       case RandomAccessMemory -> component = new RandomAccessMemory(id,manufacturer,model,price,overallPerformance,generation);
       case SolidStateDrive -> component = new SolidStateDrive(id,manufacturer,model,price,overallPerformance,generation);
       case VideoCard -> component = new VideoCard(id,manufacturer,model,price,overallPerformance,generation);
-      default -> throw new IllegalArgumentException(ExceptionMessages.INVALID_COMPONENT_TYPE);
     }
 
     return component;
