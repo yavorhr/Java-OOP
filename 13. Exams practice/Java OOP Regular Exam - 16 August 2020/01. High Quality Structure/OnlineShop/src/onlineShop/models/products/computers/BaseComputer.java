@@ -110,12 +110,12 @@ public abstract class BaseComputer extends BaseProduct implements Computer {
             this.getId()))
             .append(System.lineSeparator());
 
-    sb.append(String.format("Components (%d):", this.components.size()))
+    sb.append(String.format(" Components (%d):", this.components.size()))
             .append(System.lineSeparator());
 
     this.components.forEach(c -> sb.append(c).append(System.lineSeparator()));
 
-    sb.append(String.format("Peripherals (%d); Average Overall Performance (%.2f):",
+    sb.append(String.format(" Peripherals (%d); Average Overall Performance (%.2f):",
             this.peripherals.size(),
             this.getPeripheralsAverage()
     ))

@@ -161,18 +161,38 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String buyComputer(int id) {
+    if (!doesProductExistById(id, this.computers)) {
+      throw new IllegalArgumentException(ExceptionMessages.NOT_EXISTING_COMPUTER_ID);
+    }
+
     Computer computer = this.computers.remove(id);
     return computer.toString();
   }
 
   @Override
   public String BuyBestComputer(double budget) {
-    return null;
+    Computer computer = this.computers.values().stream()
+            .filter(c -> c.getPrice() <= budget)
+            .sorted((c1, c2) ->
+                    Double.compare(c2.getOverallPerformance(), c1.getOverallPerformance()))
+            .findFirst()
+            .orElse(null);
+
+    if (this.computers.values().isEmpty() || computer == null) {
+      throw new IllegalArgumentException(String.format(ExceptionMessages.CAN_NOT_BUY_COMPUTER, budget));
+    }
+
+    this.computers.remove(computer.getId());
+    return computer.toString();
   }
 
   @Override
   public String getComputerData(int id) {
-    return null;
+    if (!doesProductExistById(id, this.computers)) {
+      throw new IllegalArgumentException(ExceptionMessages.NOT_EXISTING_COMPUTER_ID);
+    }
+
+    return this.computers.get(id).toString();
   }
 
   // Helpers
