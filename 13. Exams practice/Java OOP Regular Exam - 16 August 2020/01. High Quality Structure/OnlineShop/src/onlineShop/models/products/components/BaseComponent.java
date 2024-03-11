@@ -17,6 +17,6 @@ public abstract class BaseComponent extends BaseProduct implements Component {
 
   @Override
   public String toString() {
-    return super.toString() + this.generation;
+    return super.toString() + String.format(" Generation: %d", this.generation);
   }
 }

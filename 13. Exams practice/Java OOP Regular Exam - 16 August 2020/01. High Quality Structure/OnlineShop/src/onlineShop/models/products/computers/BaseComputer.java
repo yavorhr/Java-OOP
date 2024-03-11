@@ -24,7 +24,7 @@ public abstract class BaseComputer extends BaseProduct implements Computer {
     double componentsPrice = this.components.stream().mapToDouble(Product::getPrice).sum();
     double peripheralsPrice = this.peripherals.stream().mapToDouble(Product::getPrice).sum();
 
-    return componentsPrice + peripheralsPrice;
+    return componentsPrice + peripheralsPrice + super.getPrice();
   }
 
   @Override
@@ -101,7 +101,7 @@ public abstract class BaseComputer extends BaseProduct implements Computer {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append(String.format("Overall Performance: %.2f. Price: %.2f - %s: %s %s (Id: %d",
+    sb.append(String.format("Overall Performance: %.2f. Price: %.2f - %s: %s %s (Id: %d)",
             this.getOverallPerformance(),
             this.getPrice(),
             this.getClass().getSimpleName(),
@@ -130,14 +130,13 @@ public abstract class BaseComputer extends BaseProduct implements Computer {
     return this.components.stream()
             .mapToDouble(Product::getOverallPerformance)
             .average()
-            .orElse(0);
+            .orElse(0) ;
   }
 
   private double getPeripheralsAverage() {
     return this.peripherals.stream()
             .mapToDouble(Product::getOverallPerformance)
             .average()
-            .orElse(0);
+            .orElse(0) ;
   }
-
 }
