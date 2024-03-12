@@ -4,7 +4,7 @@ import easterRaces.core.EngineImpl;
 import easterRaces.core.interfaces.Controller;
 import easterRaces.entities.cars.Car;
 import easterRaces.entities.drivers.Driver;
-import easterRaces.entities.racers.Race;
+import easterRaces.entities.races.Race;
 import easterRaces.io.ConsoleReader;
 import easterRaces.io.ConsoleWriter;
 import easterRaces.repositories.interfaces.Repository;

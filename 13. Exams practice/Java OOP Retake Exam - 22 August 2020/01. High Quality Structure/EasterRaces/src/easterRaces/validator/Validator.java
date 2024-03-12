@@ -17,7 +17,7 @@ public class Validator {
     }
   }
 
-  public static void throwExceptionIfEmptyDriversName(String name) {
+  public static void throwExceptionIfEmptyName(String name) {
     if (name == null || name.trim().isEmpty()) {
       throw new IllegalArgumentException(String.format(ExceptionMessages.INVALID_NAME, name, 5));
     }
@@ -29,4 +29,9 @@ public class Validator {
     }
   }
 
+  public static void throwExceptionIfLapsAreBelowOne(int laps) {
+    if (laps < 1) {
+      throw new IllegalArgumentException(ExceptionMessages.INVALID_NUMBER_OF_LAPS);
+    }
+  }
 }

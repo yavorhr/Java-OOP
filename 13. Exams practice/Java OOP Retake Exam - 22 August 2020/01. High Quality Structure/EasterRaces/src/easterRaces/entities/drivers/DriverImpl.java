@@ -52,7 +52,7 @@ public class DriverImpl implements Driver {
   }
 
   private void setName(String name) {
-    Validator.throwExceptionIfEmptyDriversName(name);
+    Validator.throwExceptionIfEmptyName(name);
     this.name = name;
   }
 }

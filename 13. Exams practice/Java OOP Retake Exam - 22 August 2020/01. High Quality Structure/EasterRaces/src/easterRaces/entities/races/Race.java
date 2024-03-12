@@ -1,4 +1,4 @@
-package easterRaces.entities.racers;
+package easterRaces.entities.races;
 
 import easterRaces.entities.drivers.Driver;
 
