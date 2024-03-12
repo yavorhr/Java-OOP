@@ -1,5 +1,7 @@
 package easterRaces.entities.cars;
 
+import easterRaces.validator.Validator;
+
 public abstract class BaseCar implements Car {
   String model;
   int horsePower;
@@ -12,7 +14,7 @@ public abstract class BaseCar implements Car {
   }
 
   public BaseCar(String model, int horsePower) {
-    setModel(model);
+    Validator.throwExceptionIfInvalidModel(model);
     this.horsePower = horsePower;
   }
 
