@@ -2,6 +2,9 @@ package easterRaces.validator;
 
 import easterRaces.common.ExceptionMessages;
 import easterRaces.entities.cars.Car;
+import easterRaces.entities.drivers.Driver;
+
+import java.util.List;
 
 public class Validator {
 
@@ -32,6 +35,27 @@ public class Validator {
   public static void throwExceptionIfLapsAreBelowOne(int laps) {
     if (laps < 1) {
       throw new IllegalArgumentException(ExceptionMessages.INVALID_NUMBER_OF_LAPS);
+    }
+  }
+
+  public static void throwExceptionIfDriverIsNull(Driver driver) {
+    if (driver == null) {
+      throw new IllegalArgumentException(ExceptionMessages.DRIVER_INVALID);
+    }
+  }
+
+  public static void throwExceptionIfDriverCannotParticipate(Driver driver) {
+    if (!driver.getCanParticipate()) {
+      throw new IllegalArgumentException(String.format(ExceptionMessages.DRIVER_NOT_PARTICIPATE, driver.getName()));
+    }
+  }
+
+  public static void throwExceptionIfDriverAlreadyExistsInTheRace(List<Driver> drivers, Driver driver, String raceName) {
+    if (drivers.contains(driver)) {
+      throw new IllegalArgumentException(String.format(ExceptionMessages.DRIVER_ALREADY_ADDED,
+              driver.getName(),
+              raceName));
+
     }
   }
 }

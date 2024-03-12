@@ -36,7 +36,11 @@ public class RaceImpl implements Race {
 
   @Override
   public void addDriver(Driver driver) {
+    Validator.throwExceptionIfDriverIsNull(driver);
+    Validator.throwExceptionIfDriverCannotParticipate(driver);
+    Validator.throwExceptionIfDriverAlreadyExistsInTheRace(this.drivers, driver, name);
 
+    this.drivers.add(driver);
   }
 
   private void setName(String name) {
