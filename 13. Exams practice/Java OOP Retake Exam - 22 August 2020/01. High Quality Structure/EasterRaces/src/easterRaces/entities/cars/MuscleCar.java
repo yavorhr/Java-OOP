@@ -1,4 +1,5 @@
 package easterRaces.entities.cars;
+
 import easterRaces.validator.Validator;
 
 public class MuscleCar extends BaseCar {
@@ -13,7 +14,7 @@ public class MuscleCar extends BaseCar {
   @Override
   public void setHorsePower(int horsePower) {
     Validator.throwExceptionIfInvalidHorsePower(horsePower, MIN_HORSE_POWER, MAX_HORSE_POWER);
-    super.setHorsePower(horsePower);
+    this.horsePower = horsePower;
   }
 
   @Override

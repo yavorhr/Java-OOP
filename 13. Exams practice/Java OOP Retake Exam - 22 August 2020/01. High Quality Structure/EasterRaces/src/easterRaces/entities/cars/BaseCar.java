@@ -8,13 +8,13 @@ public abstract class BaseCar implements Car {
   double cubicCentimeters;
 
   public BaseCar(String model, int horsePower, double cubicCentimeters) {
-    this.model = model;
+    this.setModel(model);
     this.horsePower = horsePower;
     this.cubicCentimeters = cubicCentimeters;
   }
 
   public BaseCar(String model, double cubicCentimeters) {
-    this.model = model;
+    this.setModel(model);
     this.cubicCentimeters = cubicCentimeters;
   }
 
@@ -41,6 +41,8 @@ public abstract class BaseCar implements Car {
     this.cubicCentimeters = cubicCentimeters;
   }
 
-
-
+  private void setModel(String model) {
+    Validator.throwExceptionIfInvalidModel(model);
+    this.model = model;
+  }
 }

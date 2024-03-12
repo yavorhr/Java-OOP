@@ -14,7 +14,7 @@ public class SportsCar extends BaseCar {
   @Override
   public void setHorsePower(int horsePower) {
     Validator.throwExceptionIfInvalidHorsePower(horsePower, MIN_HORSE_POWER, MAX_HORSE_POWER);
-    super.setHorsePower(horsePower);
+    this.horsePower = horsePower;
   }
 
   @Override
