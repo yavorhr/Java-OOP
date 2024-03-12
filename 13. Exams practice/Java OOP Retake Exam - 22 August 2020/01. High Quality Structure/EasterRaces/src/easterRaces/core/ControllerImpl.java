@@ -8,9 +8,6 @@ import easterRaces.entities.drivers.DriverImpl;
 import easterRaces.entities.races.Race;
 import easterRaces.entities.races.RaceImpl;
 import easterRaces.factory.CarFactoryImpl;
-import easterRaces.repositories.interfaces.CarRepository;
-import easterRaces.repositories.interfaces.DriverRepository;
-import easterRaces.repositories.interfaces.RaceRepository;
 import easterRaces.repositories.interfaces.Repository;
 import easterRaces.validator.Validator;
 
@@ -22,10 +19,10 @@ public class ControllerImpl implements Controller {
   private Repository<Driver> drivers;
   private Repository<Race> races;
 
-  public ControllerImpl() {
-    this.cars = new CarRepository();
-    this.drivers = new DriverRepository();
-    this.races = new RaceRepository();
+  public ControllerImpl(Repository<Car> cars, Repository<Driver> drivers, Repository<Race> races) {
+    this.cars = cars;
+    this.drivers = drivers;
+    this.races = races;
   }
 
   @Override
