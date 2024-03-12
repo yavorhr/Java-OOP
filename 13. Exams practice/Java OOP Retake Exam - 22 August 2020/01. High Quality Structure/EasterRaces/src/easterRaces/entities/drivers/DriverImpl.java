@@ -10,7 +10,7 @@ public class DriverImpl implements Driver {
   private boolean canParticipate;
 
   public DriverImpl(String name) {
-    this.name = name;
+    this.setName(name);
     this.numberOfWins = 0;
     this.canParticipate = false;
   }
@@ -49,5 +49,10 @@ public class DriverImpl implements Driver {
   private void setCar(Car car) {
     this.car = car;
     this.canParticipate = true;
+  }
+
+  private void setName(String name) {
+    Validator.throwExceptionIfEmptyDriversName(name);
+    this.name = name;
   }
 }

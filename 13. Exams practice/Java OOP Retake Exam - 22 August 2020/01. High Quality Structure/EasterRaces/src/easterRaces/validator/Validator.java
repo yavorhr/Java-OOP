@@ -17,6 +17,12 @@ public class Validator {
     }
   }
 
+  public static void throwExceptionIfEmptyDriversName(String name) {
+    if (name == null || name.trim().isEmpty()) {
+      throw new IllegalArgumentException(String.format(ExceptionMessages.INVALID_NAME, name, 5));
+    }
+  }
+
   public static void throwExceptionIfCarIsNull(Car car) {
     if (car == null) {
       throw new IllegalArgumentException(ExceptionMessages.CAR_INVALID);
