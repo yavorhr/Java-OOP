@@ -16,7 +16,7 @@ public class CarFactoryImpl {
     } else {
       throw new IllegalArgumentException(ExceptionMessages.CAR_INVALID);
     }
-
     return car;
   }
+
 }

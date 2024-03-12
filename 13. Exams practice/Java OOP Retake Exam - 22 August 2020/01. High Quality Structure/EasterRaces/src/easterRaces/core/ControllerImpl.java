@@ -74,13 +74,14 @@ public class ControllerImpl implements Controller {
     Race race = this.races.getByName(raceName);
 
     List<Driver> fastestDrivers =
-            this.drivers.getAll().stream().sorted((d1, d2) ->
+            race.getDrivers().stream().sorted((d1, d2) ->
                     Double.compare(
                             d2.getCar().calculateRacePoints(race.getLaps()),
                             d1.getCar().calculateRacePoints(race.getLaps())))
                     .limit(3)
                     .collect(Collectors.toList());
 
+    fastestDrivers.get(0).winRace();
     Validator.throwErrorIfDriversAreLessThan3(fastestDrivers, raceName);
 
     return result(fastestDrivers, raceName);
