@@ -17,17 +17,17 @@ public class DriverImpl implements Driver {
 
   @Override
   public String getName() {
-    return null;
+    return this.name;
   }
 
   @Override
   public Car getCar() {
-    return null;
+    return this.car;
   }
 
   @Override
   public int getNumberOfWins() {
-    return 0;
+    return this.numberOfWins;
   }
 
   @Override
@@ -38,7 +38,7 @@ public class DriverImpl implements Driver {
 
   @Override
   public void winRace() {
-
+    this.numberOfWins++;
   }
 
   @Override
