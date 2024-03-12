@@ -11,8 +11,9 @@ public abstract class BaseCar implements Car {
     this.cubicCentimeters = cubicCentimeters;
   }
 
-  public BaseCar(String model) {
-    this.setModel(model);
+  public BaseCar(String model, int horsePower) {
+    setModel(model);
+    this.horsePower = horsePower;
   }
 
   @Override
