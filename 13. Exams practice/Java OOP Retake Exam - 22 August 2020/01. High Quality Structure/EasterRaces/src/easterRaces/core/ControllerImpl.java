@@ -5,6 +5,7 @@ import easterRaces.core.interfaces.Controller;
 import easterRaces.entities.cars.Car;
 import easterRaces.entities.drivers.Driver;
 import easterRaces.entities.races.Race;
+import easterRaces.factory.CarFactoryImpl;
 import easterRaces.repositories.interfaces.CarRepository;
 import easterRaces.repositories.interfaces.DriverRepository;
 import easterRaces.repositories.interfaces.RaceRepository;
@@ -33,12 +34,21 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String createCar(String type, String model, int horsePower) {
+    Validator.throwErrorIfCarModelIsAlreadyAddedToRepository(this.cars.getAll(), model);
+    Car car = CarFactoryImpl.createCar(type, model, horsePower);
 
+    this.cars.add(car);
+    return String.format(OutputMessages.CAR_CREATED, type, model);
   }
 
   @Override
   public String addCarToDriver(String driverName, String carModel) {
-    return null;
+    Validator.throwErrorIfDriverIsNotExistingInRepository(driverName, this.drivers.getAll());
+    Validator.throwErrorIfCarModelIsNotExistingInRepository(carModel, this.cars.getAll());
+
+    Car car = this.cars.getByName(carModel);
+    this.drivers.getByName(driverName).addCar(car);
+    return String.format(OutputMessages.CAR_ADDED, driverName, carModel);
   }
 
   @Override

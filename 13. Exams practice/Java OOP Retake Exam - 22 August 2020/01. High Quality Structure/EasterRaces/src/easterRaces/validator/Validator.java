@@ -3,6 +3,7 @@ package easterRaces.validator;
 import easterRaces.common.ExceptionMessages;
 import easterRaces.entities.cars.Car;
 import easterRaces.entities.drivers.Driver;
+import easterRaces.repositories.interfaces.Repository;
 
 import java.util.Collection;
 import java.util.List;
@@ -69,4 +70,22 @@ public class Validator {
     }
   }
 
+  public static void throwErrorIfCarModelIsAlreadyAddedToRepository(Collection<Car> cars, String model) {
+    if (cars.stream().anyMatch(c -> c.getModel().equals(model))) {
+      throw new IllegalArgumentException(String.format(ExceptionMessages.CAR_EXISTS, model));
+
+    }
+  }
+
+  public static void throwErrorIfDriverIsNotExistingInRepository(String driverName, Collection<Driver> drivers) {
+    if (drivers.stream().noneMatch(d -> d.getName().equals(driverName))) {
+      throw new IllegalArgumentException(String.format(ExceptionMessages.DRIVER_NOT_FOUND, driverName));
+    }
+  }
+
+  public static void throwErrorIfCarModelIsNotExistingInRepository(String carModel, Collection<Car> cars) {
+    if (cars.stream().noneMatch(d -> d.getModel().equals(carModel))) {
+      throw new IllegalArgumentException(String.format(ExceptionMessages.CAR_NOT_FOUND, carModel));
+    }
+  }
 }
