@@ -4,10 +4,12 @@ import easterRaces.common.ExceptionMessages;
 import easterRaces.entities.cars.Car;
 import easterRaces.entities.drivers.Driver;
 
+import java.util.Collection;
 import java.util.List;
 
 public class Validator {
 
+  // CAR
   public static void throwExceptionIfInvalidHorsePower(int horsePower, int upperBound, int lowerBound) {
     if (horsePower < lowerBound || horsePower > upperBound) {
       throw new IllegalArgumentException(String.format(ExceptionMessages.INVALID_HORSE_POWER, horsePower));
@@ -20,6 +22,7 @@ public class Validator {
     }
   }
 
+  // DRIVER
   public static void throwExceptionIfEmptyName(String name) {
     if (name == null || name.trim().isEmpty()) {
       throw new IllegalArgumentException(String.format(ExceptionMessages.INVALID_NAME, name, 5));
@@ -32,6 +35,7 @@ public class Validator {
     }
   }
 
+  // RACE
   public static void throwExceptionIfLapsAreBelowOne(int laps) {
     if (laps < 1) {
       throw new IllegalArgumentException(ExceptionMessages.INVALID_NUMBER_OF_LAPS);
@@ -55,7 +59,14 @@ public class Validator {
       throw new IllegalArgumentException(String.format(ExceptionMessages.DRIVER_ALREADY_ADDED,
               driver.getName(),
               raceName));
-
     }
   }
+
+  // REPOSITORIES
+  public static void throwExceptionIfDriverAlreadyIsCreated(Collection<Driver> allDrivers, String driver) {
+    if (allDrivers.stream().anyMatch(d -> d.getName().equals(driver))) {
+      throw new IllegalArgumentException(String.format(ExceptionMessages.DRIVER_EXISTS, driver));
+    }
+  }
+
 }
