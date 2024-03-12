@@ -19,14 +19,14 @@ public class Validator {
   }
 
   public static void throwExceptionIfInvalidModel(String model) {
-    if (model == null || model.trim().isEmpty()) {
+    if (model == null || model.trim().isEmpty() || model.length() < 4) {
       throw new IllegalArgumentException(String.format(ExceptionMessages.INVALID_MODEL, model, 4));
     }
   }
 
   // DRIVER
   public static void throwExceptionIfEmptyName(String name) {
-    if (name == null || name.trim().isEmpty()) {
+    if (name == null || name.trim().isEmpty() || name.length() < 5) {
       throw new IllegalArgumentException(String.format(ExceptionMessages.INVALID_NAME, name, 5));
     }
   }
@@ -103,7 +103,7 @@ public class Validator {
 
   public static void throwErrorIfDriversAreLessThan3(List<Driver> fastestDrivers, String raceName) {
     if (fastestDrivers.size() < 3) {
-      throw new IllegalArgumentException(String.format(ExceptionMessages.RACE_INVALID, raceName));
+      throw new IllegalArgumentException(String.format(ExceptionMessages.RACE_INVALID, raceName, 3));
 
     }
   }

@@ -1,6 +1,4 @@
 package easterRaces.entities.cars;
-
-import easterRaces.common.ExceptionMessages;
 import easterRaces.validator.Validator;
 
 public class SportsCar extends BaseCar {
@@ -9,7 +7,8 @@ public class SportsCar extends BaseCar {
   private static final int MAX_HORSE_POWER = 450;
 
   public SportsCar(String model, int horsePower) {
-    super(model, horsePower, CUBIC_CENTIMETERS);
+    super(model, CUBIC_CENTIMETERS);
+    this.setHorsePower(horsePower);
   }
 
   @Override

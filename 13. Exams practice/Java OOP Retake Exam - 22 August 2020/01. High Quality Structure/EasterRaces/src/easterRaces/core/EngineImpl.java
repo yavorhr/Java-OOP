@@ -67,7 +67,7 @@ public class EngineImpl implements Engine {
         result = this.controller.createCar(data[0], data[1], Integer.parseInt(data[2]));
         break;
       case CreateRace:
-        result = this.controller.createRace(data[0], Integer.parseInt(tokens[1]));
+        result = this.controller.createRace(data[0], Integer.parseInt(data[1]));
         break;
     }
 

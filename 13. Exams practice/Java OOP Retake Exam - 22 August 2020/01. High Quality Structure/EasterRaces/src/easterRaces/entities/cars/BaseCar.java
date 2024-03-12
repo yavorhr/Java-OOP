@@ -13,9 +13,9 @@ public abstract class BaseCar implements Car {
     this.cubicCentimeters = cubicCentimeters;
   }
 
-  public BaseCar(String model, int horsePower) {
-    Validator.throwExceptionIfInvalidModel(model);
-    this.horsePower = horsePower;
+  public BaseCar(String model, double cubicCentimeters) {
+    this.model = model;
+    this.cubicCentimeters = cubicCentimeters;
   }
 
   @Override

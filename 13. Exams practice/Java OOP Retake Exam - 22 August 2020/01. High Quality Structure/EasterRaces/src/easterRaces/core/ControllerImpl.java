@@ -40,7 +40,7 @@ public class ControllerImpl implements Controller {
     Car car = CarFactoryImpl.createCar(type, model, horsePower);
 
     this.cars.add(car);
-    return String.format(OutputMessages.CAR_CREATED, type, model);
+    return String.format(OutputMessages.CAR_CREATED, type+"Car", model);
   }
 
   @Override
