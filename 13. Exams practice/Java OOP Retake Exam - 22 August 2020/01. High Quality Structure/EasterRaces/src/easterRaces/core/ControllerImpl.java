@@ -4,13 +4,18 @@ import easterRaces.common.OutputMessages;
 import easterRaces.core.interfaces.Controller;
 import easterRaces.entities.cars.Car;
 import easterRaces.entities.drivers.Driver;
+import easterRaces.entities.drivers.DriverImpl;
 import easterRaces.entities.races.Race;
+import easterRaces.entities.races.RaceImpl;
 import easterRaces.factory.CarFactoryImpl;
 import easterRaces.repositories.interfaces.CarRepository;
 import easterRaces.repositories.interfaces.DriverRepository;
 import easterRaces.repositories.interfaces.RaceRepository;
 import easterRaces.repositories.interfaces.Repository;
 import easterRaces.validator.Validator;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ControllerImpl implements Controller {
   private Repository<Car> cars;
@@ -26,7 +31,7 @@ public class ControllerImpl implements Controller {
   @Override
   public String createDriver(String name) {
     Validator.throwExceptionIfDriverAlreadyIsCreated(this.drivers.getAll(), name);
-    Driver driver = getDriver(name);
+    Driver driver = new DriverImpl(name);
     this.drivers.add(driver);
 
     return String.format(OutputMessages.DRIVER_CREATED, name);
@@ -63,20 +68,43 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String startRace(String raceName) {
-    return
+    Validator.throwErrorIfRaceIsNotExistingInRepository(raceName, this.races.getAll());
+
+    Race race = this.races.getByName(raceName);
+
+    List<Driver> fastestDrivers =
+            this.drivers.getAll().stream().sorted((d1, d2) ->
+                    Double.compare(
+                            d2.getCar().calculateRacePoints(race.getLaps()),
+                            d1.getCar().calculateRacePoints(race.getLaps()))
+            ).limit(3)
+                    .collect(Collectors.toList());
+
+    Validator.throwErrorIfDriversAreLessThan3(fastestDrivers, raceName);
+
+    return result(fastestDrivers, raceName);
   }
 
+
   @Override
-  public String createRace(String name, int laps) {
-    return null;
+  public String createRace(String raceName, int laps) {
+    Validator.throwErrorIfRaceIsAlreadyExistingInRepository(raceName, this.races.getAll());
+
+    Race race = new RaceImpl(raceName, laps);
+    this.races.add(race);
+
+    return String.format(OutputMessages.RACE_CREATED, raceName);
   }
 
   // helpers
 
-  private Driver getDriver(String name) {
-    return this.drivers.getAll().stream()
-            .filter(d -> d.getName().equals(name))
-            .findFirst()
-            .orElse(null);
+  private String result(List<Driver> fastestDrivers, String raceName) {
+    StringBuilder sb = new StringBuilder();
+
+    sb.append(String.format(OutputMessages.DRIVER_FIRST_POSITION, fastestDrivers.get(0).getName(), raceName)).append(System.lineSeparator());
+    sb.append(String.format(OutputMessages.DRIVER_SECOND_POSITION, fastestDrivers.get(1).getName(), raceName)).append(System.lineSeparator());
+    sb.append(String.format(OutputMessages.DRIVER_THIRD_POSITION, fastestDrivers.get(2).getName(), raceName)).append(System.lineSeparator());
+
+    return sb.toString().trim();
   }
 }
