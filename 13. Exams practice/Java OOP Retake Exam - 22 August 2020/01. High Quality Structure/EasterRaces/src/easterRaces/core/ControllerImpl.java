@@ -28,6 +28,7 @@ public class ControllerImpl implements Controller {
   @Override
   public String createDriver(String name) {
     Validator.throwExceptionIfDriverAlreadyIsCreated(this.drivers.getAll(), name);
+
     Driver driver = new DriverImpl(name);
     this.drivers.add(driver);
 
@@ -37,10 +38,11 @@ public class ControllerImpl implements Controller {
   @Override
   public String createCar(String type, String model, int horsePower) {
     Validator.throwErrorIfCarModelIsAlreadyAddedToRepository(this.cars.getAll(), model);
-    Car car = CarFactoryImpl.createCar(type, model, horsePower);
 
+    Car car = CarFactoryImpl.createCar(type, model, horsePower);
     this.cars.add(car);
-    return String.format(OutputMessages.CAR_CREATED, type+"Car", model);
+
+    return String.format(OutputMessages.CAR_CREATED, type + "Car", model);
   }
 
   @Override
@@ -50,6 +52,7 @@ public class ControllerImpl implements Controller {
 
     Car car = this.cars.getByName(carModel);
     this.drivers.getByName(driverName).addCar(car);
+
     return String.format(OutputMessages.CAR_ADDED, driverName, carModel);
   }
 
@@ -60,6 +63,7 @@ public class ControllerImpl implements Controller {
 
     Driver driver = this.drivers.getByName(driverName);
     races.getByName(raceName).addDriver(driver);
+
     return String.format(OutputMessages.DRIVER_ADDED, driverName, raceName);
   }
 
@@ -73,15 +77,14 @@ public class ControllerImpl implements Controller {
             this.drivers.getAll().stream().sorted((d1, d2) ->
                     Double.compare(
                             d2.getCar().calculateRacePoints(race.getLaps()),
-                            d1.getCar().calculateRacePoints(race.getLaps()))
-            ).limit(3)
+                            d1.getCar().calculateRacePoints(race.getLaps())))
+                    .limit(3)
                     .collect(Collectors.toList());
 
     Validator.throwErrorIfDriversAreLessThan3(fastestDrivers, raceName);
 
     return result(fastestDrivers, raceName);
   }
-
 
   @Override
   public String createRace(String raceName, int laps) {
@@ -93,7 +96,7 @@ public class ControllerImpl implements Controller {
     return String.format(OutputMessages.RACE_CREATED, raceName);
   }
 
-  // helpers
+  // Helpers
 
   private String result(List<Driver> fastestDrivers, String raceName) {
     StringBuilder sb = new StringBuilder();

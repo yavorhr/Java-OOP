@@ -71,7 +71,6 @@ public class EngineImpl implements Engine {
         break;
     }
 
-
     return result;
   }
 
