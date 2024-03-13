@@ -1,6 +1,7 @@
 package CounterStriker.core;
 
 import CounterStriker.common.OutputMessages;
+import CounterStriker.factory.GunFactory;
 import CounterStriker.factory.PlayerFactory;
 import CounterStriker.models.field.Field;
 import CounterStriker.models.field.FieldImpl;
@@ -14,24 +15,26 @@ import CounterStriker.validator.Validator;
 public class ControllerImpl implements Controller {
   private Repository<Gun> gunRepository;
   private Repository<Player> playerRepository;
-  private Field map;
+  private Field field;
 
   public ControllerImpl() {
     this.gunRepository = new GunRepository();
     this.playerRepository = new PlayerRepository();
-    this.map = new FieldImpl();
+    this.field = new FieldImpl();
   }
 
   @Override
   public String addGun(String type, String name, int bulletsCount) {
-    return null;
+    Gun gun = GunFactory.createGun(type, name, bulletsCount);
+    this.gunRepository.add(gun);
+    return String.format(OutputMessages.SUCCESSFULLY_ADDED_GUN, name);
   }
 
   @Override
   public String addPlayer(String type, String username, int health, int armor, String gunName) {
     Gun gun = this.gunRepository.findByName(gunName);
-
     Validator.throwErrorIfGunIsNull(gun);
+
     Player player = PlayerFactory.createPlayer(type, username, health, armor, gun);
     this.playerRepository.add(player);
 
@@ -40,7 +43,7 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String startGame() {
-    return null;
+    return this.field.start(this.playerRepository.getModels());
   }
 
   @Override
