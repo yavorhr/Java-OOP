@@ -2,6 +2,7 @@ package CounterStriker.validator;
 
 import CounterStriker.common.ExceptionMessages;
 import CounterStriker.models.guns.Gun;
+import CounterStriker.models.players.Player;
 
 public class Validator {
 
@@ -18,8 +19,15 @@ public class Validator {
   }
 
   public static void throwErrorIfNullArgumentIsPassed(Gun gun) {
-    if (gun ==null){
+    if (gun == null) {
       throw new NullPointerException(ExceptionMessages.INVALID_GUN);
+
+    }
+  }
+
+  public static void throwErrorIfNullPlayerIsPassed(Player player) {
+    if (player == null) {
+      throw new NullPointerException(ExceptionMessages.INVALID_PLAYER_REPOSITORY);
 
     }
   }
