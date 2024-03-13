@@ -1,7 +1,7 @@
 package CounterStriker.core;
 
 public class ControllerImpl implements Controller {
-  
+
 
   @Override
   public String addGun(String type, String name, int bulletsCount) {
