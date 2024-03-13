@@ -26,7 +26,7 @@ public abstract class GunImpl implements Gun {
   }
 
   public void setBulletsCount(int bulletsCount) {
-    Validator.throwErrIfBulletsAreOver(this.getBulletsCount());
+    Validator.throwErrIfBulletsAreOver(bulletsCount);
     this.bulletsCount = bulletsCount;
   }
 

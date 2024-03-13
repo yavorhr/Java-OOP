@@ -46,7 +46,7 @@ public class EngineImpl implements Engine {
 
     switch (command) {
       case AddPlayer:
-        result = this.controller.addPlayer(data[1], data[2], Integer.parseInt(data[3]), Integer.parseInt(data[4]), data[5]);
+        result = this.controller.addPlayer(data[0], data[1], Integer.parseInt(data[2]), Integer.parseInt(data[3]), data[4]);
         break;
       case Exit:
         result = Command.Exit.name();
@@ -58,7 +58,7 @@ public class EngineImpl implements Engine {
         result = this.controller.report();
         break;
       case AddGun:
-        result = this.controller.addGun(data[1], data[2], Integer.parseInt(data[3]));
+        result = this.controller.addGun(data[0], data[1], Integer.parseInt(data[2]));
         break;
     }
 
