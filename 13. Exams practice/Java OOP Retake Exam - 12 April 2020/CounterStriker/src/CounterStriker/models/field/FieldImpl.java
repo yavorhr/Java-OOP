@@ -11,11 +11,6 @@ public class FieldImpl implements Field {
 
   @Override
   public String start(Collection<Player> players) {
-    //1. Separate teams
-    //2. Terrorist -> Counter Terrorist
-    //3. Check if counterTerrorist are alive
-    //4. Counter -> Terrorst
-    //5. Check if Terrorist are alive
 
     List<Player> terrorists = getPlayers(players, "Terrorist");
     List<Player> counterTerrorists = getPlayers(players, "CounterTerrorist");
