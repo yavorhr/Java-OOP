@@ -52,5 +52,9 @@ public class PlayerImpl implements Player {
       int diff = Math.abs(this.armor -= points);
       this.health -= diff;
     }
+
+    if (this.health <= 0) {
+      this.isAlive = false;
+    }
   }
 }
