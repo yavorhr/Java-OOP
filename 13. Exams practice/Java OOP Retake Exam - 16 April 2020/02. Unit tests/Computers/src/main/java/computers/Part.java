@@ -2,7 +2,6 @@ package computers;
 
 public class Part {
     private String name;
-
     private double price;
 
     public Part(String name, double price) {
