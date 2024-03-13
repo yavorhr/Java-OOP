@@ -62,6 +62,6 @@ public class FieldImpl implements Field {
         defender.takeDamage(damage);
       }
     }
-    
+
   }
 }
