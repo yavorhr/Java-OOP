@@ -31,4 +31,10 @@ public class Validator {
 
     }
   }
+
+  public static void throwErrorIfGunIsNull(Gun gun) {
+    if (gun == null){
+      throw new IllegalArgumentException(ExceptionMessages.INVALID_GUN);
+    }
+  }
 }
