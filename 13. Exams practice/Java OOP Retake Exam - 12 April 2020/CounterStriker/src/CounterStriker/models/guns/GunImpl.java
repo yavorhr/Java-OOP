@@ -1,12 +1,14 @@
 package CounterStriker.models.guns;
 
+import CounterStriker.validator.Validator;
+
 public abstract class GunImpl implements Gun {
   private String name;
   private int bulletsCount;
 
   public GunImpl(String name, int bulletsCount) {
-    this.name = name;
-    this.bulletsCount = bulletsCount;
+    this.setName(name);
+    this.setBulletsCount(bulletsCount);
   }
 
   @Override
@@ -24,6 +26,7 @@ public abstract class GunImpl implements Gun {
   }
 
   public void setBulletsCount(int bulletsCount) {
+    Validator.throwErrIfBulletsAreOver(this.getBulletsCount());
     this.bulletsCount = bulletsCount;
   }
 

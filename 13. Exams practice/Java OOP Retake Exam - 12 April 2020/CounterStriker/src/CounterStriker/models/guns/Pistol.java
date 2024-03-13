@@ -1,5 +1,7 @@
 package CounterStriker.models.guns;
 
+import CounterStriker.validator.Validator;
+
 public class Pistol extends GunImpl {
   private static final int BULLETS_PER_TIME = 1;
 
@@ -9,6 +11,8 @@ public class Pistol extends GunImpl {
 
   @Override
   public int fire() {
+    Validator.throwErrIfBulletsAreOver(super.getBulletsCount());
+
     if (super.getBulletsCount() < BULLETS_PER_TIME) {
       return 0;
     }
