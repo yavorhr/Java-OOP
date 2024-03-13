@@ -9,6 +9,7 @@ public class Repair extends BaseProcedure {
     @Override
     public void doService(Robot robot, int procedureTime) {
         super.doService(robot, procedureTime);
+
         int newHappiness = robot.getHappiness() - 5;
         robot.setHappiness(newHappiness);
         if (robot.isRepaired()) {

@@ -31,6 +31,7 @@ public abstract class BaseProcedure implements Procedure {
         if (robot.getProcedureTime() < procedureTime) {
             throw new IllegalArgumentException(INSUFFICIENT_PROCEDURE_TIME);
         }
+
         int newProcedureTime = robot.getProcedureTime() - procedureTime;
         robot.setProcedureTime(newProcedureTime);
         this.robots.add(robot);
