@@ -57,4 +57,27 @@ public class PlayerImpl implements Player {
       this.isAlive = false;
     }
   }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+
+    sb.append(String.format("%s: %s",
+            this.getClass().getSimpleName(), this.username))
+            .append(System.lineSeparator());
+
+    sb.append(String.format("--Health: %d)",
+            this.getHealth()))
+            .append(System.lineSeparator());
+
+    sb.append(String.format("--Armor: %d)",
+            this.getArmor()))
+            .append(System.lineSeparator());
+
+    sb.append(String.format("--Gun: %s)",
+            this.getGun().getName()))
+            .append(System.lineSeparator());
+
+    return sb.toString().toString();
+  }
 }

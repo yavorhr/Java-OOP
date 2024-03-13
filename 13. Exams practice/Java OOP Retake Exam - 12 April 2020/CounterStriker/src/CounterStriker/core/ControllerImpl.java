@@ -12,6 +12,8 @@ import CounterStriker.repositories.PlayerRepository;
 import CounterStriker.repositories.Repository;
 import CounterStriker.validator.Validator;
 
+import java.util.Comparator;
+
 public class ControllerImpl implements Controller {
   private Repository<Gun> gunRepository;
   private Repository<Player> playerRepository;
@@ -48,6 +50,23 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String report() {
-    return null;
+    StringBuilder sb = new StringBuilder();
+
+    this.playerRepository.getModels().stream().sorted((p1, p2) -> {
+      int result = p1.getClass().getSimpleName()
+              .compareTo(p2.getClass().getSimpleName());
+
+      if (result == 0) {
+        result = Integer.compare(p2.getHealth(), p1.getHealth());
+      }
+
+      if (result == 0) {
+        result = p1.getUsername().compareTo(p2.getUsername());
+      }
+      return result;
+    })
+            .forEach(sb::append);
+
+    return sb.toString().trim();
   }
 }
