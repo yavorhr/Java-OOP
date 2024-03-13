@@ -34,22 +34,19 @@ public class FieldImpl implements Field {
     if (terrorists.size() == 0) {
       return "Counter Terrorist wins!";
     }
-
     return "Terrorist wins!";
   }
 
-  private boolean teamIsDead(List<Player> counterTerrorists) {
-    if (counterTerrorists.size() == 0) {
-      return true;
-    }
-    return false;
+  // Helpers
+
+  private boolean teamIsDead(List<Player> players) {
+    return players.size() == 0;
   }
 
   private List<Player> filterAlivePlayers(List<Player> counterTerrorists) {
     return counterTerrorists.stream().filter(Player::isAlive).collect(Collectors.toList());
   }
 
-  // Helpers
   private List<Player> getPlayers(Collection<Player> players, String terrorist) {
     return players.stream().filter(p -> getClass().getSimpleName().equals(terrorist)).collect(Collectors.toList());
   }
@@ -65,5 +62,6 @@ public class FieldImpl implements Field {
         defender.takeDamage(damage);
       }
     }
+    
   }
 }
