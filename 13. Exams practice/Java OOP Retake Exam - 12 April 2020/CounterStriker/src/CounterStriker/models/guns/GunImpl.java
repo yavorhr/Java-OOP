@@ -18,4 +18,16 @@ public abstract class GunImpl implements Gun {
   public int getBulletsCount() {
     return this.bulletsCount;
   }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public void setBulletsCount(int bulletsCount) {
+    this.bulletsCount = bulletsCount;
+  }
+
+  protected void shoot(int bulletsPerTime) {
+    this.bulletsCount -= bulletsPerTime;
+  }
 }
