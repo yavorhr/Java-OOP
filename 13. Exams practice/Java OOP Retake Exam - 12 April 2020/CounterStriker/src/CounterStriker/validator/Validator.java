@@ -51,7 +51,7 @@ public class Validator {
   }
 
   public static void throwErrIfArmorIsBelowZero(int armor) {
-    if (armor <= 0) {
+    if (armor < 0) {
       throw new IllegalArgumentException(ExceptionMessages.INVALID_PLAYER_ARMOR);
     }
   }
