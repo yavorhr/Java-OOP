@@ -12,8 +12,6 @@ import CounterStriker.repositories.PlayerRepository;
 import CounterStriker.repositories.Repository;
 import CounterStriker.validator.Validator;
 
-import java.util.Comparator;
-
 public class ControllerImpl implements Controller {
   private Repository<Gun> gunRepository;
   private Repository<Player> playerRepository;

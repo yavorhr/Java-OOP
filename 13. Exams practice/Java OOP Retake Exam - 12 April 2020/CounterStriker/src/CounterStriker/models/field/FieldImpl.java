@@ -47,8 +47,8 @@ public class FieldImpl implements Field {
     return counterTerrorists.stream().filter(Player::isAlive).collect(Collectors.toList());
   }
 
-  private List<Player> getPlayers(Collection<Player> players, String terrorist) {
-    return players.stream().filter(p -> getClass().getSimpleName().equals(terrorist)).collect(Collectors.toList());
+  private List<Player> getPlayers(Collection<Player> players, String type) {
+    return players.stream().filter(p -> p.getType().equals(type)).collect(Collectors.toList());
   }
 
   private boolean teamIsNotKilled(Collection<Player> team) {

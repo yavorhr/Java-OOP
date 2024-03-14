@@ -2,7 +2,7 @@ package CounterStriker.models.players;
 
 import CounterStriker.models.guns.Gun;
 
-public class PlayerImpl implements Player {
+public abstract class PlayerImpl implements Player {
   private String username;
   private int health;
   private int armor;
@@ -43,6 +43,11 @@ public class PlayerImpl implements Player {
   }
 
   @Override
+  public String getType() {
+    return this.getClass().getSimpleName();
+  }
+
+  @Override
   public void takeDamage(int points) {
     if (this.armor > points) {
       this.armor -= points;
@@ -56,6 +61,8 @@ public class PlayerImpl implements Player {
     if (this.health <= 0) {
       this.isAlive = false;
     }
+
+
   }
 
   @Override
@@ -66,15 +73,15 @@ public class PlayerImpl implements Player {
             this.getClass().getSimpleName(), this.username))
             .append(System.lineSeparator());
 
-    sb.append(String.format("--Health: %d)",
+    sb.append(String.format("--Health: %d",
             this.getHealth()))
             .append(System.lineSeparator());
 
-    sb.append(String.format("--Armor: %d)",
+    sb.append(String.format("--Armor: %d",
             this.getArmor()))
             .append(System.lineSeparator());
 
-    sb.append(String.format("--Gun: %s)",
+    sb.append(String.format("--Gun: %s",
             this.getGun().getName()))
             .append(System.lineSeparator());
 

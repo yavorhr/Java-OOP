@@ -14,4 +14,6 @@ public interface Player {
     boolean isAlive();
 
     void takeDamage(int points);
+
+    String getType();
 }
