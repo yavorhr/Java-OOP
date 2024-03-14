@@ -22,6 +22,7 @@ public abstract class GunImpl implements Gun {
   }
 
   public void setName(String name) {
+    Validator.throwErrorIfGunNameIsNullOrEmpty(name);
     this.name = name;
   }
 

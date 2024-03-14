@@ -37,4 +37,10 @@ public class Validator {
       throw new IllegalArgumentException(ExceptionMessages.INVALID_GUN);
     }
   }
+
+  public static void throwErrorIfGunNameIsNullOrEmpty(String name) {
+    if (name == null || name.trim().isEmpty()){
+      throw new IllegalArgumentException(ExceptionMessages.INVALID_GUN_NAME);
+    }
+  }
 }
