@@ -1,6 +1,7 @@
 package CounterStriker.models.players;
 
 import CounterStriker.models.guns.Gun;
+import CounterStriker.validator.Validator;
 
 public abstract class PlayerImpl implements Player {
   private String username;
@@ -10,10 +11,10 @@ public abstract class PlayerImpl implements Player {
   private Gun gun;
 
   public PlayerImpl(String username, int health, int armor, Gun gun) {
-    this.username = username;
-    this.health = health;
-    this.armor = armor;
-    this.gun = gun;
+    this.setUsername(username);
+    this.setHealth(health);
+    this.setArmor(armor);
+    this.setGun(gun);
     this.isAlive = true;
   }
 
@@ -45,6 +46,26 @@ public abstract class PlayerImpl implements Player {
   @Override
   public String getType() {
     return this.getClass().getSimpleName();
+  }
+
+  private void setUsername(String username) {
+    Validator.throwErrIfNullOrEmptyPlayerUsername(username);
+    this.username = username;
+  }
+
+  private void setHealth(int health) {
+    Validator.throwErrIfHealthIsBelowZero(health);
+    this.health = health;
+  }
+
+  private void setArmor(int armor) {
+    Validator.throwErrIfArmorIsBelowZero(armor);
+    this.armor = armor;
+  }
+
+  private void setGun(Gun gun) {
+    Validator.throwErrIfGunIsNull(gun);
+    this.gun = gun;
   }
 
   @Override
