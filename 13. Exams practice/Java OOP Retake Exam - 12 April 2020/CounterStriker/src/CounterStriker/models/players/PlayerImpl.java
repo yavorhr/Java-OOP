@@ -85,6 +85,10 @@ public abstract class PlayerImpl implements Player {
       this.isAlive = false;
     }
 
+    if (this.armor < 0){
+      this.armor = 0;
+    }
+
 
   }
 
