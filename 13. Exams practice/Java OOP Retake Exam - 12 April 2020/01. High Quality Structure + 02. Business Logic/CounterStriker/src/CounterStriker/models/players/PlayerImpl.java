@@ -88,8 +88,6 @@ public abstract class PlayerImpl implements Player {
     if (this.armor < 0){
       this.armor = 0;
     }
-
-
   }
 
   @Override
