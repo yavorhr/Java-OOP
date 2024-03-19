@@ -1,17 +1,22 @@
 package bank.core;
 
+import bank.entities.loan.Loan;
 import bank.factory.BankFactory;
 import bank.common.ConstantMessages;
 import bank.entities.bank.Bank;
+import bank.factory.LoanFactory;
+import bank.repositories.LoanRepository;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 public class ControllerImpl implements Controller {
   private Collection<Bank> banks;
+  private LoanRepository loanRepository;
 
   public ControllerImpl() {
     this.banks = new ArrayList<>();
+    loanRepository = new LoanRepository();
   }
 
   @Override
@@ -24,7 +29,10 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addLoan(String type) {
-    return null;
+    Loan loan = LoanFactory.createLoan(type);
+    loanRepository.addLoan(loan);
+
+    return String.format(ConstantMessages.SUCCESSFULLY_ADDED_BANK_OR_LOAN_TYPE, type);
   }
 
   @Override
