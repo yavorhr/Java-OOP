@@ -40,4 +40,22 @@ public class Validator {
       throw new IllegalArgumentException(ExceptionMessages.INVALID_LOAN_TYPE);
     }
   }
+
+  public static boolean validateIfClientMatchesWithBank(String clientType, String bankType) {
+
+    switch (clientType) {
+      case "Adult" -> {
+        if (!bankType.equals("CentralBank")) {
+          return false;
+        }
+      }
+      case "Student" -> {
+        if (!bankType.equals("BranchBank")) {
+          return false;
+        }
+      }
+    }
+
+    return true;
+  }
 }

@@ -1,9 +1,12 @@
 package bank.core;
 
+import bank.common.ExceptionMessages;
+import bank.entities.client.Client;
 import bank.entities.loan.Loan;
 import bank.factory.BankFactory;
 import bank.common.ConstantMessages;
 import bank.entities.bank.Bank;
+import bank.factory.ClientFactory;
 import bank.factory.LoanFactory;
 import bank.repositories.LoanRepository;
 import bank.validator.Validator;
@@ -51,7 +54,16 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addClient(String bankName, String clientType, String clientName, String clientID, double income) {
-    return null;
+    Client client = ClientFactory.createClient(clientType, clientName, clientID, income);
+    String bankType = this.banks.get(bankName).getClass().getSimpleName();
+
+    boolean result = Validator.validateIfClientMatchesWithBank(clientType, bankType);
+    if (!result) {
+      return "Unsuitable bank.";
+    }
+
+    this.banks.get(bankName).addClient(client);
+    return (String.format(ConstantMessages.SUCCESSFULLY_ADDED_CLIENT_OR_LOAN_TO_BANK, clientType, bankName));
   }
 
   @Override
