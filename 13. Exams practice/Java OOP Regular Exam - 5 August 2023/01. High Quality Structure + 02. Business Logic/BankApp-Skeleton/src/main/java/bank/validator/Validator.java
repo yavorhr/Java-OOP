@@ -1,6 +1,8 @@
 package bank.validator;
 
 import bank.common.ExceptionMessages;
+import bank.entities.loan.Loan;
+import bank.repositories.LoanRepository;
 
 public class Validator {
   public static void validateClientName(String name) {
@@ -30,6 +32,12 @@ public class Validator {
   public static void validateBankCapacityForNewClients(int capacity) {
     if (capacity == 0) {
       throw new IllegalArgumentException(ExceptionMessages.NOT_ENOUGH_CAPACITY_FOR_CLIENT);
+    }
+  }
+
+  public static void validateIfLoanExistsInRepository(LoanRepository loanRepository, String type) {
+    if (loanRepository.findFirst(type) == null) {
+      throw new IllegalArgumentException(ExceptionMessages.INVALID_LOAN_TYPE);
     }
   }
 }
