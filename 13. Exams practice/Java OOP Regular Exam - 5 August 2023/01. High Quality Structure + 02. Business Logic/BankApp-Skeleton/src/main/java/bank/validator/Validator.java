@@ -21,4 +21,9 @@ public class Validator {
     }
   }
 
+  public static void validateBankName(String name) {
+    if (name == null || name.trim().isEmpty()) {
+      throw new IllegalArgumentException(ExceptionMessages.BANK_NAME_CANNOT_BE_NULL_OR_EMPTY);
+    }
+  }
 }

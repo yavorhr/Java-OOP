@@ -2,6 +2,7 @@ package bank.entities.bank;
 
 import bank.entities.client.Client;
 import bank.entities.loan.Loan;
+import bank.validator.Validator;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,7 +28,8 @@ public abstract class BaseBank implements Bank {
 
   @Override
   public void setName(String name) {
-
+    Validator.validateBankName(name);
+    this.name = name;
   }
 
   @Override
@@ -37,7 +39,7 @@ public abstract class BaseBank implements Bank {
 
   @Override
   public Collection<Loan> getLoans() {
-    return this.getLoans();
+    return this.loans;
   }
 
   @Override
