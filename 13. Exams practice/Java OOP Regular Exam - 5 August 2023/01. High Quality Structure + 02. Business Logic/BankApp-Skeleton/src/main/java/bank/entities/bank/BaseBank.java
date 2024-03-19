@@ -66,7 +66,7 @@ public abstract class BaseBank implements Bank {
   @Override
   public String getStatistics() {
     StringBuilder sb = new StringBuilder();
-    
+
     sb.append(String.format("Name: %s, Type: %s",
             this.name,
             this.getClass().getSimpleName())
