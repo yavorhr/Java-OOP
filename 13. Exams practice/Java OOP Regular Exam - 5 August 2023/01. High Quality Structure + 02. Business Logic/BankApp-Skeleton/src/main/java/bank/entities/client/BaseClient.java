@@ -36,11 +36,6 @@ public abstract class BaseClient implements Client {
     return this.income;
   }
 
-  @Override
-  public void increase() {
-
-  }
-
   public void setId(String id) {
     Validator.validateClientId(id);
     this.id = id;
