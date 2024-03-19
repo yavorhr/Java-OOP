@@ -6,6 +6,7 @@ import bank.validator.Validator;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 public abstract class BaseBank implements Bank {
   private String name;
@@ -49,12 +50,12 @@ public abstract class BaseBank implements Bank {
 
   @Override
   public void removeClient(Client client) {
-
+    this.clients.remove(client);
   }
 
   @Override
   public void addLoan(Loan loan) {
-
+    this.loans.add(loan);
   }
 
   @Override
@@ -64,6 +65,27 @@ public abstract class BaseBank implements Bank {
 
   @Override
   public String getStatistics() {
-    return null;
+    StringBuilder sb = new StringBuilder();
+    
+    sb.append(String.format("Name: %s, Type: %s",
+            this.name,
+            this.getClass().getSimpleName())
+    ).append(System.lineSeparator());
+
+    sb.append(String.format("Clients: %s",
+            this.getClientsNames(this.getClients()))
+    ).append(System.lineSeparator());
+
+    return sb.toString();
+  }
+
+  private String getClientsNames(Collection<Client> clients) {
+    String names = this.clients.stream().map(c -> getName()).collect(Collectors.joining(", "));
+
+    if (names.isEmpty()) {
+      return "none";
+    }
+
+    return names;
   }
 }
