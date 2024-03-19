@@ -26,4 +26,10 @@ public class Validator {
       throw new IllegalArgumentException(ExceptionMessages.BANK_NAME_CANNOT_BE_NULL_OR_EMPTY);
     }
   }
+
+  public static void validateBankCapacityForNewClients(int capacity) {
+    if (capacity == 0) {
+      throw new IllegalArgumentException(ExceptionMessages.NOT_ENOUGH_CAPACITY_FOR_CLIENT);
+    }
+  }
 }

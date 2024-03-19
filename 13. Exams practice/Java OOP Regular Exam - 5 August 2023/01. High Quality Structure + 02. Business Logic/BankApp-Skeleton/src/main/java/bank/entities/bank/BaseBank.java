@@ -6,7 +6,6 @@ import bank.validator.Validator;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 
 public abstract class BaseBank implements Bank {
   private String name;
@@ -14,7 +13,7 @@ public abstract class BaseBank implements Bank {
   private Collection<Loan> loans;
   private Collection<Client> clients;
 
-  public BaseBank(String name, int capacity) {
+  protected BaseBank(String name, int capacity) {
     this.name = name;
     this.capacity = capacity;
     this.loans = new ArrayList<>();
@@ -44,7 +43,8 @@ public abstract class BaseBank implements Bank {
 
   @Override
   public void addClient(Client client) {
-
+    Validator.validateBankCapacityForNewClients(this.capacity);
+    this.clients.add(client);
   }
 
   @Override
@@ -59,7 +59,7 @@ public abstract class BaseBank implements Bank {
 
   @Override
   public int sumOfInterestRates() {
-    return 0;
+    return this.loans.stream().mapToInt(Loan::getInterestRate).sum();
   }
 
   @Override
