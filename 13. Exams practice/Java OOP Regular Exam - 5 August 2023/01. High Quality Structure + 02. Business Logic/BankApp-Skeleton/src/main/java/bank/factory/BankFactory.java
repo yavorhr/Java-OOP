@@ -1,4 +1,4 @@
-package bank.Factory;
+package bank.factory;
 
 import bank.common.ExceptionMessages;
 import bank.entities.bank.Bank;

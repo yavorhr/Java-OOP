@@ -1,6 +1,6 @@
 package bank.core;
 
-import bank.Factory.BankFactory;
+import bank.factory.BankFactory;
 import bank.common.ConstantMessages;
 import bank.entities.bank.Bank;
 
