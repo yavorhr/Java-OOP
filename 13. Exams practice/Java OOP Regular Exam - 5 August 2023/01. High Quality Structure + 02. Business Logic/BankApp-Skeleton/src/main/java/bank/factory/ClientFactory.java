@@ -12,9 +12,14 @@ public class ClientFactory {
     Client client = null;
 
     switch (type) {
-      case "Adult" -> client = new Adult(name, id, income);
-      case "Student" -> client = new Student(name, id, income);
-      default -> throw new IllegalArgumentException(ExceptionMessages.INVALID_CLIENT_TYPE);
+      case "Adult":
+        client = new Adult(name, id, income);
+        break;
+      case "Student":
+        client = new Student(name, id, income);
+        break;
+      default:
+        throw new IllegalArgumentException(ExceptionMessages.INVALID_CLIENT_TYPE);
     }
     return client;
   }

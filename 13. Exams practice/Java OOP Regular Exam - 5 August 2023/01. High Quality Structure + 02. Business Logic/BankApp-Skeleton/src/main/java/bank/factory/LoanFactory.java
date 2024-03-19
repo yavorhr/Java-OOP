@@ -12,9 +12,14 @@ public class LoanFactory {
     Loan loan = null;
 
     switch (type) {
-      case "CentralBank" -> loan = new MortgageLoan();
-      case "BranchBank" -> loan = new StudentLoan();
-      default -> throw new IllegalArgumentException(ExceptionMessages.INVALID_LOAN_TYPE);
+      case "MortgageLoan":
+        loan = new MortgageLoan();
+        break;
+      case "StudentLoan":
+        loan = new StudentLoan();
+        break;
+      default:
+        throw new IllegalArgumentException(ExceptionMessages.INVALID_LOAN_TYPE);
     }
     return loan;
   }

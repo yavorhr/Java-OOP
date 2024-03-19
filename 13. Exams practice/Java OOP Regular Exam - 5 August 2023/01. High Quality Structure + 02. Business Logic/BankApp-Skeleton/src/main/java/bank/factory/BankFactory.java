@@ -11,9 +11,14 @@ public class BankFactory {
     Bank bank = null;
 
     switch (type) {
-      case "CentralBank" -> bank = new CentralBank(name);
-      case "BranchBank" -> bank = new BranchBank(name);
-      default -> throw new IllegalArgumentException(ExceptionMessages.INVALID_BANK_TYPE);
+      case "CentralBank":
+        bank = new CentralBank(name);
+        break;
+      case "BranchBank":
+        bank = new BranchBank(name);
+        break;
+      default:
+        throw new IllegalArgumentException(ExceptionMessages.INVALID_BANK_TYPE);
     }
     return bank;
   }

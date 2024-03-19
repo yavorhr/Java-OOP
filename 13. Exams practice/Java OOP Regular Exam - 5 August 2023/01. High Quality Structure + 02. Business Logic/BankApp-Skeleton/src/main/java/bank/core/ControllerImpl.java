@@ -1,6 +1,6 @@
 package bank.core;
 
-import bank.common.ExceptionMessages;
+
 import bank.entities.client.Client;
 import bank.entities.loan.Loan;
 import bank.factory.BankFactory;
@@ -11,8 +11,6 @@ import bank.factory.LoanFactory;
 import bank.repositories.LoanRepository;
 import bank.validator.Validator;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,7 +57,7 @@ public class ControllerImpl implements Controller {
 
     boolean result = Validator.validateIfClientMatchesWithBank(clientType, bankType);
     if (!result) {
-      return "Unsuitable bank.";
+      return ConstantMessages.UNSUITABLE_BANK;
     }
 
     this.banks.get(bankName).addClient(client);
@@ -68,11 +66,19 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String finalCalculation(String bankName) {
-    return null;
+    double incomeClients = this.banks.get(bankName).getClients().stream().mapToDouble(Client::getIncome).sum();
+    double incomeLoans = this.banks.get(bankName).getLoans().stream().mapToDouble(Loan::getAmount).sum();
+
+    return String.format(ConstantMessages.FUNDS_BANK, bankName, incomeClients + incomeLoans);
   }
 
   @Override
   public String getStatistics() {
-    return null;
+    StringBuilder sb = new StringBuilder();
+    this.banks
+            .values()
+            .forEach(b -> sb.append(b.getStatistics()));
+
+    return sb.toString().trim();
   }
 }

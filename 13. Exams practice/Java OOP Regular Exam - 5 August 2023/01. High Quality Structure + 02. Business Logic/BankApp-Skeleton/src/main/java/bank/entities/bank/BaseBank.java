@@ -73,19 +73,25 @@ public abstract class BaseBank implements Bank {
     ).append(System.lineSeparator());
 
     sb.append(String.format("Clients: %s",
-            this.getClientsNames(this.getClients()))
+            this.getClientsNames())
+    ).append(System.lineSeparator());
+
+    sb.append(String.format("Loans: %d, Sum of interest rates: %d",
+            this.loans.size(),
+            this.loans.stream().mapToInt(Loan::getInterestRate).sum())
     ).append(System.lineSeparator());
 
     return sb.toString();
   }
 
-  private String getClientsNames(Collection<Client> clients) {
-    String names = this.clients.stream().map(c -> getName()).collect(Collectors.joining(", "));
+  // Helpers
+
+  private String getClientsNames() {
+    String names = this.clients.stream().map(Client::getName).collect(Collectors.joining(", "));
 
     if (names.isEmpty()) {
       return "none";
     }
-
     return names;
   }
 }

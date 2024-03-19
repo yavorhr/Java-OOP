@@ -37,23 +37,23 @@ public class Validator {
 
   public static void validateIfLoanExistsInRepository(LoanRepository loanRepository, String type) {
     if (loanRepository.findFirst(type) == null) {
-      throw new IllegalArgumentException(ExceptionMessages.INVALID_LOAN_TYPE);
+      throw new IllegalArgumentException(String.format(ExceptionMessages.NO_LOAN_FOUND, type));
     }
   }
 
   public static boolean validateIfClientMatchesWithBank(String clientType, String bankType) {
 
     switch (clientType) {
-      case "Adult" -> {
+      case "Adult":
         if (!bankType.equals("CentralBank")) {
           return false;
         }
-      }
-      case "Student" -> {
+        break;
+      case "Student":
         if (!bankType.equals("BranchBank")) {
           return false;
         }
-      }
+        break;
     }
 
     return true;
