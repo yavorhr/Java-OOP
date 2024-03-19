@@ -15,7 +15,7 @@ public abstract class BaseBank implements Bank {
   private Collection<Client> clients;
 
   protected BaseBank(String name, int capacity) {
-    this.name = name;
+    this.setName(name);
     this.capacity = capacity;
     this.loans = new ArrayList<>();
     this.clients = new ArrayList<>();

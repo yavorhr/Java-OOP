@@ -1,10 +1,25 @@
 package bank.core;
 
-public class ControllerImpl implements Controller{
+import bank.Factory.BankFactory;
+import bank.common.ConstantMessages;
+import bank.entities.bank.Bank;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+public class ControllerImpl implements Controller {
+  private Collection<Bank> banks;
+
+  public ControllerImpl() {
+    this.banks = new ArrayList<>();
+  }
 
   @Override
   public String addBank(String type, String name) {
-    return null;
+    Bank bank = BankFactory.createBank(type, name);
+    this.banks.add(bank);
+
+    return String.format(ConstantMessages.SUCCESSFULLY_ADDED_BANK_OR_LOAN_TYPE, type);
   }
 
   @Override
