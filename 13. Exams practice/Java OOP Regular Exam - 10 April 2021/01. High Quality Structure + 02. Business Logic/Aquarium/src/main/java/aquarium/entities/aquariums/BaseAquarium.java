@@ -46,7 +46,7 @@ public abstract class BaseAquarium implements Aquarium {
 
   @Override
   public void removeFish(Fish fish) {
-
+    this.fishes.remove(fish);
   }
 
   @Override
