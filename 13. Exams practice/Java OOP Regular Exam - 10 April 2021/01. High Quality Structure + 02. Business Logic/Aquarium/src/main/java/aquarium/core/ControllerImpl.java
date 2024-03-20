@@ -4,8 +4,10 @@ import aquarium.common.ConstantMessages;
 import aquarium.common.ExceptionMessages;
 import aquarium.entities.aquariums.Aquarium;
 import aquarium.entities.decorations.Decoration;
+import aquarium.entities.fish.Fish;
 import aquarium.factory.AquariumFactory;
 import aquarium.factory.DecorationFactory;
+import aquarium.factory.FishFactory;
 import aquarium.repositories.DecorationRepository;
 import aquarium.repositories.Repository;
 
@@ -47,7 +49,35 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addFish(String aquariumName, String fishType, String fishName, String fishSpecies, double price) {
-    return null;
+    Aquarium aquarium = this.aquariums.get(aquariumName);
+    Fish fish = FishFactory.create(fishType, fishName, fishSpecies, price);
+
+    boolean isWaterSuitable = validateIfWaterIsSuitable(aquariumName.getClass().getSimpleName(), fishType);
+
+    if (!isWaterSuitable) {
+      return "Water not suitable.";
+    }
+
+    aquarium.addFish(fish);
+
+    return String.format(ConstantMessages.SUCCESSFULLY_ADDED_FISH_IN_AQUARIUM, fishType, aquariumName);
+  }
+
+  private boolean validateIfWaterIsSuitable(String aquariumType, String fishType) {
+
+    switch (aquariumType) {
+      case "FreshwaterAquarium" -> {
+        if (!fishType.equals("FreshWaterFish")) {
+          return false;
+        }
+      }
+      case "SaltwaterAquarium" -> {
+        if (!fishType.equals("SaltWaterFish")) {
+          return false;
+        }
+      }
+    }
+    return true;
   }
 
   @Override
