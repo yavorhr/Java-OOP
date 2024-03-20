@@ -56,7 +56,7 @@ public abstract class BaseAquarium implements Aquarium {
 
   @Override
   public void feed() {
-
+    this.fishes.forEach(Fish::eat);
   }
 
   @Override
