@@ -42,6 +42,7 @@ public class ControllerImpl implements Controller {
     Aquarium aquarium = getAquarium(aquariumName);
     Decoration decoration = this.getDecoration(decorationType);
     aquarium.addDecoration(decoration);
+    this.decorationRepository.remove(decoration);
 
     return String.format(ConstantMessages.SUCCESSFULLY_ADDED_DECORATION_IN_AQUARIUM, decorationType, aquariumName);
   }
@@ -52,7 +53,7 @@ public class ControllerImpl implements Controller {
     Aquarium aquarium = getAquarium(aquariumName);
     Fish fish = FishFactory.create(fishType, fishName, fishSpecies, price);
 
-    boolean isWaterSuitable = validateIfWaterIsSuitable(aquariumName.getClass().getSimpleName(), fishType);
+    boolean isWaterSuitable = validateIfWaterIsSuitable(aquarium.getClass().getSimpleName(), fishType);
 
     if (!isWaterSuitable) {
       return "Water not suitable.";
@@ -67,7 +68,7 @@ public class ControllerImpl implements Controller {
     Aquarium aquarium = getAquarium(aquariumName);
     aquarium.feed();
 
-    return String.format(ConstantMessages.FISH_FED, aquarium.getFish().size())
+    return String.format(ConstantMessages.FISH_FED, aquarium.getFish().size());
   }
 
   private Aquarium getAquarium(String aquariumName) {
@@ -77,15 +78,17 @@ public class ControllerImpl implements Controller {
   @Override
   public String calculateValue(String aquariumName) {
     Aquarium aquarium = this.getAquarium(aquariumName);
-    double decorationsPrice = this.decorationRepository.getDecorations().stream().mapToDouble(Decoration::getPrice).sum();
+    double decorationsPrice = this.decorationRepository.calculatePrice();
     double fishPrice = aquarium.getFish().stream().mapToDouble(Fish::getPrice).sum();
 
-    return String.format(ConstantMessages.VALUE_AQUARIUM, aquariumName, decorationsPrice+fishPrice);
+    return String.format(ConstantMessages.VALUE_AQUARIUM, aquariumName, decorationsPrice + fishPrice);
   }
 
   @Override
   public String report() {
-    return null;
+    StringBuilder sb = new StringBuilder();
+    this.aquariums.values().forEach(a -> sb.append(a.getInfo()));
+    return sb.toString().trim();
   }
 
   // Helpers
@@ -101,12 +104,12 @@ public class ControllerImpl implements Controller {
   private boolean validateIfWaterIsSuitable(String aquariumType, String fishType) {
     switch (aquariumType) {
       case "FreshwaterAquarium" -> {
-        if (!fishType.equals("FreshWaterFish")) {
+        if (!fishType.equals("FreshwaterFish")) {
           return false;
         }
       }
       case "SaltwaterAquarium" -> {
-        if (!fishType.equals("SaltWaterFish")) {
+        if (!fishType.equals("SaltwaterFish")) {
           return false;
         }
       }

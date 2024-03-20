@@ -12,4 +12,6 @@ public interface Repository  {
     Decoration findByType(String type);
 
     Collection<Decoration> getDecorations();
+
+    Double calculatePrice();
 }

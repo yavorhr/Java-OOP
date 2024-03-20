@@ -12,13 +12,13 @@ public abstract class BaseAquarium implements Aquarium {
   private String name;
   private int capacity;
   private Collection<Decoration> decorations;
-  private Collection<Fish> fishes;
+  private Collection<Fish> fish;
 
   protected BaseAquarium(String name, int capacity) {
     this.name = name;
     this.capacity = capacity;
     this.decorations = new ArrayList<>();
-    this.fishes = new ArrayList<>();
+    this.fish = new ArrayList<>();
   }
 
   @Override
@@ -41,12 +41,12 @@ public abstract class BaseAquarium implements Aquarium {
   @Override
   public void addFish(Fish fish) {
     Validator.validateIfEnoughCapacity(this.capacity);
-    this.fishes.add(fish);
+    this.fish.add(fish);
   }
 
   @Override
   public void removeFish(Fish fish) {
-    this.fishes.remove(fish);
+    this.fish.remove(fish);
   }
 
   @Override
@@ -56,19 +56,22 @@ public abstract class BaseAquarium implements Aquarium {
 
   @Override
   public void feed() {
-    this.fishes.forEach(Fish::eat);
+    this.fish.forEach(Fish::eat);
   }
 
   @Override
   public String getInfo() {
 
     StringBuilder sb = new StringBuilder();
+
     sb.append(String.format("%s (%s):",
             this.getName(),
             this.getClass().getSimpleName()))
             .append(System.lineSeparator());
 
-    sb.append(String.format("Fish: %s", getFishNames()));
+    sb.append(String.format("Fish: %s", getFishNames()))
+            .append(System.lineSeparator());
+
     sb.append(String.format("Decorations: %d",
             this.decorations.size()))
             .append(System.lineSeparator());
@@ -77,13 +80,13 @@ public abstract class BaseAquarium implements Aquarium {
             this.calculateComfort()))
             .append(System.lineSeparator());
 
-    return sb.toString().trim();
+    return sb.toString();
   }
 
 
   @Override
   public Collection<Fish> getFish() {
-    return this.fishes;
+    return this.fish;
   }
 
   private void setName(String name) {

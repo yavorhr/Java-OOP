@@ -2,10 +2,15 @@ package aquarium.repositories;
 
 import aquarium.entities.decorations.Decoration;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class DecorationRepository implements Repository {
   private Collection<Decoration> decorations;
+
+  public DecorationRepository() {
+    this.decorations = new ArrayList<>();
+  }
 
   @Override
   public void add(Decoration decoration) {
@@ -28,5 +33,11 @@ public class DecorationRepository implements Repository {
 
   public Collection<Decoration> getDecorations() {
     return this.decorations;
+  }
+
+  public Double calculatePrice(){
+    return this.getDecorations().stream()
+            .mapToDouble(Decoration::getPrice)
+            .sum();
   }
 }

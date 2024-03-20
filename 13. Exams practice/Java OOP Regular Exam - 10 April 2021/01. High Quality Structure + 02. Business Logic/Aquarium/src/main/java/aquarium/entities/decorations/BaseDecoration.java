@@ -1,8 +1,8 @@
 package aquarium.entities.decorations;
 
 public abstract class BaseDecoration implements Decoration {
-  private int comfort;
-  private double price;
+  private final int comfort;
+  private final double price;
 
   public BaseDecoration(int comfort, double price) {
     this.comfort = comfort;
