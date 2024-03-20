@@ -59,30 +59,15 @@ public class ControllerImpl implements Controller {
     }
 
     aquarium.addFish(fish);
-
     return String.format(ConstantMessages.SUCCESSFULLY_ADDED_FISH_IN_AQUARIUM, fishType, aquariumName);
-  }
-
-  private boolean validateIfWaterIsSuitable(String aquariumType, String fishType) {
-
-    switch (aquariumType) {
-      case "FreshwaterAquarium" -> {
-        if (!fishType.equals("FreshWaterFish")) {
-          return false;
-        }
-      }
-      case "SaltwaterAquarium" -> {
-        if (!fishType.equals("SaltWaterFish")) {
-          return false;
-        }
-      }
-    }
-    return true;
   }
 
   @Override
   public String feedFish(String aquariumName) {
-    return null;
+    Aquarium aquarium = this.aquariums.get(aquariumName);
+    aquarium.feed();
+    
+    return String.format(ConstantMessages.FISH_FED, aquarium.getFish().size())
   }
 
   @Override
@@ -102,7 +87,23 @@ public class ControllerImpl implements Controller {
     if (decoration == null) {
       throw new IllegalArgumentException(String.format(ExceptionMessages.NO_DECORATION_FOUND, decorationType));
     }
-
     return decoration;
   }
+
+  private boolean validateIfWaterIsSuitable(String aquariumType, String fishType) {
+    switch (aquariumType) {
+      case "FreshwaterAquarium" -> {
+        if (!fishType.equals("FreshWaterFish")) {
+          return false;
+        }
+      }
+      case "SaltwaterAquarium" -> {
+        if (!fishType.equals("SaltWaterFish")) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
 }
