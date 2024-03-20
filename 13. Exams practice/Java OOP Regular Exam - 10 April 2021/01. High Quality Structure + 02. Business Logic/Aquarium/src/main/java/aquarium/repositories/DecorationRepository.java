@@ -1,7 +1,6 @@
 package aquarium.repositories;
 
 import aquarium.entities.decorations.Decoration;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -35,9 +34,4 @@ public class DecorationRepository implements Repository {
     return this.decorations;
   }
 
-  public Double calculatePrice(){
-    return this.getDecorations().stream()
-            .mapToDouble(Decoration::getPrice)
-            .sum();
-  }
 }

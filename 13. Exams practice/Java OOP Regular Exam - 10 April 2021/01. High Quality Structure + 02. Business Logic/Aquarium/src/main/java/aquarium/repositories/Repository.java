@@ -13,5 +13,4 @@ public interface Repository  {
 
     Collection<Decoration> getDecorations();
 
-    Double calculatePrice();
 }

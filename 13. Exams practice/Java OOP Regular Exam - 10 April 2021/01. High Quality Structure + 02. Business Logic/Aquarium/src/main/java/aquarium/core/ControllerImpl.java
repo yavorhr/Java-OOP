@@ -42,6 +42,7 @@ public class ControllerImpl implements Controller {
     Aquarium aquarium = getAquarium(aquariumName);
     Decoration decoration = this.getDecoration(decorationType);
     aquarium.addDecoration(decoration);
+
     this.decorationRepository.remove(decoration);
 
     return String.format(ConstantMessages.SUCCESSFULLY_ADDED_DECORATION_IN_AQUARIUM, decorationType, aquariumName);
@@ -78,7 +79,7 @@ public class ControllerImpl implements Controller {
   @Override
   public String calculateValue(String aquariumName) {
     Aquarium aquarium = this.getAquarium(aquariumName);
-    double decorationsPrice = this.decorationRepository.calculatePrice();
+    double decorationsPrice = aquarium.getDecorations().stream().mapToDouble(Decoration::getPrice).sum();
     double fishPrice = aquarium.getFish().stream().mapToDouble(Fish::getPrice).sum();
 
     return String.format(ConstantMessages.VALUE_AQUARIUM, aquariumName, decorationsPrice + fishPrice);
