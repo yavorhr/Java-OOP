@@ -40,7 +40,8 @@ public abstract class BaseAquarium implements Aquarium {
 
   @Override
   public void addFish(Fish fish) {
-
+    Validator.validateIfEnoughCapacity(this.capacity);
+    this.fishes.add(fish);
   }
 
   @Override

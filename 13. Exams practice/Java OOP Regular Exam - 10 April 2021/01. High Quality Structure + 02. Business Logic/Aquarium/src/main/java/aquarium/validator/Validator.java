@@ -27,4 +27,11 @@ public class Validator {
       throw new NullPointerException(ExceptionMessages.AQUARIUM_NAME_NULL_OR_EMPTY);
     }
   }
+
+  public static void validateIfEnoughCapacity(int capacity) {
+    if (capacity == 0) {
+      throw new IllegalArgumentException(ExceptionMessages.NO_ENOUGH_CAPACITY);
+    }
+  }
+
 }

@@ -9,5 +9,6 @@ public class ExceptionMessages {
     public static final String INVALID_DECORATION_TYPE = "Invalid decoration type.";
     public static final String INVALID_FISH_TYPE = "Invalid fish type.";
     public static final String NO_DECORATION_FOUND = "There isn't a decoration of type %s.";
+    public static final String NO_ENOUGH_CAPACITY = "Not enough capacity.";
 }
 
