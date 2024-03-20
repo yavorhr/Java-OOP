@@ -1,11 +1,28 @@
 package aquarium.core;
 
-public class ControllerImpl implements Controller{
+import aquarium.common.ConstantMessages;
+import aquarium.entities.aquariums.Aquarium;
+import aquarium.factory.AquariumFactory;
+import aquarium.repositories.DecorationRepository;
+import aquarium.repositories.Repository;
 
+import java.util.HashMap;
+import java.util.Map;
+
+public class ControllerImpl implements Controller {
+  private Map<String, Aquarium> aquariums;
+  private Repository decorationRepository;
+
+  public ControllerImpl() {
+    this.aquariums = new HashMap<>();
+    this.decorationRepository = new DecorationRepository();
+  }
 
   @Override
   public String addAquarium(String aquariumType, String aquariumName) {
-    return null;
+    Aquarium aquarium = AquariumFactory.create(aquariumType, aquariumName);
+    this.aquariums.put(aquariumName, aquarium);
+    return String.format(ConstantMessages.SUCCESSFULLY_ADDED_AQUARIUM_TYPE, aquariumType);
   }
 
   @Override
