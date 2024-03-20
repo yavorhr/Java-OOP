@@ -14,7 +14,7 @@ public class DecorationRepository implements Repository {
 
   @Override
   public boolean remove(Decoration decoration) {
-    return this.decorationRepository.remove(decoration)
+    return this.decorationRepository.remove(decoration);
   }
 
   @Override
