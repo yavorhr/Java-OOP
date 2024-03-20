@@ -39,7 +39,7 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String insertDecoration(String aquariumName, String decorationType) {
-    Aquarium aquarium = this.aquariums.get(aquariumName);
+    Aquarium aquarium = getAquarium(aquariumName);
     Decoration decoration = this.getDecoration(decorationType);
     aquarium.addDecoration(decoration);
 
@@ -49,7 +49,7 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addFish(String aquariumName, String fishType, String fishName, String fishSpecies, double price) {
-    Aquarium aquarium = this.aquariums.get(aquariumName);
+    Aquarium aquarium = getAquarium(aquariumName);
     Fish fish = FishFactory.create(fishType, fishName, fishSpecies, price);
 
     boolean isWaterSuitable = validateIfWaterIsSuitable(aquariumName.getClass().getSimpleName(), fishType);
@@ -64,15 +64,23 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String feedFish(String aquariumName) {
-    Aquarium aquarium = this.aquariums.get(aquariumName);
+    Aquarium aquarium = getAquarium(aquariumName);
     aquarium.feed();
-    
+
     return String.format(ConstantMessages.FISH_FED, aquarium.getFish().size())
+  }
+
+  private Aquarium getAquarium(String aquariumName) {
+    return this.aquariums.get(aquariumName);
   }
 
   @Override
   public String calculateValue(String aquariumName) {
-    return null;
+    Aquarium aquarium = this.getAquarium(aquariumName);
+    double decorationsPrice = this.decorationRepository.getDecorations().stream().mapToDouble(Decoration::getPrice).sum();
+    double fishPrice = aquarium.getFish().stream().mapToDouble(Fish::getPrice).sum();
+
+    return String.format(ConstantMessages.VALUE_AQUARIUM, aquariumName, decorationsPrice+fishPrice);
   }
 
   @Override
