@@ -51,7 +51,7 @@ public abstract class BaseAquarium implements Aquarium {
 
   @Override
   public void addDecoration(Decoration decoration) {
-
+    this.decorations.add(decoration);
   }
 
   @Override
