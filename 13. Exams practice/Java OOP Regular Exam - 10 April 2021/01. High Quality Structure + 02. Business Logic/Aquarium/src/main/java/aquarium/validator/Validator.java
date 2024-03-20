@@ -21,4 +21,10 @@ public class Validator {
       throw new IllegalArgumentException(ExceptionMessages.FISH_PRICE_BELOW_OR_EQUAL_ZERO);
     }
   }
+
+  public static void validateAquariumName(String name) {
+    if (name == null || name.trim().isEmpty()) {
+      throw new NullPointerException(ExceptionMessages.AQUARIUM_NAME_NULL_OR_EMPTY);
+    }
+  }
 }
