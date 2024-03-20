@@ -14,7 +14,7 @@ public abstract class BaseAquarium implements Aquarium {
   private Collection<Decoration> decorations;
   private Collection<Fish> fishes;
 
-  public BaseAquarium(String name, int capacity) {
+  protected BaseAquarium(String name, int capacity) {
     this.name = name;
     this.capacity = capacity;
     this.decorations = new ArrayList<>();
@@ -29,6 +29,43 @@ public abstract class BaseAquarium implements Aquarium {
   @Override
   public Collection<Decoration> getDecorations() {
     return this.decorations;
+  }
+
+  @Override
+  public int calculateComfort() {
+    return this.decorations.stream()
+            .mapToInt(Decoration::getComfort)
+            .sum();
+  }
+
+  @Override
+  public void addFish(Fish fish) {
+
+  }
+
+  @Override
+  public void removeFish(Fish fish) {
+
+  }
+
+  @Override
+  public void addDecoration(Decoration decoration) {
+
+  }
+
+  @Override
+  public void feed() {
+
+  }
+
+  @Override
+  public String getInfo() {
+    return null;
+  }
+
+  @Override
+  public Collection<Fish> getFish() {
+    return null;
   }
 
   private void setName(String name) {
