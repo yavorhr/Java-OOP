@@ -6,7 +6,7 @@ import aquarium.validator.Validator;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
+import java.util.stream.Collectors;
 
 public abstract class BaseAquarium implements Aquarium {
   private String name;
@@ -61,16 +61,42 @@ public abstract class BaseAquarium implements Aquarium {
 
   @Override
   public String getInfo() {
-    return null;
+
+    StringBuilder sb = new StringBuilder();
+    sb.append(String.format("%s (%s):",
+            this.getName(),
+            this.getClass().getSimpleName()))
+            .append(System.lineSeparator());
+
+    sb.append(String.format("Fish: %s", getFishNames()));
+    sb.append(String.format("Decorations: %d",
+            this.decorations.size()))
+            .append(System.lineSeparator());
+
+    sb.append(String.format("Comfort: %d",
+            this.calculateComfort()))
+            .append(System.lineSeparator());
+
+    return sb.toString().trim();
   }
+
 
   @Override
   public Collection<Fish> getFish() {
-    return null;
+    return this.fishes;
   }
 
   private void setName(String name) {
     Validator.validateAquariumName(name);
     this.name = name;
+  }
+
+  // Helpers
+  private String getFishNames() {
+    return this.getFish().size() == 0
+            ? "None"
+            : this.getFish().stream()
+            .map(Fish::getName)
+            .collect(Collectors.joining(" "));
   }
 }
