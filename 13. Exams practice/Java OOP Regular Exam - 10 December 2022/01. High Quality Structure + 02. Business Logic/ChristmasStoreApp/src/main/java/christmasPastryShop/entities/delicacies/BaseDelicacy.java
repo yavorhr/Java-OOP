@@ -1,6 +1,7 @@
 package christmasPastryShop.entities.delicacies;
 
 import christmasPastryShop.entities.delicacies.interfaces.Delicacy;
+import christmasPastryShop.validator.Validator;
 
 public abstract class BaseDelicacy implements Delicacy {
   private String name;
@@ -8,9 +9,9 @@ public abstract class BaseDelicacy implements Delicacy {
   private double price;
 
   protected BaseDelicacy(String name, double portion, double price) {
-    this.name = name;
-    this.portion = portion;
-    this.price = price;
+    this.setName(name);
+    this.setPortion(portion);
+    this.setPrice(price);
   }
 
   @Override
@@ -26,5 +27,21 @@ public abstract class BaseDelicacy implements Delicacy {
   @Override
   public double getPrice() {
     return this.price;
+  }
+
+  private void setName(String name) {
+    Validator.validateDelicacyName(name);
+    this.name = name;
+  }
+
+  private void setPortion(double portion) {
+    Validator.validatePortion(portion);
+
+    this.portion = portion;
+  }
+
+  private void setPrice(double price) {
+    Validator.validatePrice(price);
+    this.price = price;
   }
 }
