@@ -9,7 +9,7 @@ public abstract class BaseCocktail implements Cocktail {
   private double price;
   private String brand;
 
-  public BaseCocktail(String name, int size, double price, String brand) {
+  protected BaseCocktail(String name, int size, double price, String brand) {
     this.setName(name);
     this.setSize(size);
     this.setPrice(price);
