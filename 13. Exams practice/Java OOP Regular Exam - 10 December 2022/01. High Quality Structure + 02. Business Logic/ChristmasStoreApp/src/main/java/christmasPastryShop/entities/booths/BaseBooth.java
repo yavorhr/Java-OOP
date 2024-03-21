@@ -5,6 +5,7 @@ import christmasPastryShop.entities.cocktails.interfaces.Cocktail;
 import christmasPastryShop.entities.delicacies.interfaces.Delicacy;
 import christmasPastryShop.validator.Validator;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public abstract class BaseBooth implements Booth {
@@ -21,6 +22,8 @@ public abstract class BaseBooth implements Booth {
     this.boothNumber = boothNumber;
     this.setCapacity(capacity);
     this.pricePerPerson = pricePerPerson;
+    this.delicacyOrders = new ArrayList<>();
+    this.cocktailOrders = new ArrayList<>();
   }
 
   @Override
@@ -45,17 +48,23 @@ public abstract class BaseBooth implements Booth {
 
   @Override
   public void reserve(int numberOfPeople) {
-  
+    this.isReserved = true;
+    setNumberOfPeople(numberOfPeople);
+    this.setPrice(numberOfPeople * this.pricePerPerson);
   }
 
   @Override
   public double getBill() {
-    return 0;
+    return this.price;
   }
 
   @Override
   public void clear() {
-
+    this.isReserved = false;
+    this.numberOfPeople = 0;
+    this.price = 0;
+    this.cocktailOrders.clear();
+    this.delicacyOrders.clear();
   }
 
   private void setCapacity(int capacity) {
@@ -66,5 +75,9 @@ public abstract class BaseBooth implements Booth {
   private void setNumberOfPeople(int numberOfPeople) {
     Validator.validateNumberOfPeople(numberOfPeople);
     this.numberOfPeople = numberOfPeople;
+  }
+
+  private void setPrice(double price) {
+    this.price = price;
   }
 }
