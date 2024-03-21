@@ -3,7 +3,7 @@ package christmasPastryShop.validator;
 import christmasPastryShop.common.ExceptionMessages;
 
 public class Validator {
-  public static void validateDelicacyName(String name) {
+  public static void validateName(String name) {
     if (name == null || name.trim().isEmpty()) {
       throw new IllegalArgumentException(ExceptionMessages.INVALID_NAME);
     }
@@ -21,4 +21,15 @@ public class Validator {
     }
   }
 
+  public static void validateSize(int size) {
+    if (size <= 0) {
+      throw new IllegalArgumentException(ExceptionMessages.INVALID_SIZE);
+    }
+  }
+
+  public static void validateBrand(String brand) {
+    if (brand == null || brand.trim().isEmpty()) {
+      throw new IllegalArgumentException(ExceptionMessages.INVALID_BRAND);
+    }
+  }
 }

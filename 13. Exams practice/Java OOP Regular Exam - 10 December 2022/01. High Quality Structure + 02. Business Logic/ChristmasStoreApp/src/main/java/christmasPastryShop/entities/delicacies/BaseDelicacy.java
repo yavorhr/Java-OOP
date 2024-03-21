@@ -38,7 +38,7 @@ public abstract class BaseDelicacy implements Delicacy {
   }
 
   private void setName(String name) {
-    Validator.validateDelicacyName(name);
+    Validator.validateName(name);
     this.name = name;
   }
 
