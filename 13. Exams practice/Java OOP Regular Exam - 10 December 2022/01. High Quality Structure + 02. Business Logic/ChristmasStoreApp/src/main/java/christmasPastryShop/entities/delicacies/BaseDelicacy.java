@@ -29,6 +29,14 @@ public abstract class BaseDelicacy implements Delicacy {
     return this.price;
   }
 
+  @Override
+  public String toString() {
+    return String.format("%s: %.2fg - %.2f",
+            this.name,
+            this.portion,
+            this.portion);
+  }
+
   private void setName(String name) {
     Validator.validateDelicacyName(name);
     this.name = name;
