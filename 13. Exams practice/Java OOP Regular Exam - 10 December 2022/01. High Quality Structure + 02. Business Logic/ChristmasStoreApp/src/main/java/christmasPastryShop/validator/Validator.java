@@ -32,4 +32,16 @@ public class Validator {
       throw new IllegalArgumentException(ExceptionMessages.INVALID_BRAND);
     }
   }
+
+  public static void validateCapacity(int capacity) {
+    if (capacity <= 0) {
+      throw new IllegalArgumentException(ExceptionMessages.INVALID_TABLE_CAPACITY);
+    }
+  }
+
+  public static void validateNumberOfPeople(int people) {
+    if (people <= 0) {
+      throw new IllegalArgumentException(ExceptionMessages.INVALID_NUMBER_OF_PEOPLE);
+    }
+  }
 }

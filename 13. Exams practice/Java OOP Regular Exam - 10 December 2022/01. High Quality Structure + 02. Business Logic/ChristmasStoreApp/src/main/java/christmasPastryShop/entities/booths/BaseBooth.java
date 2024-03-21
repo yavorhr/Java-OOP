@@ -3,6 +3,7 @@ package christmasPastryShop.entities.booths;
 import christmasPastryShop.entities.booths.interfaces.Booth;
 import christmasPastryShop.entities.cocktails.interfaces.Cocktail;
 import christmasPastryShop.entities.delicacies.interfaces.Delicacy;
+import christmasPastryShop.validator.Validator;
 
 import java.util.Collection;
 
@@ -18,7 +19,7 @@ public abstract class BaseBooth implements Booth {
 
   public BaseBooth(int boothNumber, int capacity, double pricePerPerson) {
     this.boothNumber = boothNumber;
-    this.capacity = capacity;
+    this.setCapacity(capacity);
     this.pricePerPerson = pricePerPerson;
   }
 
@@ -44,7 +45,7 @@ public abstract class BaseBooth implements Booth {
 
   @Override
   public void reserve(int numberOfPeople) {
-
+  
   }
 
   @Override
@@ -55,5 +56,15 @@ public abstract class BaseBooth implements Booth {
   @Override
   public void clear() {
 
+  }
+
+  private void setCapacity(int capacity) {
+    Validator.validateCapacity(capacity);
+    this.capacity = capacity;
+  }
+
+  private void setNumberOfPeople(int numberOfPeople) {
+    Validator.validateNumberOfPeople(numberOfPeople);
+    this.numberOfPeople = numberOfPeople;
   }
 }
