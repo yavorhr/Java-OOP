@@ -44,15 +44,22 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addBooth(String type, int boothNumber, int capacity) {
-    Booth booth =  BoothFactory.create(type,boothNumber,capacity);
+    Booth booth = BoothFactory.create(type, boothNumber, capacity);
     doesBootExistInRepository(boothNumber);
-    return null;
+    this.boothRepository.add(booth);
+
+    return String.format(OutputMessages.BOOTH_ADDED, boothNumber);
   }
 
   @Override
   public String reserveBooth(int numberOfPeople) {
-    //TODO
-    return null;
+    if (findFirstAvailableBooth(numberOfPeople) == null) {
+      return String.format(OutputMessages.RESERVATION_NOT_POSSIBLE, numberOfPeople);
+    }
+
+    Booth booth = findFirstAvailableBooth(numberOfPeople);
+    booth.reserve(numberOfPeople);
+    return String.format(OutputMessages.BOOTH_RESERVED, booth.getBoothNumber(), numberOfPeople);
   }
 
   @Override
@@ -65,6 +72,15 @@ public class ControllerImpl implements Controller {
   public String getIncome() {
     //TODO
     return null;
+  }
+
+  private Booth findFirstAvailableBooth(int numberOfPeople) {
+    return this.boothRepository
+            .getAll()
+            .stream()
+            .filter(b -> b.getCapacity() <= numberOfPeople && !b.isReserved())
+            .findFirst()
+            .orElse(null);
   }
 
   // Helpers
