@@ -3,7 +3,7 @@ package christmasPastryShop.entities.cocktails;
 public class Hibernation extends BaseCocktail {
   private static final double PRICE = 4.50;
 
-  protected Hibernation(String name, int size, String brand) {
+  public Hibernation(String name, int size, String brand) {
     super(name, size, PRICE, brand);
   }
 }

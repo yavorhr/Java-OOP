@@ -4,7 +4,6 @@ import christmasPastryShop.core.ControllerImpl;
 import christmasPastryShop.core.EngineImpl;
 import christmasPastryShop.core.interfaces.Controller;
 import christmasPastryShop.entities.delicacies.interfaces.Delicacy;
-import christmasPastryShop.entities.cocktails.interfaces.Cocktail;
 import christmasPastryShop.entities.booths.interfaces.Booth;
 import christmasPastryShop.io.ConsoleReader;
 import christmasPastryShop.io.ConsoleWriter;
@@ -14,7 +13,7 @@ public class Main {
   public static void main(String[] args) {
 
     DelicacyRepository<Delicacy> delicacyRepository = new DelicacyRepositoryImpl();
-    CocktailRepository<Cocktail> cocktailRepository = new CocktailRepositoryImpl();
+    CocktailRepository<christmasPastryShop.entities.cocktails.interfaces.Cocktail> cocktailRepository = new CocktailRepositoryImpl();
     BoothRepository<Booth> boothRepository = new BoothRepositoryImpl();
 
     Controller controller = new ControllerImpl(delicacyRepository, cocktailRepository, boothRepository);

@@ -1,16 +1,15 @@
 package christmasPastryShop.entities.booths;
 
 import christmasPastryShop.entities.booths.interfaces.Booth;
-import christmasPastryShop.entities.cocktails.interfaces.Cocktail;
-import christmasPastryShop.entities.delicacies.interfaces.Delicacy;
+import christmasPastryShop.entities.delicacies.interfaces.Cocktail;
 import christmasPastryShop.validator.Validator;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 public abstract class BaseBooth implements Booth {
-  private Collection<Delicacy> delicacyOrders;
-  private Collection<Cocktail> cocktailOrders;
+  private Collection<Cocktail> delicacyOrders;
+  private Collection<christmasPastryShop.entities.cocktails.interfaces.Cocktail> cocktailOrders;
   private int boothNumber;
   private int capacity;
   private int numberOfPeople;

@@ -1,9 +1,10 @@
 package christmasPastryShop.entities.delicacies.interfaces;
 
 public interface Delicacy {
-    String getName();
+  String getName();
 
-    double getPortion();
+  double getPortion();
 
-    double getPrice();
+  double getPrice();
+
 }
