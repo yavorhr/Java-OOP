@@ -10,8 +10,12 @@ public class BoothFactory {
     Booth booth = null;
 
     switch (type) {
-      case "OpenBooth" -> booth = new OpenBooth(boothNumber, capacity);
-      case "PrivateBooth" -> booth = new PrivateBooth(boothNumber, capacity);
+      case "OpenBooth":
+        booth = new OpenBooth(boothNumber, capacity);
+        break;
+      case "PrivateBooth":
+        booth = new PrivateBooth(boothNumber, capacity);
+        break;
     }
 
     return booth;

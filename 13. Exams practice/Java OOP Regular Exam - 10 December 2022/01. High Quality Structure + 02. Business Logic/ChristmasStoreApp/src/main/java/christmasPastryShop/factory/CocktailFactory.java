@@ -10,8 +10,12 @@ public class CocktailFactory {
     Cocktail cocktail = null;
 
     switch (type) {
-      case "Hibernation" -> cocktail = new Hibernation(name, size, brand);
-      case "MulledWine" -> cocktail = new MulledWine(name, size, brand);
+      case "Hibernation":
+        cocktail = new Hibernation(name, size, brand);
+        break;
+      case "MulledWine":
+        cocktail = new MulledWine(name, size, brand);
+        break;
     }
 
     return cocktail;

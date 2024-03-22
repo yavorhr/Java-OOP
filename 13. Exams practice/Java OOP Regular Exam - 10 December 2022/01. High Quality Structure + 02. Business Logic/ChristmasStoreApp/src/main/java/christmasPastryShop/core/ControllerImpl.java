@@ -93,19 +93,19 @@ public class ControllerImpl implements Controller {
 
   // Helpers
   private void doesDelicacyExistInRepository(String name, String type) {
-    if (this.delicacyRepository.getByName(name) == null) {
+    if (this.delicacyRepository.getByName(name) != null) {
       throw new IllegalArgumentException(String.format(ExceptionMessages.FOOD_OR_DRINK_EXIST, type, name));
     }
   }
 
   private void doesCocktailExistInRepository(String name, String type) {
-    if (this.cocktailRepository.getByName(name) == null) {
+    if (this.cocktailRepository.getByName(name) != null) {
       throw new IllegalArgumentException(String.format(ExceptionMessages.FOOD_OR_DRINK_EXIST, type, name));
     }
   }
 
   private void doesBootExistInRepository(int number) {
-    if (this.boothRepository.getByNumber(number) == null) {
+    if (this.boothRepository.getByNumber(number) != null) {
       throw new IllegalArgumentException(String.format(ExceptionMessages.BOOTH_EXIST, number));
     }
   }
