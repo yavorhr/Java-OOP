@@ -27,4 +27,5 @@ public class CocktailRepositoryImpl implements CocktailRepository<Cocktail> {
   public void add(Cocktail cocktail) {
   this.cocktails.add(cocktail);
   }
+
 }
