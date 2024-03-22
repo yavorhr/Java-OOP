@@ -43,7 +43,8 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addBooth(String type, int boothNumber, int capacity) {
-    //TODO
+    Booth booth = new BoothFactory.create(type,boothNumber,capacity);
+    doesBootExistInRepository(boothNumber);
     return null;
   }
 
@@ -75,6 +76,12 @@ public class ControllerImpl implements Controller {
   private void doesCocktailExistInRepository(String name, String type) {
     if (this.cocktailRepository.getByName(name) == null) {
       throw new IllegalArgumentException(String.format(ExceptionMessages.FOOD_OR_DRINK_EXIST, type, name));
+    }
+  }
+
+  private void doesBootExistInRepository(int number) {
+    if (this.boothRepository.getByNumber(number) == null) {
+      throw new IllegalArgumentException(String.format(ExceptionMessages.BOOTH_EXIST, number));
     }
   }
 
