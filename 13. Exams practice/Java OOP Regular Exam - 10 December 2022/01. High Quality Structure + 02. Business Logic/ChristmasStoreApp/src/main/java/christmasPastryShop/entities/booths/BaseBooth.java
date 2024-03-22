@@ -18,7 +18,7 @@ public abstract class BaseBooth implements Booth {
   private boolean isReserved;
   private double price;
 
-  public BaseBooth(int boothNumber, int capacity, double pricePerPerson) {
+  protected BaseBooth(int boothNumber, int capacity, double pricePerPerson) {
     this.boothNumber = boothNumber;
     this.setCapacity(capacity);
     this.pricePerPerson = pricePerPerson;
