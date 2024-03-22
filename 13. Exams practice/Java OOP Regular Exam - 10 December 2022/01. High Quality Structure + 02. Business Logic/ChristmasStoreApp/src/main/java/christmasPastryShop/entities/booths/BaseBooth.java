@@ -1,15 +1,15 @@
 package christmasPastryShop.entities.booths;
 
 import christmasPastryShop.entities.booths.interfaces.Booth;
-import christmasPastryShop.entities.delicacies.interfaces.Cocktail;
+import christmasPastryShop.entities.cocktails.interfaces.Cocktail;
+import christmasPastryShop.entities.delicacies.interfaces.Delicacy;
 import christmasPastryShop.validator.Validator;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
 public abstract class BaseBooth implements Booth {
-  private Collection<Cocktail> delicacyOrders;
-  private Collection<christmasPastryShop.entities.cocktails.interfaces.Cocktail> cocktailOrders;
+  private Collection<Delicacy> delicacyOrders;
+  private Collection<Cocktail> cocktailOrders;
   private int boothNumber;
   private int capacity;
   private int numberOfPeople;
@@ -54,7 +54,11 @@ public abstract class BaseBooth implements Booth {
 
   @Override
   public double getBill() {
-    return this.price;
+    double cocktailsPrice = this.cocktailOrders.stream().mapToDouble(Cocktail::getPrice).sum();
+    double delicaciesPrice = this.delicacyOrders.stream().mapToDouble(Delicacy::getPrice).sum();
+    this.clear();
+
+    return this.price + cocktailsPrice + delicaciesPrice;
   }
 
   @Override

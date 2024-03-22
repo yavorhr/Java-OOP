@@ -64,14 +64,22 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String leaveBooth(int boothNumber) {
-    //TODO
-    return null;
+    Booth booth = this.boothRepository.getByNumber(boothNumber);
+    double bill = booth.getBill();
+
+    return String.format(OutputMessages.BILL, boothNumber, bill);
   }
 
   @Override
   public String getIncome() {
-    //TODO
-    return null;
+    double boothRepositorySum =
+            this.boothRepository
+                    .getAll()
+                    .stream()
+                    .mapToDouble(Booth::getBill)
+                    .sum();
+
+    return String.format(OutputMessages.TOTAL_INCOME, boothRepositorySum);
   }
 
   private Booth findFirstAvailableBooth(int numberOfPeople) {
