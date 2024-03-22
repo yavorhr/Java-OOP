@@ -6,6 +6,7 @@ import christmasPastryShop.core.interfaces.Controller;
 import christmasPastryShop.entities.cocktails.interfaces.Cocktail;
 import christmasPastryShop.entities.booths.interfaces.Booth;
 import christmasPastryShop.entities.delicacies.interfaces.Delicacy;
+import christmasPastryShop.factory.BoothFactory;
 import christmasPastryShop.factory.CocktailFactory;
 import christmasPastryShop.factory.DelicacyFactory;
 import christmasPastryShop.repositories.interfaces.BoothRepository;
@@ -43,7 +44,7 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addBooth(String type, int boothNumber, int capacity) {
-    Booth booth = new BoothFactory.create(type,boothNumber,capacity);
+    Booth booth =  BoothFactory.create(type,boothNumber,capacity);
     doesBootExistInRepository(boothNumber);
     return null;
   }
