@@ -35,8 +35,10 @@ public class ControllerImpl implements Controller {
   @Override
   public String addCocktail(String type, String name, int size, String brand) {
     Cocktail cocktail = CocktailFactory.create(type, name, size, brand);
+    doesCocktailExistInRepository(name, type);
+    this.cocktailRepository.add(cocktail);
 
-    return null;
+    return String.format(OutputMessages.COCKTAIL_ADDED, type, name);
   }
 
   @Override
