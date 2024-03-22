@@ -12,7 +12,7 @@ import christmasPastryShop.repositories.interfaces.*;
 
 public class Main {
   public static void main(String[] args) {
-    
+
     DelicacyRepository<Delicacy> delicacyRepository = new DelicacyRepositoryImpl();
     CocktailRepository<Cocktail> cocktailRepository = new CocktailRepositoryImpl();
     BoothRepository<Booth> boothRepository = new BoothRepositoryImpl();
