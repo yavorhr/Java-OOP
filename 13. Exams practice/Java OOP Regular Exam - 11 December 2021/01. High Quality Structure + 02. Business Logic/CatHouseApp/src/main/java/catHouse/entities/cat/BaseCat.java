@@ -31,11 +31,6 @@ public abstract class BaseCat implements Cat {
   }
 
   @Override
-  public void eating() {
-
-  }
-
-  @Override
   public void setName(String name) {
     Validator.validateCatName(name);
     this.name = name;
