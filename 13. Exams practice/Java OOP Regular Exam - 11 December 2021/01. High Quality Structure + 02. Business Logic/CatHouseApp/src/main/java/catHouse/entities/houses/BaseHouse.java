@@ -42,12 +42,12 @@ public abstract class BaseHouse implements House {
 
   @Override
   public void buyToy(Toy toy) {
-
+    this.toys.add(toy);
   }
 
   @Override
   public void feeding() {
-
+    this.cats.forEach(Cat::eating);
   }
 
   @Override
