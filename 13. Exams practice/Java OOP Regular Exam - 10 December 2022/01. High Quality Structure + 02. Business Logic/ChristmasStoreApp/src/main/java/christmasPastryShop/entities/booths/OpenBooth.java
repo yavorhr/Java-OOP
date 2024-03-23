@@ -6,4 +6,9 @@ public class OpenBooth extends BaseBooth {
   public OpenBooth(int boothNumber, int capacity) {
     super(boothNumber, capacity, PRICE_PER_PERSON);
   }
+
+  @Override
+  public double getPrice() {
+    return PRICE_PER_PERSON * super.getNumberOfPeople();
+  }
 }

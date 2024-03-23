@@ -6,4 +6,9 @@ public class PrivateBooth extends BaseBooth {
   public PrivateBooth(int boothNumber, int capacity) {
     super(boothNumber, capacity, PRICE_PER_PERSON);
   }
+
+  @Override
+  public double getPrice() {
+    return PRICE_PER_PERSON * super.getNumberOfPeople();
+  }
 }

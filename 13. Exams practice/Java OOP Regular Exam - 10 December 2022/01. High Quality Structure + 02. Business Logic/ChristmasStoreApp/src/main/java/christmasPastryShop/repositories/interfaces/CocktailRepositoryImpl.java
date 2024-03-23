@@ -2,12 +2,14 @@ package christmasPastryShop.repositories.interfaces;
 
 import christmasPastryShop.entities.cocktails.interfaces.Cocktail;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class CocktailRepositoryImpl implements CocktailRepository<Cocktail> {
   private Collection<Cocktail> cocktails;
 
   public CocktailRepositoryImpl() {
+    this.cocktails = new ArrayList<>();
   }
 
   @Override
@@ -25,7 +27,7 @@ public class CocktailRepositoryImpl implements CocktailRepository<Cocktail> {
 
   @Override
   public void add(Cocktail cocktail) {
-  this.cocktails.add(cocktail);
+    this.cocktails.add(cocktail);
   }
 
 }

@@ -40,9 +40,8 @@ public abstract class BaseBooth implements Booth {
     return this.isReserved;
   }
 
-  @Override
-  public double getPrice() {
-    return this.price;
+  public int getNumberOfPeople() {
+    return numberOfPeople;
   }
 
   @Override
@@ -56,9 +55,11 @@ public abstract class BaseBooth implements Booth {
   public double getBill() {
     double cocktailsPrice = this.cocktailOrders.stream().mapToDouble(Cocktail::getPrice).sum();
     double delicaciesPrice = this.delicacyOrders.stream().mapToDouble(Delicacy::getPrice).sum();
+    double pricePerPersonTotal = this.getPrice();
+
     this.clear();
 
-    return this.price + cocktailsPrice + delicaciesPrice;
+    return pricePerPersonTotal + cocktailsPrice + delicaciesPrice;
   }
 
   @Override

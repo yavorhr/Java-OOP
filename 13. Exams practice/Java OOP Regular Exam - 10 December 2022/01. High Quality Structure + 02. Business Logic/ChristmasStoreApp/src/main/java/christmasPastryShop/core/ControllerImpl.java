@@ -15,7 +15,7 @@ import christmasPastryShop.repositories.interfaces.DelicacyRepository;
 
 public class ControllerImpl implements Controller {
   private DelicacyRepository<Delicacy> delicacyRepository;
-  private CocktailRepository<christmasPastryShop.entities.cocktails.interfaces.Cocktail> cocktailRepository;
+  private CocktailRepository<Cocktail> cocktailRepository;
   private BoothRepository<Booth> boothRepository;
 
   public ControllerImpl(DelicacyRepository<Delicacy> delicacyRepository, CocktailRepository<Cocktail> cocktailRepository, BoothRepository<Booth> boothRepository) {
@@ -83,10 +83,10 @@ public class ControllerImpl implements Controller {
   }
 
   private Booth findFirstAvailableBooth(int numberOfPeople) {
-    return this.boothRepository
+  return this.boothRepository
             .getAll()
             .stream()
-            .filter(b -> b.getCapacity() <= numberOfPeople && !b.isReserved())
+            .filter(b -> b.getCapacity() >= numberOfPeople && !b.isReserved())
             .findFirst()
             .orElse(null);
   }
