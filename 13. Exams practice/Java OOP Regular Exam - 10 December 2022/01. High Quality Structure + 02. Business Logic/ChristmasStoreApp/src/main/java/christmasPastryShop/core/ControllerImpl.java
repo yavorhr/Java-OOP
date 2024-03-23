@@ -40,7 +40,7 @@ public class ControllerImpl implements Controller {
     doesCocktailExistInRepository(name, type);
     this.cocktailRepository.add(cocktail);
 
-    return String.format(OutputMessages.COCKTAIL_ADDED, type, name);
+    return String.format(OutputMessages.COCKTAIL_ADDED, name, brand);
   }
 
   @Override
