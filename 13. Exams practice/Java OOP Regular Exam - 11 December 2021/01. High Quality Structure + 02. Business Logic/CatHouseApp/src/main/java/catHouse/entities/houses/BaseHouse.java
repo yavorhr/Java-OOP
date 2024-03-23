@@ -6,6 +6,7 @@ import catHouse.validator.Validator;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 public abstract class BaseHouse implements House {
   private String name;
@@ -52,7 +53,34 @@ public abstract class BaseHouse implements House {
 
   @Override
   public String getStatistics() {
-    return null;
+    StringBuilder sb = new StringBuilder();
+
+    sb.append(String.format("%s %s:",
+            this.name, this.getClass().getSimpleName()))
+            .append(System.lineSeparator());
+
+    sb.append(String.format("Cats: %s", getCatNames()))
+            .append(System.lineSeparator());
+
+    sb.append(String.format("Toys: %d Softness: %d",
+            this.toys.size(), this.getSoftness()))
+            .append(System.lineSeparator());
+
+    return sb.toString().trim();
+  }
+
+  private int getSoftness() {
+    return this.toys.stream()
+            .mapToInt(Toy::getSoftness)
+            .sum();
+  }
+
+  private String getCatNames() {
+    return this.cats.size() == 0
+            ? "none"
+            : this.cats.stream()
+            .map(Cat::getName)
+            .collect(Collectors.joining(", "));
   }
 
   @Override
