@@ -14,8 +14,8 @@ public abstract class BaseHouse implements House {
   private Collection<Toy> toys;
   private Collection<Cat> cats;
 
-  public BaseHouse(String name, int capacity) {
-    this.name = name;
+  protected BaseHouse(String name, int capacity) {
+    this.setName(name);
     this.capacity = capacity;
     this.toys = new ArrayList<>();
     this.cats = new ArrayList<>();
@@ -90,7 +90,8 @@ public abstract class BaseHouse implements House {
 
   @Override
   public void setName(String name) {
-
+    Validator.validateHouseName(name);
+    this.name = name;
   }
 
   @Override

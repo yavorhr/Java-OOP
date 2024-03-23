@@ -26,4 +26,10 @@ public class Validator {
       throw new IllegalArgumentException(ExceptionMessages.NOT_ENOUGH_CAPACITY);
     }
   }
+
+  public static void validateHouseName(String name) {
+    if (name == null || name.trim().isEmpty()) {
+      throw new NullPointerException(ExceptionMessages.HOUSE_NAME_CANNOT_BE_NULL_OR_EMPTY);
+    }
+  }
 }
