@@ -8,7 +8,7 @@ public abstract class BaseCat implements Cat {
   private int kilograms;
   private double price;
 
-  public BaseCat(String name, String breed, int kilograms, double price) {
+  protected BaseCat(String name, String breed, int kilograms, double price) {
     this.setName(name);
     this.setBreed(breed);
     this.kilograms = kilograms;
