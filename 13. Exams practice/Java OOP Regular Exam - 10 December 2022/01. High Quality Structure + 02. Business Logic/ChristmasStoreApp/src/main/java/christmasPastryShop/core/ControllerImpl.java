@@ -14,6 +14,7 @@ import christmasPastryShop.repositories.interfaces.CocktailRepository;
 import christmasPastryShop.repositories.interfaces.DelicacyRepository;
 
 public class ControllerImpl implements Controller {
+  private static double STORE_INCOME = 0.0;
   private DelicacyRepository<Delicacy> delicacyRepository;
   private CocktailRepository<Cocktail> cocktailRepository;
   private BoothRepository<Booth> boothRepository;
@@ -66,24 +67,19 @@ public class ControllerImpl implements Controller {
   public String leaveBooth(int boothNumber) {
     Booth booth = this.boothRepository.getByNumber(boothNumber);
     double bill = booth.getBill();
+    STORE_INCOME += bill;
+    booth.clear();
 
     return String.format(OutputMessages.BILL, boothNumber, bill);
   }
 
   @Override
   public String getIncome() {
-    double boothRepositorySum =
-            this.boothRepository
-                    .getAll()
-                    .stream()
-                    .mapToDouble(Booth::getBill)
-                    .sum();
-
-    return String.format(OutputMessages.TOTAL_INCOME, boothRepositorySum);
+    return String.format(OutputMessages.TOTAL_INCOME, STORE_INCOME);
   }
 
   private Booth findFirstAvailableBooth(int numberOfPeople) {
-  return this.boothRepository
+    return this.boothRepository
             .getAll()
             .stream()
             .filter(b -> b.getCapacity() >= numberOfPeople && !b.isReserved())

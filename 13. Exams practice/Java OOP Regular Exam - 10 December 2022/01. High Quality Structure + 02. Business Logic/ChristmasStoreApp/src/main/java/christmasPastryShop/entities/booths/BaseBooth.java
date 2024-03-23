@@ -57,8 +57,6 @@ public abstract class BaseBooth implements Booth {
     double delicaciesPrice = this.delicacyOrders.stream().mapToDouble(Delicacy::getPrice).sum();
     double pricePerPersonTotal = this.getPrice();
 
-    this.clear();
-
     return pricePerPersonTotal + cocktailsPrice + delicaciesPrice;
   }
 
