@@ -20,4 +20,10 @@ public class Validator {
       throw new IllegalArgumentException(ExceptionMessages.CAT_PRICE_CANNOT_BE_BELOW_OR_EQUAL_TO_ZERO);
     }
   }
+
+  public static void validateIfHouseCapacity(int capacity) {
+    if (capacity == 0) {
+      throw new IllegalArgumentException(ExceptionMessages.NOT_ENOUGH_CAPACITY);
+    }
+  }
 }

@@ -2,6 +2,7 @@ package catHouse.entities.houses;
 
 import catHouse.entities.cat.Cat;
 import catHouse.entities.toys.Toy;
+import catHouse.validator.Validator;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,12 +29,15 @@ public abstract class BaseHouse implements House {
 
   @Override
   public void addCat(Cat cat) {
-    
+    Validator.validateIfHouseCapacity(capacity);
+    this.cats.add(cat);
+    this.capacity--;
   }
 
   @Override
   public void removeCat(Cat cat) {
-
+    this.cats.remove(cat);
+    this.capacity++;
   }
 
   @Override

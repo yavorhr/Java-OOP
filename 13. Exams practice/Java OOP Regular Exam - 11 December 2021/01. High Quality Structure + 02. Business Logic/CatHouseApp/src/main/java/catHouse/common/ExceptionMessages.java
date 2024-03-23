@@ -9,5 +9,6 @@ public class ExceptionMessages {
     public static final String INVALID_TOY_TYPE = "Invalid toy type.";
     public static final String INVALID_CAT_TYPE = "Invalid cat type.";
     public static final String NO_TOY_FOUND = "Toy of type %s is missing.";
+    public static final String NOT_ENOUGH_CAPACITY = "Not enough capacity for this cat.";
 }
 
