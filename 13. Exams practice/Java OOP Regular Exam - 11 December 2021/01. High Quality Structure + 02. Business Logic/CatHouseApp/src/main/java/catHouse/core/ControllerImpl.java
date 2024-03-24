@@ -83,11 +83,16 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String sumOfAll(String houseName) {
-    return null;
+    House house = this.getHouse(houseName);
+    double catsTotalPrice = house.getCats().stream().mapToDouble(Cat::getPrice).sum();
+    double toysTotalPrice = house.getToys().stream().mapToDouble(Toy::getPrice).sum();
+
+    return String.format(ConstantMessages.VALUE_HOUSE, houseName, catsTotalPrice + toysTotalPrice);
   }
 
   @Override
   public String getStatistics() {
+
     return null;
   }
 
