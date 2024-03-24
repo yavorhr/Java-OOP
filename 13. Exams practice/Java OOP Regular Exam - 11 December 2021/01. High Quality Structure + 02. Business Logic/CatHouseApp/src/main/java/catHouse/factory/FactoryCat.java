@@ -10,8 +10,8 @@ public class FactoryCat {
     Cat cat = null;
 
     switch (catType) {
-      case "ShortHairCat" -> cat = new ShorthairCat(catName, catBreed, price);
-      case "LongHairCat" -> cat = new LonghairCat(catName, catBreed, price);
+      case "ShorthairCat" -> cat = new ShorthairCat(catName, catBreed, price);
+      case "LonghairCat" -> cat = new LonghairCat(catName, catBreed, price);
       default -> throw new IllegalArgumentException(ExceptionMessages.INVALID_CAT_TYPE);
     }
 

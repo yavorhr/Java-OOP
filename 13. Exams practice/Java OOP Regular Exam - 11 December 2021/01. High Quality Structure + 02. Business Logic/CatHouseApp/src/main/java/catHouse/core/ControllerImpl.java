@@ -70,7 +70,7 @@ public class ControllerImpl implements Controller {
     }
 
     house.addCat(cat);
-    return String.format(ConstantMessages.SUCCESSFULLY_ADDED_CAT_IN_HOUSE, catType, houseName)
+    return String.format(ConstantMessages.SUCCESSFULLY_ADDED_CAT_IN_HOUSE, catType, houseName);
   }
 
 
@@ -99,9 +99,7 @@ public class ControllerImpl implements Controller {
   }
 
   // Helpers
-
   private House getHouse(String houseName) {
     return this.houses.stream().filter(h -> h.getName().equals(houseName)).findFirst().orElse(null);
   }
-
 }

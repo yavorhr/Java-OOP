@@ -10,12 +10,12 @@ public class FactoryHouse {
     House house = null;
 
     switch (type) {
-      case "ShortHouse" -> new ShortHouse(name);
-      case "LongHouse" -> new LongHouse(name);
+      case "ShortHouse" -> house = new ShortHouse(name);
+      case "LongHouse" -> house = new LongHouse(name);
       default -> throw new IllegalArgumentException(ExceptionMessages.INVALID_HOUSE_TYPE);
     }
 
     return house;
   }
-  
+
 }
