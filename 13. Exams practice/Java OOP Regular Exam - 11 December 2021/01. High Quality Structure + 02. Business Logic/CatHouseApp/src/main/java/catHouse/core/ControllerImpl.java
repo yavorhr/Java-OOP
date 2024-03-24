@@ -2,7 +2,9 @@ package catHouse.core;
 
 import catHouse.common.ConstantMessages;
 import catHouse.entities.houses.House;
+import catHouse.entities.toys.Toy;
 import catHouse.factory.FactoryHouse;
+import catHouse.factory.FactoryToy;
 import catHouse.repositories.Repository;
 import catHouse.repositories.ToyRepositoryImpl;
 
@@ -28,7 +30,10 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String buyToy(String type) {
-    return null;
+    Toy toy = FactoryToy.create(type);
+    this.toyRepository.buyToy(toy);
+
+    return String.format(ConstantMessages.SUCCESSFULLY_ADDED_TOY_TYPE, type);
   }
 
   @Override
