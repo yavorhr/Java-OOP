@@ -5,7 +5,6 @@ import catHouse.entities.toys.Toy;
 import java.util.ArrayList;
 import java.util.Collection;
 
-
 public class ToyRepositoryImpl implements Repository {
   private Collection<Toy> toys;
 

@@ -13,7 +13,7 @@ public class EngineImpl implements Engine {
 
     public EngineImpl() {
 
-        this.controller = new ControllerImpl(); // TODO: Implement ControllerImpl before starting the application.
+        this.controller = new ControllerImpl();
         this.reader = new BufferedReader(new InputStreamReader(System.in));
     }
 
