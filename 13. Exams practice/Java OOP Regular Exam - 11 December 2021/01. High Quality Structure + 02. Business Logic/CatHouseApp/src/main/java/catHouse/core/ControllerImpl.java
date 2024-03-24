@@ -1,6 +1,8 @@
 package catHouse.core;
 
+import catHouse.common.ConstantMessages;
 import catHouse.entities.houses.House;
+import catHouse.factory.FactoryHouse;
 import catHouse.repositories.Repository;
 import catHouse.repositories.ToyRepositoryImpl;
 
@@ -18,7 +20,10 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addHouse(String type, String name) {
-    return null;
+    House house = FactoryHouse.create(type, name);
+    this.houses.add(house);
+    
+    return String.format(ConstantMessages.SUCCESSFULLY_ADDED_HOUSE_TYPE, type);
   }
 
   @Override
