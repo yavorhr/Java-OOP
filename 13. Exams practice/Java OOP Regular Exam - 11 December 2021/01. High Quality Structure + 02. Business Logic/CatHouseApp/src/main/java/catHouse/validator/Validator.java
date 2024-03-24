@@ -32,4 +32,22 @@ public class Validator {
       throw new NullPointerException(ExceptionMessages.HOUSE_NAME_CANNOT_BE_NULL_OR_EMPTY);
     }
   }
+
+  public static boolean isCatSuitableToHouse(String houseType, String catType) {
+    boolean result = true;
+
+    switch (houseType) {
+      case "ShortHouse" -> {
+        if (catType.equals("LongHairCat")) {
+          result = false;
+        }
+      }
+      case "LongHouse" -> {
+        if (catType.equals("ShortHairCat")) {
+          result = false;
+        }
+      }
+    }
+    return result;
+  }
 }

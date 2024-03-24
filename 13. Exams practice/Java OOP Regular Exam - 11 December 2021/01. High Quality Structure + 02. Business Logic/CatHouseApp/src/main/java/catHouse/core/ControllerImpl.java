@@ -2,12 +2,14 @@ package catHouse.core;
 
 import catHouse.common.ConstantMessages;
 import catHouse.common.ExceptionMessages;
+import catHouse.entities.cat.Cat;
 import catHouse.entities.houses.House;
 import catHouse.entities.toys.Toy;
 import catHouse.factory.FactoryHouse;
 import catHouse.factory.FactoryToy;
 import catHouse.repositories.Repository;
 import catHouse.repositories.ToyRepositoryImpl;
+import catHouse.validator.Validator;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -57,7 +59,21 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addCat(String houseName, String catType, String catName, String catBreed, double price) {
-    return null;
+    House house = getHouse(houseName);
+    boolean result = Validator.isCatSuitableToHouse(house.getClass().getSimpleName(), catType);
+
+
+
+    if (!result) {
+      return "Unsuitable house.";
+    }
+
+
+    return String.format(ConstantMessages.SUCCESSFULLY_ADDED_CAT_IN_HOUSE,catType,houseName)
+  }
+
+  private House getHouse(String houseName) {
+    return this.houses.stream().filter(h -> h.getName().equals(houseName)).findFirst().orElse(null);
   }
 
   @Override
