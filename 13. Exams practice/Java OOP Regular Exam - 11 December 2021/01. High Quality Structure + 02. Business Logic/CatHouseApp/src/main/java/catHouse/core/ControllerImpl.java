@@ -1,6 +1,7 @@
 package catHouse.core;
 
 import catHouse.common.ConstantMessages;
+import catHouse.common.ExceptionMessages;
 import catHouse.entities.houses.House;
 import catHouse.entities.toys.Toy;
 import catHouse.factory.FactoryHouse;
@@ -38,7 +39,20 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String toyForHouse(String houseName, String toyType) {
-    return null;
+    Toy toy = getToyFromRepository(toyType);
+    this.toyRepository.removeToy(toy);
+
+    return String.format(ConstantMessages.SUCCESSFULLY_ADDED_TOY_IN_HOUSE, toyType, houseName);
+  }
+
+  private Toy getToyFromRepository(String toyType) {
+    Toy toy = this.toyRepository.findFirst(toyType);
+
+    if (toy == null) {
+      throw new IllegalArgumentException(String.format(ExceptionMessages.NO_TOY_FOUND, toyType));
+    }
+
+    return toy;
   }
 
   @Override
