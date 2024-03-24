@@ -22,7 +22,7 @@ public class ControllerImpl implements Controller {
   public String addHouse(String type, String name) {
     House house = FactoryHouse.create(type, name);
     this.houses.add(house);
-    
+
     return String.format(ConstantMessages.SUCCESSFULLY_ADDED_HOUSE_TYPE, type);
   }
 
