@@ -76,7 +76,9 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String feedingCat(String houseName) {
-    return null;
+    House house = this.getHouse(houseName);
+    house.feeding();
+    return String.format(ConstantMessages.FEEDING_CAT, house.getCats().size());
   }
 
   @Override
