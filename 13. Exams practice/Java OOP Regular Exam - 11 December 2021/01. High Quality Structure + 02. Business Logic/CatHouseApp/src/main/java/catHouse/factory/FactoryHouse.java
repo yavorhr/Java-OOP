@@ -1,5 +1,6 @@
 package catHouse.factory;
 
+import catHouse.common.ExceptionMessages;
 import catHouse.entities.houses.House;
 import catHouse.entities.houses.LongHouse;
 import catHouse.entities.houses.ShortHouse;
@@ -9,14 +10,12 @@ public class FactoryHouse {
     House house = null;
 
     switch (type) {
-      case "ShortHouse":
-        house = new ShortHouse(name);
-        break;
-      case "LongHouse":
-        house = new LongHouse(name);
-        break;
+      case "ShortHouse" -> new ShortHouse(name);
+      case "LongHouse" -> new LongHouse(name);
+      default -> throw new IllegalArgumentException(ExceptionMessages.INVALID_HOUSE_TYPE);
     }
 
     return house;
   }
+  
 }
