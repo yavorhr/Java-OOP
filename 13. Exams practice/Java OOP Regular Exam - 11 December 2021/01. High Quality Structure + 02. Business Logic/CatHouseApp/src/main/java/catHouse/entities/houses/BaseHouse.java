@@ -66,7 +66,7 @@ public abstract class BaseHouse implements House {
             this.toys.size(), this.getSoftness()))
             .append(System.lineSeparator());
 
-    return sb.toString().trim();
+    return sb.toString();
   }
 
   private int getSoftness() {
@@ -80,7 +80,7 @@ public abstract class BaseHouse implements House {
             ? "none"
             : this.cats.stream()
             .map(Cat::getName)
-            .collect(Collectors.joining(", "));
+            .collect(Collectors.joining(" "));
   }
 
   @Override

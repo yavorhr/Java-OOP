@@ -44,6 +44,7 @@ public class ControllerImpl implements Controller {
   public String toyForHouse(String houseName, String toyType) {
     Toy toy = getToyFromRepository(toyType);
     this.toyRepository.removeToy(toy);
+    this.getHouse(houseName).buyToy(toy);
 
     return String.format(ConstantMessages.SUCCESSFULLY_ADDED_TOY_IN_HOUSE, toyType, houseName);
   }
@@ -93,7 +94,7 @@ public class ControllerImpl implements Controller {
   @Override
   public String getStatistics() {
     StringBuilder sb = new StringBuilder();
-    this.houses.forEach(h -> sb.append(h.toString()));
+    this.houses.forEach(h -> sb.append(h.getStatistics()));
 
     return sb.toString().trim();
   }
