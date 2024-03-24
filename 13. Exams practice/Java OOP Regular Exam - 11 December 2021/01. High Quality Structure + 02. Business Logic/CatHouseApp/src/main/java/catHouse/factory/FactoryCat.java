@@ -14,5 +14,7 @@ public class FactoryCat {
       case "LongHairCat" -> cat = new LonghairCat(catName, catBreed, price);
       default -> throw new IllegalArgumentException(ExceptionMessages.INVALID_CAT_TYPE);
     }
+
+    return cat;
   }
 }
