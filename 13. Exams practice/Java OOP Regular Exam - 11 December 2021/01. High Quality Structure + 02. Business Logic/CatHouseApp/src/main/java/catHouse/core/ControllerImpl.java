@@ -92,8 +92,10 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String getStatistics() {
+    StringBuilder sb = new StringBuilder();
+    this.houses.forEach(h -> sb.append(h.toString()));
 
-    return null;
+    return sb.toString().trim();
   }
 
   // Helpers
