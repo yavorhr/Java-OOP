@@ -2,6 +2,7 @@ package viceCity.models.players;
 
 import viceCity.models.guns.Gun;
 import viceCity.repositories.interfaces.Repository;
+import viceCity.validator.Validator;
 
 public class BasePlayer implements Player {
   private String name;
@@ -9,8 +10,8 @@ public class BasePlayer implements Player {
   private Repository<Gun> gunRepository;
 
   public BasePlayer(String name, int lifePoints) {
-    this.name = name;
-    this.lifePoints = lifePoints;
+    this.setName(name);
+    this.setLifePoints(lifePoints);
     this.gunRepository = new GunRepositoryImpl();
   }
 
@@ -41,5 +42,15 @@ public class BasePlayer implements Player {
     if (this.lifePoints < 0) {
       this.lifePoints = 0;
     }
+  }
+
+  public void setName(String name) {
+    Validator.validatePlayerName(name);
+    this.name = name;
+  }
+
+  public void setLifePoints(int lifePoints) {
+    Validator.validatePlayerLifePoints(lifePoints);
+    this.lifePoints = lifePoints;
   }
 }
