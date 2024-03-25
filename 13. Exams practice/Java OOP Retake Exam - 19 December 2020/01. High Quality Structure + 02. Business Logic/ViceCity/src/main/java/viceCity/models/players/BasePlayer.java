@@ -10,7 +10,7 @@ public class BasePlayer implements Player {
   private int lifePoints;
   private Repository<Gun> gunRepository;
 
-  public BasePlayer(String name, int lifePoints) {
+  protected BasePlayer(String name, int lifePoints) {
     this.setName(name);
     this.setLifePoints(lifePoints);
     this.gunRepository = new GunRepositoryImpl();
