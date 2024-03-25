@@ -38,12 +38,12 @@ public class Validator {
 
     switch (houseType) {
       case "ShortHouse" -> {
-        if (catType.equals("LongHairCat")) {
+        if (catType.equals("LonghairCat")) {
           result = false;
         }
       }
       case "LongHouse" -> {
-        if (catType.equals("ShortHairCat")) {
+        if (catType.equals("ShorthairCat")) {
           result = false;
         }
       }
