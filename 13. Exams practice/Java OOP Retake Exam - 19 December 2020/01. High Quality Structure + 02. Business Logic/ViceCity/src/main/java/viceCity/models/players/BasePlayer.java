@@ -1,6 +1,7 @@
 package viceCity.models.players;
 
 import viceCity.models.guns.Gun;
+import viceCity.repositories.GunRepositoryImpl;
 import viceCity.repositories.interfaces.Repository;
 import viceCity.validator.Validator;
 
