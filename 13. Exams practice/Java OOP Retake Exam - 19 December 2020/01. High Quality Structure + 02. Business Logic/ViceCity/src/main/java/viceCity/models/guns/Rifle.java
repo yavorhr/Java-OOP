@@ -11,6 +11,11 @@ public class Rifle extends BaseGun{
 
   @Override
   public int fire() {
+    if (this.canFire()) {
+      super.decreaseBulletsPerBarrel(FIRE_BULLETS_PER_TIME);
+    } else if (!this.canFire()) {
+      super.reloadGun(BULLETS_PER_BARREL);
+    }
     return FIRE_BULLETS_PER_TIME;
   }
 

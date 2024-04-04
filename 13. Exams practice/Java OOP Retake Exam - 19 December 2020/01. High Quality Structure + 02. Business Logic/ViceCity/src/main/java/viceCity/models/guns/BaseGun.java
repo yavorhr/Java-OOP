@@ -4,7 +4,6 @@ public abstract class BaseGun implements Gun {
   private String name;
   private int bulletsPerBarrel;
   private int totalBullets;
-  private boolean canFire;
 
   public BaseGun(String name, int bulletsPerBarrel, int totalBullets) {
     this.name = name;
@@ -25,5 +24,14 @@ public abstract class BaseGun implements Gun {
   @Override
   public int getTotalBullets() {
     return this.totalBullets;
+  }
+
+  public void decreaseBulletsPerBarrel(int bulletsPerBarrel) {
+    this.bulletsPerBarrel -= bulletsPerBarrel;
+  }
+
+  public void reloadGun(int newBullets) {
+    this.totalBullets -= newBullets;
+    this.bulletsPerBarrel += newBullets;
   }
 }

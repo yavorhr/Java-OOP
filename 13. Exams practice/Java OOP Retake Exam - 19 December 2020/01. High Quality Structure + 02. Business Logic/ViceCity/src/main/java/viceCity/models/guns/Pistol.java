@@ -11,6 +11,11 @@ public class Pistol extends BaseGun {
 
   @Override
   public int fire() {
+    if (this.canFire()) {
+      super.decreaseBulletsPerBarrel(FIRE_BULLETS_PER_TIME);
+    } else if (super.getTotalBullets() >= BULLETS_PER_BARREL) {
+      super.reloadGun(BULLETS_PER_BARREL);
+    }
     return FIRE_BULLETS_PER_TIME;
   }
 
@@ -18,5 +23,4 @@ public class Pistol extends BaseGun {
   public boolean canFire() {
     return super.getBulletsPerBarrel() >= FIRE_BULLETS_PER_TIME;
   }
-
 }
