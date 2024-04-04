@@ -13,4 +13,9 @@ public class Rifle extends BaseGun{
   public int fire() {
     return FIRE_BULLETS_PER_TIME;
   }
+
+  @Override
+  public boolean canFire() {
+    return super.getBulletsPerBarrel() >= FIRE_BULLETS_PER_TIME;
+  }
 }

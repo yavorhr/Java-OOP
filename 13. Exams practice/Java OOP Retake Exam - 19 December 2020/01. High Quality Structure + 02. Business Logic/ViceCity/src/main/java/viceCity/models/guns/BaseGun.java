@@ -23,11 +23,6 @@ public abstract class BaseGun implements Gun {
   }
 
   @Override
-  public boolean canFire() {
-    return false;
-  }
-
-  @Override
   public int getTotalBullets() {
     return this.totalBullets;
   }
