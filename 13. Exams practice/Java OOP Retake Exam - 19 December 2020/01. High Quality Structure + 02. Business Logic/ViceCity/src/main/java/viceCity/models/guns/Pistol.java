@@ -21,6 +21,6 @@ public class Pistol extends BaseGun {
 
   @Override
   public boolean canFire() {
-    return super.getBulletsPerBarrel() >= FIRE_BULLETS_PER_TIME;
+    return super.getTotalBullets() >= FIRE_BULLETS_PER_TIME;
   }
 }
