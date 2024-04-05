@@ -2,6 +2,7 @@ package viceCity.core;
 
 import viceCity.common.ConstantMessages;
 import viceCity.core.interfaces.Controller;
+import viceCity.models.guns.Gun;
 import viceCity.models.players.CivilPlayer;
 import viceCity.models.players.MainPlayer;
 import viceCity.models.players.Player;
@@ -26,7 +27,8 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addGun(String type, String name) {
-    return null;
+    Gun gun = GunFactory.create(type, name);
+    return String.format(ConstantMessages.GUN_ADDED,name,type);
   }
 
   @Override
