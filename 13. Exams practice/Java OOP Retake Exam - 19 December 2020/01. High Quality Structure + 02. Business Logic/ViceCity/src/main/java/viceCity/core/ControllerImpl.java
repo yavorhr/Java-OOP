@@ -7,6 +7,8 @@ import viceCity.models.guns.Gun;
 import viceCity.models.players.CivilPlayer;
 import viceCity.models.players.MainPlayer;
 import viceCity.models.players.Player;
+import viceCity.repositories.GunRepositoryImpl;
+import viceCity.repositories.interfaces.Repository;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,10 +16,12 @@ import java.util.Collection;
 public class ControllerImpl implements Controller {
   private Collection<Player> civilPlayers;
   private Player mainPlayer;
+  private Repository<Gun> gunRepository;
 
   public ControllerImpl() {
     this.civilPlayers = new ArrayList<>();
     this.mainPlayer = new MainPlayer();
+    this.gunRepository = new GunRepositoryImpl();
   }
 
   @Override
@@ -34,6 +38,7 @@ public class ControllerImpl implements Controller {
       return "Invalid gun type!";
     }
 
+    this.gunRepository.add(gun);
     return String.format(ConstantMessages.GUN_ADDED, name, type);
   }
 
