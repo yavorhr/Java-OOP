@@ -4,6 +4,8 @@ import viceCity.common.ConstantMessages;
 import viceCity.core.interfaces.Controller;
 import viceCity.factory.GunFactory;
 import viceCity.models.guns.Gun;
+import viceCity.models.neighbourhood.GangNeighbourhood;
+import viceCity.models.neighbourhood.Neighbourhood;
 import viceCity.models.players.CivilPlayer;
 import viceCity.models.players.MainPlayer;
 import viceCity.models.players.Player;
@@ -17,11 +19,13 @@ public class ControllerImpl implements Controller {
   private Collection<Player> civilPlayers;
   private Player mainPlayer;
   private Repository<Gun> allGunsRepository;
+  private Neighbourhood neighbourhood;
 
   public ControllerImpl() {
     this.civilPlayers = new ArrayList<>();
     this.mainPlayer = new MainPlayer();
     this.allGunsRepository = new GunRepositoryImpl();
+    this.neighbourhood = new GangNeighbourhood();
   }
 
   @Override
@@ -67,17 +71,40 @@ public class ControllerImpl implements Controller {
     }
   }
 
+  @Override
+  public String fight() {
+    this.neighbourhood.action(mainPlayer, civilPlayers);
+
+    if (noShootoutYet()) {
+      return ConstantMessages.FIGHT_HOT_HAPPENED;
+    }
+  }
+
+
+  // Helpers
   private void addGunToPlayer(Player player, Gun gun) {
     player.getGunRepository().add(gun);
     this.allGunsRepository.remove(gun);
   }
 
+  private boolean noShootoutYet() {
+    return this.mainPlayer.getLifePoints() == 100 && this.civilPlayers.stream().allMatch(p -> p.getLifePoints() == 50);
+  }
+
+
   private Player getPlayer(String name) {
-    return this.civilPlayers.stream().filter(p -> p.getName().equals(name)).findFirst().orElse(null);
+    return this.civilPlayers
+            .stream()
+            .filter(p -> p.getName().equals(name))
+            .findFirst()
+            .orElse(null);
   }
 
   private boolean doesCivilPlayerExist(String name) {
-    return this.civilPlayers.stream().anyMatch(p -> p.getName().equals(name));
+    return this.civilPlayers
+            .stream()
+            .anyMatch(p -> p.getName()
+                    .equals(name));
   }
 
   private boolean gunRepositoryIsEmpty() {
@@ -88,14 +115,4 @@ public class ControllerImpl implements Controller {
     return this.allGunsRepository.getModels().stream().findFirst().orElse(null);
   }
 
-  @Override
-  public String fight() {
-
-    return null;
-  }
-
-
-  private boolean playerOwnTheGunAlready(Player player, String name) {
-    return this.civilPlayers.stream().filter(p -> p.getName().equals(name)).findFirst().orElse(null);
-  }
 }

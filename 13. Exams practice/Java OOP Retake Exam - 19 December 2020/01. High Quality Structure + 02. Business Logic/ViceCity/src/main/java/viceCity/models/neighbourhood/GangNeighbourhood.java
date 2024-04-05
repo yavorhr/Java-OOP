@@ -33,6 +33,7 @@ public class GangNeighbourhood implements Neighbourhood {
   }
 
 
+  // Helpers
 
   private Collection<Player> filterAliveCivilPlayers(Collection<Player> civilPlayers) {
     return civilPlayers
