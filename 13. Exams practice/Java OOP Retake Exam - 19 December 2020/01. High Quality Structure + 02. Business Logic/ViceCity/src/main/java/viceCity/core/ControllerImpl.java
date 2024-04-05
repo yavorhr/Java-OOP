@@ -79,11 +79,10 @@ public class ControllerImpl implements Controller {
     if (noFightHappened()) {
       return ConstantMessages.FIGHT_HOT_HAPPENED;
     } else {
-      StringBuilder sb = new StringBuilder();
-      sb.append(ConstantMessages.FIGHT_HAPPENED);
-      sb.append(String.format(ConstantMessages.MAIN_PLAYER_LIVE_POINTS_MESSAGE, mainPlayer.getLifePoints()));
-      sb.append(String.format(ConstantMessages.MAIN_PLAYER_KILLED_CIVIL_PLAYERS_MESSAGE, getKilledCivilPlayers()));
-      sb.append(String.format(ConstantMessages.CIVIL_PLAYERS_LEFT_MESSAGE, getCivilPlayersLeftCount()));
+      StringBuilder sb = new StringBuilder(ConstantMessages.FIGHT_HAPPENED).append(System.lineSeparator());
+      sb.append(String.format(ConstantMessages.MAIN_PLAYER_LIVE_POINTS_MESSAGE, mainPlayer.getLifePoints())).append(System.lineSeparator());
+      sb.append(String.format(ConstantMessages.MAIN_PLAYER_KILLED_CIVIL_PLAYERS_MESSAGE, getKilledCivilPlayers())).append(System.lineSeparator());
+      sb.append(String.format(ConstantMessages.CIVIL_PLAYERS_LEFT_MESSAGE, getCivilPlayersLeftCount())).append(System.lineSeparator());
 
       return sb.toString().trim();
     }
