@@ -29,7 +29,12 @@ public class ControllerImpl implements Controller {
   @Override
   public String addGun(String type, String name) {
     Gun gun = GunFactory.create(type, name);
-    return String.format(ConstantMessages.GUN_ADDED,name,type);
+
+    if (gun == null) {
+      return "Invalid gun type!";
+    }
+
+    return String.format(ConstantMessages.GUN_ADDED, name, type);
   }
 
   @Override
