@@ -61,7 +61,7 @@ public class ControllerImpl implements Controller {
       player = this.mainPlayer;
       addGunToPlayer(player, gun);
 
-      return String.format(ConstantMessages.GUN_ADDED_TO_MAIN_PLAYER, name, mainPlayer.getName());
+      return String.format(ConstantMessages.GUN_ADDED_TO_MAIN_PLAYER, gun.getName(), mainPlayer.getName());
     } else if (!doesCivilPlayerExist(name)) {
       return ConstantMessages.CIVIL_PLAYER_DOES_NOT_EXIST;
     } else {
