@@ -2,6 +2,7 @@ package viceCity.core;
 
 import viceCity.common.ConstantMessages;
 import viceCity.core.interfaces.Controller;
+import viceCity.factory.GunFactory;
 import viceCity.models.guns.Gun;
 import viceCity.models.players.CivilPlayer;
 import viceCity.models.players.MainPlayer;
