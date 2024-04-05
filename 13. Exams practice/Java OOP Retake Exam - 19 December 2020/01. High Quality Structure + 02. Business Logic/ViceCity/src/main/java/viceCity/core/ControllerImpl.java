@@ -14,6 +14,7 @@ import viceCity.repositories.interfaces.Repository;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 public class ControllerImpl implements Controller {
   private Collection<Player> civilPlayers;
@@ -75,8 +76,16 @@ public class ControllerImpl implements Controller {
   public String fight() {
     this.neighbourhood.action(mainPlayer, civilPlayers);
 
-    if (noShootoutYet()) {
+    if (noFightHappened()) {
       return ConstantMessages.FIGHT_HOT_HAPPENED;
+    } else {
+      StringBuilder sb = new StringBuilder();
+      sb.append(ConstantMessages.FIGHT_HAPPENED);
+      sb.append(String.format(ConstantMessages.MAIN_PLAYER_LIVE_POINTS_MESSAGE, mainPlayer.getLifePoints()));
+      sb.append(String.format(ConstantMessages.MAIN_PLAYER_KILLED_CIVIL_PLAYERS_MESSAGE, getKilledCivilPlayers()));
+      sb.append(String.format(ConstantMessages.CIVIL_PLAYERS_LEFT_MESSAGE, getCivilPlayersLeftCount()));
+
+      return sb.toString().trim();
     }
   }
 
@@ -87,7 +96,22 @@ public class ControllerImpl implements Controller {
     this.allGunsRepository.remove(gun);
   }
 
-  private boolean noShootoutYet() {
+  private int getCivilPlayersLeftCount() {
+    return (int) this.civilPlayers
+            .stream()
+            .filter(Player::isAlive)
+            .count();
+  }
+
+  private int getKilledCivilPlayers() {
+    return (int) this.civilPlayers
+            .stream()
+            .filter(p -> !p.isAlive())
+            .count();
+  }
+
+
+  private boolean noFightHappened() {
     return this.mainPlayer.getLifePoints() == 100 && this.civilPlayers.stream().allMatch(p -> p.getLifePoints() == 50);
   }
 
