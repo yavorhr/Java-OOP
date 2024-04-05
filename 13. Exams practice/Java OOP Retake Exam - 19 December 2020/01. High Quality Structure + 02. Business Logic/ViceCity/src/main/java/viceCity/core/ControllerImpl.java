@@ -1,6 +1,8 @@
 package viceCity.core;
 
+import viceCity.common.ConstantMessages;
 import viceCity.core.interfaces.Controller;
+import viceCity.models.players.CivilPlayer;
 import viceCity.models.players.MainPlayer;
 import viceCity.models.players.Player;
 
@@ -18,7 +20,8 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addPlayer(String name) {
-    return null;
+    civilPlayers.add(new CivilPlayer(name));
+    return String.format(ConstantMessages.PLAYER_ADDED, name);
   }
 
   @Override
