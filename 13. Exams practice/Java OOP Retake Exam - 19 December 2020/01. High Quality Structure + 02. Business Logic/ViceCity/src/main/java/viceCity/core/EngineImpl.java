@@ -45,10 +45,10 @@ public class EngineImpl implements Engine {
     String[] data = Arrays.stream(tokens).skip(1).toArray(String[]::new);
 
     switch (command) {
-      case AddPlayer -> this.controller.addPlayer(data[0]);
-      case AddGun -> this.controller.addGun(data[0], data[1]);
-      case AddGunToPlayer -> this.controller.addGunToPlayer(data[0])
-      case Fight -> this.controller.fight();
+      case AddPlayer -> result = this.controller.addPlayer(data[0]);
+      case AddGun -> result = this.controller.addGun(data[0], data[1]);
+      case AddGunToPlayer -> result = this.controller.addGunToPlayer(data[0]);
+      case Fight -> result = this.controller.fight();
       case Exit -> result = Command.Exit.name();
     }
 
