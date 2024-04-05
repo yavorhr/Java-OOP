@@ -16,12 +16,12 @@ import java.util.Collection;
 public class ControllerImpl implements Controller {
   private Collection<Player> civilPlayers;
   private Player mainPlayer;
-  private Repository<Gun> gunRepository;
+  private Repository<Gun> allGunsRepository;
 
   public ControllerImpl() {
     this.civilPlayers = new ArrayList<>();
     this.mainPlayer = new MainPlayer();
-    this.gunRepository = new GunRepositoryImpl();
+    this.allGunsRepository = new GunRepositoryImpl();
   }
 
   @Override
@@ -38,18 +38,64 @@ public class ControllerImpl implements Controller {
       return "Invalid gun type!";
     }
 
-    this.gunRepository.add(gun);
+    this.allGunsRepository.add(gun);
     return String.format(ConstantMessages.GUN_ADDED, name, type);
   }
 
   @Override
   public String addGunToPlayer(String name) {
-    return null;
+    if (gunRepositoryIsEmpty()) {
+      return ConstantMessages.GUN_QUEUE_IS_EMPTY;
+    }
+
+    Gun gun = getFirstGunAvailable();
+
+    Player player = null;
+
+    if (name.equals("Vercetti")) {
+      player = this.mainPlayer;
+      addGunToPlayer(player, gun);
+
+      return String.format(ConstantMessages.GUN_ADDED_TO_MAIN_PLAYER, name, mainPlayer.getName());
+    } else if (!doesCivilPlayerExist(name)) {
+      return ConstantMessages.CIVIL_PLAYER_DOES_NOT_EXIST;
+    } else {
+      player = getPlayer(name);
+      addGunToPlayer(player, gun);
+
+      return String.format(ConstantMessages.GUN_ADDED_TO_CIVIL_PLAYER, gun.getName(), name);
+    }
+  }
+
+  private void addGunToPlayer(Player player, Gun gun) {
+    player.getGunRepository().add(gun);
+    this.allGunsRepository.remove(gun);
+  }
+
+  private Player getPlayer(String name) {
+    return this.civilPlayers.stream().filter(p -> p.getName().equals(name)).findFirst().orElse(null);
+  }
+
+  private boolean doesCivilPlayerExist(String name) {
+    return this.civilPlayers.stream().anyMatch(p -> p.getName().equals(name));
+  }
+
+  private boolean gunRepositoryIsEmpty() {
+    return this.allGunsRepository.getModels().size() == 0;
+  }
+
+  private Gun getFirstGunAvailable() {
+    return this.allGunsRepository.getModels().stream().findFirst().orElse(null);
   }
 
   @Override
   public String fight() {
 
     return null;
+  }
+
+
+  private boolean playerOwnTheGunAlready(Player player, String name) {
+    return this.civilPlayers.stream().filter(p -> p.getName().equals(name)).findFirst().orElse(null);
   }
 }
