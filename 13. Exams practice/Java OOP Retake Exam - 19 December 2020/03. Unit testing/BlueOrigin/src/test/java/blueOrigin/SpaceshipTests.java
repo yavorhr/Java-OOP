@@ -36,21 +36,20 @@ public class SpaceshipTests {
   // test setCapacity()
   @Test(expected = IllegalArgumentException.class)
   public void testSetInvalidCapacityWhenInitSpaceship() {
-   new Spaceship("someShip", -1);
+    new Spaceship("someShip", -1);
   }
 
   // test setName with empty name()
-  @Test(expected = IllegalArgumentException.class)
+  @Test(expected = NullPointerException.class)
   public void testSetNameWithEmptyValueShouldThrowError() {
     new Spaceship("", 5);
   }
 
   // test setName with null value()
-  @Test(expected = IllegalArgumentException.class)
+  @Test(expected = NullPointerException.class)
   public void testSetNameWithNullValueThrowError() {
     new Spaceship(null, 5);
   }
-
 
   // test addAstronaut()
   @Test(expected = IllegalArgumentException.class)
@@ -60,7 +59,7 @@ public class SpaceshipTests {
 
   @Test(expected = IllegalArgumentException.class)
   public void testAddAstronautShouldThrowErrorWhenAstronautAlreadyExists() {
-    this.spaceship.add(new Astronaut("Mike", 90));
+    this.spaceship.add(new Astronaut("Steven", 90));
   }
 
   // test removeAstronaut()
@@ -70,6 +69,12 @@ public class SpaceshipTests {
     Assert.assertFalse(this.spaceship.remove("invalid_name"));
   }
 
+  //test astronaut
+  @Test
+  public void testAstronautsInitShouldWorksCorrect() {
+    Assert.assertEquals(90, this.astronaut.getOxygenInPercentage(), 0);
+    Assert.assertEquals("Steven", this.astronaut.getName());
 
+  }
 
 }
