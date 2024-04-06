@@ -44,4 +44,11 @@ public class SpaceshipTests {
     this.spaceship.add(new Astronaut("Mike", 90));
   }
 
+  // test removeAstronaut()
+  @Test
+  public void testRemoveAstronautShouldWorksCorrect() {
+    Assert.assertTrue(this.spaceship.remove("Mike"));
+    Assert.assertFalse(this.spaceship.remove("invalid_name"));
+  }
+
 }
