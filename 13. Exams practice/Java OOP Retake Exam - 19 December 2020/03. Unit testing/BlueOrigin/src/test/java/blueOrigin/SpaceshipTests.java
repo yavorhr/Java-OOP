@@ -12,9 +12,9 @@ public class SpaceshipTests {
 
   @Before
   public void setUp() {
-   this.astronaut = new Astronaut("Steven", 90);
-   this.astronaut2 = new Astronaut("Mike", 50);
-   this.astronaut3 = new Astronaut("George", 80);
+    this.astronaut = new Astronaut("Steven", 90);
+    this.astronaut2 = new Astronaut("Mike", 50);
+    this.astronaut3 = new Astronaut("George", 80);
 
     this.spaceship = new Spaceship("StarOfDeath", 3);
     this.spaceship.add(astronaut);
@@ -22,8 +22,26 @@ public class SpaceshipTests {
     this.spaceship.add(astronaut3);
   }
 
+  // test Constructor
   @Test
   public void testSpaceShipCtorWhenInitObjWorksCorrect() {
-    Assert.assertEquals("StarOfDeath", this.sp);
+    Assert.assertEquals("StarOfDeath", this.spaceship.getName());
+    Assert.assertEquals(3, this.spaceship.getCapacity());
+    Assert.assertEquals(3, this.spaceship.getCount());
+
+    Spaceship demoShip = new Spaceship("demoShip", 5);
+    Assert.assertEquals(0, demoShip.getCount());
   }
+
+  // test addAstronaut()
+  @Test(expected = IllegalArgumentException.class)
+  public void testAddAstronautShouldThrowErrorWhenFullCapacity() {
+    this.spaceship.add(new Astronaut("Florenze", 90));
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testAddAstronautShouldThrowErrorWhenAstronautAlreadyExists() {
+    this.spaceship.add(new Astronaut("Mike", 90));
+  }
+
 }
