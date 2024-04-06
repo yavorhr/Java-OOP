@@ -19,6 +19,7 @@ public class GangNeighbourhood implements Neighbourhood {
         }
       }
     }
+
     civilPlayers = filterAliveCivilPlayers(civilPlayers);
 
     for (Player civilPlayer : civilPlayers) {
@@ -40,10 +41,6 @@ public class GangNeighbourhood implements Neighbourhood {
             .stream()
             .filter(Player::isAlive)
             .collect(Collectors.toList());
-  }
-
-  private boolean allPlayersAreDead(Collection<Player> civilPlayers) {
-    return civilPlayers.stream().noneMatch(Player::isAlive);
   }
 
   private Collection<Gun> getPlayerGuns(Player player) {

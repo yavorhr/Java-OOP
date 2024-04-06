@@ -26,12 +26,5 @@ public abstract class BaseGun implements Gun {
     return this.totalBullets;
   }
 
-  public void decreaseBulletsPerBarrel(int bulletsPerBarrel) {
-    this.bulletsPerBarrel -= bulletsPerBarrel;
-  }
 
-  public void reloadGun(int newBarrel) {
-    this.totalBullets -= newBarrel;
-    this.bulletsPerBarrel += newBarrel;
-  }
 }
