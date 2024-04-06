@@ -14,7 +14,7 @@ public class GangNeighbourhood implements Neighbourhood {
 
     for (Gun gun : playerGuns) {
       for (Player civilPlayer : civilPlayers) {
-        while (gun.canFire() && civilPlayer.isAlive()) {
+        while (civilPlayer.isAlive() && gun.getCurrentTotalBullets() > 0) {
           civilPlayer.takeLifePoints(gun.fire());
         }
       }
@@ -26,7 +26,7 @@ public class GangNeighbourhood implements Neighbourhood {
       Collection<Gun> civilPlayerGuns = getPlayerGuns(civilPlayer);
 
       for (Gun gun : civilPlayerGuns) {
-        while (gun.canFire() && mainPlayer.isAlive()) {
+        while (mainPlayer.isAlive()) {
           mainPlayer.takeLifePoints(gun.fire());
         }
       }

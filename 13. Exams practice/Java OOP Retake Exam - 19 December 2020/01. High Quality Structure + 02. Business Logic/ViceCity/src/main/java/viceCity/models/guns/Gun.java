@@ -9,5 +9,7 @@ public interface Gun {
 
     int getTotalBullets();
 
+    int getCurrentTotalBullets();
+
     int fire();
 }

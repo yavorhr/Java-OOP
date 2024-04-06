@@ -88,7 +88,6 @@ public class ControllerImpl implements Controller {
     }
   }
 
-
   // Helpers
   private void addGunToPlayer(Player player, Gun gun) {
     player.getGunRepository().add(gun);
