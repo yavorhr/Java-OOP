@@ -33,6 +33,25 @@ public class SpaceshipTests {
     Assert.assertEquals(0, demoShip.getCount());
   }
 
+  // test setCapacity()
+  @Test(expected = IllegalArgumentException.class)
+  public void testSetInvalidCapacityWhenInitSpaceship() {
+   new Spaceship("someShip", -1);
+  }
+
+  // test setName with empty name()
+  @Test(expected = IllegalArgumentException.class)
+  public void testSetNameWithEmptyValueShouldThrowError() {
+    new Spaceship("", 5);
+  }
+
+  // test setName with null value()
+  @Test(expected = IllegalArgumentException.class)
+  public void testSetNameWithNullValueThrowError() {
+    new Spaceship(null, 5);
+  }
+
+
   // test addAstronaut()
   @Test(expected = IllegalArgumentException.class)
   public void testAddAstronautShouldThrowErrorWhenFullCapacity() {
@@ -50,5 +69,7 @@ public class SpaceshipTests {
     Assert.assertTrue(this.spaceship.remove("Mike"));
     Assert.assertFalse(this.spaceship.remove("invalid_name"));
   }
+
+
 
 }
