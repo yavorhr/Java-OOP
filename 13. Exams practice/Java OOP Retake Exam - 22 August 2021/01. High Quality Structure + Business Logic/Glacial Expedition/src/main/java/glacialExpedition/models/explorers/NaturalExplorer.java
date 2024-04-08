@@ -6,4 +6,9 @@ public class NaturalExplorer extends BaseExplorer {
   public NaturalExplorer(String name) {
     super(name, INITIAL_ENERGY);
   }
+
+  @Override
+  public void search() {
+
+  }
 }
