@@ -1,5 +1,6 @@
 package glacialExpedition.models.explorers;
 
+import glacialExpedition.models.suitcases.Cartoon;
 import glacialExpedition.models.suitcases.Suitcase;
 import glacialExpedition.validator.Validator;
 
@@ -11,7 +12,7 @@ public abstract class BaseExplorer implements Explorer {
   protected BaseExplorer(String name, double energy) {
     this.setName(name);
     this.setEnergy(energy);
-    this.suitcase = new Carton();
+    this.suitcase = new Cartoon();
   }
 
   @Override
