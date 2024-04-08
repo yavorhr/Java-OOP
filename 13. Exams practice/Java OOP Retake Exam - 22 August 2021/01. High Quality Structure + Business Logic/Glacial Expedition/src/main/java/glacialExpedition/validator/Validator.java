@@ -1,6 +1,7 @@
 package glacialExpedition.validator;
 
 import glacialExpedition.common.ExceptionMessages;
+import glacialExpedition.models.explorers.Explorer;
 
 public class Validator {
 
@@ -12,7 +13,13 @@ public class Validator {
 
   public static void validateEnergy(double energy) {
     if (energy < 0) {
-      throw new IllegalArgumentException (ExceptionMessages.EXPLORER_ENERGY_LESS_THAN_ZERO);
+      throw new IllegalArgumentException(ExceptionMessages.EXPLORER_ENERGY_LESS_THAN_ZERO);
+    }
+  }
+
+  public static void validateExplorer(Explorer explorer) {
+    if (explorer == null) {
+      throw new IllegalArgumentException(String.format(ExceptionMessages.EXPLORER_DOES_NOT_EXIST, explorer.getName()));
     }
   }
 }

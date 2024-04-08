@@ -8,6 +8,7 @@ import glacialExpedition.models.states.StateImpl;
 import glacialExpedition.repositories.ExplorerRepository;
 import glacialExpedition.repositories.Repository;
 import glacialExpedition.repositories.StateRepository;
+import glacialExpedition.validator.Validator;
 
 public class ControllerImpl implements Controller {
   private Repository<Explorer> explorerRepository;
@@ -39,7 +40,12 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String retireExplorer(String explorerName) {
-    return null;
+    Explorer explorer = this.explorerRepository.byName(explorerName);
+    Validator.validateExplorer(explorer);
+
+    this.explorerRepository.remove(explorer);
+
+    return String.format(ConstantMessages.EXPLORER_RETIRED, explorer.getName());
   }
 
   @Override
