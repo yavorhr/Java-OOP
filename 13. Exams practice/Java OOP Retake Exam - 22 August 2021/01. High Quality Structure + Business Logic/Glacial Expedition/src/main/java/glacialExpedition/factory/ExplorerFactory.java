@@ -6,7 +6,7 @@ import glacialExpedition.models.explorers.GlacierExplorer;
 import glacialExpedition.models.explorers.NaturalExplorer;
 
 public class ExplorerFactory {
-  private static Explorer create(String type, String name) {
+  public static Explorer create(String type, String name) {
     Explorer explorer = null;
 
     switch (type) {
