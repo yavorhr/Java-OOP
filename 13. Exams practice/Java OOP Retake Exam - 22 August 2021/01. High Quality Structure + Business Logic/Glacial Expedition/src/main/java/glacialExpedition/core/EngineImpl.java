@@ -44,19 +44,19 @@ public class EngineImpl implements Engine {
 
         switch (command) {
             case AddExplorer:
-                result = addExplorer(data);
+                result = this.controller.addExplorer(data[0], data[1]);
                 break;
             case AddState:
-                result = addState(data);
+                result = this.controller.addState(data[0], data[1]);
                 break;
             case RetireExplorer:
-                result = retireExplorer(data);
+                result = this.controller.retireExplorer(data[0]);
                 break;
             case ExploreState:
-                result = exploreState(data);
+                result = this.controller.exploreState(data[0]);
                 break;
             case FinalResult:
-                result = finalResult();
+                result = this.controller.finalResult();
                 break;
             case Exit:
                 result = Command.Exit.name();
@@ -65,26 +65,5 @@ public class EngineImpl implements Engine {
 
         return result;
     }
-
-    private String retireExplorer(String[] data) {
-        return controller.retireExplorer(data[0]);
-    }
-
-    private String finalResult() {
-        return controller.finalResult();
-    }
-
-    private String exploreState(String[] data) {
-        return controller.exploreState(data[0]);
-    }
-
-    private String addState(String[] data) {
-        String stateName = data[0];
-        String[] exhibits = Arrays.stream(data).skip(1).toArray(String[]::new);
-        return controller.addState(stateName, exhibits);
-    }
-
-    private String addExplorer(String[] data) {
-        return controller.addExplorer(data[0], data[1]);
-    }
+    
 }
