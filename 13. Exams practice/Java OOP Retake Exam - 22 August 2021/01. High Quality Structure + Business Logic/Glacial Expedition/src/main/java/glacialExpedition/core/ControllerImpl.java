@@ -1,6 +1,15 @@
 package glacialExpedition.core;
 
+import glacialExpedition.models.explorers.Explorer;
+import glacialExpedition.repositories.ExplorerRepository;
+import glacialExpedition.repositories.Repository;
+
 public class ControllerImpl implements Controller {
+    private Repository<Explorer> explorerRepository;
+
+    public ControllerImpl() {
+        this.explorerRepository  = new ExplorerRepository();
+    }
 
     @Override
     public String addExplorer(String type, String explorerName) {
