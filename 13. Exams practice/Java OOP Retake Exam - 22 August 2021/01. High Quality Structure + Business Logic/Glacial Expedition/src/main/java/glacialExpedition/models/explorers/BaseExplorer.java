@@ -44,4 +44,8 @@ public abstract class BaseExplorer implements Explorer {
     Validator.validateEnergy(energy);
     this.energy = energy;
   }
+
+  protected void decreaseEnergy(int energy) {
+    this.energy -= energy;
+  }
 }

@@ -1,7 +1,7 @@
 package glacialExpedition.models.explorers;
 
 public class AnimalExplorer extends BaseExplorer {
-  private static double INITIAL_ENERGY = 60;
+  private static int INITIAL_ENERGY = 60;
 
   public AnimalExplorer(String name) {
     super(name, INITIAL_ENERGY);
@@ -9,6 +9,6 @@ public class AnimalExplorer extends BaseExplorer {
 
   @Override
   public void search() {
-
+    super.decreaseEnergy(INITIAL_ENERGY);
   }
 }
