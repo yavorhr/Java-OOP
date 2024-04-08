@@ -33,7 +33,7 @@ public abstract class BaseExplorer implements Explorer {
   public Suitcase getSuitcase() {
     return this.suitcase;
   }
-  
+
   private void setName(String name) {
     Validator.validateName(name);
     this.name = name;
