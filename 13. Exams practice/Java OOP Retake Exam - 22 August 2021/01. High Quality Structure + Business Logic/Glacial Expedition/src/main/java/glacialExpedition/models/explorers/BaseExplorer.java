@@ -1,6 +1,7 @@
 package glacialExpedition.models.explorers;
 
 import glacialExpedition.models.suitcases.Suitcase;
+import glacialExpedition.validator.Validator;
 
 public abstract class BaseExplorer implements Explorer {
   private String name;
@@ -8,8 +9,8 @@ public abstract class BaseExplorer implements Explorer {
   private Suitcase suitcase;
 
   protected BaseExplorer(String name, double energy) {
-    this.name = name;
-    this.energy = energy;
+    this.setName(name);
+    this.setEnergy(energy);
     this.suitcase = new Carton();
   }
 
@@ -36,5 +37,15 @@ public abstract class BaseExplorer implements Explorer {
   @Override
   public void search() {
 
+  }
+
+  private void setName(String name) {
+    Validator.validateName(name);
+    this.name = name;
+  }
+
+  private void setEnergy(double energy) {
+    Validator.validateEnergy(energy);
+    this.energy = energy;
   }
 }
