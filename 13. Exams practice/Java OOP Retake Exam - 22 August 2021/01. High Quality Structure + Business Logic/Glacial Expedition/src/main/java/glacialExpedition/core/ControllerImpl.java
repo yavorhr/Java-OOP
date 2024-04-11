@@ -42,7 +42,7 @@ public class ControllerImpl implements Controller {
   @Override
   public String addState(String... strings) {
     String stateName = strings[0];
-
+    
     List<String> exhibits = getExhibitsIfAny(strings);
     this.stateRepository.add(new StateImpl(stateName, exhibits));
 
@@ -69,7 +69,9 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String exploreState(String stateName) {
-    return "this.mission.explore(stateName,);";
+    this.mission.explore(this.stateRepository.byName(stateName), this.explorerRepository.getCollection());
+
+    return "";
   }
 
   @Override

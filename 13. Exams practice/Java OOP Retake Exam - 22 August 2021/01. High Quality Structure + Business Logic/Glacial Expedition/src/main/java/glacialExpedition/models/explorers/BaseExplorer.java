@@ -53,6 +53,6 @@ public abstract class BaseExplorer implements Explorer {
   }
 
   private void decreaseEnergy() {
-    this.energy -= energy;
+    this.energy -= DECREASE_ENERGY_VALUE_ON_SEARCH;
   }
 }
