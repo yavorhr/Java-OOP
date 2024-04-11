@@ -42,7 +42,7 @@ public class ControllerImpl implements Controller {
   @Override
   public String addState(String... strings) {
     String stateName = strings[0];
-    
+
     List<String> exhibits = getExhibitsIfAny(strings);
     this.stateRepository.add(new StateImpl(stateName, exhibits));
 

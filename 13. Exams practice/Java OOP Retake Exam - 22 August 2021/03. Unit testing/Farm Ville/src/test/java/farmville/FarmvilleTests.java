@@ -1,5 +1,20 @@
 package farmville;
 
+import org.junit.Before;
+
 public class FarmvilleTests {
-    //TODO: TEST ALL THE FUNCTIONALITY OF THE PROVIDED CLASS Farm
+  private Farm farm;
+  private Animal chicken;
+  private Animal cow;
+  private Animal horse;
+
+  @Before
+  public void setUp() {
+    this.farm = new Farm("bestFarm", 3);
+    this.chicken = new Animal("chicken", 70);
+    this.cow = new Animal("cow", 20);
+    this.horse = new Animal("horse", 100);
+  }
+
+  
 }
