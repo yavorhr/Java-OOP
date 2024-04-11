@@ -39,13 +39,19 @@ public class FarmvilleTests {
     Assert.assertEquals(3, this.farm.getCount());
   }
 
-  // addAnimal throws error when capacity is reached
+  // addAnimal() throws error when capacity is reached
   @Test(expected = IllegalArgumentException.class)
   public void testAddAnimalShouldThrowErrorWhenNoCapacity() {
     this.farm.add(this.chicken);
     this.farm.add(this.cow);
     this.farm.add(this.horse);
     this.farm.add(new Animal("test",10));
-    
+  }
+
+  // addAnimal() throws error when animal type already exists
+  @Test(expected = IllegalArgumentException.class)
+  public void testAddAnimalShouldThrowErrorWhenAnimalTypeAlreadyExists() {
+    this.farm.add(this.chicken);
+    this.farm.add(new Animal("chicken", 60));
   }
 }
