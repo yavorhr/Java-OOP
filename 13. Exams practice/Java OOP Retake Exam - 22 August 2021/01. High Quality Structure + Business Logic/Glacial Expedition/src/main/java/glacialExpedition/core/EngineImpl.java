@@ -42,26 +42,14 @@ public class EngineImpl implements Engine {
         String result = null;
         String[] data = Arrays.stream(tokens).skip(1).toArray(String[]::new);
 
-        switch (command) {
-            case AddExplorer:
-                result = this.controller.addExplorer(data[0], data[1]);
-                break;
-            case AddState:
-                result = this.controller.addState(data[0], data[1]);
-                break;
-            case RetireExplorer:
-                result = this.controller.retireExplorer(data[0]);
-                break;
-            case ExploreState:
-                result = this.controller.exploreState(data[0]);
-                break;
-            case FinalResult:
-                result = this.controller.finalResult();
-                break;
-            case Exit:
-                result = Command.Exit.name();
-                break;
-        }
+        result = switch (command) {
+            case AddExplorer -> this.controller.addExplorer(data[0], data[1]);
+            case AddState -> this.controller.addState(data[0]);
+            case RetireExplorer -> this.controller.retireExplorer(data[0]);
+            case ExploreState -> this.controller.exploreState(data[0]);
+            case FinalResult -> this.controller.finalResult();
+            case Exit -> Command.Exit.name();
+        };
 
         return result;
     }

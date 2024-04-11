@@ -7,8 +7,5 @@ public class NaturalExplorer extends BaseExplorer {
     super(name, INITIAL_ENERGY);
   }
 
-  @Override
-  public void search() {
-    super.decreaseEnergy(INITIAL_ENERGY);
-  }
+
 }

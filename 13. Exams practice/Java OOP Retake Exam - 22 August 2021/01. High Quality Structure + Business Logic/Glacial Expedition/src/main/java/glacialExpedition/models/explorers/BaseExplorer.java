@@ -5,6 +5,8 @@ import glacialExpedition.models.suitcases.Suitcase;
 import glacialExpedition.validator.Validator;
 
 public abstract class BaseExplorer implements Explorer {
+  private static int DECREASE_ENERGY_VALUE_ON_SEARCH = 15;
+
   private String name;
   private double energy;
   private Suitcase suitcase;
@@ -45,7 +47,12 @@ public abstract class BaseExplorer implements Explorer {
     this.energy = energy;
   }
 
-  protected void decreaseEnergy(int energy) {
+  @Override
+  public void search() {
+    this.decreaseEnergy();
+  }
+
+  private void decreaseEnergy() {
     this.energy -= energy;
   }
 }
