@@ -45,7 +45,7 @@ public class FarmvilleTests {
     this.farm.add(this.chicken);
     this.farm.add(this.cow);
     this.farm.add(this.horse);
-    this.farm.add(new Animal("test",10));
+    this.farm.add(new Animal("test", 10));
   }
 
   // addAnimal() throws error when animal type already exists
@@ -54,4 +54,16 @@ public class FarmvilleTests {
     this.farm.add(this.chicken);
     this.farm.add(new Animal("chicken", 60));
   }
+
+  // removeAnimal()
+  @Test
+  public void testRemoveAnimalShouldWorksCorrect() {
+    this.farm.add(this.chicken);
+    Assert.assertTrue(this.farm.remove("chicken"));
+    Assert.assertFalse(this.farm.remove("elephant"));
+  }
+
+  //test setters
+  
+
 }
