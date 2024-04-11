@@ -28,4 +28,24 @@ public class FarmvilleTests {
     Assert.assertEquals("chicken", this.chicken.getType());
     Assert.assertEquals(70, this.chicken.getEnergy(), 0);
   }
+
+  // addAnimal
+  @Test
+  public void testAddAnimalShouldWorksCorrect() {
+    this.farm.add(this.chicken);
+    this.farm.add(this.cow);
+    this.farm.add(this.horse);
+
+    Assert.assertEquals(3, this.farm.getCount());
+  }
+
+  // addAnimal throws error when capacity is reached
+  @Test(expected = IllegalArgumentException.class)
+  public void testAddAnimalShouldThrowErrorWhenNoCapacity() {
+    this.farm.add(this.chicken);
+    this.farm.add(this.cow);
+    this.farm.add(this.horse);
+    this.farm.add(new Animal("test",10));
+    
+  }
 }
