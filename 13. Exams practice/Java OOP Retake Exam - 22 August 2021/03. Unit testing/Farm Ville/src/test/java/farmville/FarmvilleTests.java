@@ -64,6 +64,18 @@ public class FarmvilleTests {
   }
 
   //test setters
-  
+  @Test(expected = NullPointerException.class)
+  public void testSetFarmNameShouldThrowErrorWhenEmptyName() {
+   new Farm("", 10);
+  }
 
+  @Test(expected = NullPointerException.class)
+  public void testSetFarmNameShouldThrowErrorWhenNullName() {
+    new Farm(null, 10);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testSetFarmCapacityShouldThrowErrorWhenNegativeValue() {
+    new Farm("testFarm", -5);
+  }
 }
