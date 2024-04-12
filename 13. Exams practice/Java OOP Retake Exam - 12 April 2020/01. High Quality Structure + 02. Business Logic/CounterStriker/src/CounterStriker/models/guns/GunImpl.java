@@ -5,10 +5,12 @@ import CounterStriker.validator.Validator;
 public abstract class GunImpl implements Gun {
   private String name;
   private int bulletsCount;
+  private final int bulletsPerTime;
 
-  public GunImpl(String name, int bulletsCount) {
+  public GunImpl(String name, int bulletsCount, int bulletsPerTime) {
     this.setName(name);
     this.setBulletsCount(bulletsCount);
+    this.bulletsPerTime = bulletsPerTime;
   }
 
   @Override
@@ -33,5 +35,17 @@ public abstract class GunImpl implements Gun {
 
   protected void shoot(int bulletsPerTime) {
     this.bulletsCount -= bulletsPerTime;
+  }
+  
+  @Override
+  public int fire() {
+    Validator.throwErrIfBulletsAreOver(this.getBulletsCount());
+
+    if (this.getBulletsCount() < this.bulletsPerTime) {
+      return 0;
+    }
+
+    this.shoot(this.bulletsPerTime);
+    return this.bulletsPerTime;
   }
 }
