@@ -36,7 +36,7 @@ public abstract class GunImpl implements Gun {
   protected void shoot(int bulletsPerTime) {
     this.bulletsCount -= bulletsPerTime;
   }
-  
+
   @Override
   public int fire() {
     Validator.throwErrIfBulletsAreOver(this.getBulletsCount());
