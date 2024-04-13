@@ -1,5 +1,7 @@
 package robotService.entities.supplements;
 
+import validator.Validator;
+
 public class BaseSupplement implements Supplement {
   private int hardness;
   private double price;
