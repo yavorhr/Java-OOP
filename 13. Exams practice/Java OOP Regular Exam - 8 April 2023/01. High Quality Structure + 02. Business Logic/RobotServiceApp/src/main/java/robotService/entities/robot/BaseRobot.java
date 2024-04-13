@@ -14,6 +14,13 @@ public class BaseRobot implements Robot {
     this.setPrice(price);
   }
 
+  protected BaseRobot(String name, String kind, double price, int kilograms) {
+    this.setName(name);
+    this.setKind(kind);
+    this.setPrice(price);
+    this.kilograms = kilograms;
+  }
+
   @Override
   public String getName() {
     return this.name;
@@ -45,8 +52,7 @@ public class BaseRobot implements Robot {
     this.price = price;
   }
 
-  @Override
-  public void eating() {
-
+  protected void increaseKilos(int kg) {
+    this.kilograms += kg;
   }
 }

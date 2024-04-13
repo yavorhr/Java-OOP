@@ -5,7 +5,7 @@ import robotService.common.ExceptionMessages;
 public class Validator {
   public static void validateName(String name) {
     if (name == null || name.trim().isEmpty()) {
-      throw new NullPointerException(ExceptionMessages.ROBOT_NAME_CANNOT_BE_NULL_OR_EMPTY)
+      throw new NullPointerException(ExceptionMessages.ROBOT_NAME_CANNOT_BE_NULL_OR_EMPTY);
     }
   }
 
