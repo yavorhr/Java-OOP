@@ -4,7 +4,7 @@ public class BaseSupplement implements Supplement {
   private int hardness;
   private double price;
 
-  public BaseSupplement(int hardness, double price) {
+  protected BaseSupplement(int hardness, double price) {
     this.hardness = hardness;
     this.price = price;
   }
