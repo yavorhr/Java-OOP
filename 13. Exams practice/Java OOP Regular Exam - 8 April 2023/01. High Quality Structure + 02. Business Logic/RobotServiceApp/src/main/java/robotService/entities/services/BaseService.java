@@ -56,7 +56,7 @@ public abstract class BaseService implements Service {
 
   @Override
   public void addSupplement(Supplement supplement) {
-
+    this.supplements.add(supplement);
   }
 
   @Override
