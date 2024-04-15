@@ -19,7 +19,7 @@ public class SupplementRepository implements Repository {
 
   @Override
   public boolean removeSupplement(Supplement supplement) {
-    return false;
+    return this.supplements.remove(supplement);
   }
 
   @Override
