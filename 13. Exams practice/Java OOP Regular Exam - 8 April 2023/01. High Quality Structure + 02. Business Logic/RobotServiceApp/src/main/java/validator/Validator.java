@@ -22,8 +22,14 @@ public class Validator {
   }
 
   public static void validatePrice(double price) {
-    if (price <=0) {
-      throw new IllegalArgumentException (ExceptionMessages.ROBOT_PRICE_CANNOT_BE_BELOW_OR_EQUAL_TO_ZERO);
+    if (price <= 0) {
+      throw new IllegalArgumentException(ExceptionMessages.ROBOT_PRICE_CANNOT_BE_BELOW_OR_EQUAL_TO_ZERO);
+    }
+  }
+
+  public static void validateCapacity(int capacity) {
+    if (capacity == 0) {
+      throw new IllegalArgumentException(ExceptionMessages.NO_CAPACITY);
     }
   }
 }

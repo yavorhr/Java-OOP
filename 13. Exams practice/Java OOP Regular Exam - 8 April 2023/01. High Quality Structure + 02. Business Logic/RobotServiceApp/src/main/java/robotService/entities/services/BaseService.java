@@ -45,7 +45,8 @@ public abstract class BaseService implements Service {
 
   @Override
   public void addRobot(Robot robot) {
-
+    Validator.validateCapacity(this.capacity);
+    this.robots.add(robot);
   }
 
   @Override
