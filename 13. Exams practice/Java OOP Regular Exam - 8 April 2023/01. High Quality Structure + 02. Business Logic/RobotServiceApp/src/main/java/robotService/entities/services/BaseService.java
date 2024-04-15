@@ -65,7 +65,10 @@ public abstract class BaseService implements Service {
 
   @Override
   public int sumHardness() {
-    return 0;
+    return this.supplements
+            .stream()
+            .mapToInt(Supplement::getHardness)
+            .sum();
   }
 
   @Override
