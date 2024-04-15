@@ -7,4 +7,9 @@ public class FemaleRobot extends BaseRobot{
   protected FemaleRobot(String name, String kind, double price) {
     super(name, kind, price);
   }
+
+  @Override
+  public void eating() {
+    super.increaseKilos(INCREASE_KILOGRAMS);
+  }
 }

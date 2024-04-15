@@ -2,7 +2,7 @@ package robotService.entities.robot;
 
 import validator.Validator;
 
-public class BaseRobot implements Robot {
+public abstract class BaseRobot implements Robot {
   private String name;
   private String kind;
   private int kilograms;
