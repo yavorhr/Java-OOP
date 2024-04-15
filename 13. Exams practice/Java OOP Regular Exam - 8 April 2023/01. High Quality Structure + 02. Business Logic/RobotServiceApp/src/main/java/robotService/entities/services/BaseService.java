@@ -51,7 +51,7 @@ public abstract class BaseService implements Service {
 
   @Override
   public void removeRobot(Robot robot) {
-
+    this.robots.remove(robot);
   }
 
   @Override
