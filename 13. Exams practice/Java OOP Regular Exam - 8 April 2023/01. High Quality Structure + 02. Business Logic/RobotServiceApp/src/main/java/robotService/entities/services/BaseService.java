@@ -61,7 +61,7 @@ public abstract class BaseService implements Service {
 
   @Override
   public void feeding() {
-
+    this.robots.forEach(Robot::eating);
   }
 
   @Override
