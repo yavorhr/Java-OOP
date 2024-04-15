@@ -38,7 +38,7 @@ public abstract class BaseRobot implements Robot {
 
   @Override
   public void setName(String name) {
-    Validator.validateName(name);
+    Validator.validateRobotName(name);
     this.name = name;
   }
 

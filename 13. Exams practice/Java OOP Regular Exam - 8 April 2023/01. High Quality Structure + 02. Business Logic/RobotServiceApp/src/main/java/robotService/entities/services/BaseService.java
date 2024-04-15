@@ -2,20 +2,21 @@ package robotService.entities.services;
 
 import robotService.entities.robot.Robot;
 import robotService.entities.supplements.Supplement;
+import validator.Validator;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class BaseService implements Service {
+public abstract class BaseService implements Service {
   private String name;
   private int capacity;
   private List<Supplement> supplements;
   private List<Robot> robots;
 
   public BaseService(String name, int capacity) {
-    this.name = name;
+    this.setName(name);
     this.capacity = capacity;
     this.supplements = new ArrayList<>();
     this.robots = new ArrayList<>();
@@ -28,7 +29,8 @@ public class BaseService implements Service {
 
   @Override
   public void setName(String name) {
-
+    Validator.validateServiceName(name);
+    this.name = name;
   }
 
   @Override

@@ -3,9 +3,15 @@ package validator;
 import robotService.common.ExceptionMessages;
 
 public class Validator {
-  public static void validateName(String name) {
+  public static void validateRobotName(String name) {
     if (name == null || name.trim().isEmpty()) {
       throw new NullPointerException(ExceptionMessages.ROBOT_NAME_CANNOT_BE_NULL_OR_EMPTY);
+    }
+  }
+
+  public static void validateServiceName(String name) {
+    if (name == null || name.trim().isEmpty()) {
+      throw new NullPointerException(ExceptionMessages.SERVICE_NAME_CANNOT_BE_NULL_OR_EMPTY);
     }
   }
 
