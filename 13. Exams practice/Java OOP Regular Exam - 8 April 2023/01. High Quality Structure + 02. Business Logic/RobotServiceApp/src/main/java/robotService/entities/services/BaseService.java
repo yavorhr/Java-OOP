@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class BaseService implements Service {
   private String name;
@@ -74,6 +75,18 @@ public abstract class BaseService implements Service {
 
   @Override
   public String getStatistics() {
-    return null;
+    StringBuilder sb = new StringBuilder();
+    sb.append(String.format("%s %s:", this.getName(), this.getClass().getSimpleName())).append(System.lineSeparator());
+    sb.append(String.format("Robots: %s", getRobotNames())).append(System.lineSeparator());
+    sb.append(String.format("Supplements: %d Hardness: %d", this.supplements.size(), this.sumHardness())).append(System.lineSeparator());
+
+    return sb.toString();
+  }
+
+  private String getRobotNames() {
+    if (this.robots.size() == 0) {
+      return "None";
+    }
+    return this.robots.stream().map(Robot::getName).collect(Collectors.joining(", "));
   }
 }
