@@ -94,7 +94,19 @@ public class ServiceTests {
   public void testForSaleShouldThrowErrorWhenRobotDoesNotExist() {
     this.service.add(robot1);
     this.service.forSale("robot2");
+  }
 
+  // test report()
+  @Test
+  public void testReportShouldWorksCorrect() {
+    this.service.add(robot1);
+    this.service.add(robot2);
+    this.service.add(robot3);
+
+   String expected = "The robot robot1, robot2, robot3 is in the service best!";
+   String actual = this.service.report();
+
+   Assert.assertEquals(expected,actual);
   }
 
 }
