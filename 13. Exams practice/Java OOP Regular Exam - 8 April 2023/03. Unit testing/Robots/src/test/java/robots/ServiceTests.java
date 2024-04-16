@@ -20,30 +20,51 @@ public class ServiceTests {
 
   // test constructors works correct
   @Test
-  public void testServiceConstructorWorksAsExpected(){
+  public void testServiceConstructorWorksAsExpected() {
     Assert.assertEquals(3, service.getCapacity());
     Assert.assertEquals(0, service.getCount());
     Assert.assertEquals("best", service.getName());
   }
 
   @Test
-  public void testRobotConstructorWorksAsExpected(){
+  public void testRobotConstructorWorksAsExpected() {
     Assert.assertEquals("robot1", robot1.getName());
   }
 
   // test constructors if throw errors
   @Test(expected = NullPointerException.class)
-  public void testServiceConstructorThrowErrorWhenEmptyNameIsGiven(){
-    new Service("",3);
+  public void testServiceConstructorThrowErrorWhenEmptyNameIsGiven() {
+    new Service("", 3);
   }
 
   @Test(expected = NullPointerException.class)
-  public void testServiceConstructorThrowErrorWhenNullNameIsGiven(){
-    new Service(null,3);
+  public void testServiceConstructorThrowErrorWhenNullNameIsGiven() {
+    new Service(null, 3);
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void testServiceConstructorThrowErrorWhenNegativeCapacityIsGiven(){
-    new Service("test",-1);
+  public void testServiceConstructorThrowErrorWhenNegativeCapacityIsGiven() {
+    new Service("test", -1);
   }
+
+  // test addRobot()
+  @Test
+  public void testAddRobotWorksCorrect() {
+    this.service.add(robot1);
+    this.service.add(robot2);
+    this.service.add(robot3);
+
+    Assert.assertEquals(3, this.service.getCount());
+  }
+
+  // test addRobot() throw error
+  @Test(expected = IllegalArgumentException.class)
+  public void testAddRobotThrowsErrorWhenNoCapacity() {
+    this.service.add(robot1);
+    this.service.add(robot2);
+    this.service.add(robot3);
+    this.service.add(robot3);
+
+  }
+
 }
