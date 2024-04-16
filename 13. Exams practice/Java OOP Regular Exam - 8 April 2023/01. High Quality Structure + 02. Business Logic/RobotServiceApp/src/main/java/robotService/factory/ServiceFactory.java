@@ -13,7 +13,7 @@ public class ServiceFactory {
 
     switch (type) {
       case "MainService" -> service = new MainService(name);
-      case "SecondaryService" -> new SecondaryService(name);
+      case "SecondaryService" -> service= new SecondaryService(name);
     }
 
     return service;

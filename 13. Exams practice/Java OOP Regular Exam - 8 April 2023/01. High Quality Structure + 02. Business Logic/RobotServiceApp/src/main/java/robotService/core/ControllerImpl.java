@@ -50,6 +50,7 @@ public class ControllerImpl implements Controller {
     }
 
     service.addSupplement(supplement);
+    this.supplementsRepository.removeSupplement(supplement);
 
     return String.format(ConstantMessages.SUCCESSFULLY_ADDED_SUPPLEMENT_IN_SERVICE, supplementType, serviceName);
   }

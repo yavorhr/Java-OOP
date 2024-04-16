@@ -24,6 +24,6 @@ public class SupplementRepository implements Repository {
 
   @Override
   public Supplement findFirst(String type) {
-    return this.supplements.stream().findFirst().orElse(null);
+    return this.supplements.stream().filter(s -> s.getClass().getSimpleName().equals(type)).findFirst().orElse(null);
   }
 }
