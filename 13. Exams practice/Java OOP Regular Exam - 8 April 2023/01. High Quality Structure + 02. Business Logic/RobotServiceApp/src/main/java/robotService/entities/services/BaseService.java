@@ -66,6 +66,20 @@ public class BaseService implements Service {
     this.robots.forEach(Robot::eating);
   }
 
+  public double sumRobotsPrices() {
+    return this.robots
+            .stream()
+            .mapToDouble(Robot::getPrice)
+            .sum();
+  }
+
+  public double sumSupplements() {
+    return this.supplements
+            .stream()
+            .mapToDouble(Supplement::getPrice)
+            .sum();
+  }
+
   @Override
   public int sumHardness() {
     return this.supplements
