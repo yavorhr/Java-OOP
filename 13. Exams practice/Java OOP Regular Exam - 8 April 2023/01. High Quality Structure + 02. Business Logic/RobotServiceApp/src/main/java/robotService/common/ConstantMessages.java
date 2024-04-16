@@ -1,8 +1,6 @@
 package robotService.common;
 
 public class ConstantMessages {
-    public static final String NOT_ENOUGH_CAPACITY_FOR_ROBOT = "Not enough capacity for this robot.";
-    public static final String UNSUITABLE_SERVICE = "Unsuitable service.";
     public static final String SUCCESSFULLY_ADDED_ROBOT_IN_SERVICE = "Successfully added %s to %s.";
     public static final String SUCCESSFULLY_ADDED_SUPPLEMENT_IN_SERVICE = "Successfully added %s to %s.";
     public static final String FEEDING_ROBOT = "Robots fed: %d";
