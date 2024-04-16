@@ -2,12 +2,15 @@ package robotService.core;
 
 import robotService.common.ConstantMessages;
 import robotService.common.ExceptionMessages;
+import robotService.entities.robot.Robot;
 import robotService.entities.services.Service;
 import robotService.entities.supplements.Supplement;
+import robotService.factory.RobotFactory;
 import robotService.factory.ServiceFactory;
 import robotService.factory.SupplementFactory;
 import robotService.repositories.Repository;
 import robotService.repositories.SupplementRepository;
+import validator.Validator;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -53,7 +56,13 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addRobot(String serviceName, String robotType, String robotName, String robotKind, double price) {
-    return null;
+    Robot robot = RobotFactory.create(robotType, robotName, robotKind, price);
+    Service service = findService(serviceName);
+
+    Validator.validateRobotServiceArea(service.getClass().getSimpleName(), robotType);
+    service.addRobot(robot);
+
+    return String.format(ConstantMessages.SUCCESSFULLY_ADDED_ROBOT_IN_SERVICE, robotType, serviceName);
   }
 
   @Override

@@ -10,5 +10,6 @@ public class ExceptionMessages {
     public static final String INVALID_ROBOT_TYPE = "Invalid robot type.";
     public static final String NO_SUPPLEMENT_FOUND = "Supplement of type %s is missing.";
     public static final String NO_CAPACITY = "Not enough capacity for this robot.";
+    public static final String UNSUITABLE_SERVICE = "Unsuitable service.";
 }
 

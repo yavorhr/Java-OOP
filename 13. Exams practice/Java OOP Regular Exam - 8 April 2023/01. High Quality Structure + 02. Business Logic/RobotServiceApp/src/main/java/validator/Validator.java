@@ -35,7 +35,7 @@ public class Validator {
 
   public static void validateServiceType(String type) {
     if (!(type.equals("MainService") || type.equals("SecondaryService"))) {
-        throw new NullPointerException(ExceptionMessages.INVALID_SERVICE_TYPE);
+      throw new NullPointerException(ExceptionMessages.INVALID_SERVICE_TYPE);
     }
   }
 
@@ -50,4 +50,12 @@ public class Validator {
       throw new NullPointerException(ExceptionMessages.INVALID_ROBOT_TYPE);
     }
   }
+
+  public static void validateRobotServiceArea(String serviceType, String robotType) {
+    if (serviceType.equals("SecondaryService") && robotType.equals("MaleRobot") ||
+            serviceType.equals("FemaleRobot") && robotType.equals("MainService")) {
+      throw new IllegalArgumentException(ExceptionMessages.UNSUITABLE_SERVICE);
+    }
+  }
+
 }
