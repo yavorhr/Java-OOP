@@ -81,4 +81,20 @@ public class ServiceTests {
     this.service.remove("robot2");
   }
 
+  // test forSale()
+  @Test
+  public void testForSaleShouldWorksCorrect() {
+    this.service.add(robot1);
+    this.service.forSale("robot1");
+    Assert.assertFalse(robot1.isReadyForSale());
+  }
+
+  // test forSale() throws error when robot does not exist
+  @Test(expected = IllegalArgumentException.class)
+  public void testForSaleShouldThrowErrorWhenRobotDoesNotExist() {
+    this.service.add(robot1);
+    this.service.forSale("robot2");
+
+  }
+
 }

@@ -65,6 +65,7 @@ public class Service {
                 .filter(f -> name.equals(f.getName()))
                 .findAny()
                 .orElse(null);
+
         if (robot == null){
             throw new IllegalArgumentException(String.format("Robot with name %s doesn't exist!", name));
         }
