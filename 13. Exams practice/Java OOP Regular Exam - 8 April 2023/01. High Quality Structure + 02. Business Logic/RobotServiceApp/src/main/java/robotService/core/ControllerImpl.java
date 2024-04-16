@@ -1,6 +1,8 @@
 package robotService.core;
 
+import robotService.common.ConstantMessages;
 import robotService.entities.services.Service;
+import robotService.factory.ServiceFactory;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,8 +16,9 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addService(String type, String name) {
-
-    return null;
+    Service service = ServiceFactory.create(type, name);
+    this.services.add(service);
+    return String.format(ConstantMessages.SUCCESSFULLY_ADDED_SERVICE_TYPE, type);
   }
 
   @Override

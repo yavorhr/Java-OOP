@@ -6,7 +6,7 @@ import robotService.entities.services.Service;
 import validator.Validator;
 
 public class ServiceFactory {
-  private static Service create(String type, String name) {
+  public static Service create(String type, String name) {
     Validator.validateServiceType(type);
 
     Service service = null;
