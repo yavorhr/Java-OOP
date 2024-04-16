@@ -1,6 +1,7 @@
 package robotService.core;
 
 import robotService.common.ConstantMessages;
+import robotService.common.ExceptionMessages;
 import robotService.entities.services.Service;
 import robotService.entities.supplements.Supplement;
 import robotService.factory.ServiceFactory;
@@ -24,6 +25,7 @@ public class ControllerImpl implements Controller {
   public String addService(String type, String name) {
     Service service = ServiceFactory.create(type, name);
     this.services.add(service);
+
     return String.format(ConstantMessages.SUCCESSFULLY_ADDED_SERVICE_TYPE, type);
   }
 
@@ -31,12 +33,22 @@ public class ControllerImpl implements Controller {
   public String addSupplement(String type) {
     Supplement supplement = SupplementFactory.create(type);
     this.supplementsRepository.addSupplement(supplement);
+
     return String.format(ConstantMessages.SUCCESSFULLY_ADDED_SUPPLEMENT_TYPE, type);
   }
 
   @Override
   public String supplementForService(String serviceName, String supplementType) {
-    return null;
+    Service service = findService(serviceName);
+    Supplement supplement = this.supplementsRepository.findFirst(supplementType);
+
+    if (supplement == null) {
+      return String.format(ExceptionMessages.NO_SUPPLEMENT_FOUND, supplementType);
+    }
+
+    service.addSupplement(supplement);
+
+    return String.format(ConstantMessages.SUCCESSFULLY_ADDED_SUPPLEMENT_IN_SERVICE, supplementType, serviceName);
   }
 
   @Override
@@ -57,5 +69,14 @@ public class ControllerImpl implements Controller {
   @Override
   public String getStatistics() {
     return null;
+  }
+
+  // helpers
+  private Service findService(String serviceName) {
+    return this.services
+            .stream()
+            .filter(s -> s.getName().equals(serviceName))
+            .findFirst()
+            .orElse(null);
   }
 }
