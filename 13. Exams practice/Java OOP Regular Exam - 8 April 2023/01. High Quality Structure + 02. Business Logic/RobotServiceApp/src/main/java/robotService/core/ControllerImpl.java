@@ -79,12 +79,15 @@ public class ControllerImpl implements Controller {
     double robotsSum = service.getRobots().stream().mapToDouble(Robot::getPrice).sum();
     double supplementsSum = service.getSupplements().stream().mapToDouble(Supplement::getPrice).sum();
 
-    return String.format(ConstantMessages.VALUE_SERVICE,serviceName, robotsSum+supplementsSum);
+    return String.format(ConstantMessages.VALUE_SERVICE, serviceName, robotsSum + supplementsSum);
   }
 
   @Override
   public String getStatistics() {
-    return null;
+    StringBuilder sb = new StringBuilder();
+    this.services.forEach(s -> sb.append(s.getStatistics()));
+
+    return sb.toString();
   }
 
   // helpers
