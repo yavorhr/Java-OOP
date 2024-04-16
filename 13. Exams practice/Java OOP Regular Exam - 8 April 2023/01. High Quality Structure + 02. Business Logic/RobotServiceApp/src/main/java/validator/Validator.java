@@ -53,7 +53,7 @@ public class Validator {
 
   public static void validateRobotServiceArea(String serviceType, String robotType) {
     if (serviceType.equals("SecondaryService") && robotType.equals("MaleRobot") ||
-            serviceType.equals("FemaleRobot") && robotType.equals("MainService")) {
+            serviceType.equals("MainService") && robotType.equals("FemaleRobot")) {
       throw new IllegalArgumentException(ExceptionMessages.UNSUITABLE_SERVICE);
     }
   }
