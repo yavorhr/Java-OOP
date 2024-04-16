@@ -2,7 +2,9 @@ package robotService.core;
 
 import robotService.common.ConstantMessages;
 import robotService.entities.services.Service;
+import robotService.entities.supplements.Supplement;
 import robotService.factory.ServiceFactory;
+import robotService.factory.SupplementFactory;
 import robotService.repositories.Repository;
 import robotService.repositories.SupplementRepository;
 
@@ -27,7 +29,9 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addSupplement(String type) {
-    return null;
+    Supplement supplement = SupplementFactory.create(type);
+    this.supplementsRepository.addSupplement(supplement);
+    return String.format(ConstantMessages.SUCCESSFULLY_ADDED_SUPPLEMENT_TYPE, type);
   }
 
   @Override
