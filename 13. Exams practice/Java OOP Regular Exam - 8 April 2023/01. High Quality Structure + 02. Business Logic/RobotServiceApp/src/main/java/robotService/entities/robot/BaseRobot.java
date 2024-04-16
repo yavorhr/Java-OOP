@@ -29,30 +29,31 @@ public abstract class BaseRobot implements Robot {
   @Override
   public int getKilograms() {
     return this.kilograms;
-    public double getPrice() {
-      return this.price;
-    }
-
-    @Override
-    public void setName(String name) {
-      Validator.validateRobotName(name);
-      this.name = name;
-    }
-
-    private void setKind(String kind) {
-      Validator.validateKind(kind);
-      this.kind = kind;
-    }
-
-    private void setPrice(double price) {
-      Validator.validatePrice(price);
-      this.price = price;
-    }
-
-    protected void increaseKilos(int kg) {
-      this.kilograms += kg;
-    }
   }
+
+  public double getPrice() {
+    return this.price;
   }
 
   @Override
+  public void setName(String name) {
+    Validator.validateRobotName(name);
+    this.name = name;
+  }
+
+  private void setKind(String kind) {
+    Validator.validateKind(kind);
+    this.kind = kind;
+  }
+
+  private void setPrice(double price) {
+    Validator.validatePrice(price);
+    this.price = price;
+  }
+
+  protected void increaseKilos(int kg) {
+    this.kilograms += kg;
+  }
+}
+
+

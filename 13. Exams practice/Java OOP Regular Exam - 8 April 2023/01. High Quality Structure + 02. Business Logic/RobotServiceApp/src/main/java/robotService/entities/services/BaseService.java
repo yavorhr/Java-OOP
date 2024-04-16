@@ -10,11 +10,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class BaseService implements Service {
+public class BaseService implements Service {
   private String name;
   private int capacity;
   private List<Supplement> supplements;
-  private List<Robot> robots;
+  private List<robotService.entities.robot.Robot> robots;
 
   public BaseService(String name, int capacity) {
     this.setName(name);
@@ -45,9 +45,8 @@ public abstract class BaseService implements Service {
   }
 
   @Override
-  public void addRobot(Robot robot) {
-    Validator.validateCapacity(this.capacity);
-    this.robots.add(robot);
+  public void addSupplement(Supplement supplement) {
+    this.supplements.add(supplement);
   }
 
   @Override
@@ -56,13 +55,15 @@ public abstract class BaseService implements Service {
   }
 
   @Override
-  public void addSupplement(Supplement supplement) {
-    this.supplements.add(supplement);
+  public void addRobot(Robot robot) {
+    Validator.validateCapacity(this.capacity);
+    this.robots.add(robot);
   }
+
 
   @Override
   public void feeding() {
-    this.robots.forEach(Robot::eating);
+    this.robots.forEach(robotService.entities.robot.Robot::eating);
   }
 
   @Override
@@ -87,6 +88,6 @@ public abstract class BaseService implements Service {
     if (this.robots.size() == 0) {
       return "None";
     }
-    return this.robots.stream().map(Robot::getName).collect(Collectors.joining(", "));
+    return this.robots.stream().map(robotService.entities.robot.Robot::getName).collect(Collectors.joining(", "));
   }
 }

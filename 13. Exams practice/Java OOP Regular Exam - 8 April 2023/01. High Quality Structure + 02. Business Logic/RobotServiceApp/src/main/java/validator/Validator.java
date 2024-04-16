@@ -44,4 +44,10 @@ public class Validator {
       throw new NullPointerException(ExceptionMessages.INVALID_SUPPLEMENT_TYPE);
     }
   }
+
+  public static void validateRobotType(String type) {
+    if (!(type.equals("MaleRobot") || type.equals("FemaleRobot"))) {
+      throw new NullPointerException(ExceptionMessages.INVALID_ROBOT_TYPE);
+    }
+  }
 }
