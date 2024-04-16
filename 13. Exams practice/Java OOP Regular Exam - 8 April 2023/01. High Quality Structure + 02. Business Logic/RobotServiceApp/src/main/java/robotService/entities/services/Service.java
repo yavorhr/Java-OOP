@@ -26,4 +26,5 @@ public interface Service {
     int sumHardness();
 
     String getStatistics();
+
 }

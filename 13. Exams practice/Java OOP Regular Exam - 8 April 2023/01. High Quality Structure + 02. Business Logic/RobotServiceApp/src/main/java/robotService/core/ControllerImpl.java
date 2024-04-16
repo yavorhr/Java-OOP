@@ -75,8 +75,11 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String sumOfAll(String serviceName) {
+    Service service = findService(serviceName);
+    double robotsSum = service.getRobots().stream().mapToDouble(Robot::getPrice).sum();
+    double supplementsSum = service.getSupplements().stream().mapToDouble(Supplement::getPrice).sum();
 
-    return null;
+    return String.format(ConstantMessages.VALUE_SERVICE,serviceName, robotsSum+supplementsSum);
   }
 
   @Override
