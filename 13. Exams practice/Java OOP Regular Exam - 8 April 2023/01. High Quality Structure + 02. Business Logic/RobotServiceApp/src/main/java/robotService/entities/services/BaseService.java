@@ -63,7 +63,7 @@ public class BaseService implements Service {
 
   @Override
   public void feeding() {
-    this.robots.forEach(robotService.entities.robot.Robot::eating);
+    this.robots.forEach(Robot::eating);
   }
 
   @Override

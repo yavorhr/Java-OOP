@@ -67,7 +67,10 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String feedingRobot(String serviceName) {
-    return null;
+    Service service = findService(serviceName);
+    service.feeding();
+
+    return String.format(ConstantMessages.FEEDING_ROBOT, service.getRobots().size());
   }
 
   @Override
