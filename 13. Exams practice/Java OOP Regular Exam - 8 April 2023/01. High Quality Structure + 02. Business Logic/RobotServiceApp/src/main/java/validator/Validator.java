@@ -32,4 +32,10 @@ public class Validator {
       throw new IllegalArgumentException(ExceptionMessages.NO_CAPACITY);
     }
   }
+
+  public static void validateServiceType(String type) {
+    if (!(type.equals("MainService") || type.equals("SecondaryService"))) {
+        throw new NullPointerException(ExceptionMessages.INVALID_SERVICE_TYPE);
+    }
+  }
 }
