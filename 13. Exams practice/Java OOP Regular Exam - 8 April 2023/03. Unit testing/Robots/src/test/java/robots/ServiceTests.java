@@ -64,7 +64,21 @@ public class ServiceTests {
     this.service.add(robot2);
     this.service.add(robot3);
     this.service.add(robot3);
+  }
 
+  // test remove()
+  @Test
+  public void testRemoveShouldWorksCorrect() {
+    this.service.add(robot1);
+    this.service.remove("robot1");
+    Assert.assertEquals(0, this.service.getCount());
+  }
+
+  // test remove() should throw error when none existing robot
+  @Test(expected = IllegalArgumentException.class)
+  public void testRemoveShouldThrowErrorWhenRobotDoesNotExist() {
+    this.service.add(robot1);
+    this.service.remove("robot2");
   }
 
 }
