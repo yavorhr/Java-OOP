@@ -18,6 +18,7 @@ public class ServiceTests {
     robot3 = new Robot("robot3");
   }
 
+  // test constructors works correct
   @Test
   public void testServiceConstructorWorksAsExpected(){
     Assert.assertEquals(3, service.getCapacity());
@@ -30,4 +31,19 @@ public class ServiceTests {
     Assert.assertEquals("robot1", robot1.getName());
   }
 
+  // test constructors if throw errors
+  @Test(expected = NullPointerException.class)
+  public void testServiceConstructorThrowErrorWhenEmptyNameIsGiven(){
+    new Service("",3);
+  }
+
+  @Test(expected = NullPointerException.class)
+  public void testServiceConstructorThrowErrorWhenNullNameIsGiven(){
+    new Service(null,3);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testServiceConstructorThrowErrorWhenNegativeCapacityIsGiven(){
+    new Service("test",-1);
+  }
 }
