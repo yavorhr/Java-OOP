@@ -3,15 +3,19 @@ package robotService.core;
 import robotService.common.ConstantMessages;
 import robotService.entities.services.Service;
 import robotService.factory.ServiceFactory;
+import robotService.repositories.Repository;
+import robotService.repositories.SupplementRepository;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 public class ControllerImpl implements Controller {
   private Collection<Service> services;
+  private Repository supplementsRepository;
 
   public ControllerImpl() {
     this.services = new ArrayList<>();
+    this.supplementsRepository = new SupplementRepository();
   }
 
   @Override

@@ -38,4 +38,10 @@ public class Validator {
         throw new NullPointerException(ExceptionMessages.INVALID_SERVICE_TYPE);
     }
   }
+
+  public static void validateSupplementType(String type) {
+    if (!(type.equals("PlasticArmor") || type.equals("MetalArmor"))) {
+      throw new NullPointerException(ExceptionMessages.INVALID_SUPPLEMENT_TYPE);
+    }
+  }
 }
