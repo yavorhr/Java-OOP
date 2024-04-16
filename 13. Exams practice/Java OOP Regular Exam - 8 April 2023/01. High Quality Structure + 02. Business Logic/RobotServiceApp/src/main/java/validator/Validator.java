@@ -29,7 +29,7 @@ public class Validator {
 
   public static void validateCapacity(int capacity) {
     if (capacity == 0) {
-      throw new IllegalArgumentException(ExceptionMessages.NO_CAPACITY);
+      throw new IllegalArgumentException(ExceptionMessages.NOT_ENOUGH_CAPACITY_FOR_ROBOT);
     }
   }
 
