@@ -1,6 +1,5 @@
 package bakery.io;
 
-
 import bakery.io.interfaces.OutputWriter;
 
 public class ConsoleWriter implements OutputWriter {
