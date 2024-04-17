@@ -4,13 +4,13 @@ import bakery.entities.bakedFoods.interfaces.BakedFood;
 import bakery.validator.Validator;
 
 
-public abstract class BakedFoodImpl implements BakedFood {
+public abstract class BaseBakedFood implements BakedFood {
   private String name;
   private double portion;
   private double price;
   private String brand;
 
-  public BakedFoodImpl(String name, double portion, double price, String brand) {
+  public BaseBakedFood(String name, double portion, double price, String brand) {
     this.setName(name);
     this.setPortion(portion);
     this.setPrice(price);
@@ -50,5 +50,10 @@ public abstract class BakedFoodImpl implements BakedFood {
   private void setBrand(String brand) {
     Validator.validateBrand(brand);
     this.brand = brand;
+  }
+
+  @Override
+  public String toString() {
+    return String.format("%s: %.2fg - %.2f", this.name, this.portion, this.price);
   }
 }
