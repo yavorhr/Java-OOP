@@ -63,7 +63,8 @@ public abstract class BaseTable implements Table {
 
   @Override
   public void reserve(int numberOfPeople) {
-
+    setNumberOfPeople(numberOfPeople);
+    this.isReserved = true;
   }
 
   @Override
