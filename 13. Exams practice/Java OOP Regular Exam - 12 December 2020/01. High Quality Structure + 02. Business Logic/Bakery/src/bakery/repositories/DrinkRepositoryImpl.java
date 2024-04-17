@@ -1,13 +1,13 @@
 package bakery.repositories;
 
 import bakery.entities.drinks.interfaces.Drink;
-import bakery.repositories.interfaces.Repository;
+import bakery.repositories.interfaces.DrinkRepository;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
-public class DrinkRepositoryImpl implements Repository<Drink> {
+public class DrinkRepositoryImpl implements DrinkRepository<Drink> {
   private Collection<Drink> drinks;
 
   public DrinkRepositoryImpl() {
@@ -22,5 +22,15 @@ public class DrinkRepositoryImpl implements Repository<Drink> {
   @Override
   public void add(Drink drink) {
     this.drinks.add(drink);
+  }
+
+  @Override
+  public Drink getByNameAndBrand(String drinkName, String drinkBrand) {
+    return this.drinks.stream()
+            .filter(d ->
+                    d.getBrand().equals(drinkBrand) &&
+                            d.getName().equals(drinkName))
+            .findFirst()
+            .orElse(null);
   }
 }
