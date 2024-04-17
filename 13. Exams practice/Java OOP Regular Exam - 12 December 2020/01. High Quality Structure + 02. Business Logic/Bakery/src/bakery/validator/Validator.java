@@ -27,6 +27,15 @@ public class Validator {
     }
   }
 
+  public static void validateCapacity(int capacity) {
+    if (capacity < 0) {
+      throw new IllegalArgumentException(ExceptionMessages.INVALID_TABLE_CAPACITY);
+    }
+  }
 
-
+  public static void validateNumberOfPeople(int peopleCount) {
+    if (peopleCount <= 0) {
+      throw new IllegalArgumentException(ExceptionMessages.INVALID_NUMBER_OF_PEOPLE);
+    }
+  }
 }

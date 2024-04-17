@@ -91,5 +91,13 @@ public abstract class BaseTable implements Table {
     return null;
   }
 
+  private void setCapacity(int capacity) {
+    Validator.validateCapacity(capacity);
+    this.capacity = capacity;
+  }
 
+  private void setNumberOfPeople(int numberOfPeople) {
+    Validator.validateNumberOfPeople(numberOfPeople);
+    this.numberOfPeople = numberOfPeople;
+  }
 }
