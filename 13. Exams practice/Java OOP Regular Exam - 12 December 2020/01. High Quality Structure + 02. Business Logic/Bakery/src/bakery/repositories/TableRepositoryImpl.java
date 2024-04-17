@@ -1,6 +1,7 @@
-package bakery.repositories.interfaces;
+package bakery.repositories;
 
 import bakery.entities.tables.interfaces.Table;
+import bakery.repositories.interfaces.TableRepository;
 
 import java.util.ArrayList;
 import java.util.Collection;
