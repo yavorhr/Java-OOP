@@ -79,7 +79,10 @@ public abstract class BaseTable implements Table {
 
   @Override
   public double getBill() {
-    return 0;
+    double foodBill = this.foodOrders.stream().mapToDouble(BakedFood::getPrice).sum();
+    double drinksBill = this.drinkOrders.stream().mapToDouble(Drink::getPrice).sum();
+
+    return foodBill + drinksBill;
   }
 
   @Override
