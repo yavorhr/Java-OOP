@@ -69,12 +69,12 @@ public abstract class BaseTable implements Table {
 
   @Override
   public void orderFood(BakedFood food) {
-
+    this.foodOrders.add(food);
   }
 
   @Override
   public void orderDrink(Drink drink) {
-
+    this.drinkOrders.add(drink);
   }
 
   @Override
