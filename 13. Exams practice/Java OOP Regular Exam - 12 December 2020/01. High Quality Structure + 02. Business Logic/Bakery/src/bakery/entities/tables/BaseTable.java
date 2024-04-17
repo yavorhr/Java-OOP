@@ -96,7 +96,17 @@ public abstract class BaseTable implements Table {
 
   @Override
   public String getFreeTableInfo() {
-    return null;
+
+    return String.format("""
+            "Table: %d"
+            "Type: %s"
+            "Capacity: %d"
+            "Price per Person: %.2f"
+            """,
+            this.tableNumber,
+            this.getClass().getSimpleName(),
+            this.capacity,
+            this.pricePerPerson);
   }
 
   private void setNumberOfPeople(int numberOfPeople) {
