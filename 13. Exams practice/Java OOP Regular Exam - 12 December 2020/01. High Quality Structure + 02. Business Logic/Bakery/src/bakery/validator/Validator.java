@@ -26,4 +26,7 @@ public class Validator {
       throw new IllegalArgumentException(ExceptionMessages.INVALID_PRICE);
     }
   }
+
+
+
 }

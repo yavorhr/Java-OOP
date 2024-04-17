@@ -1,0 +1,95 @@
+package bakery.entities.tables;
+
+import bakery.entities.bakedFoods.interfaces.BakedFood;
+import bakery.entities.drinks.interfaces.Drink;
+import bakery.entities.tables.interfaces.Table;
+import bakery.validator.Validator;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+public abstract class BaseTable implements Table {
+  private int tableNumber;
+  private int capacity;
+  private double pricePerPerson;
+
+  private Collection<BakedFood> foodOrders;
+  private Collection<Drink> drinkOrders;
+  private int numberOfPeople;
+  private boolean isReserved;
+  private double price;
+
+  protected BaseTable(int tableNumber, int capacity, double pricePerPerson) {
+    this.tableNumber = tableNumber;
+    this.capacity = capacity;
+    this.pricePerPerson = pricePerPerson;
+
+    this.foodOrders = new ArrayList<>();
+    this.drinkOrders = new ArrayList<>();
+    this.numberOfPeople = 0;
+    this.isReserved = false;
+    this.price = 0;
+  }
+
+  @Override
+  public int getTableNumber() {
+    return this.tableNumber;
+  }
+
+  @Override
+  public int getCapacity() {
+    return this.capacity;
+  }
+
+  @Override
+  public int getNumberOfPeople() {
+    return this.numberOfPeople;
+  }
+
+  @Override
+  public double getPricePerPerson() {
+    return this.pricePerPerson;
+  }
+
+  @Override
+  public boolean isReserved() {
+    return this.isReserved;
+  }
+
+  @Override
+  public double getPrice() {
+    return this.numberOfPeople * this.pricePerPerson;
+  }
+
+  @Override
+  public void reserve(int numberOfPeople) {
+
+  }
+
+  @Override
+  public void orderFood(BakedFood food) {
+
+  }
+
+  @Override
+  public void orderDrink(Drink drink) {
+
+  }
+
+  @Override
+  public double getBill() {
+    return 0;
+  }
+
+  @Override
+  public void clear() {
+
+  }
+
+  @Override
+  public String getFreeTableInfo() {
+    return null;
+  }
+
+
+}
