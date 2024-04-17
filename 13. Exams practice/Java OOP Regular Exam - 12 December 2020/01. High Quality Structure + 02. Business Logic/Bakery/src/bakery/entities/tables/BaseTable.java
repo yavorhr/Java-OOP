@@ -87,17 +87,16 @@ public abstract class BaseTable implements Table {
 
   @Override
   public void clear() {
-
+    this.drinkOrders.clear();
+    this.foodOrders.clear();
+    this.isReserved = false;
+    this.numberOfPeople = 0;
+    this.price = 0;
   }
 
   @Override
   public String getFreeTableInfo() {
     return null;
-  }
-
-  private void setCapacity(int capacity) {
-    Validator.validateCapacity(capacity);
-    this.capacity = capacity;
   }
 
   private void setNumberOfPeople(int numberOfPeople) {
