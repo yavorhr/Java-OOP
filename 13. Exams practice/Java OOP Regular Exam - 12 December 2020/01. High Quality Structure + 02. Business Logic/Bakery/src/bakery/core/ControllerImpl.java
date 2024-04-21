@@ -6,10 +6,11 @@ import bakery.core.interfaces.Controller;
 import bakery.entities.bakedFoods.interfaces.BakedFood;
 import bakery.entities.drinks.interfaces.Drink;
 import bakery.entities.tables.interfaces.Table;
+import bakery.factory.FoodFactory;
 import bakery.repositories.interfaces.*;
 
 public class ControllerImpl implements Controller {
-  private Repository<BakedFood> foodRepository;
+  private FoodRepository<BakedFood> foodRepository;
   private DrinkRepository<Drink> drinkRepository;
   private TableRepository<Table> tableRepository;
 
@@ -23,8 +24,12 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addFood(String type, String name, double price) {
-    //TODO:
-    return null;
+    validateIfFoodExists(name, type);
+    BakedFood food = FoodFactory.create(type, name, price);
+
+    foodRepository.add(food);
+
+    return String.format(OutputMessages.FOOD_ADDED, name, type);
   }
 
   @Override
@@ -74,5 +79,12 @@ public class ControllerImpl implements Controller {
   public String getTotalIncome() {
     //TODO:
     return null;
+  }
+
+  // Helpers
+  private void validateIfFoodExists(String name, String type) {
+    if (this.foodRepository.getByName(name) != null) {
+      throw new IllegalArgumentException(String.format(ExceptionMessages.FOOD_OR_DRINK_EXIST, type, name));
+    }
   }
 }
