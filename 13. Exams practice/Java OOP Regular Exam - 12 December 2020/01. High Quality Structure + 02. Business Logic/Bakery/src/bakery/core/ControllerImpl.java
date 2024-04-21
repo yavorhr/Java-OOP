@@ -55,8 +55,19 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String reserveTable(int numberOfPeople) {
-    //TODO:
-    return null;
+    Table table = findFreeTable(numberOfPeople);
+
+    if (table == null) {
+      return String.format(OutputMessages.RESERVATION_NOT_POSSIBLE, numberOfPeople);
+    }
+
+    table.reserve(numberOfPeople);
+
+    return String.format(OutputMessages.TABLE_RESERVED, table.getTableNumber(), numberOfPeople);
+  }
+
+  private Table findFreeTable(int numberOfPeople) {
+    return this.tableRepository.getAll().stream().filter(t -> t.getCapacity() <= numberOfPeople && !t.isReserved()).findFirst().orElse(null);
   }
 
   @Override
