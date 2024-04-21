@@ -66,14 +66,27 @@ public class ControllerImpl implements Controller {
     return String.format(OutputMessages.TABLE_RESERVED, table.getTableNumber(), numberOfPeople);
   }
 
-  private Table findFreeTable(int numberOfPeople) {
-    return this.tableRepository.getAll().stream().filter(t -> t.getCapacity() <= numberOfPeople && !t.isReserved()).findFirst().orElse(null);
-  }
-
   @Override
   public String orderFood(int tableNumber, String foodName) {
-    //TODO:
-    return null;
+    Table table = getTable(tableNumber);
+
+    if (table == null) {
+      return String.format(OutputMessages.WRONG_TABLE_NUMBER, tableNumber);
+    }
+
+    BakedFood food = this.foodRepository.getByName(foodName);
+
+    if (food == null) {
+      return String.format(OutputMessages.NONE_EXISTENT_FOOD, foodName);
+    }
+
+    table.orderFood(food);
+
+    return String.format(OutputMessages.FOOD_ORDER_SUCCESSFUL, tableNumber, foodName);
+  }
+
+  private Table getTable(int tableNumber) {
+    return this.tableRepository.getByNumber(tableNumber);
   }
 
   @Override
@@ -115,8 +128,12 @@ public class ControllerImpl implements Controller {
   }
 
   private void validateTableNumber(int tableNumber) {
-    if (this.tableRepository.getByNumber(tableNumber) != null) {
+    if (getTable(tableNumber) != null) {
       throw new IllegalArgumentException(String.format(ExceptionMessages.TABLE_EXIST, tableNumber));
     }
+  }
+
+  private Table findFreeTable(int numberOfPeople) {
+    return this.tableRepository.getAll().stream().filter(t -> t.getCapacity() <= numberOfPeople && !t.isReserved()).findFirst().orElse(null);
   }
 }
