@@ -8,6 +8,7 @@ import bakery.entities.drinks.interfaces.Drink;
 import bakery.entities.tables.interfaces.Table;
 import bakery.factory.DrinkFactory;
 import bakery.factory.FoodFactory;
+import bakery.factory.TableFactory;
 import bakery.repositories.interfaces.*;
 
 public class ControllerImpl implements Controller {
@@ -45,8 +46,11 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addTable(String type, int tableNumber, int capacity) {
-    //TODO:
-    return null;
+    validateTableNumber(tableNumber);
+    Table table = TableFactory.create(type, tableNumber, capacity);
+
+    this.tableRepository.add(table);
+    return String.format(OutputMessages.TABLE_ADDED, tableNumber);
   }
 
   @Override
@@ -96,6 +100,12 @@ public class ControllerImpl implements Controller {
   private void validateIfDrinkExists(String name, String brand, String type) {
     if (this.drinkRepository.getByNameAndBrand(name, brand) != null) {
       throw new IllegalArgumentException(String.format(ExceptionMessages.FOOD_OR_DRINK_EXIST, type, name));
+    }
+  }
+
+  private void validateTableNumber(int tableNumber) {
+    if (this.tableRepository.getByNumber(tableNumber) != null) {
+      throw new IllegalArgumentException(String.format(ExceptionMessages.TABLE_EXIST, tableNumber));
     }
   }
 }
