@@ -97,13 +97,15 @@ public class ControllerImpl implements Controller {
     }
 
     table.orderDrink(drink);
-    return String.format(OutputMessages.DRINK_ORDER_SUCCESSFUL, tableNumber, drinkName,drinkBrand);
+    return String.format(OutputMessages.DRINK_ORDER_SUCCESSFUL, tableNumber, drinkName, drinkBrand);
   }
 
   @Override
   public String leaveTable(int tableNumber) {
-    //TODO:
-    return null;
+    Table table = this.tableRepository.getByNumber(tableNumber);
+    double bill = table.getBill();
+
+    return String.format(OutputMessages.BILL, tableNumber, bill);
   }
 
   @Override
