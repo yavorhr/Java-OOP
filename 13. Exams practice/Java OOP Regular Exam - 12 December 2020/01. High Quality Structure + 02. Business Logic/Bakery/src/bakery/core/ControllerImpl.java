@@ -110,8 +110,7 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String getFreeTablesInfo() {
-    //TODO:
-    return null;
+    return getFreeTablesInfo();
   }
 
   @Override
@@ -145,6 +144,17 @@ public class ControllerImpl implements Controller {
 
   private Table getTable(int tableNumber) {
     return this.tableRepository.getByNumber(tableNumber);
+  }
+
+  private String printFreeTablesInfo() {
+    StringBuilder sb = new StringBuilder();
+
+    this.tableRepository
+            .getAll().stream()
+            .filter(t -> !t.isReserved())
+            .forEach(t -> sb.append(t.getFreeTableInfo()));
+
+    return sb.toString().trim();
   }
 
 }
