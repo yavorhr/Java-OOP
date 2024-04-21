@@ -8,13 +8,11 @@ public abstract class BaseBakedFood implements BakedFood {
   private String name;
   private double portion;
   private double price;
-  private String brand;
 
-  public BaseBakedFood(String name, double portion, double price, String brand) {
+  public BaseBakedFood(String name, double portion, double price) {
     this.setName(name);
     this.setPortion(portion);
     this.setPrice(price);
-    this.setBrand(brand);
   }
 
   @Override
@@ -45,11 +43,6 @@ public abstract class BaseBakedFood implements BakedFood {
   private void setPrice(double price) {
     Validator.validatePrice(price);
     this.price = price;
-  }
-
-  private void setBrand(String brand) {
-    Validator.validateBrand(brand);
-    this.brand = brand;
   }
 
   @Override

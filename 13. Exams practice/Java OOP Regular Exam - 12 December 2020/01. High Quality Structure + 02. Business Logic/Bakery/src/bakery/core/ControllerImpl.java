@@ -9,11 +9,15 @@ import bakery.entities.tables.interfaces.Table;
 import bakery.repositories.interfaces.*;
 
 public class ControllerImpl implements Controller {
-
+  private Repository<BakedFood> foodRepository;
+  private DrinkRepository<Drink> drinkRepository;
+  private TableRepository<Table> tableRepository;
 
 
   public ControllerImpl(FoodRepository<BakedFood> foodRepository, DrinkRepository<Drink> drinkRepository, TableRepository<Table> tableRepository) {
-
+    this.foodRepository = foodRepository;
+    this.drinkRepository = drinkRepository;
+    this.tableRepository = tableRepository;
   }
 
 
