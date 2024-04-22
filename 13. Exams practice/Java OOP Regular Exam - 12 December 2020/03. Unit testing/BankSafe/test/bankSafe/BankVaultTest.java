@@ -47,4 +47,10 @@ public class BankVaultTest {
     this.bankVault.addItem("A", item1);
     this.bankVault.addItem("A", item2);
   }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testAddItemShouldThrowErrorWhenItemIsAddedToOtherCell() throws OperationNotSupportedException {
+    this.bankVault.addItem("A", item1);
+    this.bankVault.addItem("B", item1);
+  }
 }
