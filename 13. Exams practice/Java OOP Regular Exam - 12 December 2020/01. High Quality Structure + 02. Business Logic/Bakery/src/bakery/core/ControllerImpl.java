@@ -40,7 +40,7 @@ public class ControllerImpl implements Controller {
     Drink drink = DrinkFactory.create(type, name, portion, brand);
     this.drinkRepository.add(drink);
 
-    return String.format(OutputMessages.DRINK_ADDED, name, type);
+    return String.format(OutputMessages.DRINK_ADDED, name, brand);
   }
 
 
