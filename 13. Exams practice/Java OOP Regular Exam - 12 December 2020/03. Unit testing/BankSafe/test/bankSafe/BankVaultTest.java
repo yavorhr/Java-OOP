@@ -63,6 +63,14 @@ public class BankVaultTest {
     Assert.assertEquals("123", this.bankVault.getVaultCells().get("A").getItemId());
   }
 
+  //test removeItem()
+  @Test (expected = IllegalArgumentException.class)
+  public void testRemoveItemShouldThrowErrorWhenCellDoesntExist() {
+    this.bankVault.removeItem("XYD", item1);
+  }
+
+
+
 
 
 }
