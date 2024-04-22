@@ -31,7 +31,7 @@ public class ControllerImpl implements Controller {
 
     this.foodRepository.add(food);
 
-    return String.format(OutputMessages.FOOD_ADDED,  name, type);
+    return String.format(OutputMessages.FOOD_ADDED, name, type);
   }
 
   @Override
@@ -57,7 +57,7 @@ public class ControllerImpl implements Controller {
   public String reserveTable(int numberOfPeople) {
     Table table = findFreeTable(numberOfPeople);
 
-    if (table == null) {
+    if (table.isReserved()) {
       return String.format(OutputMessages.RESERVATION_NOT_POSSIBLE, numberOfPeople);
     }
 
@@ -69,7 +69,8 @@ public class ControllerImpl implements Controller {
   @Override
   public String orderFood(int tableNumber, String foodName) {
     Table table = getTable(tableNumber);
-    if (table == null) {
+
+    if (table == null || !table.isReserved()) {
       return String.format(OutputMessages.WRONG_TABLE_NUMBER, tableNumber);
     }
 
@@ -87,7 +88,7 @@ public class ControllerImpl implements Controller {
   public String orderDrink(int tableNumber, String drinkName, String drinkBrand) {
     Table table = getTable(tableNumber);
 
-    if (table == null) {
+    if (table == null || !table.isReserved()) {
       return String.format(OutputMessages.WRONG_TABLE_NUMBER, tableNumber);
     }
 
