@@ -28,5 +28,9 @@ public class BankVaultTest {
     Assert.assertNull(this.bankVault.getVaultCells().get("A1"));
   }
 
-
+  //test getVaultCells()
+  @Test(expected = UnsupportedOperationException.class)
+  public void testBankVaultGetVaultCells() {
+    this.bankVault.getVaultCells().put("C5", null);
+  }
 }
