@@ -22,7 +22,7 @@ public abstract class BaseTable implements Table {
 
   protected BaseTable(int tableNumber, int capacity, double pricePerPerson) {
     this.tableNumber = tableNumber;
-    this.capacity = capacity;
+    this.setCapacity(capacity);
     this.pricePerPerson = pricePerPerson;
 
     this.foodOrders = new ArrayList<>();
@@ -119,5 +119,10 @@ public abstract class BaseTable implements Table {
   private void setNumberOfPeople(int numberOfPeople) {
     Validator.validateNumberOfPeople(numberOfPeople);
     this.numberOfPeople = numberOfPeople;
+  }
+
+  private void setCapacity(int capacity) {
+    Validator.validateCapacity(capacity);
+    this.capacity = capacity;
   }
 }
