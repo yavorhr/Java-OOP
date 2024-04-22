@@ -63,19 +63,24 @@ public class BankVaultTest {
   }
 
   //test removeItem()
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testRemoveItemShouldThrowErrorWhenCellDoesntExist() {
     this.bankVault.removeItem("XYD", item1);
   }
 
-  //test removeItem()
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testRemoveItemShouldThrowErrorWhenItemDoesntExist() {
     this.bankVault.removeItem("A1", item1);
   }
 
+  @Test
+  public void testRemoveItemShouldWorksCorrect() throws OperationNotSupportedException {
+    this.bankVault.addItem("A1", item1);
+    String actual = this.bankVault.removeItem("A1", item1);
+    String expected = "Remove item:123 successfully!";
 
-
+    Assert.assertEquals(expected, actual);
+  }
 
 
 }
