@@ -31,5 +31,5 @@ public abstract class BaseDiver implements Diver {
   public SeaCatch getSeaCatch() {
     return this.seaCatch;
   }
-  
+
 }
