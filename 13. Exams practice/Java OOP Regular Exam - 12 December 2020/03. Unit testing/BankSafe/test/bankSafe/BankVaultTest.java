@@ -44,29 +44,34 @@ public class BankVaultTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testAddItemShouldThrowErrorWhenCellIsNotEmpty() throws OperationNotSupportedException {
-    this.bankVault.addItem("A", item1);
-    this.bankVault.addItem("A", item2);
+    this.bankVault.addItem("A1", item1);
+    this.bankVault.addItem("A1", item2);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test(expected = OperationNotSupportedException.class)
   public void testAddItemShouldThrowErrorWhenItemIsAddedToOtherCell() throws OperationNotSupportedException {
-    this.bankVault.addItem("A", item1);
-    this.bankVault.addItem("B", item1);
+    this.bankVault.addItem("A1", item1);
+    this.bankVault.addItem("B1", item1);
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void testAddItemShouldWorksCorrect() throws OperationNotSupportedException {
-    this.bankVault.addItem("A", item1);
+    this.bankVault.addItem("A1", item1);
 
-    Assert.assertEquals(1, this.bankVault.getVaultCells().size());
-    Assert.assertEquals("George", this.bankVault.getVaultCells().get("A").getOwner());
-    Assert.assertEquals("123", this.bankVault.getVaultCells().get("A").getItemId());
+    Assert.assertEquals("George", this.bankVault.getVaultCells().get("A1").getOwner());
+    Assert.assertEquals("123", this.bankVault.getVaultCells().get("A1").getItemId());
   }
 
   //test removeItem()
   @Test (expected = IllegalArgumentException.class)
   public void testRemoveItemShouldThrowErrorWhenCellDoesntExist() {
     this.bankVault.removeItem("XYD", item1);
+  }
+
+  //test removeItem()
+  @Test (expected = IllegalArgumentException.class)
+  public void testRemoveItemShouldThrowErrorWhenItemDoesntExist() {
+    this.bankVault.removeItem("A1", item1);
   }
 
 
