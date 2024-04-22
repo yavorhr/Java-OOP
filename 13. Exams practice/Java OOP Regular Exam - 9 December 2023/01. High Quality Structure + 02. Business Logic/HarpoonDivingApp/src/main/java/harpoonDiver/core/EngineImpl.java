@@ -13,11 +13,9 @@ public class EngineImpl implements Engine{
     private final Scanner scanner;
 
     public EngineImpl(Controller controller) {
-        this.controller = controller; //TODO implement first ControllerImpl class
+        this.controller = controller;
         this.scanner = new Scanner(System.in);
     }
-
-
 
     @Override
     public void run() {
