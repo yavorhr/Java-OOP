@@ -1,7 +1,9 @@
 package bankSafe;
 
 
+import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
 
 public class BankVaultTest {
   private BankVault bankVault;
@@ -14,6 +16,16 @@ public class BankVaultTest {
     this.bankVault = new BankVault();
     item1 = new Item("George", "123");
     item2 = new Item("Mike", "1234");
+  }
+
+  //test BankVault constructor
+  @Test
+  public void testBankVaultConstructorInitObj() {
+    int actualSafeSize = this.bankVault.getVaultCells().size();
+    int expected = 12;
+
+    Assert.assertEquals(actualSafeSize, expected);
+    Assert.assertNull(this.bankVault.getVaultCells().get("A1"));
   }
 
 
