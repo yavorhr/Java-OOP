@@ -5,6 +5,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.naming.OperationNotSupportedException;
+
 public class BankVaultTest {
   private BankVault bankVault;
   private Item item1;
@@ -32,5 +34,11 @@ public class BankVaultTest {
   @Test(expected = UnsupportedOperationException.class)
   public void testBankVaultGetVaultCells() {
     this.bankVault.getVaultCells().put("C5", null);
+  }
+
+  //test addItem()
+  @Test(expected = IllegalArgumentException.class)
+  public void testAddItemShouldThrowErrorWhenAddToNoneExistingCell() throws OperationNotSupportedException {
+    this.bankVault.addItem("ZYD", item1);
   }
 }
