@@ -53,4 +53,16 @@ public class BankVaultTest {
     this.bankVault.addItem("A", item1);
     this.bankVault.addItem("B", item1);
   }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testAddItemShouldWorksCorrect() throws OperationNotSupportedException {
+    this.bankVault.addItem("A", item1);
+
+    Assert.assertEquals(1, this.bankVault.getVaultCells().size());
+    Assert.assertEquals("George", this.bankVault.getVaultCells().get("A").getOwner());
+    Assert.assertEquals("123", this.bankVault.getVaultCells().get("A").getItemId());
+  }
+
+
+
 }
