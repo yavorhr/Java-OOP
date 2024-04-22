@@ -31,7 +31,7 @@ public class ControllerImpl implements Controller {
 
     this.foodRepository.add(food);
 
-    return String.format(OutputMessages.FOOD_ADDED, type, name);
+    return String.format(OutputMessages.FOOD_ADDED,  name, type);
   }
 
   @Override
@@ -40,7 +40,7 @@ public class ControllerImpl implements Controller {
     Drink drink = DrinkFactory.create(type, name, portion, brand);
     this.drinkRepository.add(drink);
 
-    return String.format(OutputMessages.DRINK_ADDED, type, name);
+    return String.format(OutputMessages.DRINK_ADDED, name, type);
   }
 
 
@@ -115,7 +115,7 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String getTotalIncome() {
-    double totalIncome = this.tableRepository.getAll().stream().mapToDouble(Table::getPrice).sum();
+    double totalIncome = this.tableRepository.getAll().stream().mapToDouble(Table::getBill).sum();
 
     return String.format(OutputMessages.TOTAL_INCOME, totalIncome);
   }

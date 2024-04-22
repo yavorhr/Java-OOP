@@ -11,9 +11,9 @@ public class BaseDrink implements Drink {
 
   protected BaseDrink(String name, int portion, double price, String brand) {
     this.name = name;
-    this.portion = portion;
-    this.price = price;
-    this.brand = brand;
+    this.setPortion(portion);
+    this.setPrice(price);
+    this.setBrand(brand);
   }
 
   @Override

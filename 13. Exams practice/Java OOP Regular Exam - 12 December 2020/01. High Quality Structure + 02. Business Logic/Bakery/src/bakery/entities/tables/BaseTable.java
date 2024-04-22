@@ -1,5 +1,6 @@
 package bakery.entities.tables;
 
+import bakery.common.OutputMessages;
 import bakery.entities.bakedFoods.interfaces.BakedFood;
 import bakery.entities.drinks.interfaces.Drink;
 import bakery.entities.tables.interfaces.Table;
@@ -81,9 +82,10 @@ public abstract class BaseTable implements Table {
   public double getBill() {
     double foodBill = this.foodOrders.stream().mapToDouble(BakedFood::getPrice).sum();
     double drinksBill = this.drinkOrders.stream().mapToDouble(Drink::getPrice).sum();
-    this.price = foodBill + drinksBill + this.getPrice();
+    double total = foodBill + drinksBill + this.getPrice();
 
-    return this.price;
+    this.setPrice(total);
+    return total;
   }
 
   @Override
@@ -93,6 +95,10 @@ public abstract class BaseTable implements Table {
     this.isReserved = false;
     this.numberOfPeople = 0;
     this.price = 0;
+  }
+
+  public void setPrice(double price) {
+    this.price = price;
   }
 
   @Override
