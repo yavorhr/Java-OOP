@@ -59,7 +59,7 @@ public abstract class BaseTable implements Table {
 
   @Override
   public double getPrice() {
-    return this.numberOfPeople * this.pricePerPerson;
+    return this.price;
   }
 
   @Override
@@ -82,9 +82,10 @@ public abstract class BaseTable implements Table {
   public double getBill() {
     double foodBill = this.foodOrders.stream().mapToDouble(BakedFood::getPrice).sum();
     double drinksBill = this.drinkOrders.stream().mapToDouble(Drink::getPrice).sum();
-    double total = foodBill + drinksBill + this.getPrice();
+    double total = foodBill + drinksBill + this.numberOfPeople * this.pricePerPerson;
 
     this.setPrice(total);
+
     return total;
   }
 
@@ -95,10 +96,6 @@ public abstract class BaseTable implements Table {
     this.isReserved = false;
     this.numberOfPeople = 0;
     this.price = 0;
-  }
-
-  public void setPrice(double price) {
-    this.price = price;
   }
 
   @Override
@@ -124,5 +121,9 @@ public abstract class BaseTable implements Table {
   private void setCapacity(int capacity) {
     Validator.validateCapacity(capacity);
     this.capacity = capacity;
+  }
+
+  private void setPrice(double price) {
+    this.price = price;
   }
 }

@@ -116,7 +116,10 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String getTotalIncome() {
-    double totalIncome = this.tableRepository.getAll().stream().mapToDouble(Table::getBill).sum();
+    double totalIncome = this.tableRepository
+            .getAll()
+            .stream()
+            .mapToDouble(Table::getPrice).sum();
 
     return String.format(OutputMessages.TOTAL_INCOME, totalIncome);
   }
