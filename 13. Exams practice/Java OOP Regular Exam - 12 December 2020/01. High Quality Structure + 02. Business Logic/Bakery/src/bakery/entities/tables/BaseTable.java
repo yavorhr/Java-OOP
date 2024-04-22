@@ -81,8 +81,9 @@ public abstract class BaseTable implements Table {
   public double getBill() {
     double foodBill = this.foodOrders.stream().mapToDouble(BakedFood::getPrice).sum();
     double drinksBill = this.drinkOrders.stream().mapToDouble(Drink::getPrice).sum();
+    this.price = foodBill + drinksBill + this.getPrice();
 
-    return foodBill + drinksBill;
+    return this.price;
   }
 
   @Override
@@ -98,11 +99,11 @@ public abstract class BaseTable implements Table {
   public String getFreeTableInfo() {
 
     return String.format("""
-            "Table: %d"
-            "Type: %s"
-            "Capacity: %d"
-            "Price per Person: %.2f"
-            """,
+                    Table: %d
+                    Type: %s
+                    Capacity: %d
+                    Price per Person: %.2f
+                    """,
             this.tableNumber,
             this.getClass().getSimpleName(),
             this.capacity,

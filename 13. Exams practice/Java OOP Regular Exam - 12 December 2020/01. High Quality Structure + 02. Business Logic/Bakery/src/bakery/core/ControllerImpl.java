@@ -110,13 +110,12 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String getFreeTablesInfo() {
-    return getFreeTablesInfo();
+    return printFreeTablesInfo();
   }
 
   @Override
   public String getTotalIncome() {
-    //TODO:
-    return null;
+   
   }
 
   // Helpers
@@ -139,7 +138,12 @@ public class ControllerImpl implements Controller {
   }
 
   private Table findFreeTable(int numberOfPeople) {
-    return this.tableRepository.getAll().stream().filter(t -> t.getCapacity() <= numberOfPeople && !t.isReserved()).findFirst().orElse(null);
+    return this.tableRepository
+            .getAll()
+            .stream()
+            .filter(t -> t.getCapacity() >= numberOfPeople && !t.isReserved())
+            .findFirst()
+            .orElse(null);
   }
 
   private Table getTable(int tableNumber) {
