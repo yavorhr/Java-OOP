@@ -41,4 +41,10 @@ public class BankVaultTest {
   public void testAddItemShouldThrowErrorWhenAddToNoneExistingCell() throws OperationNotSupportedException {
     this.bankVault.addItem("ZYD", item1);
   }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testAddItemShouldThrowErrorWhenCellIsNotEmpty() throws OperationNotSupportedException {
+    this.bankVault.addItem("A", item1);
+    this.bankVault.addItem("A", item2);
+  }
 }
