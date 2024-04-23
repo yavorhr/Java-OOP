@@ -7,8 +7,5 @@ public class OpenWaterDiver extends BaseDiver {
     super(name, INITIAL_OXYGEN_LEVEL);
   }
 
-  @Override
-  public void shoot() {
 
-  }
 }

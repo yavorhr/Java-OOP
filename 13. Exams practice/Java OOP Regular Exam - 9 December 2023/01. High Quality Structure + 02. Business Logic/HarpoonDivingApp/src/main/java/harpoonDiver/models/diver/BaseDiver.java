@@ -32,4 +32,12 @@ public abstract class BaseDiver implements Diver {
     return this.seaCatch;
   }
 
+  public void setOxygen(double oxygen) {
+    this.oxygen = oxygen;
+  }
+
+  @Override
+  public void shoot() {
+
+  }
 }

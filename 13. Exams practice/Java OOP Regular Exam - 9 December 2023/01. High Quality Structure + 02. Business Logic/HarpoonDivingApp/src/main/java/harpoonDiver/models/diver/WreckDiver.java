@@ -7,8 +7,5 @@ public class WreckDiver extends BaseDiver {
     super(name, oxygen);
   }
 
-  @Override
-  public void shoot() {
 
-  }
 }
