@@ -14,10 +14,10 @@ import harpoonDiver.repositories.Repository;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class ControllerImpl implements Controller {
+  private static int DIVING_COUNT = 0;
   private Repository<Diver> divers;
   private Repository<DivingSite> divingSites;
   private Diving diving;
@@ -57,7 +57,7 @@ public class ControllerImpl implements Controller {
   @Override
   public String startDiving(String siteName) {
     validateIfThereAreDiversWithEnoughOxygen();
-
+    DIVING_COUNT++;
     DivingSite diving = this.divingSites.byName(siteName);
     Collection<Diver> divers = getDiversWithOxygen();
 

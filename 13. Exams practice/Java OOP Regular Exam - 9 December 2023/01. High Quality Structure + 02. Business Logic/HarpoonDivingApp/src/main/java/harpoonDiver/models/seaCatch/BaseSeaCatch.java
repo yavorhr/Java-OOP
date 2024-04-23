@@ -2,7 +2,6 @@ package harpoonDiver.models.seaCatch;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 
 public class BaseSeaCatch implements SeaCatch {
   private Collection<String> seaCreatures;
@@ -13,6 +12,6 @@ public class BaseSeaCatch implements SeaCatch {
 
   @Override
   public Collection<String> getSeaCreatures() {
-    return Collections.unmodifiableCollection(this.seaCreatures);
+    return this.seaCreatures;
   }
 }
