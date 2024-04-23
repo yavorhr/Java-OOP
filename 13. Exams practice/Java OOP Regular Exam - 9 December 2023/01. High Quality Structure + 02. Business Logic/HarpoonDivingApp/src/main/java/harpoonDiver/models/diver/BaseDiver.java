@@ -1,6 +1,8 @@
 package harpoonDiver.models.diver;
 
+import harpoonDiver.models.seaCatch.BaseSeaCatch;
 import harpoonDiver.models.seaCatch.SeaCatch;
+import harpoonDiver.validation.Validator;
 
 public abstract class BaseDiver implements Diver {
   private String name;
@@ -8,8 +10,9 @@ public abstract class BaseDiver implements Diver {
   private SeaCatch seaCatch;
 
   protected BaseDiver(String name, double oxygen) {
-    this.name = name;
-    this.oxygen = oxygen;
+    this.setName(name);
+    this.setOxygen(oxygen);
+    this.seaCatch = new BaseSeaCatch();
   }
 
   @Override
@@ -32,12 +35,18 @@ public abstract class BaseDiver implements Diver {
     return this.seaCatch;
   }
 
-  public void setOxygen(double oxygen) {
-    this.oxygen = oxygen;
-  }
-
   @Override
   public void shoot() {
 
+  }
+
+  private void setOxygen(double oxygen) {
+    Validator.validateDiversOxygen(oxygen);
+    this.oxygen = oxygen;
+  }
+
+  private void setName(String name) {
+    Validator.validateDiverName(name);
+    this.name = name;
   }
 }

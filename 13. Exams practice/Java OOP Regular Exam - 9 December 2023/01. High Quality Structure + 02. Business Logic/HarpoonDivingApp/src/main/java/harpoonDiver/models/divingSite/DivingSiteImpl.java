@@ -1,5 +1,7 @@
 package harpoonDiver.models.divingSite;
 
+import harpoonDiver.validation.Validator;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -9,7 +11,7 @@ public class DivingSiteImpl implements DivingSite {
   private Collection<String> seaCreatures;
 
   public DivingSiteImpl(String name) {
-    this.name = name;
+    this.setName(name);
     this.seaCreatures = new ArrayList<>();
   }
 
@@ -21,5 +23,10 @@ public class DivingSiteImpl implements DivingSite {
   @Override
   public String getName() {
     return this.name;
+  }
+
+  private void setName(String name) {
+    Validator.validateSiteName(name);
+    this.name = name;
   }
 }
