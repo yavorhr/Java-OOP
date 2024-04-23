@@ -33,7 +33,6 @@ public class EngineImpl implements Engine {
 
       System.out.println(result);
     }
-
   }
 
   private String processInput() throws IOException {
@@ -44,26 +43,14 @@ public class EngineImpl implements Engine {
     String result = null;
     String[] data = Arrays.stream(tokens).skip(1).toArray(String[]::new);
 
-    switch (command) {
-      case AddDiver:
-        result = addDiver(data);
-        break;
-      case AddDivingSite:
-        result = addDivingSite(data);
-        break;
-      case RemoveDiver:
-        result = removeDiver(data);
-        break;
-      case StartDiving:
-        result = startDiving(data);
-        break;
-      case GetStatistics:
-        result = getStatistics();
-        break;
-      case Exit:
-        result = Command.Exit.name();
-        break;
-    }
+    result = switch (command) {
+      case AddDiver -> addDiver(data);
+      case AddDivingSite -> addDivingSite(data);
+      case RemoveDiver -> removeDiver(data);
+      case StartDiving -> startDiving(data);
+      case GetStatistics -> getStatistics();
+      case Exit -> Command.Exit.name();
+    };
     return result;
   }
 
