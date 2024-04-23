@@ -68,8 +68,21 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String getStatistics() {
-    //TODO
-    return null;
+    StringBuilder sb = new StringBuilder();
+    sb.append(String.format(ConstantMessages.FINAL_DIVING_SITES, DIVING_COUNT)).append(System.lineSeparator());
+    sb.append(ConstantMessages.FINAL_DIVERS_STATISTICS).append(System.lineSeparator());
+    this.divers.getCollection().forEach(d -> {
+      sb.append(String.format(ConstantMessages.FINAL_DIVER_NAME, d.getName())).append(System.lineSeparator());
+      sb.append(String.format(ConstantMessages.FINAL_DIVER_OXYGEN, d.getOxygen())).append(System.lineSeparator());
+      sb.append(ConstantMessages.FINAL_DIVER_CATCH).append(getDiversCatch(d.getSeaCatch().getSeaCreatures())).append(System.lineSeparator());
+    });
+    return sb.toString();
+  }
+
+  private String getDiversCatch(Collection<String> seaCreatures) {
+    return seaCreatures.size() == 0
+            ? "None"
+            : String.join(", ", seaCreatures);
   }
 
   //Helpers
