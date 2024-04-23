@@ -4,7 +4,6 @@ import harpoonDiver.validation.Validator;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 
 public class DivingSiteImpl implements DivingSite {
   private String name;
@@ -17,7 +16,7 @@ public class DivingSiteImpl implements DivingSite {
 
   @Override
   public Collection<String> getSeaCreatures() {
-    return Collections.unmodifiableCollection(this.seaCreatures);
+    return this.seaCreatures;
   }
 
   @Override
