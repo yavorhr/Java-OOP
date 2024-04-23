@@ -37,7 +37,13 @@ public abstract class BaseDiver implements Diver {
 
   @Override
   public void shoot() {
+    if (canDive()) {
+      this.oxygen -= 30;
+    }
 
+    if (this.oxygen < 0) {
+      this.oxygen = 0;
+    }
   }
 
   private void setOxygen(double oxygen) {
