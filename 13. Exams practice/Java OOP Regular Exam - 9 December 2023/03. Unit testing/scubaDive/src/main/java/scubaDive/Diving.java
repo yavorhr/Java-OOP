@@ -6,7 +6,7 @@ import java.util.Collection;
 public class Diving {
     private static final String INVALID_DIVING_SITE = "Invalid diving site!";
     private static final String INVALID_CAPACITY = "Invalid capacity!";
-    private static final String NO_MORE_PLACES = "No more places for this dive!"; //TODO
+    private static final String NO_MORE_PLACES = "No more places for this dive!";
     private static final String DIVER_EXIST = "The diver %s is already in the dive!";
     private static final int ZERO_CAPACITY = 0;
 
