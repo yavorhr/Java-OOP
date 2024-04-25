@@ -83,7 +83,7 @@ public class ControllerImpl implements Controller {
       sb.append(String.format(ConstantMessages.FINAL_DIVER_CATCH, getDiversCatch(d.getSeaCatch().getSeaCreatures())))
               .append(System.lineSeparator());
     });
-    return sb.toString();
+    return sb.toString().trim();
   }
 
   //Helpers
