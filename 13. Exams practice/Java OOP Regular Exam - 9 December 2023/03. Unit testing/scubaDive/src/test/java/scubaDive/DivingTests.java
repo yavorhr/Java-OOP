@@ -67,4 +67,17 @@ public class DivingTests {
     this.diving.addDeepWaterDiver(new DeepWaterDiver("George", 100));
     this.diving.addDeepWaterDiver(new DeepWaterDiver("Tony", 100));
   }
+
+  // test removeDeepWaterDiver()
+  @Test
+  public void testRemoveDeepWaterDiverShouldWorksCorrect() {
+    Assert.assertTrue(this.diving.removeDeepWaterDiver("Mike"));
+    Assert.assertEquals(1, this.diving.getCount());
+  }
+
+  @Test
+  public void testRemoveDeepWaterDiverShouldThrowErrorWhenDiverNotExist() {
+    Assert.assertFalse(this.diving.removeDeepWaterDiver("Mikka"));
+    Assert.assertEquals(2, this.diving.getCount());
+  }
 }
