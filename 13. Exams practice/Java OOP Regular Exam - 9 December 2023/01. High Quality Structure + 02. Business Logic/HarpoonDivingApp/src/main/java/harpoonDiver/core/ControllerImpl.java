@@ -62,9 +62,11 @@ public class ControllerImpl implements Controller {
     Collection<Diver> divers = getDiversWithOxygen();
 
     this.diving.searching(diving, divers);
-    return String.format(ConstantMessages.SITE_DIVING, siteName, divers.size());
-  }
 
+    int removedDivers = getRemovedDivers(divers);
+
+    return String.format(ConstantMessages.SITE_DIVING, siteName, removedDivers);
+  }
 
   @Override
   public String getStatistics() {
@@ -119,5 +121,14 @@ public class ControllerImpl implements Controller {
             : String.join(", ", seaCreatures);
   }
 
+  private int getRemovedDivers(Collection<Diver> divers) {
+    int initialCount = divers.size();
+    int filteredDivers = divers
+            .stream()
+            .filter(d -> d.getOxygen() >= 30)
+            .collect(Collectors.toList())
+            .size();
 
+    return initialCount - filteredDivers;
+  }
 }
