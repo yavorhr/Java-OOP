@@ -7,5 +7,4 @@ public class WreckDiver extends BaseDiver {
     super(name, INITIAL_OXYGEN_LEVEL);
   }
 
-
 }
