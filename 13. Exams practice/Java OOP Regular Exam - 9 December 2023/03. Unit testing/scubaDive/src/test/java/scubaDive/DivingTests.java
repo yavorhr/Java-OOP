@@ -14,7 +14,7 @@ public class DivingTests {
   @Before
   public void setUp() {
     this.emptyDiving = new Diving("emptyDiving", 3);
-    this.diving = new Diving("blueLagoon", 2);
+    this.diving = new Diving("blueLagoon", 3);
     this.deepWaterDiver1 = new DeepWaterDiver("Mike", 30);
     this.deepWaterDiver2 = new DeepWaterDiver("Chris", 100);
     this.diving.addDeepWaterDiver(deepWaterDiver1);
@@ -29,16 +29,17 @@ public class DivingTests {
     Assert.assertEquals(0, emptyDiving.getCount());
   }
 
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testDivingCtorShouldThrowErrorWhenNegativeCapacity() {
-   new Diving("test", -1);
+    new Diving("test", -1);
   }
 
-  @Test (expected = NullPointerException.class)
+  @Test(expected = NullPointerException.class)
   public void testDivingCtorShouldThrowErrorWhenEmptyName() {
     new Diving("", 1);
   }
-  @Test (expected = NullPointerException.class)
+
+  @Test(expected = NullPointerException.class)
   public void testDivingCtorShouldThrowErrorWhenNullName() {
     new Diving(null, 1);
   }
@@ -47,6 +48,23 @@ public class DivingTests {
   @Test
   public void testDiverCtorShouldWorksCorrect() {
     Assert.assertEquals("Mike", deepWaterDiver1.getName());
-    Assert.assertEquals(30, deepWaterDiver1.getOxygen(),0);
+    Assert.assertEquals(30, deepWaterDiver1.getOxygen(), 0);
+  }
+
+  // test addDeepWaterDiver()
+  @Test
+  public void testAddDeepWaterDiverShouldWorksCorrect() {
+    Assert.assertEquals(2, this.diving.getCount());
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testAddDeepWaterDiverShouldThrowErrorWhenExistingDiverIsAdded() {
+    this.diving.addDeepWaterDiver(new DeepWaterDiver("Mike", 100));
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testAddDeepWaterDiverShouldThrowErrorWhenCapacityIsReached() {
+    this.diving.addDeepWaterDiver(new DeepWaterDiver("George", 100));
+    this.diving.addDeepWaterDiver(new DeepWaterDiver("Tony", 100));
   }
 }
