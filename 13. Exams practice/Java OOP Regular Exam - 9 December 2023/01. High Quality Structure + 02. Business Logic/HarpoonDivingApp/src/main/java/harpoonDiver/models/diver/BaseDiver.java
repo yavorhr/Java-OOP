@@ -5,6 +5,7 @@ import harpoonDiver.models.seaCatch.SeaCatch;
 import harpoonDiver.validation.Validator;
 
 public abstract class BaseDiver implements Diver {
+  private static final double OXYGEN_CONSUMPTION = 30;
   private String name;
   private double oxygen;
   private SeaCatch seaCatch;
@@ -37,13 +38,7 @@ public abstract class BaseDiver implements Diver {
 
   @Override
   public void shoot() {
-    if (canDive()) {
-      this.oxygen -= 30;
-    }
-
-    if (this.oxygen < 0) {
-      this.oxygen = 0;
-    }
+    this.oxygen = Math.max(this.oxygen - OXYGEN_CONSUMPTION, 0);
   }
 
   private void setOxygen(double oxygen) {
