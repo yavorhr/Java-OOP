@@ -21,7 +21,7 @@ public class DivingTests {
     this.diving.addDeepWaterDiver(deepWaterDiver2);
   }
 
-  // test diving constructor
+  // test Diving constructor
   @Test
   public void testDivingCtorShouldWorksCorrect() {
     Assert.assertEquals("emptyDiving", emptyDiving.getName());
@@ -43,4 +43,10 @@ public class DivingTests {
     new Diving(null, 1);
   }
 
+  // test DeepWater constructor
+  @Test
+  public void testDiverCtorShouldWorksCorrect() {
+    Assert.assertEquals("Mike", deepWaterDiver1.getName());
+    Assert.assertEquals(30, deepWaterDiver1.getOxygen(),0);
+  }
 }
