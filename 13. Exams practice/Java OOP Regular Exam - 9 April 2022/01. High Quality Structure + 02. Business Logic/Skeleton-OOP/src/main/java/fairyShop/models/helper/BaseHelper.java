@@ -1,6 +1,7 @@
 package fairyShop.models.helper;
 
 import fairyShop.models.instrument.Instrument;
+import fairyShop.validator.Validator;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,7 +13,7 @@ public abstract class BaseHelper implements Helper {
   private Collection<Instrument> instruments;
 
   protected BaseHelper(String name, int energy) {
-    this.name = name;
+    this.setName(name);
     this.energy = energy;
     this.instruments = new ArrayList<>();
   }
@@ -44,5 +45,10 @@ public abstract class BaseHelper implements Helper {
 
   protected void decreaseEnergy(int value) {
     this.energy = Math.max(this.energy - value, 0);
+  }
+
+  protected void setName(String name) {
+    Validator.validateHelperName(name);
+    this.name = name;
   }
 }
