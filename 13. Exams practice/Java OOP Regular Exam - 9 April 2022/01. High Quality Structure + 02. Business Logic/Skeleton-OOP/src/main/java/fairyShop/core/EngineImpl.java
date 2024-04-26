@@ -42,26 +42,14 @@ public class EngineImpl implements Engine {
     String result = null;
     String[] data = Arrays.stream(tokens).skip(1).toArray(String[]::new);
 
-    switch (command) {
-      case AddHelper:
-        result = addHelper(data);
-        break;
-      case AddPresent:
-        result = addPresent(data);
-        break;
-      case AddInstrumentToHelper:
-        result = addInstrumentToHelper(data);
-        break;
-      case CraftPresent:
-        result = craftPresent(data);
-        break;
-      case Report:
-        result = report();
-        break;
-      case Exit:
-        result = Command.Exit.name();
-        break;
-    }
+    result = switch (command) {
+      case AddHelper -> addHelper(data);
+      case AddPresent -> addPresent(data);
+      case AddInstrumentToHelper -> addInstrumentToHelper(data);
+      case CraftPresent -> craftPresent(data);
+      case Report -> report();
+      case Exit -> Command.Exit.name();
+    };
     return result;
   }
 
