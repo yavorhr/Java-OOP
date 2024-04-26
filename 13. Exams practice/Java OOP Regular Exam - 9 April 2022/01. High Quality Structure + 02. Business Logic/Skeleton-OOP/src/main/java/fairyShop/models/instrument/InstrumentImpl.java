@@ -1,8 +1,14 @@
 package fairyShop.models.instrument;
 
+import fairyShop.validator.Validator;
+
 public class InstrumentImpl implements Instrument {
   private static final int DECREASE_UNITS_VALUE = 10;
   private int power;
+
+  public InstrumentImpl(int power) {
+    this.setPower(power);
+  }
 
   @Override
   public int getPower() {
@@ -17,5 +23,10 @@ public class InstrumentImpl implements Instrument {
   @Override
   public boolean isBroken() {
     return this.power > 0;
+  }
+
+  protected void setPower(int power) {
+    Validator.validateInstrumentPower(power);
+    this.power = power;
   }
 }

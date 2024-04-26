@@ -8,4 +8,10 @@ public class Validator {
       throw new NullPointerException(ExceptionMessages.HELPER_NAME_NULL_OR_EMPTY);
     }
   }
+
+  public static void validateInstrumentPower(int value) {
+    if (value < 0) {
+      throw new IllegalArgumentException (ExceptionMessages.INSTRUMENT_POWER_LESS_THAN_ZERO);
+    }
+  }
 }
