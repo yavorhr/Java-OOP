@@ -1,4 +1,6 @@
-package fairyShop.models;
+package fairyShop.models.helper;
+
+import fairyShop.models.instrument.Instrument;
 
 import java.util.Collection;
 

@@ -1,4 +1,4 @@
-package fairyShop.models;
+package fairyShop.models.instrument;
 
 public interface Instrument {
     int getPower();
