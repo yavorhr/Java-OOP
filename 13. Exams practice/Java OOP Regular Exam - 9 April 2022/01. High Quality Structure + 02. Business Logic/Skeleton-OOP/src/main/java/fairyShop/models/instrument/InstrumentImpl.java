@@ -25,7 +25,7 @@ public class InstrumentImpl implements Instrument {
     return this.power > 0;
   }
 
-  protected void setPower(int power) {
+  private void setPower(int power) {
     Validator.validateInstrumentPower(power);
     this.power = power;
   }
