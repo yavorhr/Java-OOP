@@ -41,4 +41,8 @@ public abstract class BaseHelper implements Helper {
   public Collection<Instrument> getInstruments() {
     return Collections.unmodifiableCollection(this.instruments);
   }
+
+  protected void decreaseEnergy(int value) {
+    this.energy = Math.max(this.energy - value, 0);
+  }
 }
