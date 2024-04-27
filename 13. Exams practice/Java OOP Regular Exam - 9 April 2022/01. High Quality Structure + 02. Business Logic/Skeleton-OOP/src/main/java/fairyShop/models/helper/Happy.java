@@ -4,7 +4,7 @@ public class Happy extends BaseHelper {
   private static final int INITIAL_ENERGY_UNITS = 100;
   private static final int DECREASE_UNITS_VALUE = 10;
 
-  protected Happy(String name) {
+  public Happy(String name) {
     super(name, INITIAL_ENERGY_UNITS);
   }
 

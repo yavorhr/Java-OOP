@@ -4,7 +4,7 @@ public class Sleepy extends BaseHelper {
   private static final int INITIAL_ENERGY_UNITS = 50;
   private static final int DECREASE_UNITS_VALUE = 15;
 
-  protected Sleepy(String name) {
+  public Sleepy(String name) {
     super(name, INITIAL_ENERGY_UNITS);
   }
 
