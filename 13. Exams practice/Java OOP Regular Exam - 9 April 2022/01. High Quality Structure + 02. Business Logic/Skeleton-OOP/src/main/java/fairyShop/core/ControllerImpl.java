@@ -1,8 +1,10 @@
 package fairyShop.core;
 
 import fairyShop.common.ConstantMessages;
+import fairyShop.common.ExceptionMessages;
 import fairyShop.factory.HelperFactory;
 import fairyShop.models.helper.Helper;
+import fairyShop.models.instrument.InstrumentImpl;
 import fairyShop.repositories.HelperRepository;
 import fairyShop.repositories.Repository;
 
@@ -22,7 +24,14 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addInstrumentToHelper(String helperName, int power) {
-    return null;
+    Helper helper = this.helperRepository.findByName(helperName);
+
+    if (helper == null) {
+      return ExceptionMessages.HELPER_DOESNT_EXIST;
+    }
+
+    helper.addInstrument(new InstrumentImpl(power));
+    return String.format(ConstantMessages.SUCCESSFULLY_ADDED_INSTRUMENT_TO_HELPER, power, helperName);
   }
 
   @Override
