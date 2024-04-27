@@ -1,11 +1,23 @@
 package fairyShop.core;
 
-public class ControllerImpl implements Controller {
+import fairyShop.common.ConstantMessages;
+import fairyShop.factory.HelperFactory;
+import fairyShop.models.helper.Helper;
+import fairyShop.repositories.HelperRepository;
+import fairyShop.repositories.Repository;
 
+public class ControllerImpl implements Controller {
+  private Repository<Helper> helperRepository;
+
+  public ControllerImpl() {
+    this.helperRepository = new HelperRepository();
+  }
 
   @Override
   public String addHelper(String type, String helperName) {
-    return null;
+    Helper helper = HelperFactory.create(type, helperName);
+    this.helperRepository.add(helper);
+    return String.format(ConstantMessages.ADDED_HELPER, type, helperName);
   }
 
   @Override
