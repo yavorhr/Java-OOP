@@ -15,9 +15,11 @@ import fairyShop.repositories.PresentRepository;
 import fairyShop.repositories.Repository;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class ControllerImpl implements Controller {
+  private static int CRAFTER_PRESENTS_COUNT = 0;
   private Repository<Helper> helperRepository;
   private Repository<Present> presentRepository;
   private Shop shop;
@@ -56,7 +58,7 @@ public class ControllerImpl implements Controller {
   @Override
   public String craftPresent(String presentName) {
     Present present = this.presentRepository.findByName(presentName);
-    Collection<Helper> helpers = getHelpersWithEnergyAbove50();
+    Collection<Helper> helpers = getHelpersWithEnergyAbove50energy();
 
     if (helpers.size() == 0) {
       return ExceptionMessages.NO_HELPER_READY;
@@ -71,6 +73,10 @@ public class ControllerImpl implements Controller {
             presentName,
             present.isDone() ? "done" : "not done")).append(System.lineSeparator());
 
+    if (present.isDone()) {
+      CRAFTER_PRESENTS_COUNT++;
+    }
+
     sb.append(String.format(ConstantMessages.COUNT_BROKEN_INSTRUMENTS, getCountBrokenInstruments(helpers)))
             .append(System.lineSeparator());
 
@@ -78,15 +84,28 @@ public class ControllerImpl implements Controller {
 
   }
 
-
   @Override
   public String report() {
+    StringBuilder sb = new StringBuilder();
+    sb.append(String.format("%d presents are done!", CRAFTER_PRESENTS_COUNT))
+            .append(System.lineSeparator());
+    sb.append("Helpers info:")
+            .append(System.lineSeparator());
+
+    for (Helper helper : this.helperRepository.getModels()) {
+      sb.append(String.format("Name: %s", helper.getName()))
+              .append(System.lineSeparator());
+      sb.append(String.format("Energy: %d", helper.getEnergy()))
+              .append(System.lineSeparator());
+      sb.append(String.format("Instruments: %d not broken left", countNotBrokenInstruments(helper.getInstruments())))
+              .append(System.lineSeparator());
+    }
     return null;
   }
 
   // Helpers
 
-  private Collection<Helper> getHelpersWithEnergyAbove50() {
+  private Collection<Helper> getHelpersWithEnergyAbove50energy() {
     return this.helperRepository
             .getModels()
             .stream()
@@ -104,6 +123,10 @@ public class ControllerImpl implements Controller {
       }
     }
     return count;
+  }
+
+  private long countNotBrokenInstruments(Collection<Instrument> instruments) {
+    return instruments.stream().filter(i -> !i.isBroken()).count();
   }
 }
 
