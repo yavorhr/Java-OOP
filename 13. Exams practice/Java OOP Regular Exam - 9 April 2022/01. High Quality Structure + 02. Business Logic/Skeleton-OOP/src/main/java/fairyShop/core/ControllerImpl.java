@@ -5,14 +5,19 @@ import fairyShop.common.ExceptionMessages;
 import fairyShop.factory.HelperFactory;
 import fairyShop.models.helper.Helper;
 import fairyShop.models.instrument.InstrumentImpl;
+import fairyShop.models.present.Present;
+import fairyShop.models.present.PresentImpl;
 import fairyShop.repositories.HelperRepository;
+import fairyShop.repositories.PresentRepository;
 import fairyShop.repositories.Repository;
 
 public class ControllerImpl implements Controller {
   private Repository<Helper> helperRepository;
+  private Repository<Present> presentRepository;
 
   public ControllerImpl() {
     this.helperRepository = new HelperRepository();
+    this.presentRepository = new PresentRepository();
   }
 
   @Override
@@ -36,7 +41,8 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addPresent(String presentName, int energyRequired) {
-    return null;
+    this.presentRepository.add(new PresentImpl(presentName, energyRequired));
+    return String.format(ConstantMessages.SUCCESSFULLY_ADDED_PRESENT, presentName);
   }
 
   @Override
