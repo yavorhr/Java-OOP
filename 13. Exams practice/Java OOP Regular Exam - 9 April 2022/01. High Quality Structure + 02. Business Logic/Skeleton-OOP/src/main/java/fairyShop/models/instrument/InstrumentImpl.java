@@ -22,7 +22,7 @@ public class InstrumentImpl implements Instrument {
 
   @Override
   public boolean isBroken() {
-    return this.power > 0;
+    return this.power == 0;
   }
 
   private void setPower(int power) {

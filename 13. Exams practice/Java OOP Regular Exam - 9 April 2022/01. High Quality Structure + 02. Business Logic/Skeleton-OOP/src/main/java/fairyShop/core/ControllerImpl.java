@@ -7,17 +7,24 @@ import fairyShop.models.helper.Helper;
 import fairyShop.models.instrument.InstrumentImpl;
 import fairyShop.models.present.Present;
 import fairyShop.models.present.PresentImpl;
+import fairyShop.models.shop.Shop;
+import fairyShop.models.shop.ShopImpl;
 import fairyShop.repositories.HelperRepository;
 import fairyShop.repositories.PresentRepository;
 import fairyShop.repositories.Repository;
 
+import java.util.Collection;
+import java.util.stream.Collectors;
+
 public class ControllerImpl implements Controller {
   private Repository<Helper> helperRepository;
   private Repository<Present> presentRepository;
+  private Shop shop;
 
   public ControllerImpl() {
     this.helperRepository = new HelperRepository();
     this.presentRepository = new PresentRepository();
+    this.shop = new ShopImpl();
   }
 
   @Override
@@ -47,11 +54,24 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String craftPresent(String presentName) {
-    return null;
+    Present present = this.presentRepository.findByName(presentName);
+    this.shop.craft();
+    Collection<Helper> collect = getHelpersWithEnergyAbove50();
+    return this
   }
 
   @Override
   public String report() {
     return null;
+  }
+
+  // Helpers
+
+  private Collection<Helper> getHelpersWithEnergyAbove50() {
+    return this.helperRepository
+            .getModels()
+            .stream()
+            .filter(h -> h.getEnergy() > 50)
+            .collect(Collectors.toList());
   }
 }
