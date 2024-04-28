@@ -15,7 +15,6 @@ import fairyShop.repositories.PresentRepository;
 import fairyShop.repositories.Repository;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class ControllerImpl implements Controller {

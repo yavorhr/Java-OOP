@@ -47,8 +47,6 @@ public abstract class BaseHelper implements Helper {
     this.energy = Math.max(this.energy - value, 0);
   }
 
-
-
   protected void setName(String name) {
     Validator.validateHelperName(name);
     this.name = name;

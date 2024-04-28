@@ -13,6 +13,7 @@ public class ShopImpl implements Shop {
         while (!currentInstrument.isBroken()) {
           currentInstrument.use();
           present.getCrafted();
+          helper.work();
         }
       }
     }
