@@ -4,6 +4,7 @@ import fairyShop.common.ConstantMessages;
 import fairyShop.common.ExceptionMessages;
 import fairyShop.factory.HelperFactory;
 import fairyShop.models.helper.Helper;
+import fairyShop.models.instrument.Instrument;
 import fairyShop.models.instrument.InstrumentImpl;
 import fairyShop.models.present.Present;
 import fairyShop.models.present.PresentImpl;
@@ -55,10 +56,28 @@ public class ControllerImpl implements Controller {
   @Override
   public String craftPresent(String presentName) {
     Present present = this.presentRepository.findByName(presentName);
-    this.shop.craft();
-    Collection<Helper> collect = getHelpersWithEnergyAbove50();
-    return this
+    Collection<Helper> helpers = getHelpersWithEnergyAbove50();
+
+    if (helpers.size() == 0) {
+      return ExceptionMessages.NO_HELPER_READY;
+    }
+
+    for (Helper helper : helpers) {
+      this.shop.craft(present, helper);
+    }
+
+    StringBuilder sb = new StringBuilder();
+    sb.append(String.format(ConstantMessages.PRESENT_DONE,
+            presentName,
+            present.isDone() ? "done" : "not done")).append(System.lineSeparator());
+
+    sb.append(String.format(ConstantMessages.COUNT_BROKEN_INSTRUMENTS, getCountBrokenInstruments(helpers)))
+            .append(System.lineSeparator());
+
+    return sb.toString().trim();
+
   }
+
 
   @Override
   public String report() {
@@ -74,4 +93,17 @@ public class ControllerImpl implements Controller {
             .filter(h -> h.getEnergy() > 50)
             .collect(Collectors.toList());
   }
+
+  private int getCountBrokenInstruments(Collection<Helper> helpers) {
+    int count = 0;
+    for (Helper helper : helpers) {
+      for (Instrument instrument : helper.getInstruments()) {
+        if (instrument.isBroken()) {
+          count++;
+        }
+      }
+    }
+    return count;
+  }
 }
+
