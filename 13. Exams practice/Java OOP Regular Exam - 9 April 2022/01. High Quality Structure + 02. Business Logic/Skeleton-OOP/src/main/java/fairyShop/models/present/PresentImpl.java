@@ -1,5 +1,4 @@
 package fairyShop.models.present;
-
 import fairyShop.validator.Validator;
 
 public class PresentImpl implements Present {

@@ -8,15 +8,21 @@ public class ShopImpl implements Shop {
 
   @Override
   public void craft(Present present, Helper helper) {
-    while (helper.canWork() && !noMoreInstrumentsLeft(helper) && !present.isDone()) {
+    while (helper.canWork() && !noMoreInstrumentsLeft(helper)) {
       for (Instrument currentInstrument : helper.getInstruments()) {
         while (!currentInstrument.isBroken()) {
           currentInstrument.use();
           present.getCrafted();
           helper.work();
+
+          if (present.isDone()) {
+            return;
+          }
         }
+
       }
     }
+
   }
 
   // Helpers
