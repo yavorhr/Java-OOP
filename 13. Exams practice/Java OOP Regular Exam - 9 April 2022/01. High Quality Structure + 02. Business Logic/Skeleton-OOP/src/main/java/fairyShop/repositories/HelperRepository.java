@@ -2,11 +2,16 @@ package fairyShop.repositories;
 
 import fairyShop.models.helper.Helper;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
 public class HelperRepository implements Repository<Helper> {
   private Collection<Helper> helpers;
+
+  public HelperRepository() {
+    this.helpers = new ArrayList<>();
+  }
 
   @Override
   public Collection<Helper> getModels() {
