@@ -95,11 +95,10 @@ public class ControllerImpl implements Controller {
       sb.append(String.format("Name: %s", helper.getName()))
               .append(System.lineSeparator());
       sb.append(String.format("Energy: %d", helper.getEnergy()))
-              .append(System.lineSeparator());
-      sb.append(String.format("Instruments: %d not broken left", countNotBrokenInstruments(helper.getInstruments())))
+              .append(String.format("Instruments: %d not broken left", countNotBrokenInstruments(helper.getInstruments())))
               .append(System.lineSeparator());
     }
-    return null;
+    return sb.toString().trim();
   }
 
   // Helpers
