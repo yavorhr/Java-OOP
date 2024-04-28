@@ -70,7 +70,7 @@ public class ControllerImpl implements Controller {
     StringBuilder sb = new StringBuilder();
     sb.append(String.format(ConstantMessages.PRESENT_DONE,
             presentName,
-            present.isDone() ? "done" : "not done")).append(System.lineSeparator());
+            present.isDone() ? "done" : "not done"));
 
     if (present.isDone()) {
       CRAFTER_PRESENTS_COUNT++;
@@ -86,15 +86,15 @@ public class ControllerImpl implements Controller {
   @Override
   public String report() {
     StringBuilder sb = new StringBuilder();
-    sb.append(String.format("%d presents are done!", CRAFTER_PRESENTS_COUNT))
-            .append(System.lineSeparator());
-    sb.append("Helpers info:")
+    sb.append(String.format("%d presents are done!", CRAFTER_PRESENTS_COUNT)).append(System.lineSeparator());
+            sb.append("Helpers info:")
             .append(System.lineSeparator());
 
     for (Helper helper : this.helperRepository.getModels()) {
       sb.append(String.format("Name: %s", helper.getName()))
               .append(System.lineSeparator());
       sb.append(String.format("Energy: %d", helper.getEnergy()))
+              .append(System.lineSeparator())
               .append(String.format("Instruments: %d not broken left", countNotBrokenInstruments(helper.getInstruments())))
               .append(System.lineSeparator());
     }

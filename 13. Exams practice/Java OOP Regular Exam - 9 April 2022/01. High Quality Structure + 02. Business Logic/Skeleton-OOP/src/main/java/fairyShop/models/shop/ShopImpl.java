@@ -26,6 +26,7 @@ public class ShopImpl implements Shop {
   }
 
   // Helpers
+
   private boolean noMoreInstrumentsLeft(Helper helper) {
     return helper.getInstruments().stream().allMatch(Instrument::isBroken);
   }
