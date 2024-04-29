@@ -67,4 +67,14 @@ public class GiftFactoryTests {
   public void testRemoveGiftShouldReturnTrueWhenGiftIsRemoved() {
     Assert.assertTrue(this.giftFactory.removeGift("car"));
   }
+
+  //getPresentWithLeastMagic()
+  @Test
+  public void testGetPresentWithLeastMagic(){
+    Gift presentWithLeastMagic = this.giftFactory.getPresentWithLeastMagic();
+
+    Assert.assertEquals("car", presentWithLeastMagic.getType());
+    Assert.assertEquals(30, presentWithLeastMagic.getMagic(), 0);
+
+  }
 }
