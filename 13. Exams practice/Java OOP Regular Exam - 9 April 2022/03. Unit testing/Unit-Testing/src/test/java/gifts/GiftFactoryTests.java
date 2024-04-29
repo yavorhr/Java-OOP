@@ -75,6 +75,14 @@ public class GiftFactoryTests {
 
     Assert.assertEquals("car", presentWithLeastMagic.getType());
     Assert.assertEquals(30, presentWithLeastMagic.getMagic(), 0);
+  }
 
+  @Test
+  public void testGetPresent(){
+    Gift present = this.giftFactory.getPresent("doll");
+
+    Assert.assertEquals("doll", present.getType());
+    Assert.assertEquals(40, present.getMagic(), 0);
   }
 }
+
