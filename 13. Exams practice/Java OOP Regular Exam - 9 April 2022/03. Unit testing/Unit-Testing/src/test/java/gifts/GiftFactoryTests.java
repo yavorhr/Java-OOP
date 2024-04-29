@@ -42,19 +42,29 @@ public class GiftFactoryTests {
     Assert.assertEquals(2, this.giftFactory.getCount());
   }
 
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testCreateGiftShouldThrowsErrorWhenGiftAlreadyExists() {
-  this.giftFactory.createGift(new Gift("car", 30));
+    this.giftFactory.createGift(new Gift("car", 30));
   }
 
   // test removeGift()
-  @Test (expected = NullPointerException.class)
+  @Test(expected = NullPointerException.class)
   public void testRemoveGiftShouldThrowsErrorWhenGiftIsEmpty() {
     this.giftFactory.removeGift("");
   }
 
-  @Test (expected = NullPointerException.class)
+  @Test(expected = NullPointerException.class)
   public void testRemoveGiftShouldThrowsErrorWhenGiftIsNull() {
     this.giftFactory.removeGift(null);
+  }
+
+  @Test
+  public void testRemoveGiftShouldReturnFalseWhenGiftNotExist() {
+    Assert.assertFalse(this.emptyFactory.removeGift("test"));
+  }
+
+  @Test
+  public void testRemoveGiftShouldReturnTrueWhenGiftIsRemoved() {
+    Assert.assertTrue(this.giftFactory.removeGift("car"));
   }
 }
