@@ -46,4 +46,15 @@ public class GiftFactoryTests {
   public void testCreateGiftShouldThrowsErrorWhenGiftAlreadyExists() {
   this.giftFactory.createGift(new Gift("car", 30));
   }
+
+  // test removeGift()
+  @Test (expected = NullPointerException.class)
+  public void testRemoveGiftShouldThrowsErrorWhenGiftIsEmpty() {
+    this.giftFactory.removeGift("");
+  }
+
+  @Test (expected = NullPointerException.class)
+  public void testRemoveGiftShouldThrowsErrorWhenGiftIsNull() {
+    this.giftFactory.removeGift(null);
+  }
 }
