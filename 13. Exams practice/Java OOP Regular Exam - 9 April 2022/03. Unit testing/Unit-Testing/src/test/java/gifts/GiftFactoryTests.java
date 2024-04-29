@@ -27,4 +27,11 @@ public class GiftFactoryTests {
     Assert.assertEquals(0, this.emptyFactory.getPresents().size());
     Assert.assertEquals(0, this.emptyFactory.getCount());
   }
+
+  // test Gift obj constructor
+  @Test
+  public void testGiftCtorShouldWorksCorrect() {
+    Assert.assertEquals("Car", this.gift1.getType());
+    Assert.assertEquals(30, this.gift1.getMagic(), 0);
+  }
 }
