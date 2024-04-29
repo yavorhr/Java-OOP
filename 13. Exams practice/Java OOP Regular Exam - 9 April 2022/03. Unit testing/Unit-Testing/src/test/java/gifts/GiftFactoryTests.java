@@ -68,21 +68,28 @@ public class GiftFactoryTests {
     Assert.assertTrue(this.giftFactory.removeGift("car"));
   }
 
-  //getPresentWithLeastMagic()
+  //test getPresentWithLeastMagic()
   @Test
-  public void testGetPresentWithLeastMagic(){
+  public void testGetPresentWithLeastMagic() {
     Gift presentWithLeastMagic = this.giftFactory.getPresentWithLeastMagic();
 
     Assert.assertEquals("car", presentWithLeastMagic.getType());
     Assert.assertEquals(30, presentWithLeastMagic.getMagic(), 0);
   }
 
+  //test getPresent()
   @Test
-  public void testGetPresent(){
+  public void testGetPresent() {
     Gift present = this.giftFactory.getPresent("doll");
 
     Assert.assertEquals("doll", present.getType());
     Assert.assertEquals(40, present.getMagic(), 0);
+  }
+
+  //test getPresents() Unmodifiable coll
+  @Test(expected = UnsupportedOperationException.class)
+  public void testGetPresentReturnsUnmodifiableCollection() {
+  this.giftFactory.getPresents().add(new Gift("test", 123));
   }
 }
 
