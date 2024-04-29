@@ -41,4 +41,9 @@ public class GiftFactoryTests {
     Assert.assertEquals(2, this.giftFactory.getPresents().size());
     Assert.assertEquals(2, this.giftFactory.getCount());
   }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testCreateGiftShouldThrowsErrorWhenGiftAlreadyExists() {
+  this.giftFactory.createGift(new Gift("car", 30));
+  }
 }
