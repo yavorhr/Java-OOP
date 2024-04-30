@@ -1,6 +1,7 @@
 package climbers.core;
 
 import climbers.common.ConstantMessages;
+import climbers.common.ExceptionMessages;
 import climbers.factory.ClimberFactory;
 import climbers.models.climber.Climber;
 import climbers.models.mountain.Mountain;
@@ -33,7 +34,17 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String removeClimber(String climberName) {
-    return null;
+    Climber climber = this.climberRepository.byName(climberName);
+    doesClimberExist(climberName, climber);
+    this.climberRepository.remove(climber);
+
+    return String.format(ConstantMessages.CLIMBER_REMOVE, climberName);
+  }
+
+  private void doesClimberExist(String climberName, Climber climber) {
+    if (climber == null) {
+      throw new IllegalArgumentException(String.format(ExceptionMessages.CLIMBER_DOES_NOT_EXIST, climberName));
+    }
   }
 
   @Override
