@@ -5,7 +5,7 @@ public class RockClimber extends BaseClimber {
   protected static final double DECREASE_STRENGTH_VALUE = 60;
 
 
-  protected RockClimber(String name) {
+  public RockClimber(String name) {
     super(name, INITIAL_STRENGTH);
   }
 
