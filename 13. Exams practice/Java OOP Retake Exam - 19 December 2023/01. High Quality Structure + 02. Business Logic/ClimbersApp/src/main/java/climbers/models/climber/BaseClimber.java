@@ -32,4 +32,12 @@ public abstract class BaseClimber implements Climber {
   public Roster getRoster() {
     return this.roster;
   }
+
+  protected void decreaseStrengthWhenClimbing(double strengthValue) {
+    this.strength -= strengthValue;
+
+    if (this.strength < 0) {
+      this.strength = 0;
+    }
+  }
 }
