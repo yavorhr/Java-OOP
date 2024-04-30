@@ -2,6 +2,7 @@ package climbers.models.climber;
 
 import climbers.models.roster.Roster;
 import climbers.models.roster.RosterImpl;
+import climbers.validation.Validator;
 
 public abstract class BaseClimber implements Climber {
   private String name;
@@ -9,8 +10,8 @@ public abstract class BaseClimber implements Climber {
   private Roster roster;
 
   protected BaseClimber(String name, double strength) {
-    this.name = name;
-    this.strength = strength;
+    this.setName(name);
+    this.setStrength(strength);
     this.roster = new RosterImpl();
   }
 
@@ -40,5 +41,15 @@ public abstract class BaseClimber implements Climber {
     if (this.strength < 0) {
       this.strength = 0;
     }
+  }
+
+  private void setName(String name) {
+    Validator.validateClimberName(name);
+    this.name = name;
+  }
+
+  private void setStrength(double strength) {
+    Validator.validateClimberStrength(strength);
+    this.strength = strength;
   }
 }
