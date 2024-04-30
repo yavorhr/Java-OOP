@@ -14,9 +14,7 @@ public class EngineImpl implements Engine{
         this.controller = controller;
         this.scanner = new Scanner(System.in);
     }
-
-
-
+    
     @Override
     public void run() {
         while (true) {
