@@ -14,7 +14,6 @@ public class ClimberFactory {
       case "RockClimber" -> climber = new RockClimber(name);
       default -> throw new IllegalArgumentException(ExceptionMessages.CLIMBER_INVALID_TYPE);
     }
-
     return climber;
   }
 }

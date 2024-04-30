@@ -1,11 +1,23 @@
 package climbers.core;
 
-public class ControllerImpl implements Controller {
+import climbers.common.ConstantMessages;
+import climbers.factory.ClimberFactory;
+import climbers.models.climber.Climber;
+import climbers.repositories.ClimberRepository;
+import climbers.repositories.Repository;
 
+public class ControllerImpl implements Controller {
+  private Repository<Climber> climberRepository;
+
+  public ControllerImpl() {
+    this.climberRepository = new ClimberRepository();
+  }
 
   @Override
   public String addClimber(String type, String climberName) {
-    return null;
+    Climber climber = ClimberFactory.create(type,climberName);
+    this.climberRepository.add(climber);
+    return String.format(ConstantMessages.CLIMBER_ADDED,type,climberName);
   }
 
   @Override
