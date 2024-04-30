@@ -1,5 +1,7 @@
 package climbers.models.mountain;
 
+import climbers.validation.Validator;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -9,7 +11,7 @@ public class MountainImpl implements Mountain {
   private Collection<String> peaks;
 
   public MountainImpl(String name) {
-    this.name = name;
+    this.setName(name);
     this.peaks = new ArrayList<>();
   }
 
@@ -21,5 +23,10 @@ public class MountainImpl implements Mountain {
   @Override
   public String getName() {
     return this.name;
+  }
+
+  private void setName(String name) {
+    Validator.validateMountainName(name);
+    this.name = name;
   }
 }
