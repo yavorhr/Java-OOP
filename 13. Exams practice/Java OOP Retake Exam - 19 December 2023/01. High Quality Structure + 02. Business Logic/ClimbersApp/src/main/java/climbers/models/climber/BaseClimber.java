@@ -32,9 +32,4 @@ public abstract class BaseClimber implements Climber {
   public Roster getRoster() {
     return this.roster;
   }
-
-  @Override
-  public void climb() {
-
-  }
 }
