@@ -1,6 +1,7 @@
 package climbers.models.climber;
 
 import climbers.models.roster.Roster;
+import climbers.models.roster.RosterImpl;
 
 public abstract class BaseClimber implements Climber {
   private String name;
