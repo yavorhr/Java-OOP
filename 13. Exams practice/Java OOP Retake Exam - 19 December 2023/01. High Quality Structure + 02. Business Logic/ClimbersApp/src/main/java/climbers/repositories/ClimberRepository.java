@@ -20,7 +20,7 @@ public class ClimberRepository implements Repository<Climber> {
 
   @Override
   public void add(Climber climber) {
-    this.climbers.add(climber)
+    this.climbers.add(climber);
   }
 
   @Override
