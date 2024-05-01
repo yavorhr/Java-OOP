@@ -51,4 +51,11 @@ public class ClimbingTests {
     new Climbing(null, 5);
   }
 
+  // addClimber()
+
+  @Test
+  public void testAddRockClimberShouldWorksCorrect() {
+    Assert.assertEquals(2, this.climbing.getCount());
+  }
+
 }
