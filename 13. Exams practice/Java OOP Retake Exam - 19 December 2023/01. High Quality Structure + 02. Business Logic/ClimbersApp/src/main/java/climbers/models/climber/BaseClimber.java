@@ -48,7 +48,7 @@ public abstract class BaseClimber implements Climber {
   @Override
   public String toString() {
     return String.format("Name: %s\n" +
-            "Strength: %.2f\n" +
+            "Strength: %.0f\n" +
             "Conquered peaks: %s\n",
             this.name, this.strength, getPeaks(roster.getPeaks()));
   }

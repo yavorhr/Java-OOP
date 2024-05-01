@@ -36,7 +36,7 @@ public class ControllerImpl implements Controller {
     Mountain mountain = new MountainImpl(mountainName);
     addPeaksToMountain(mountain, peaks);
     this.mountainRepository.add(mountain);
-    
+
     return String.format(ConstantMessages.MOUNTAIN_ADDED, mountainName);
   }
 
@@ -75,11 +75,8 @@ public class ControllerImpl implements Controller {
   public String getStatistics() {
     StringBuilder sb = new StringBuilder();
 
-    if (CLIMBED_MOUNTAINS_CNT == 0) {
-      return "None";
-    }
-
     sb.append(String.format(ConstantMessages.FINAL_MOUNTAIN_COUNT, CLIMBED_MOUNTAINS_CNT))
+            .append(CLIMBED_MOUNTAINS_CNT == 0 ? "None" : "")
             .append(System.lineSeparator());
     sb.append(ConstantMessages.FINAL_CLIMBERS_STATISTICS)
             .append(System.lineSeparator());
