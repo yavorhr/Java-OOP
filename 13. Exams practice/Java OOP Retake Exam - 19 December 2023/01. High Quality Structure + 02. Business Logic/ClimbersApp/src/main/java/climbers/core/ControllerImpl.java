@@ -4,24 +4,26 @@ import climbers.common.ConstantMessages;
 import climbers.common.ExceptionMessages;
 import climbers.factory.ClimberFactory;
 import climbers.models.climber.Climber;
+import climbers.models.climbing.Climbing;
+import climbers.models.climbing.ClimbingImpl;
 import climbers.models.mountain.Mountain;
 import climbers.models.mountain.MountainImpl;
 import climbers.repositories.ClimberRepository;
 import climbers.repositories.MountainRepository;
 import climbers.repositories.Repository;
-
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 public class ControllerImpl implements Controller {
   private Repository<Climber> climberRepository;
   private Repository<Mountain> mountainRepository;
-  private static int CLIMBED_MOUNTAINS_CNT = 0;
+  private Climbing climbing;
 
   public ControllerImpl() {
     this.climberRepository = new ClimberRepository();
     this.mountainRepository = new MountainRepository();
+    this.climbing = new ClimbingImpl();
   }
 
   @Override
@@ -52,31 +54,18 @@ public class ControllerImpl implements Controller {
   @Override
   public String startClimbing(String mountainName) {
     validateIfClimbers();
-    Mountain mountain = this.mountainRepository.byName(mountainName);
-    CLIMBED_MOUNTAINS_CNT++;
 
-    List<String> peaks = new ArrayList<>(mountain.getPeaksList());
-    int removedClimbers = 0;
+    climbing.conqueringPeaks(this.mountainRepository.byName(mountainName), climbersWithEnoughStrengthToClimb(climberRepository.getCollection()));
 
-    for (Climber climber : this.climberRepository.getCollection()) {
-      while (climber.canClimb() && peaks.size() > 0) {
-        climber.climb();
-        climber.getRoster().getPeaks().add(peaks.remove(0));
-
-        removedClimbers = countClimbersWithoutStrength(removedClimbers, climber);
-      }
-    }
-
-    return String.format(ConstantMessages.PEAK_CLIMBING, mountainName, removedClimbers);
+    return String.format(ConstantMessages.PEAK_CLIMBING, mountainName, this.climbing.getRemovedClimbers());
   }
-
 
   @Override
   public String getStatistics() {
     StringBuilder sb = new StringBuilder();
 
-    sb.append(String.format(ConstantMessages.FINAL_MOUNTAIN_COUNT, CLIMBED_MOUNTAINS_CNT))
-            .append(CLIMBED_MOUNTAINS_CNT == 0 ? "None" : "")
+    sb.append(String.format(ConstantMessages.FINAL_MOUNTAIN_COUNT, this.climbing.getClimbedMountainsCnt()))
+            .append(this.climbing.getClimbedMountainsCnt() == 0 ? "None" : "")
             .append(System.lineSeparator());
     sb.append(ConstantMessages.FINAL_CLIMBERS_STATISTICS)
             .append(System.lineSeparator());
@@ -106,11 +95,7 @@ public class ControllerImpl implements Controller {
     }
   }
 
-
-  private int countClimbersWithoutStrength(int removedClimbers, Climber climber) {
-    if (!climber.canClimb()) {
-      removedClimbers++;
-    }
-    return removedClimbers;
+  private Collection<Climber> climbersWithEnoughStrengthToClimb(Collection<Climber> climbers) {
+    return climbers.stream().filter(Climber::canClimb).collect(Collectors.toList());
   }
 }

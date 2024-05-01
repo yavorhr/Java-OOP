@@ -8,4 +8,6 @@ import java.util.Collection;
 public interface Climbing {
     void conqueringPeaks(Mountain mountain, Collection<Climber> climbers);
 
+    int getClimbedMountainsCnt();
+    int getRemovedClimbers();
 }
