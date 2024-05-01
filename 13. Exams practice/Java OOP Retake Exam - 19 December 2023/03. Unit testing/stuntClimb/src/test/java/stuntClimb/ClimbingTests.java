@@ -51,11 +51,23 @@ public class ClimbingTests {
     new Climbing(null, 5);
   }
 
-  // addClimber()
+  // addRockClimber()
 
   @Test
   public void testAddRockClimberShouldWorksCorrect() {
     Assert.assertEquals(2, this.climbing.getCount());
   }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testAddRockClimberShouldThrowErrorWhenClimberExists() {
+    this.emptyClimbing.addRockClimber(rockClimber1);
+    this.emptyClimbing.addRockClimber(rockClimber1);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testAddRockClimberShouldThrowErrorWhenNoCapacity() {
+    this.climbing.addRockClimber(new RockClimber("George",50));
+  }
+
 
 }
