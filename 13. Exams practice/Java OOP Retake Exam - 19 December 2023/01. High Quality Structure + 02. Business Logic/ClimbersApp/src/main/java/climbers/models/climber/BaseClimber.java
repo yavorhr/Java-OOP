@@ -53,8 +53,8 @@ public abstract class BaseClimber implements Climber {
             this.name, this.strength, getPeaks(roster.getPeaks()));
   }
 
-  protected String getPeaks(Collection<String> peaks) {
-    return String.join(", ", peaks);
+  private String getPeaks(Collection<String> peaks) {
+    return peaks.size() == 0 ? "None" : String.join(", ", peaks);
   }
 
   private void setName(String name) {

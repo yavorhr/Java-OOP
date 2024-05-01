@@ -65,7 +65,6 @@ public class ControllerImpl implements Controller {
     StringBuilder sb = new StringBuilder();
 
     sb.append(String.format(ConstantMessages.FINAL_MOUNTAIN_COUNT, this.climbing.getClimbedMountainsCnt()))
-            .append(this.climbing.getClimbedMountainsCnt() == 0 ? "None" : "")
             .append(System.lineSeparator());
     sb.append(ConstantMessages.FINAL_CLIMBERS_STATISTICS)
             .append(System.lineSeparator());

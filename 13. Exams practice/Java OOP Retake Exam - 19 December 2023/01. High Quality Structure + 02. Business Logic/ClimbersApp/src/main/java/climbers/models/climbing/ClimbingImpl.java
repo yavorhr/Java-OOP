@@ -18,8 +18,9 @@ public class ClimbingImpl implements Climbing {
 
   @Override
   public void conqueringPeaks(Mountain mountain, Collection<Climber> climbers) {
-    this.climbedMountainsCnt++;
-    this.removedClimbers = 0;
+    this.setRemovedClimbersToZero();
+    this.increaseMountainsCount();
+
     List<String> peaks = new ArrayList<>(mountain.getPeaksList());
 
     for (Climber climber : climbers) {
@@ -42,5 +43,13 @@ public class ClimbingImpl implements Climbing {
   @Override
   public int getRemovedClimbers() {
     return this.removedClimbers;
+  }
+
+  public void setRemovedClimbersToZero() {
+    this.removedClimbers = 0;
+  }
+
+  public void increaseMountainsCount() {
+    this.climbedMountainsCnt++;
   }
 }
