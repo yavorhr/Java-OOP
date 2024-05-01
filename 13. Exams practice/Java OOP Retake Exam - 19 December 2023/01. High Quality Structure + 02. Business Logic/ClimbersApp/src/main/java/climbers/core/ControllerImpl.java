@@ -17,7 +17,7 @@ import java.util.List;
 public class ControllerImpl implements Controller {
   private Repository<Climber> climberRepository;
   private Repository<Mountain> mountainRepository;
-  private static int CLIMBED_MOUNTAINS = 0;
+  private static int CLIMBED_MOUNTAINS_CNT = 0;
 
   public ControllerImpl() {
     this.climberRepository = new ClimberRepository();
@@ -51,7 +51,7 @@ public class ControllerImpl implements Controller {
   public String startClimbing(String mountainName) {
     validateIfClimbers();
     Mountain mountain = this.mountainRepository.byName(mountainName);
-    CLIMBED_MOUNTAINS++;
+    CLIMBED_MOUNTAINS_CNT++;
 
     List<String> peaks = new ArrayList<>(mountain.getPeaksList());
     int removedClimbers = 0;
@@ -61,10 +61,9 @@ public class ControllerImpl implements Controller {
         climber.climb();
         climber.getRoster().getPeaks().add(peaks.remove(0));
 
-        removedClimbers = deleteClimberWithoutStrength(removedClimbers, climber);
+        removedClimbers = countClimbersWithoutStrength(removedClimbers, climber);
       }
     }
-
 
     return String.format(ConstantMessages.PEAK_CLIMBING, mountainName, removedClimbers);
   }
@@ -72,7 +71,17 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String getStatistics() {
-    return null;
+    StringBuilder sb = new StringBuilder();
+
+    if (CLIMBED_MOUNTAINS_CNT == 0) {
+      return "None";
+    }
+
+    sb.append(String.format(ConstantMessages.FINAL_MOUNTAIN_COUNT, CLIMBED_MOUNTAINS_CNT)).append(System.lineSeparator();
+    sb.append(ConstantMessages.FINAL_CLIMBERS_STATISTICS).append(System.lineSeparator());
+    this.climberRepository.getCollection().forEach(c -> sb.append(c.toString()));
+
+    return sb.toString();
   }
 
   // Helpers
@@ -96,10 +105,9 @@ public class ControllerImpl implements Controller {
   }
 
 
-  private int deleteClimberWithoutStrength(int removedClimbers, Climber climber) {
+  private int countClimbersWithoutStrength(int removedClimbers, Climber climber) {
     if (!climber.canClimb()) {
       removedClimbers++;
-      this.climberRepository.remove(climber);
     }
     return removedClimbers;
   }

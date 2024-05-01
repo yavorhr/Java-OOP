@@ -4,6 +4,8 @@ import climbers.models.roster.Roster;
 import climbers.models.roster.RosterImpl;
 import climbers.validation.Validator;
 
+import java.util.Collection;
+
 public abstract class BaseClimber implements Climber {
   private String name;
   private double strength;
@@ -41,6 +43,18 @@ public abstract class BaseClimber implements Climber {
     if (this.strength < 0) {
       this.strength = 0;
     }
+  }
+
+  @Override
+  public String toString() {
+    return String.format("Name: %s\n" +
+            "Strength: %.2f\n" +
+            "Conquered peaks: %s\n",
+            this.name, this.strength, getPeaks(roster.getPeaks()));
+  }
+
+  protected String getPeaks(Collection<String> peaks) {
+    return String.join(", ", peaks);
   }
 
   private void setName(String name) {
