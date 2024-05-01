@@ -24,17 +24,31 @@ public class ClimbingTests {
 
   //test constructors
   @Test
-  public void testClimbingCtorShouldWorksCorrect(){
+  public void testClimbingCtorShouldWorksCorrect() {
     Assert.assertEquals("empty", this.emptyClimbing.getName());
     Assert.assertEquals(0, this.emptyClimbing.getCount());
     Assert.assertEquals(5, this.emptyClimbing.getCapacity());
   }
 
   @Test
-  public void testRockClimberCtorShouldWorksCorrect(){
+  public void testRockClimberCtorShouldWorksCorrect() {
     Assert.assertEquals("Mike", this.rockClimber1.getName());
-    Assert.assertEquals(50, this.rockClimber1.getStrength(),0);
-    
+    Assert.assertEquals(50, this.rockClimber1.getStrength(), 0);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testRockClimberCtorShouldThrowErrorWhenZeroCapacity() {
+    new Climbing("test1", -5);
+  }
+
+  @Test(expected = NullPointerException.class)
+  public void testRockClimberCtorShouldThrowErrorEmptyName() {
+    new Climbing("", 5);
+  }
+
+  @Test(expected = NullPointerException.class)
+  public void testRockClimberCtorShouldThrowErrorNullName() {
+    new Climbing(null, 5);
   }
 
 }
