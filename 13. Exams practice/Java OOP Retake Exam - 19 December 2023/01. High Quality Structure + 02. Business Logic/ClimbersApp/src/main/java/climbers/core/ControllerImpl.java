@@ -35,6 +35,8 @@ public class ControllerImpl implements Controller {
   public String addMountain(String mountainName, String... peaks) {
     Mountain mountain = new MountainImpl(mountainName);
     addPeaksToMountain(mountain, peaks);
+    this.mountainRepository.add(mountain);
+    
     return String.format(ConstantMessages.MOUNTAIN_ADDED, mountainName);
   }
 

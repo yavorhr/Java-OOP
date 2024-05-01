@@ -28,7 +28,6 @@ public class EngineImpl implements Engine {
       } catch (NullPointerException | IllegalArgumentException | IOException e) {
         result = e.getMessage();
       }
-
       System.out.println(result);
     }
   }
