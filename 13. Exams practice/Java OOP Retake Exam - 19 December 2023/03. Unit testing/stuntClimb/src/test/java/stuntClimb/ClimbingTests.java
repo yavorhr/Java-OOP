@@ -30,4 +30,11 @@ public class ClimbingTests {
     Assert.assertEquals(5, this.emptyClimbing.getCapacity());
   }
 
+  @Test
+  public void testRockClimberCtorShouldWorksCorrect(){
+    Assert.assertEquals("Mike", this.rockClimber1.getName());
+    Assert.assertEquals(50, this.rockClimber1.getStrength(),0);
+    
+  }
+
 }
