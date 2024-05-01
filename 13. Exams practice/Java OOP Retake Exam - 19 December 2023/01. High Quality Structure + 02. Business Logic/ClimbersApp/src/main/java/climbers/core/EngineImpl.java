@@ -41,26 +41,14 @@ public class EngineImpl implements Engine {
     String result = null;
     String[] data = Arrays.stream(tokens).skip(1).toArray(String[]::new);
 
-    switch (command) {
-      case AddClimber:
-        result = addClimber(data);
-        break;
-      case AddMountain:
-        result = addMountain(data);
-        break;
-      case RemoveClimber:
-        result = removeClimber(data);
-        break;
-      case StartClimbing:
-        result = startClimbing(data);
-        break;
-      case GetStatistics:
-        result = getStatistics();
-        break;
-      case Exit:
-        result = Command.Exit.name();
-        break;
-    }
+    result = switch (command) {
+      case AddClimber -> addClimber(data);
+      case AddMountain -> addMountain(data);
+      case RemoveClimber -> removeClimber(data);
+      case StartClimbing -> startClimbing(data);
+      case GetStatistics -> getStatistics();
+      case Exit -> Command.Exit.name();
+    };
 
     return result;
   }

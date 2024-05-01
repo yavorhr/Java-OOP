@@ -77,8 +77,11 @@ public class ControllerImpl implements Controller {
       return "None";
     }
 
-    sb.append(String.format(ConstantMessages.FINAL_MOUNTAIN_COUNT, CLIMBED_MOUNTAINS_CNT)).append(System.lineSeparator();
-    sb.append(ConstantMessages.FINAL_CLIMBERS_STATISTICS).append(System.lineSeparator());
+    sb.append(String.format(ConstantMessages.FINAL_MOUNTAIN_COUNT, CLIMBED_MOUNTAINS_CNT))
+            .append(System.lineSeparator());
+    sb.append(ConstantMessages.FINAL_CLIMBERS_STATISTICS)
+            .append(System.lineSeparator());
+
     this.climberRepository.getCollection().forEach(c -> sb.append(c.toString()));
 
     return sb.toString();
