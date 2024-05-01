@@ -69,5 +69,16 @@ public class ClimbingTests {
     this.climbing.addRockClimber(new RockClimber("George",50));
   }
 
+  // addRockClimber()
+  @Test
+  public void testRemoveRockClimberShouldReturnTrueWhenClimberIsRemoved() {
+    Assert.assertTrue( this.climbing.removeRockClimber("Mike"));
+  }
+
+  @Test
+  public void testRemoveRockClimberShouldReturnFalseWhenClimberIsNotExisting() {
+    Assert.assertFalse( this.climbing.removeRockClimber("None_Existing_Climber"));
+  }
+
 
 }
