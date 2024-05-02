@@ -1,19 +1,16 @@
 package handball.entities.team;
 
+import handball.Validator.Validator;
+
 public abstract class BaseTeam implements Team {
   private String name;
   private String country;
   private int advantage;
 
   protected BaseTeam(String name, String country, int advantage) {
-    this.name = name;
-    this.country = country;
-    this.advantage = advantage;
-  }
-
-  @Override
-  public void setName(String name) {
-    this.name = name;
+    this.setName(name);
+    this.setCountry(country);
+    this.setAdvantage(advantage);
   }
 
   @Override
@@ -26,7 +23,19 @@ public abstract class BaseTeam implements Team {
     return this.advantage;
   }
 
+  @Override
+  public void setName(String name) {
+    Validator.validateTeamName(name);
+    this.name = name;
+  }
+
   protected void setAdvantage(int advantage) {
+    Validator.validateAdvantage(advantage);
     this.advantage = advantage;
+  }
+
+  public void setCountry(String country) {
+    Validator.validateCountryName(country);
+    this.country = country;
   }
 }
