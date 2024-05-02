@@ -1,9 +1,9 @@
 package handball.entities.team;
 
-public class Bulgaria extends BaseTeam {
-  private static final int ADVANTAGE_INCREASE_VALUE = 115;
+public class Germany extends BaseTeam {
+  private static final int ADVANTAGE_INCREASE_VALUE = 145;
 
-  public Bulgaria(String name, String country, int advantage) {
+  public Germany(String name, String country, int advantage) {
     super(name, country, advantage);
   }
 
