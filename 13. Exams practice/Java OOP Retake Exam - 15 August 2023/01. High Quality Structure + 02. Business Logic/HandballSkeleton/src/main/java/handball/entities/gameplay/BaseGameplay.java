@@ -1,5 +1,6 @@
 package handball.entities.gameplay;
 
+import handball.Validator.Validator;
 import handball.entities.equipment.Equipment;
 import handball.entities.team.Team;
 
@@ -14,7 +15,7 @@ public abstract class BaseGameplay implements Gameplay {
   private Collection<Team> teams;
 
   protected BaseGameplay(String name, int capacity) {
-    this.name = name;
+    this.setName(name);
     this.capacity = capacity;
   }
 
@@ -76,6 +77,11 @@ public abstract class BaseGameplay implements Gameplay {
             .append(System.lineSeparator());
 
     return sb.toString().trim();
+  }
+
+  private void setName(String name) {
+    Validator.validateGamePlayName(name);
+    this.name = name;
   }
 
   // Helpers

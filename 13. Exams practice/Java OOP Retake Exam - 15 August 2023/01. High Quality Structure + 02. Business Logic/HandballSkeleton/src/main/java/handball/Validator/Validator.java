@@ -9,6 +9,12 @@ public class Validator {
     }
   }
 
+  public static void validateGamePlayName(String name) {
+    if (name == null || name.trim().isEmpty()) {
+      throw new NullPointerException(ExceptionMessages.GAMEPLAY_NAME_NULL_OR_EMPTY);
+    }
+  }
+
   public static void validateCountryName(String name) {
     if (name == null || name.trim().isEmpty()) {
       throw new NullPointerException(ExceptionMessages.TEAM_COUNTRY_NULL_OR_EMPTY);
