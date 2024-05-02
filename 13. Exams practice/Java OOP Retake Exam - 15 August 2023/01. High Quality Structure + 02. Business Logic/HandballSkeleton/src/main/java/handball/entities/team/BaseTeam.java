@@ -17,11 +17,6 @@ public abstract class BaseTeam implements Team {
   }
 
   @Override
-  public void play() {
-
-  }
-
-  @Override
   public String getName() {
     return this.name;
   }
@@ -29,5 +24,9 @@ public abstract class BaseTeam implements Team {
   @Override
   public int getAdvantage() {
     return this.advantage;
+  }
+
+  protected void setAdvantage(int advantage) {
+    this.advantage = advantage;
   }
 }
