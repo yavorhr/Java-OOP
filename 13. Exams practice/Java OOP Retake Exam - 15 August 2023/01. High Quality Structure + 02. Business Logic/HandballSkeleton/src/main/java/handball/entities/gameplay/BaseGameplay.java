@@ -5,6 +5,7 @@ import handball.entities.team.Team;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.stream.Collectors;
 
 public abstract class BaseGameplay implements Gameplay {
   private String name;
@@ -12,7 +13,7 @@ public abstract class BaseGameplay implements Gameplay {
   private Collection<Equipment> equipments;
   private Collection<Team> teams;
 
-  public BaseGameplay(String name, int capacity) {
+  protected BaseGameplay(String name, int capacity) {
     this.name = name;
     this.capacity = capacity;
   }
@@ -58,5 +59,31 @@ public abstract class BaseGameplay implements Gameplay {
   @Override
   public String getName() {
     return this.name;
+  }
+
+  @Override
+  public String toString() {
+    if (this.getTeam().size() == 0) {
+      return "None";
+    }
+
+    StringBuilder sb = new StringBuilder();
+    sb.append(String.format("%s %s", this.getName(), this.getClass().getSimpleName()))
+            .append(System.lineSeparator());
+    sb.append(String.format("Team: %s", getTeamsNames(this.teams)))
+            .append(System.lineSeparator());
+    sb.append(String.format("Equipment: %d, Protection: %d", this.equipments.size(), this.allProtection()))
+            .append(System.lineSeparator());
+
+    return sb.toString().trim();
+  }
+
+  // Helpers
+  private String getTeamsNames(Collection<Team> teams) {
+    return teams.size() == 0
+            ? "None"
+            : this.teams.stream()
+            .map(Team::getName)
+            .collect(Collectors.joining(", "));
   }
 }
