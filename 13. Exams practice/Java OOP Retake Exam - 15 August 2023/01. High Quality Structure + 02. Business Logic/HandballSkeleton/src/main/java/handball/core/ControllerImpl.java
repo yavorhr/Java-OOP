@@ -1,13 +1,15 @@
 package handball.core;
 
+import handball.common.ConstantMessages;
 import handball.entities.gameplay.Gameplay;
+import handball.factory.GamePlayFactory;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class ControllerImpl implements Controller {
-  private Map<String, List<Gameplay>> gamePlays;
+  private Map<String, Gameplay> gamePlays;
 
   public ControllerImpl() {
     this.gamePlays = new HashMap<>();
@@ -15,8 +17,10 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addGameplay(String gameplayType, String gameplayName) {
+    Gameplay gameplay = GamePlayFactory.create(gameplayType, gameplayName);
+    gamePlays.put(gameplayName, gameplay);
 
-    return null;
+    return String.format(ConstantMessages.SUCCESSFULLY_ADDED_GAMEPLAY_TYPE, gameplayType);
   }
 
   @Override
