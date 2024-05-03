@@ -1,10 +1,21 @@
 package handball.core;
 
-public class ControllerImpl implements Controller {
+import handball.entities.gameplay.Gameplay;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class ControllerImpl implements Controller {
+  private Map<String, List<Gameplay>> gamePlays;
+
+  public ControllerImpl() {
+    this.gamePlays = new HashMap<>();
+  }
 
   @Override
   public String addGameplay(String gameplayType, String gameplayName) {
+
     return null;
   }
 
