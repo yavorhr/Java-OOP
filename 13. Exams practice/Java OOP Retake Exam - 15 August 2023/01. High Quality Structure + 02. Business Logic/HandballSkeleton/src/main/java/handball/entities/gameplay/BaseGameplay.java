@@ -79,7 +79,7 @@ public abstract class BaseGameplay implements Gameplay {
     sb.append(String.format("Equipment: %d, Protection: %d", this.equipments.size(), this.allProtection()))
             .append(System.lineSeparator());
 
-    return sb.toString().trim();
+    return sb.toString();
   }
 
   private void setName(String name) {
@@ -93,6 +93,6 @@ public abstract class BaseGameplay implements Gameplay {
             ? "None"
             : this.teams.stream()
             .map(Team::getName)
-            .collect(Collectors.joining(", "));
+            .collect(Collectors.joining(" "));
   }
 }
