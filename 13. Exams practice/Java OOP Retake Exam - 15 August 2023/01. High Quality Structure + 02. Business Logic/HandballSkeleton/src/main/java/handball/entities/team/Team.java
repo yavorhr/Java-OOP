@@ -9,5 +9,5 @@ public interface Team {
 
   int getAdvantage();
 
-  String getPlayingArea()
+  String getPlayingArea();
 }

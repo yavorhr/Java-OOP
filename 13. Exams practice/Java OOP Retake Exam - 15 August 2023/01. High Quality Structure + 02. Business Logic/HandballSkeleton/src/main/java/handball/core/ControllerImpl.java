@@ -54,6 +54,7 @@ public class ControllerImpl implements Controller {
   public String addTeam(String gameplayName, String teamType, String teamName, String country, int advantage) {
     Team team = TeamFactory.create(teamType, teamName, country, advantage);
     Gameplay gameplay = this.gamePlays.get(gameplayName);
+    gameplay.addTeam(team);
 
     if (teamNotSuitableForArea(team.getPlayingArea(), gameplay.getClass().getSimpleName())) {
       return ConstantMessages.GAMEPLAY_NOT_SUITABLE;
@@ -62,14 +63,12 @@ public class ControllerImpl implements Controller {
     return String.format(ConstantMessages.SUCCESSFULLY_ADDED_TEAM_IN_GAMEPLAY, teamType, gameplayName);
   }
 
-  private boolean teamNotSuitableForArea(String playingArea, String teamType) {
-    return !playingArea.equals(teamType);
-
-  }
-
   @Override
   public String playInGameplay(String gameplayName) {
-    return null;
+    Gameplay gameplay = this.gamePlays.get(gameplayName);
+    gameplay.teamsInGameplay();
+
+    return String.format(ConstantMessages.TEAMS_PLAYED, gameplay.getTeam().size());
   }
 
   @Override
@@ -87,5 +86,9 @@ public class ControllerImpl implements Controller {
     if (equipment == null) {
       throw new IllegalArgumentException(String.format(ExceptionMessages.NO_EQUIPMENT_FOUND, equipmentType));
     }
+  }
+
+  private boolean teamNotSuitableForArea(String playingArea, String teamType) {
+    return !playingArea.equals(teamType);
   }
 }
