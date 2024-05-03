@@ -3,16 +3,19 @@ package handball.core;
 import handball.common.ConstantMessages;
 import handball.entities.gameplay.Gameplay;
 import handball.factory.GamePlayFactory;
+import handball.repositories.EquipmentRepository;
+import handball.repositories.Repository;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ControllerImpl implements Controller {
   private Map<String, Gameplay> gamePlays;
+  private Repository equipmentRepository;
 
   public ControllerImpl() {
     this.gamePlays = new HashMap<>();
+    this.equipmentRepository = new EquipmentRepository();
   }
 
   @Override
