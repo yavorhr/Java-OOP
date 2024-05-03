@@ -73,7 +73,9 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String percentAdvantage(String gameplayName) {
-    return null;
+    int totalAdvantage = this.gamePlays.get(gameplayName).getTeam().stream().mapToInt(Team::getAdvantage).sum();
+
+    return String.format(ConstantMessages.ADVANTAGE_GAMEPLAY, gameplayName, totalAdvantage);
   }
 
   @Override
