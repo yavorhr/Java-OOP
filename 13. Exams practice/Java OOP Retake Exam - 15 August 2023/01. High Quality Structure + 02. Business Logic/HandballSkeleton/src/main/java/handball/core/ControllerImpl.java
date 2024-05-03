@@ -1,7 +1,9 @@
 package handball.core;
 
 import handball.common.ConstantMessages;
+import handball.entities.equipment.Equipment;
 import handball.entities.gameplay.Gameplay;
+import handball.factory.EquipmentFactory;
 import handball.factory.GamePlayFactory;
 import handball.repositories.EquipmentRepository;
 import handball.repositories.Repository;
@@ -28,7 +30,10 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addEquipment(String equipmentType) {
-    return null;
+    Equipment equipment = EquipmentFactory.create(equipmentType);
+    this.equipmentRepository.add(equipment);
+
+    return String.format(ConstantMessages.SUCCESSFULLY_ADDED_EQUIPMENT_TYPE, equipmentType);
   }
 
   @Override
