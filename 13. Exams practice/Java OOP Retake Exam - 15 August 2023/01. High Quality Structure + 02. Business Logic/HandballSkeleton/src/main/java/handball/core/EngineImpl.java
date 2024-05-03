@@ -42,32 +42,16 @@ public class EngineImpl implements Engine {
     String result = null;
     String[] data = Arrays.stream(tokens).skip(1).toArray(String[]::new);
 
-    switch (command) {
-      case AddGameplay:
-        result = addGameplay(data);
-        break;
-      case AddTeam:
-        result = addTeam(data);
-        break;
-      case AddEquipment:
-        result = addEquipment(data);
-        break;
-      case EquipmentRequirement:
-        result = equipmentRequirement(data);
-        break;
-      case PlayInGameplay:
-        result = playInGameplay(data);
-        break;
-      case PercentAdvantage:
-        result = percentAdvantage(data);
-        break;
-      case GetStatistics:
-        result = getStatistics();
-        break;
-      case Exit:
-        result = Command.Exit.name();
-        break;
-    }
+    result = switch (command) {
+      case AddGameplay -> addGameplay(data);
+      case AddTeam -> addTeam(data);
+      case AddEquipment -> addEquipment(data);
+      case EquipmentRequirement -> equipmentRequirement(data);
+      case PlayInGameplay -> playInGameplay(data);
+      case PercentAdvantage -> percentAdvantage(data);
+      case GetStatistics -> getStatistics();
+      case Exit -> Command.Exit.name();
+    };
     return result;
   }
 
