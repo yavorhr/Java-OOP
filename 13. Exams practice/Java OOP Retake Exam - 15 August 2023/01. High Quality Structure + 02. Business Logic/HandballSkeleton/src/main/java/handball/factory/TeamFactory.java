@@ -12,9 +12,8 @@ public class TeamFactory {
     switch (type) {
       case "Germany" -> team = new Germany(teamName, country, advantage);
       case "Bulgaria" -> team = new Bulgaria(teamName, country, advantage);
-      default -> throw new IllegalArgumentException(ExceptionMessages.TEAM_NAME_NULL_OR_EMPTY)
+      default -> throw new IllegalArgumentException(ExceptionMessages.TEAM_NAME_NULL_OR_EMPTY);
     }
-
     return team;
   }
 }

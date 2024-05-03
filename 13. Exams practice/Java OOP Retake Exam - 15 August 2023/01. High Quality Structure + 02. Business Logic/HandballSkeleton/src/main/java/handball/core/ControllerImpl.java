@@ -4,8 +4,10 @@ import handball.common.ConstantMessages;
 import handball.common.ExceptionMessages;
 import handball.entities.equipment.Equipment;
 import handball.entities.gameplay.Gameplay;
+import handball.entities.team.Team;
 import handball.factory.EquipmentFactory;
 import handball.factory.GamePlayFactory;
+import handball.factory.TeamFactory;
 import handball.repositories.EquipmentRepository;
 import handball.repositories.Repository;
 
@@ -45,12 +47,24 @@ public class ControllerImpl implements Controller {
     this.equipmentRepository.remove(equipment);
     this.gamePlays.get(gameplayName).addEquipment(equipment);
 
-    return String.format(ConstantMessages.SUCCESSFULLY_ADDED_EQUIPMENT_IN_GAMEPLAY, equipmentType,gameplayName);
+    return String.format(ConstantMessages.SUCCESSFULLY_ADDED_EQUIPMENT_IN_GAMEPLAY, equipmentType, gameplayName);
   }
 
   @Override
   public String addTeam(String gameplayName, String teamType, String teamName, String country, int advantage) {
-    return null;
+    Team team = TeamFactory.create(teamType, teamName, country, advantage);
+    Gameplay gameplay = this.gamePlays.get(gameplayName);
+
+    if (teamNotSuitableForArea(team.getPlayingArea(), gameplay.getClass().getSimpleName())) {
+      return ConstantMessages.GAMEPLAY_NOT_SUITABLE;
+    }
+
+    return String.format(ConstantMessages.SUCCESSFULLY_ADDED_TEAM_IN_GAMEPLAY, teamType, gameplayName);
+  }
+
+  private boolean teamNotSuitableForArea(String playingArea, String teamType) {
+    return !playingArea.equals(teamType);
+
   }
 
   @Override

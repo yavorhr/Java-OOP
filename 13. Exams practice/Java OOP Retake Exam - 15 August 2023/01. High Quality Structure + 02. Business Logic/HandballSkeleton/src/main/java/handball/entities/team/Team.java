@@ -1,13 +1,13 @@
 package handball.entities.team;
 
 public interface Team {
-    void setName(String name);
+  void setName(String name);
 
-    void play();
+  void play();
 
-    String getName();
+  String getName();
 
-    int getAdvantage();
+  int getAdvantage();
 
-
+  String getPlayingArea()
 }
