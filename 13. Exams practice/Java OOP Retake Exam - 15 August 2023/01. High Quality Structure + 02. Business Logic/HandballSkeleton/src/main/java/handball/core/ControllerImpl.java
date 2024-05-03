@@ -80,7 +80,10 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String getStatistics() {
-    return null;
+    StringBuilder sb = new StringBuilder();
+    this.gamePlays.values().forEach(g -> sb.append(g.toString()));
+
+    return sb.toString();
   }
 
   // Helpers
