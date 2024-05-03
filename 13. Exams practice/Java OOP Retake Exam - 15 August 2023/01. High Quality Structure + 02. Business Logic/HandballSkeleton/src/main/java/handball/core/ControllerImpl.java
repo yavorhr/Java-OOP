@@ -1,6 +1,7 @@
 package handball.core;
 
 import handball.common.ConstantMessages;
+import handball.common.ExceptionMessages;
 import handball.entities.equipment.Equipment;
 import handball.entities.gameplay.Gameplay;
 import handball.factory.EquipmentFactory;
@@ -38,7 +39,13 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String equipmentRequirement(String gameplayName, String equipmentType) {
-    return null;
+    Equipment equipment = this.equipmentRepository.findByType(equipmentType);
+    validateEquipment(equipmentType, equipment);
+
+    this.equipmentRepository.remove(equipment);
+    this.gamePlays.get(gameplayName).addEquipment(equipment);
+
+    return String.format(ConstantMessages.SUCCESSFULLY_ADDED_EQUIPMENT_IN_GAMEPLAY, equipmentType,gameplayName);
   }
 
   @Override
@@ -59,5 +66,12 @@ public class ControllerImpl implements Controller {
   @Override
   public String getStatistics() {
     return null;
+  }
+
+  // Helpers
+  private void validateEquipment(String equipmentType, Equipment equipment) {
+    if (equipment == null) {
+      throw new IllegalArgumentException(String.format(ExceptionMessages.NO_EQUIPMENT_FOUND, equipmentType));
+    }
   }
 }
