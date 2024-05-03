@@ -45,7 +45,9 @@ public class ControllerImpl implements Controller {
     validateEquipment(equipmentType, equipment);
 
     this.equipmentRepository.remove(equipment);
-    this.gamePlays.get(gameplayName).addEquipment(equipment);
+
+    Gameplay gameplay = this.gamePlays.get(gameplayName);
+    gameplay.addEquipment(equipment);
 
     return String.format(ConstantMessages.SUCCESSFULLY_ADDED_EQUIPMENT_IN_GAMEPLAY, equipmentType, gameplayName);
   }

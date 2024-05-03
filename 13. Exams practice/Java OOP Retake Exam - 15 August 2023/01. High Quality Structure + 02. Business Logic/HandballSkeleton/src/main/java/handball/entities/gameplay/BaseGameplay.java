@@ -4,6 +4,7 @@ import handball.Validator.Validator;
 import handball.entities.equipment.Equipment;
 import handball.entities.team.Team;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.stream.Collectors;
@@ -17,6 +18,8 @@ public abstract class BaseGameplay implements Gameplay {
   protected BaseGameplay(String name, int capacity) {
     this.setName(name);
     this.capacity = capacity;
+    this.equipments = new ArrayList<>();
+    this.teams = new ArrayList<>();
   }
 
   @Override
