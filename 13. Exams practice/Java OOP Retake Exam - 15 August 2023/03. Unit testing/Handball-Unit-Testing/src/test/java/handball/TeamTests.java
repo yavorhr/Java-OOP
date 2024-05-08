@@ -54,4 +54,15 @@ public class TeamTests {
     team1.add(new HandballPlayer("Mike"));
   }
 
+  //test removeHandballPlayer
+  @Test
+  public void testRemoveHandballPlayerShouldWorksCorrect(){
+    this.team1.remove("Ivan");
+    Assert.assertEquals(1, team1.getCount());
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testRemoveHandballPlayerShouldThrowErrorWhenPlayerIsNotExisting(){
+    this.team1.remove("none_existing_player");
+  }
 }
