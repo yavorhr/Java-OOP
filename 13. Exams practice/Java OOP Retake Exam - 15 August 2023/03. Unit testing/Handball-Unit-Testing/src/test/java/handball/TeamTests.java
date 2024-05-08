@@ -35,4 +35,11 @@ public class TeamTests {
     Assert.assertTrue(player1.isActive());
     Assert.assertEquals("Ivan", player1.getName());
   }
+
+  //test setPosition() validation
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testTeamConstructorShouldThrowErrorWhenNegativePosition() {
+   new Team("test", -3);
+  }
 }
