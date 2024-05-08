@@ -12,7 +12,7 @@ public class TeamTests {
 
   @Before
   public void setup() {
-    this.team1 = new Team("Arsenal", 3);
+    this.team1 = new Team("Arsenal", 2);
     this.team1.add(player1 = new HandballPlayer("Ivan"));
     this.team1.add(player2 = new HandballPlayer("Georgi"));
 
@@ -38,8 +38,20 @@ public class TeamTests {
 
   //test setPosition() validation
 
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testTeamConstructorShouldThrowErrorWhenNegativePosition() {
-   new Team("test", -3);
+    new Team("test", -3);
   }
+
+  //test addHandballPlayer
+  @Test
+  public void testAddHandballPlayerShouldWorksCorrect() {
+    Assert.assertEquals(2, team1.getCount());
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testAddHandballPlayerShouldThrowErrorWhenTeamIsFull() {
+    team1.add(new HandballPlayer("Mike"));
+  }
+
 }
