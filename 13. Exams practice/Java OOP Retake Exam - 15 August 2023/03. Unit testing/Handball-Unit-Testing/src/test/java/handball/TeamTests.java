@@ -78,4 +78,12 @@ public class TeamTests {
     this.team1.playerForAnotherTeam("none_existing_player");
   }
 
+  //test getStatistics()
+  @Test
+  public void testGetStatisticsWorksCorrect(){
+    String expected = "The player Ivan, Georgi is in the team Arsenal.";
+    String result = this.team1.getStatistics();
+    Assert.assertEquals(expected, result);
+  }
+
 }
