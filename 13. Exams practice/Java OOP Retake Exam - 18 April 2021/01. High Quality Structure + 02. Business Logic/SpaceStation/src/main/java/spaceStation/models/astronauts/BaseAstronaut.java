@@ -1,6 +1,7 @@
 package spaceStation.models.astronauts;
 
 import spaceStation.models.bags.Bag;
+import spaceStation.validator.Validator;
 
 public abstract class BaseAstronaut implements Astronaut {
   private String name;
@@ -8,8 +9,8 @@ public abstract class BaseAstronaut implements Astronaut {
   private Bag bag;
 
   protected BaseAstronaut(String name, double oxygen) {
-    this.name = name;
-    this.oxygen = oxygen;
+    this.setName(name);
+    this.setOxygen(oxygen);
   }
 
   @Override
@@ -38,5 +39,15 @@ public abstract class BaseAstronaut implements Astronaut {
     if (oxygen < 0) {
       oxygen = 0;
     }
+  }
+
+  private void setName(String name) {
+    Validator.validateAstronautName(name);
+    this.name = name;
+  }
+
+  public void setOxygen(double oxygen) {
+    Validator.validateAstronautOxygen(oxygen);
+    this.oxygen = oxygen;
   }
 }

@@ -14,4 +14,5 @@ public class Validator {
       throw new IllegalArgumentException(ExceptionMessages.ASTRONAUT_OXYGEN_LESS_THAN_ZERO);
     }
   }
+
 }
