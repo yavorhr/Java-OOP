@@ -32,8 +32,11 @@ public abstract class BaseAstronaut implements Astronaut {
     return this.bag;
   }
 
-  @Override
-  public void breath() {
+  protected void decreaseOxygenWhenBreathe(double value) {
+    this.oxygen -= value;
 
+    if (oxygen < 0) {
+      oxygen = 0;
+    }
   }
 }
