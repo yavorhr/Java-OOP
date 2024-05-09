@@ -15,4 +15,9 @@ public class Validator {
     }
   }
 
+  public static void validatePlanetName(String name) {
+    if (name == null || name.trim().isEmpty()) {
+      throw new NullPointerException(ExceptionMessages.PLANET_NAME_NULL_OR_EMPTY);
+    }
+  }
 }

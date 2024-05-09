@@ -1,5 +1,7 @@
 package spaceStation.models.planets;
 
+import spaceStation.validator.Validator;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -9,7 +11,7 @@ public class PlanetImpl implements Planet {
   private List<String> items;
 
   public PlanetImpl(String name) {
-    this.name = name;
+    this.setName(name);
     this.items = new ArrayList<>();
   }
 
@@ -21,5 +23,10 @@ public class PlanetImpl implements Planet {
   @Override
   public String getName() {
     return this.name;
+  }
+
+  public void setName(String name) {
+    Validator.validatePlanetName(name);
+    this.name = name;
   }
 }
