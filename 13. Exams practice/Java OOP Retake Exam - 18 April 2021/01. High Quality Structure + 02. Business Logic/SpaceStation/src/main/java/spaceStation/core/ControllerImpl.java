@@ -3,14 +3,21 @@ package spaceStation.core;
 import spaceStation.common.ConstantMessages;
 import spaceStation.factory.AstronautFactory;
 import spaceStation.models.astronauts.Astronaut;
+import spaceStation.models.planets.Planet;
+import spaceStation.models.planets.PlanetImpl;
 import spaceStation.repositories.AstronautRepository;
+import spaceStation.repositories.PlanetRepository;
 import spaceStation.repositories.Repository;
+
+import java.util.Arrays;
 
 public class ControllerImpl implements Controller {
   Repository<Astronaut> astronautRepository;
+  Repository<Planet> planetRepository;
 
   public ControllerImpl() {
-    astronautRepository = new AstronautRepository();
+    this.astronautRepository = new AstronautRepository();
+    this.planetRepository = new PlanetRepository();
   }
 
   @Override
@@ -23,7 +30,19 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addPlanet(String planetName, String... items) {
-    return null;
+    Planet planet = createPlanet(planetName, items);
+    this.planetRepository.add(planet);
+
+    return String.format(ConstantMessages.PLANET_ADDED, planetName);
+  }
+
+  private Planet createPlanet(String planetName, String[] items) {
+    Planet planet = new PlanetImpl(planetName);
+    if (items.length > 0) {
+      Arrays.stream(items).forEach(i -> planet.getItems().add(i));
+    }
+
+    return planet;
   }
 
   @Override
