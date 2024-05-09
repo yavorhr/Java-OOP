@@ -7,7 +7,7 @@ import spaceStation.models.astronauts.Geodesist;
 import spaceStation.models.astronauts.Meteorologist;
 
 public class AstronautFactory {
-  public Astronaut create(String type, String name) {
+  public static Astronaut create(String type, String name) {
     Astronaut astronaut = null;
 
     switch (type) {
