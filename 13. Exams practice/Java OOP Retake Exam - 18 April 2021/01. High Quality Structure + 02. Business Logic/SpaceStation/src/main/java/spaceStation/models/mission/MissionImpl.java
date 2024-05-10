@@ -6,10 +6,11 @@ import spaceStation.models.planets.Planet;
 import java.util.Collection;
 
 public class MissionImpl implements Mission {
+  private static int MISSIONS_COUNT = 0;
 
   @Override
   public void explore(Planet planet, Collection<Astronaut> astronauts) {
-
+    MISSIONS_COUNT++;
     while (planet.getItems().size() > 0 && astronautsLeft(astronauts)) {
       for (Astronaut astronaut : astronauts) {
         while (astronaut.canBreath() && !"".equals(getItem(planet))) {
@@ -21,6 +22,11 @@ public class MissionImpl implements Mission {
         }
       }
     }
+  }
+
+  @Override
+  public int getExploredPlanets() {
+    return MISSIONS_COUNT;
   }
 
 

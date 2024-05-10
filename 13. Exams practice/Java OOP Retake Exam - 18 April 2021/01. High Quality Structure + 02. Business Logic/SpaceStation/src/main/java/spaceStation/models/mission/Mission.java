@@ -7,4 +7,6 @@ import java.util.Collection;
 
 public interface Mission {
     void explore(Planet planet, Collection<Astronaut> astronauts);
+
+    int getExploredPlanets();
 }

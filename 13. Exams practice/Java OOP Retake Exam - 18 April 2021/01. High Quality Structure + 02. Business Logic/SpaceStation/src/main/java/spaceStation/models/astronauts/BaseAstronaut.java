@@ -1,7 +1,10 @@
 package spaceStation.models.astronauts;
 
+import spaceStation.common.ConstantMessages;
 import spaceStation.models.bags.Bag;
 import spaceStation.validator.Validator;
+
+import java.util.stream.Collectors;
 
 public abstract class BaseAstronaut implements Astronaut {
   private String name;
@@ -49,5 +52,26 @@ public abstract class BaseAstronaut implements Astronaut {
   public void setOxygen(double oxygen) {
     Validator.validateAstronautOxygen(oxygen);
     this.oxygen = oxygen;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append(String.format(ConstantMessages.REPORT_ASTRONAUT_NAME, this.name))
+            .append(System.lineSeparator());
+
+    sb.append(String.format(ConstantMessages.REPORT_ASTRONAUT_OXYGEN, this.oxygen))
+            .append(System.lineSeparator());
+
+    sb.append(String.format(ConstantMessages.REPORT_ASTRONAUT_BAG_ITEMS, getItemsNames()))
+            .append(System.lineSeparator());
+
+    return sb.toString();
+  }
+
+  private String getItemsNames() {
+    return this.getBag().getItems().size() == 0
+            ? "None"
+            : String.join(ConstantMessages.REPORT_ASTRONAUT_BAG_ITEMS_DELIMITER, this.getBag().getItems());
   }
 }

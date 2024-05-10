@@ -82,6 +82,13 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String report() {
+    StringBuilder sb = new StringBuilder();
+    sb.append(String.format(ConstantMessages.REPORT_PLANET_EXPLORED, this.mission.getExploredPlanets()))
+            .append(System.lineSeparator());
+
+    sb.append(ConstantMessages.REPORT_ASTRONAUT_INFO)
+            .append(System.lineSeparator());
+
     return null;
   }
 

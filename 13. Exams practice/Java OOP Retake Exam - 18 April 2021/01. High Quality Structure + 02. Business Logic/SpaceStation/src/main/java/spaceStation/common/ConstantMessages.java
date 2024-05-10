@@ -9,7 +9,7 @@ public class ConstantMessages {
 
     public static final String PLANET_EXPLORED = "Planet: %s was explored! Exploration finished with %d dead astronauts!";
 
-    public static final String REPORT_PLANET_EXPLORED = "%s planets were explored!";
+    public static final String REPORT_PLANET_EXPLORED = "%d planets were explored!";
 
     public static final String REPORT_ASTRONAUT_INFO = "Astronauts info:";
 
