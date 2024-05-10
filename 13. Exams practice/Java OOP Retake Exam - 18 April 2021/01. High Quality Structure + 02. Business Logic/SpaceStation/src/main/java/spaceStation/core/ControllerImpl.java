@@ -1,6 +1,7 @@
 package spaceStation.core;
 
 import spaceStation.common.ConstantMessages;
+import spaceStation.common.ExceptionMessages;
 import spaceStation.factory.AstronautFactory;
 import spaceStation.models.astronauts.Astronaut;
 import spaceStation.models.planets.Planet;
@@ -47,7 +48,15 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String retireAstronaut(String astronautName) {
-    return null;
+    Astronaut astronaut = this.astronautRepository.findByName(astronautName);
+
+    if (astronaut == null) {
+      throw new IllegalArgumentException(String.format(ExceptionMessages.ASTRONAUT_DOES_NOT_EXIST, astronautName));
+    }
+
+    this.astronautRepository.remove(astronaut);
+
+    return String.format(ConstantMessages.ASTRONAUT_RETIRED, astronaut);
   }
 
   @Override
