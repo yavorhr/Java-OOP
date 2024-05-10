@@ -91,7 +91,7 @@ public class ControllerImpl implements Controller {
 
     this.astronautRepository.getModels().forEach(a -> sb.append(a.toString()));
 
-    return sb.toString();
+    return sb.toString().trim();
   }
 
   // Helpers

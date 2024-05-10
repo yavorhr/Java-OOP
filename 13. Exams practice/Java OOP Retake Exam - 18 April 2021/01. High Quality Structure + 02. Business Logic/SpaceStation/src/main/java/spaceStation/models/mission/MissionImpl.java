@@ -21,7 +21,7 @@ public class MissionImpl implements Mission {
           astronaut.breath();
 
           if (getItem(planet).equals("")) {
-            break;
+            return;
           }
 
         }

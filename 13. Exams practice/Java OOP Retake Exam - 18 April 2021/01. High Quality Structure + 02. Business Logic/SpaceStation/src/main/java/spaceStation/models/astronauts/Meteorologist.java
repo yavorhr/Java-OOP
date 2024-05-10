@@ -5,7 +5,7 @@ public class Meteorologist extends BaseAstronaut {
   private static final double DECREASE_VALUE_ON_BREATHE = 10;
 
   public Meteorologist(String name) {
-    super(name, DECREASE_VALUE_ON_BREATHE);
+    super(name, INITIAL_OXYGEN);
   }
 
   @Override
