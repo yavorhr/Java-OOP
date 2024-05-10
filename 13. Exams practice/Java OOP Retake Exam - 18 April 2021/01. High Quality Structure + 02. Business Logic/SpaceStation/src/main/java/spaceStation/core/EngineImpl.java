@@ -42,26 +42,14 @@ public class EngineImpl implements Engine {
     String result = null;
     String[] data = Arrays.stream(tokens).skip(1).toArray(String[]::new);
 
-    switch (command) {
-      case AddAstronaut:
-        result = addAstronaut(data);
-        break;
-      case AddPlanet:
-        result = addPlanet(data);
-        break;
-      case RetireAstronaut:
-        result = retireAstronaut(data);
-        break;
-      case ExplorePlanet:
-        result = explorePlanet(data);
-        break;
-      case Report:
-        result = report();
-        break;
-      case Exit:
-        result = Command.Exit.name();
-        break;
-    }
+    result = switch (command) {
+      case AddAstronaut -> addAstronaut(data);
+      case AddPlanet -> addPlanet(data);
+      case RetireAstronaut -> retireAstronaut(data);
+      case ExplorePlanet -> explorePlanet(data);
+      case Report -> report();
+      case Exit -> Command.Exit.name();
+    };
 
     return result;
   }
