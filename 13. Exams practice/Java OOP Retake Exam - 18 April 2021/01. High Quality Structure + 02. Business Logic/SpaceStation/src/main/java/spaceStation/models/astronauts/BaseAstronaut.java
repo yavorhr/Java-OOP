@@ -5,8 +5,6 @@ import spaceStation.models.bags.Backpack;
 import spaceStation.models.bags.Bag;
 import spaceStation.validator.Validator;
 
-import java.util.stream.Collectors;
-
 public abstract class BaseAstronaut implements Astronaut {
   private String name;
   private double oxygen;
@@ -73,7 +71,7 @@ public abstract class BaseAstronaut implements Astronaut {
 
   private String getItemsNames() {
     return this.getBag().getItems().size() == 0
-            ? "None"
+            ? "none"
             : String.join(ConstantMessages.REPORT_ASTRONAUT_BAG_ITEMS_DELIMITER, this.getBag().getItems());
   }
 }

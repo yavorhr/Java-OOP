@@ -61,7 +61,7 @@ public class ControllerImpl implements Controller {
     }
 
     this.astronautRepository.remove(astronaut);
-    return String.format(ConstantMessages.ASTRONAUT_RETIRED, astronaut);
+    return String.format(ConstantMessages.ASTRONAUT_RETIRED, astronautName);
   }
 
   @Override
@@ -89,7 +89,9 @@ public class ControllerImpl implements Controller {
     sb.append(ConstantMessages.REPORT_ASTRONAUT_INFO)
             .append(System.lineSeparator());
 
-    return null;
+    this.astronautRepository.getModels().forEach(a -> sb.append(a.toString()));
+
+    return sb.toString();
   }
 
   // Helpers

@@ -13,12 +13,17 @@ public class MissionImpl implements Mission {
     MISSIONS_COUNT++;
     while (planet.getItems().size() > 0 && astronautsLeft(astronauts)) {
       for (Astronaut astronaut : astronauts) {
-        while (astronaut.canBreath() && !"".equals(getItem(planet))) {
+        while (astronaut.canBreath()) {
           String item = getItem(planet);
 
           astronaut.getBag().getItems().add(item);
           planet.getItems().remove(item);
           astronaut.breath();
+
+          if (getItem(planet).equals("")) {
+            break;
+          }
+
         }
       }
     }
