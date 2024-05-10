@@ -1,6 +1,7 @@
 package spaceStation.models.astronauts;
 
 import spaceStation.common.ConstantMessages;
+import spaceStation.models.bags.Backpack;
 import spaceStation.models.bags.Bag;
 import spaceStation.validator.Validator;
 
@@ -14,6 +15,7 @@ public abstract class BaseAstronaut implements Astronaut {
   protected BaseAstronaut(String name, double oxygen) {
     this.setName(name);
     this.setOxygen(oxygen);
+    this.bag = new Backpack();
   }
 
   @Override

@@ -2,10 +2,15 @@ package spaceStation.repositories;
 
 import spaceStation.models.planets.Planet;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class PlanetRepository implements Repository<Planet> {
   private Collection<Planet> planets;
+
+  public PlanetRepository() {
+    this.planets = new ArrayList<>();
+  }
 
   @Override
   public Collection<Planet> getModels() {
