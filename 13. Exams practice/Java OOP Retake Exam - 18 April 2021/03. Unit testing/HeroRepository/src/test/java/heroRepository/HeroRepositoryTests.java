@@ -46,4 +46,9 @@ public class HeroRepositoryTests {
   public void testCreateHeroShouldThrowErrorWhenHeroAlreadyExists() {
    this.heroRepository.create(new Hero("Dean",55));
   }
+
+  @Test (expected = NullPointerException.class)
+  public void testCreateHeroShouldThrowErrorWhenNullValueIsPassed() {
+    this.heroRepository.create(null);
+  }
 }
