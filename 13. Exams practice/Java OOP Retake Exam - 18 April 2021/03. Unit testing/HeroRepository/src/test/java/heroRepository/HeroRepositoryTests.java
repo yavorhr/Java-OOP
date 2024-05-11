@@ -63,4 +63,12 @@ public class HeroRepositoryTests {
     Assert.assertFalse(this.heroRepository.remove("Vankata"));
   }
 
+  //getHeroWithHighestLevel()
+  @Test
+  public void testGetHeroWithHighestLevel() {
+    Hero expectedHero = this.heroRepository.getHeroWithHighestLevel();
+    Assert.assertEquals(expectedHero.getName(), "Mike");
+    Assert.assertEquals(expectedHero.getLevel(), 59);
+  }
+
 }
