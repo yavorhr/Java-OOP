@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Collection;
+
 public class HeroRepositoryTests {
   private HeroRepository heroRepository;
   private HeroRepository emptyRepository;
@@ -77,6 +79,18 @@ public class HeroRepositoryTests {
     Hero expectedHero = this.heroRepository.getHero("Mike");
     Assert.assertEquals(expectedHero.getName(), "Mike");
     Assert.assertEquals(expectedHero.getLevel(), 59);
+  }
+
+  // getHeroes()
+  @Test(expected = UnsupportedOperationException.class)
+  public void testGetHeroesReturnUnmodifiableCollection() {
+    this.heroRepository.getHeroes().add(new Hero("DarkShadow", 333));
+  }
+
+  @Test
+  public void testGetHeroesReturnCollection() {
+    int expected = this.heroRepository.getHeroes().size();
+    Assert.assertEquals(expected,2);
   }
 
 
