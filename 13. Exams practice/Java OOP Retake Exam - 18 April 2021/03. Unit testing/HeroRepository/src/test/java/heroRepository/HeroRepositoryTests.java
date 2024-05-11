@@ -23,7 +23,6 @@ public class HeroRepositoryTests {
 
 
   //test constructors
-
   @Test
   public void testHeroRepositoryCtorShouldWorksCorrect() {
     Assert.assertEquals(0, this.emptyRepository.getCount());
@@ -35,5 +34,11 @@ public class HeroRepositoryTests {
     int expectedLevel = this.hero1.getLevel();
     Assert.assertEquals(expectedName, "Dean");
     Assert.assertEquals(expectedLevel, 33);
+  }
+
+  //test create()
+  @Test
+  public void testCreateShouldWorksCorrect() {
+    Assert.assertEquals(2, this.heroRepository.getCount());
   }
 }
