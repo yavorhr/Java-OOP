@@ -38,7 +38,12 @@ public class HeroRepositoryTests {
 
   //test create()
   @Test
-  public void testCreateShouldWorksCorrect() {
+  public void testCreateHeroShouldWorksCorrect() {
     Assert.assertEquals(2, this.heroRepository.getCount());
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testCreateHeroShouldThrowErrorWhenHeroAlreadyExists() {
+   this.heroRepository.create(new Hero("Dean",55));
   }
 }
