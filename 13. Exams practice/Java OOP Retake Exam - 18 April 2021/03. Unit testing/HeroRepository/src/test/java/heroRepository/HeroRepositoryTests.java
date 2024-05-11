@@ -13,9 +13,27 @@ public class HeroRepositoryTests {
   @Before
   public void setup() {
     this.emptyRepository = new HeroRepository();
+
     this.heroRepository = new HeroRepository();
+    this.hero1 = new Hero("Dean", 33);
+    this.hero2 = new Hero("Mike", 59);
     this.heroRepository.create(hero1);
     this.heroRepository.create(hero2);
   }
 
+
+  //test constructors
+
+  @Test
+  public void testHeroRepositoryCtorShouldWorksCorrect() {
+    Assert.assertEquals(0, this.emptyRepository.getCount());
+  }
+
+  @Test
+  public void testHeroCtorShouldWorksCorrect() {
+    String expectedName = this.hero1.getName();
+    int expectedLevel = this.hero1.getLevel();
+    Assert.assertEquals(expectedName, "Dean");
+    Assert.assertEquals(expectedLevel, 33);
+  }
 }
