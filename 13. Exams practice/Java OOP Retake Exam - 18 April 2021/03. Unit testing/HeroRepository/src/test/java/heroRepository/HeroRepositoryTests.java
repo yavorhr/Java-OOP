@@ -42,13 +42,25 @@ public class HeroRepositoryTests {
     Assert.assertEquals(2, this.heroRepository.getCount());
   }
 
-  @Test (expected = IllegalArgumentException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void testCreateHeroShouldThrowErrorWhenHeroAlreadyExists() {
-   this.heroRepository.create(new Hero("Dean",55));
+    this.heroRepository.create(new Hero("Dean", 55));
   }
 
-  @Test (expected = NullPointerException.class)
+  @Test(expected = NullPointerException.class)
   public void testCreateHeroShouldThrowErrorWhenNullValueIsPassed() {
     this.heroRepository.create(null);
   }
+
+  //test remove()
+  @Test
+  public void testRemoveHeroShouldReturnsTrueWhenHeroIsRemoved() {
+    Assert.assertTrue(this.heroRepository.remove("Dean"));
+  }
+
+  @Test
+  public void testRemoveHeroShouldReturnsFalseWhenHeroIsNotExisting() {
+    Assert.assertFalse(this.heroRepository.remove("Vankata"));
+  }
+
 }
