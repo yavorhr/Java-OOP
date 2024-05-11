@@ -71,4 +71,13 @@ public class HeroRepositoryTests {
     Assert.assertEquals(expectedHero.getLevel(), 59);
   }
 
+  // getHero()
+  @Test
+  public void testGetHeroShouldReturnHero() {
+    Hero expectedHero = this.heroRepository.getHero("Mike");
+    Assert.assertEquals(expectedHero.getName(), "Mike");
+    Assert.assertEquals(expectedHero.getLevel(), 59);
+  }
+
+
 }
