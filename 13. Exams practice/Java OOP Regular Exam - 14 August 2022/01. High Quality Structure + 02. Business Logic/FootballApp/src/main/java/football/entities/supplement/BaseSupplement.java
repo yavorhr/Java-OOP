@@ -4,7 +4,7 @@ public abstract class BaseSupplement implements  Supplement{
   private int energy;
   private double price;
 
-  public BaseSupplement(int energy, double price) {
+  protected BaseSupplement(int energy, double price) {
     this.energy = energy;
     this.price = price;
   }
