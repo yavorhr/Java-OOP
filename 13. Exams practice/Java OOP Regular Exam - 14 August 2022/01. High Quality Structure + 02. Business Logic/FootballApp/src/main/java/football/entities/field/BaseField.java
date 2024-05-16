@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class BaseField implements Field {
   private String name;
@@ -55,7 +56,26 @@ public abstract class BaseField implements Field {
 
   @Override
   public String getInfo() {
-    return null;
+    StringBuilder sb = new StringBuilder();
+
+    sb.append(String.format("%s (%s):", this.name, this.getClass().getSimpleName()))
+            .append(System.lineSeparator());
+    sb.append(String.format("Player: %s", playersOutput()))
+            .append(System.lineSeparator());
+    sb.append(String.format("Supplement: %d", this.supplements.size()))
+            .append(System.lineSeparator());
+    sb.append(String.format("Energy: %d", this.sumEnergy()))
+            .append(System.lineSeparator());
+
+    return sb.toString().trim();
+  }
+
+  protected String playersOutput() {
+    return this.players.size() == 0
+            ? "None"
+            : this.players.stream()
+            .map(Player::getName)
+            .collect(Collectors.joining(", "));
   }
 
   @Override
