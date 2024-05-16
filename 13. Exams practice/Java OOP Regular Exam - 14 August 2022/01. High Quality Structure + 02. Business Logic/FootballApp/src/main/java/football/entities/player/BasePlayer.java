@@ -32,4 +32,8 @@ public abstract class BasePlayer implements Player {
   public int getStrength() {
     return this.strength;
   }
+
+  protected void increaseStrength(int strength) {
+    this.strength += strength;
+  }
 }
