@@ -16,8 +16,8 @@ public abstract class BaseField implements Field {
   private List<Supplement> supplements;
   private List<Player> players;
 
-  public BaseField(String name, int capacity) {
-    this.name = name;
+  protected BaseField(String name, int capacity) {
+    this.setName(name);
     this.capacity = capacity;
     this.supplements = new ArrayList<>();
     this.players = new ArrayList<>();
@@ -92,5 +92,10 @@ public abstract class BaseField implements Field {
   @Override
   public String getName() {
     return this.name;
+  }
+
+  public void setName(String name) {
+    Validator.validateFieldName(name);
+    this.name = name;
   }
 }

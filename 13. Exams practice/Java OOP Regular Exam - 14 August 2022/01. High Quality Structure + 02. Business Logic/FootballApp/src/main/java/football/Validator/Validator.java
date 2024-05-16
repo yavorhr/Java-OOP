@@ -30,4 +30,9 @@ public class Validator {
   }
 
 
+  public static void validateFieldName(String name) {
+    if (name == null || name.trim().isEmpty()) {
+      throw new IllegalArgumentException(ExceptionMessages.FIELD_NAME_NULL_OR_EMPTY);
+    }
+  }
 }
