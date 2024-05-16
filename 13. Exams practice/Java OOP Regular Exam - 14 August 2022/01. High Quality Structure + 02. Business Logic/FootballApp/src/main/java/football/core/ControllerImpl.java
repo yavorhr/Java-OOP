@@ -1,40 +1,50 @@
 package football.core;
 
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Collection;
+
+
 public class ControllerImpl implements Controller {
+  private Collection<Field> fields;
 
-    @Override
-    public String addField(String fieldType, String fieldName) {
-        return null;
-    }
+  public ControllerImpl() {
+    this.fields = new ArrayList<>();
+  }
 
-    @Override
-    public String deliverySupplement(String type) {
-        return null;
-    }
+  @Override
+  public String addField(String fieldType, String fieldName) {
+    return null;
+  }
 
-    @Override
-    public String supplementForField(String fieldName, String supplementType) {
-        return null;
-    }
+  @Override
+  public String deliverySupplement(String type) {
+    return null;
+  }
 
-    @Override
-    public String addPlayer(String fieldName, String playerType, String playerName, String nationality, int strength) {
-        return null;
-    }
+  @Override
+  public String supplementForField(String fieldName, String supplementType) {
+    return null;
+  }
 
-    @Override
-    public String dragPlayer(String fieldName) {
-        return null;
-    }
+  @Override
+  public String addPlayer(String fieldName, String playerType, String playerName, String nationality, int strength) {
+    return null;
+  }
 
-    @Override
-    public String calculateStrength(String fieldName) {
-        return null;
-    }
+  @Override
+  public String dragPlayer(String fieldName) {
+    return null;
+  }
 
-    @Override
-    public String getStatistics() {
-        return null;
-    }
+  @Override
+  public String calculateStrength(String fieldName) {
+    return null;
+  }
+
+  @Override
+  public String getStatistics() {
+    return null;
+  }
 }
