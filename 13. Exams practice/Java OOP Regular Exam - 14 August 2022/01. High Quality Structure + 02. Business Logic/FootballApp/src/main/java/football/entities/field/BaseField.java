@@ -34,6 +34,7 @@ public abstract class BaseField implements Field {
   @Override
   public void addPlayer(Player player) {
     Validator.validateIfCapacity(this.capacity);
+
     this.players.add(player);
     this.capacity--;
   }

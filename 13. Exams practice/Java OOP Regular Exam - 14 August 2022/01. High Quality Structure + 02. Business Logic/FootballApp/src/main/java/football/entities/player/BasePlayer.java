@@ -1,5 +1,7 @@
 package football.entities.player;
 
+import football.Validator.Validator;
+
 public abstract class BasePlayer implements Player {
   private String name;
   private String nationality;
@@ -7,14 +9,15 @@ public abstract class BasePlayer implements Player {
   private int strength;
 
   protected BasePlayer(String name, String nationality, double kg, int strength) {
-    this.name = name;
-    this.nationality = nationality;
+    this.setName(name);
+    this.setNationality(nationality);
     this.kg = kg;
-    this.strength = strength;
+    this.setStrength(strength);
   }
 
   @Override
   public void setName(String name) {
+    Validator.validatePlayerName(name);
     this.name = name;
   }
 
@@ -25,6 +28,7 @@ public abstract class BasePlayer implements Player {
 
   @Override
   public String getName() {
+    Validator.validatePlayerName(name);
     return this.name;
   }
 
@@ -35,5 +39,14 @@ public abstract class BasePlayer implements Player {
 
   protected void increaseStrength(int strength) {
     this.strength += strength;
+  }
+
+  private void setStrength(int strength) {
+    Validator.validateStrength(strength);
+    this.strength = strength;
+  }
+
+  private void setNationality(String nationality) {
+    this.nationality = nationality;
   }
 }
