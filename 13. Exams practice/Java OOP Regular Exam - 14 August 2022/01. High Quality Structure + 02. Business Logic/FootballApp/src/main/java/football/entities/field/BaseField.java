@@ -6,6 +6,7 @@ import football.entities.supplement.Supplement;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public abstract class BaseField implements Field {
@@ -32,23 +33,24 @@ public abstract class BaseField implements Field {
   @Override
   public void addPlayer(Player player) {
     Validator.validateIfCapacity(this.capacity);
-
     this.players.add(player);
+    this.capacity--;
   }
 
   @Override
   public void removePlayer(Player player) {
-
+    this.players.remove(player);
+    this.capacity++;
   }
 
   @Override
   public void addSupplement(Supplement supplement) {
-
+    this.supplements.add(supplement);
   }
 
   @Override
   public void drag() {
-
+    this.players.forEach(Player::stimulation);
   }
 
   @Override
@@ -58,16 +60,16 @@ public abstract class BaseField implements Field {
 
   @Override
   public Collection<Player> getPlayers() {
-    return null;
+    return Collections.unmodifiableCollection(this.players);
   }
 
   @Override
   public Collection<Supplement> getSupplements() {
-    return null;
+    return Collections.unmodifiableCollection(this.supplements);
   }
 
   @Override
   public String getName() {
-    return null;
+    return this.name;
   }
 }
