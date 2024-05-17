@@ -89,7 +89,10 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String getStatistics() {
-    return null;
+    StringBuilder sb = new StringBuilder();
+    this.fields.forEach(f -> sb.append(f.getInfo()));
+
+    return sb.toString();
   }
 
   // Helpers
