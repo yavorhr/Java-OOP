@@ -4,9 +4,11 @@ package football.core;
 import football.common.ConstantMessages;
 import football.common.ExceptionMessages;
 import football.entities.field.Field;
+import football.entities.player.Player;
 import football.entities.supplement.Supplement;
 import football.factory.FieldFactory;
 import football.factory.SupplementFactory;
+import football.repositories.PlayerFactory;
 import football.repositories.SupplementRepository;
 import football.repositories.SupplementRepositoryImpl;
 
@@ -53,8 +55,17 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addPlayer(String fieldName, String playerType, String playerName, String nationality, int strength) {
-    return null;
+    Player player = PlayerFactory.create(playerType, playerName, nationality, strength);
+    Field field = getField(fieldName);
+    field.addPlayer(player);
+
+    if (!doesPlayerCanPlayOnField(playerType, field.getClass().getSimpleName())) {
+      return ConstantMessages.FIELD_NOT_SUITABLE;
+    }
+
+    return String.format(ConstantMessages.SUCCESSFULLY_ADDED_PLAYER_IN_FIELD, playerType, fieldName);
   }
+
 
   @Override
   public String dragPlayer(String fieldName) {
@@ -86,5 +97,13 @@ public class ControllerImpl implements Controller {
             .orElse(null);
   }
 
+  private boolean doesPlayerCanPlayOnField(String playerType, String simpleName) {
+    if (playerType.equals("Men") && simpleName.equals("ArtificialTurf")
+            || playerType.equals("Women") && simpleName.equals("NaturalGrass")) {
+      return false;
+    }
+
+    return true;
+  }
 
 }
