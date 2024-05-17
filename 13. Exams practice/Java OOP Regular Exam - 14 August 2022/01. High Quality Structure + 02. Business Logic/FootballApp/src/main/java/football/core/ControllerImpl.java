@@ -8,7 +8,7 @@ import football.entities.player.Player;
 import football.entities.supplement.Supplement;
 import football.factory.FieldFactory;
 import football.factory.SupplementFactory;
-import football.repositories.PlayerFactory;
+import football.factory.PlayerFactory;
 import football.repositories.SupplementRepository;
 import football.repositories.SupplementRepositoryImpl;
 
@@ -44,7 +44,7 @@ public class ControllerImpl implements Controller {
   @Override
   public String supplementForField(String fieldName, String supplementType) {
     Supplement supplement = this.supplementRepository.findByType(supplementType);
-    validateSupplement(supplement);
+    validateSupplement(supplement, supplementType);
 
     Field field = getField(fieldName);
     this.supplementRepository.remove(supplement);
@@ -65,7 +65,6 @@ public class ControllerImpl implements Controller {
 
     return String.format(ConstantMessages.SUCCESSFULLY_ADDED_PLAYER_IN_FIELD, playerType, fieldName);
   }
-
 
   @Override
   public String dragPlayer(String fieldName) {
@@ -96,10 +95,9 @@ public class ControllerImpl implements Controller {
   }
 
   // Helpers
-
-  private void validateSupplement(Supplement supplement) {
+  private void validateSupplement(Supplement supplement, String supplementType) {
     if (supplement == null) {
-      throw new IllegalArgumentException(ExceptionMessages.NO_SUPPLEMENT_FOUND);
+      throw new IllegalArgumentException(String.format(ExceptionMessages.NO_SUPPLEMENT_FOUND, supplementType));
     }
   }
 

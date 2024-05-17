@@ -14,6 +14,7 @@ public class SupplementFactory {
       case "Liquid" -> supplement = new Liquid();
       default -> throw new IllegalArgumentException(ExceptionMessages.INVALID_SUPPLEMENT_TYPE);
     }
+
     return supplement;
   }
 }
