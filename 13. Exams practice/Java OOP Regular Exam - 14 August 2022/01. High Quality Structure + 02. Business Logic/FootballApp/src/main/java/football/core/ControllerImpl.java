@@ -77,7 +77,14 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String calculateStrength(String fieldName) {
-    return null;
+    Field field = getField(fieldName);
+
+    int totalStrength = field.getPlayers()
+            .stream()
+            .mapToInt(Player::getStrength)
+            .sum();
+
+    return String.format(ConstantMessages.STRENGTH_FIELD, fieldName, totalStrength);
   }
 
   @Override
