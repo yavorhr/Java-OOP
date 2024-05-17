@@ -41,32 +41,16 @@ public class EngineImpl implements Engine {
     String result = null;
     String[] data = Arrays.stream(tokens).skip(1).toArray(String[]::new);
 
-    switch (command) {
-      case AddField:
-        result = addField(data);
-        break;
-      case DeliverySupplement:
-        result = deliverySupplement(data);
-        break;
-      case SupplementForField:
-        result = supplementForField(data);
-        break;
-      case AddPlayer:
-        result = addPlayer(data);
-        break;
-      case DragPlayer:
-        result = dragPlayer(data);
-        break;
-      case CalculateStrength:
-        result = calculateStrength(data);
-        break;
-      case GetStatistics:
-        result = getStatistics();
-        break;
-      case Exit:
-        result = Command.Exit.name();
-        break;
-    }
+    result = switch (command) {
+      case AddField -> addField(data);
+      case DeliverySupplement -> deliverySupplement(data);
+      case SupplementForField -> supplementForField(data);
+      case AddPlayer -> addPlayer(data);
+      case DragPlayer -> dragPlayer(data);
+      case CalculateStrength -> calculateStrength(data);
+      case GetStatistics -> getStatistics();
+      case Exit -> Command.Exit.name();
+    };
     return result;
   }
 
