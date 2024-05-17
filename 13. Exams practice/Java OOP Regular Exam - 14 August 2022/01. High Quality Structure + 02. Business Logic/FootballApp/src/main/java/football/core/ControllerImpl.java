@@ -3,10 +3,11 @@ package football.core;
 
 import football.common.ConstantMessages;
 import football.entities.field.Field;
+import football.entities.supplement.Supplement;
 import football.factory.FieldFactory;
+import football.factory.SupplementFactory;
 import football.repositories.SupplementRepository;
 import football.repositories.SupplementRepositoryImpl;
-
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -31,8 +32,10 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String deliverySupplement(String type) {
+    Supplement supplement = SupplementFactory.create(type);
+    this.supplementRepository.add(supplement);
 
-    return null;
+    return String.format(ConstantMessages.SUCCESSFULLY_ADDED_SUPPLEMENT_TYPE, type);
   }
 
   @Override
