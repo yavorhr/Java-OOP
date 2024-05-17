@@ -2,18 +2,23 @@ package football.core;
 
 
 import football.common.ConstantMessages;
+import football.entities.field.Field;
 import football.factory.FieldFactory;
+import football.repositories.SupplementRepository;
+import football.repositories.SupplementRepositoryImpl;
 
-import java.lang.reflect.Field;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
 
 public class ControllerImpl implements Controller {
   private Collection<Field> fields;
+  private SupplementRepository supplementRepository;
 
   public ControllerImpl() {
     this.fields = new ArrayList<>();
+    this.supplementRepository = new SupplementRepositoryImpl();
   }
 
   @Override
@@ -26,6 +31,7 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String deliverySupplement(String type) {
+
     return null;
   }
 
