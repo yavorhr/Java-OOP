@@ -2,6 +2,7 @@ package football.core;
 
 
 import football.common.ConstantMessages;
+import football.common.ExceptionMessages;
 import football.entities.field.Field;
 import football.entities.supplement.Supplement;
 import football.factory.FieldFactory;
@@ -40,7 +41,14 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String supplementForField(String fieldName, String supplementType) {
-    return null;
+    Supplement supplement = this.supplementRepository.findByType(supplementType);
+    validateSupplement(supplement);
+
+    Field field = getField(fieldName);
+    this.supplementRepository.remove(supplement);
+    field.addSupplement(supplement);
+
+    return String.format(ConstantMessages.SUCCESSFULLY_ADDED_SUPPLEMENT_IN_FIELD, supplementType, fieldName);
   }
 
   @Override
@@ -62,4 +70,21 @@ public class ControllerImpl implements Controller {
   public String getStatistics() {
     return null;
   }
+
+  // Helpers
+
+  private void validateSupplement(Supplement supplement) {
+    if (supplement == null) {
+      throw new IllegalArgumentException(ExceptionMessages.NO_SUPPLEMENT_FOUND);
+    }
+  }
+
+  private Field getField(String name) {
+    return this.fields.stream()
+            .filter(f -> f.getName().equals(name))
+            .findFirst()
+            .orElse(null);
+  }
+
+
 }
