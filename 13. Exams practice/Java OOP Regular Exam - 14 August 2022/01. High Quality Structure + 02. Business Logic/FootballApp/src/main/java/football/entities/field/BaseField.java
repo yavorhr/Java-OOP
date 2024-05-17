@@ -76,7 +76,7 @@ public abstract class BaseField implements Field {
             ? "None"
             : this.players.stream()
             .map(Player::getName)
-            .collect(Collectors.joining(", "));
+            .collect(Collectors.joining(" "));
   }
 
   @Override
