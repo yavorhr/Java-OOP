@@ -69,7 +69,10 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String dragPlayer(String fieldName) {
-    return null;
+    Field field = getField(fieldName);
+    field.drag();
+
+    return String.format(ConstantMessages.PLAYER_DRAG, field.getPlayers().size());
   }
 
   @Override
