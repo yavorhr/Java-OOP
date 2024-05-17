@@ -18,7 +18,10 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addField(String fieldType, String fieldName) {
-   
+    Field field = FieldFactory.create(fieldType, fieldName);
+    this.fields.add(field);
+
+    return String.format(ConstantMessages.SUCCESSFULLY_ADDED_FIELD_TYPE, fieldType);
   }
 
   @Override
