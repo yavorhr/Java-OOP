@@ -69,6 +69,10 @@ public class FootballTeamTests {
     Assert.assertEquals(expected, actual);
   }
 
-  
+  @Test(expected = IllegalArgumentException.class)
+  public void testRemoveFootballerShouldThrowErrorWhenNoPlayer() {
+    this.footballTeam.removeFootballer("invalidPlayer");
+  }
+
 
 }
