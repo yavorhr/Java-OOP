@@ -34,18 +34,18 @@ public class FootballTeamTests {
   }
 
   @Test(expected = NullPointerException.class)
-  public void testSetNameOfFootballTeamShouldThrowExcWhenNullName(){
-    new FootballTeam(null,10);
+  public void testSetNameOfFootballTeamShouldThrowExcWhenNullName() {
+    new FootballTeam(null, 10);
   }
 
   @Test(expected = NullPointerException.class)
-  public void testSetNameOfFootballTeamShouldThrowExcWhenEmptyName(){
-    new FootballTeam("",10);
+  public void testSetNameOfFootballTeamShouldThrowExcWhenEmptyName() {
+    new FootballTeam("", 10);
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void testSetVacantPositionsShouldThrowExcWhenNegativeValue(){
-    new FootballTeam("test",-5);
+  public void testSetVacantPositionsShouldThrowExcWhenNegativeValue() {
+    new FootballTeam("test", -5);
   }
 
   // test addFootballer()
@@ -56,7 +56,19 @@ public class FootballTeamTests {
 
   @Test(expected = IllegalArgumentException.class)
   public void testAddFootballerShouldThrowErrorWhenNoSpace() {
-   this.footballTeam.addFootballer(new Footballer("test"));
+    this.footballTeam.addFootballer(new Footballer("test"));
   }
+
+  // test removeFootballer()
+  @Test
+  public void testRemoveFootballerShouldWorksCorrect() {
+    this.footballTeam.removeFootballer("Mike");
+    int actual = this.footballTeam.getCount();
+    int expected = 1;
+
+    Assert.assertEquals(expected, actual);
+  }
+
+  
 
 }
