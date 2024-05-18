@@ -74,7 +74,7 @@ public class FootballTeamTests {
     this.footballTeam.removeFootballer("invalidPlayer");
   }
 
-  //footballerForSale()
+  // footballerForSale()
   @Test
   public void testFootballerForSaleShouldWorksCorrect() {
     Footballer footballer = this.footballTeam.footballerForSale("Mike");
@@ -88,5 +88,12 @@ public class FootballTeamTests {
     this.footballTeam.footballerForSale("invalidPlayer");
   }
 
+  // getStatistics()
+  @Test
+  public void testGetStatisticsShouldWorksCorrect() {
+    String actual = this.footballTeam.getStatistics();
+    String expected = "The footballer Mike, George is in the team CSKA.";
 
+    Assert.assertEquals(actual, expected);
+  }
 }
