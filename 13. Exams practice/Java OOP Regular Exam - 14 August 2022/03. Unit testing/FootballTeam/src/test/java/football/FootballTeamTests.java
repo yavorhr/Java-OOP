@@ -28,4 +28,9 @@ public class FootballTeamTests {
     Assert.assertEquals(10, emptyFootballTeam.getVacantPositions());
   }
 
+  @Test
+  public void testFootballTerCtorShouldWorksCorrect() {
+    Assert.assertEquals("Mike", player1.getName());
+  }
+
 }
