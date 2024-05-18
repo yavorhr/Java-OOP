@@ -54,4 +54,9 @@ public class FootballTeamTests {
     Assert.assertEquals(this.footballTeam.getCount(), 2);
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testAddFootballerShouldThrowErrorWhenNoSpace() {
+   this.footballTeam.addFootballer(new Footballer("test"));
+  }
+
 }
