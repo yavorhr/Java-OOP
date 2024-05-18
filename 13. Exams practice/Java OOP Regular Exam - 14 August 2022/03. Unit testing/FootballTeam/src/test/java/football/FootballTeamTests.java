@@ -74,5 +74,14 @@ public class FootballTeamTests {
     this.footballTeam.removeFootballer("invalidPlayer");
   }
 
+  //footballerForSale()
+  @Test
+  public void testFootballerForSaleShouldWorksCorrect() {
+    Footballer footballer = this.footballTeam.footballerForSale("Mike");
+
+    Assert.assertFalse(footballer.isActive());
+    Assert.assertEquals("Mike", footballer.getName());
+  }
+
 
 }
