@@ -43,4 +43,9 @@ public class FootballTeamTests {
     new FootballTeam("",10);
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testSetVacantPositionsShouldThrowExcWhenNegativeValue(){
+    new FootballTeam("test",-5);
+  }
+
 }
