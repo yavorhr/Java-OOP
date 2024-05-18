@@ -48,4 +48,10 @@ public class FootballTeamTests {
     new FootballTeam("test",-5);
   }
 
+  // test addFootballer()
+  @Test
+  public void testAddFootballerShouldWorksCorrect() {
+    Assert.assertEquals(this.footballTeam.getCount(), 2);
+  }
+
 }
