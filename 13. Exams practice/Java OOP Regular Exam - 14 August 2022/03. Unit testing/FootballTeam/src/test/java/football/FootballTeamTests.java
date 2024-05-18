@@ -20,7 +20,7 @@ public class FootballTeamTests {
     this.footballTeam.addFootballer(player2);
   }
 
-  // test constructor
+  // test constructors
   @Test
   public void testFootballTeamCtorShouldWorksCorrect() {
     Assert.assertEquals("test", emptyFootballTeam.getName());
@@ -31,6 +31,16 @@ public class FootballTeamTests {
   @Test
   public void testFootballTerCtorShouldWorksCorrect() {
     Assert.assertEquals("Mike", player1.getName());
+  }
+
+  @Test(expected = NullPointerException.class)
+  public void testSetNameOfFootballTeamShouldThrowExcWhenNullName(){
+    new FootballTeam(null,10);
+  }
+
+  @Test(expected = NullPointerException.class)
+  public void testSetNameOfFootballTeamShouldThrowExcWhenEmptyName(){
+    new FootballTeam("",10);
   }
 
 }
