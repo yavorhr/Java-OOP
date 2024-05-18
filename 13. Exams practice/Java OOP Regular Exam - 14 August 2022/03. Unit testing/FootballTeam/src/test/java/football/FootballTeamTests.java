@@ -83,5 +83,10 @@ public class FootballTeamTests {
     Assert.assertEquals("Mike", footballer.getName());
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testFootballerForSaleShouldThrowErrorWhenNoPlayer() {
+    this.footballTeam.footballerForSale("invalidPlayer");
+  }
+
 
 }
