@@ -1,4 +1,6 @@
-package restaurant.entities.healthyFoods.interfaces;
+package restaurant.entities.healthyFoods;
+
+import restaurant.entities.healthyFoods.interfaces.HealthyFood;
 
 public abstract class Food implements HealthyFood {
   private String name;
