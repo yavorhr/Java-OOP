@@ -9,7 +9,7 @@ import restaurant.repositories.interfaces.*;
 
 public class Main {
     public static void main(String[] args) {
-        // TODO: Optional - Create new instances for all repositories to test your code locally.
+
 
         HealthFoodRepository<HealthyFood> healthFoodRepository;
         BeverageRepository<Beverages> beverageRepository;
