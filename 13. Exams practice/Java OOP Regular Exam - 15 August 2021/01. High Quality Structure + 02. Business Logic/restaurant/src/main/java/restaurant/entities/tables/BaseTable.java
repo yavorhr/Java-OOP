@@ -3,6 +3,7 @@ package restaurant.entities.tables;
 import restaurant.entities.drinks.interfaces.Beverages;
 import restaurant.entities.healthyFoods.interfaces.HealthyFood;
 import restaurant.entities.tables.interfaces.Table;
+import restaurant.validator.Validator;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,12 +20,12 @@ public abstract class BaseTable implements Table {
 
   protected BaseTable(int tableNumber, int size, double pricePerPerson) {
     this.tableNumber = tableNumber;
-    this.size = size;
+    this.setSize(size);
     this.pricePerPerson = pricePerPerson;
 
     this.foods = new ArrayList<>();
     this.beverages = new ArrayList<>();
-    this.numberOfPeople = 0;
+    this.setNumberOfPeople(numberOfPeople);
     this.isReservedTable = false;
     this.allPeople = 0;
   }
@@ -106,5 +107,15 @@ public abstract class BaseTable implements Table {
             .append(System.lineSeparator());
 
     return sb.toString();
+  }
+
+  private void setSize(int size) {
+    Validator.validateSize(size);
+    this.size = size;
+  }
+
+  private void setNumberOfPeople(int numberOfPeople) {
+    Validator.validateNumberOfPeople(numberOfPeople);
+    this.numberOfPeople = numberOfPeople;
   }
 }

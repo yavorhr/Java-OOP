@@ -32,4 +32,18 @@ public class Validator {
       throw new IllegalArgumentException(ExceptionMessages.INVALID_BRAND);
     }
   }
+
+  public static void validateSize(int size) {
+    if (size < 0) {
+      throw new IllegalArgumentException(ExceptionMessages.INVALID_TABLE_SIZE);
+    }
+  }
+
+  public static void validateNumberOfPeople(int numberOfPeople) {
+    if (numberOfPeople <= 0) {
+      throw new IllegalArgumentException(ExceptionMessages.INVALID_NUMBER_OF_PEOPLE);
+    }
+  }
+
+
 }
