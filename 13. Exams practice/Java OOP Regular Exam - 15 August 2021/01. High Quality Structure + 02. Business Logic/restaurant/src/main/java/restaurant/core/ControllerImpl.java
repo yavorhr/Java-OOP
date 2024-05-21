@@ -9,9 +9,9 @@ import restaurant.repositories.interfaces.*;
 public class ControllerImpl implements Controller {
   private HealthFoodRepository<HealthyFood> healthFoodRepository;
   private BeverageRepository<Beverages> beverageRepository;
-  private BeverageRepository<Table> tableBeverageRepository;
+  private TableRepository<Table> tableBeverageRepository;
 
-  public ControllerImpl(HealthFoodRepository<HealthyFood> healthFoodRepository, BeverageRepository<Beverages> beverageRepository, BeverageRepository<Table> tableRepository) {
+  public ControllerImpl(HealthFoodRepository<HealthyFood> healthFoodRepository, BeverageRepository<Beverages> beverageRepository, TableRepository<Table> tableRepository) {
     this.healthFoodRepository = healthFoodRepository;
     this.beverageRepository = beverageRepository;
     this.tableBeverageRepository = tableRepository;

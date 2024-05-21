@@ -11,7 +11,7 @@ public class TableFactory {
     switch (type) {
       case "InGarden" -> table = new InGarden(tableNumber, capacity);
       case "Indoors" -> table = new Indoors(tableNumber, capacity);
-      default -> throw new IllegalArgumentException("Invalid table type!")
+      default -> throw new IllegalArgumentException("Invalid table type!");
     }
 
     return table;
