@@ -20,4 +20,16 @@ public class Validator {
       throw new IllegalArgumentException(ExceptionMessages.INVALID_PRICE);
     }
   }
+
+  public static void validateCounter(int counter) {
+    if (counter <= 0) {
+      throw new IllegalArgumentException(ExceptionMessages.INVALID_COUNTER);
+    }
+  }
+
+  public static void validateBrand(String brand) {
+    if (brand == null || brand.trim().isEmpty()) {
+      throw new IllegalArgumentException(ExceptionMessages.INVALID_BRAND);
+    }
+  }
 }

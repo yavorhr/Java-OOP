@@ -1,6 +1,7 @@
 package restaurant.entities.drinks;
 
 import restaurant.entities.drinks.interfaces.Beverages;
+import restaurant.validator.Validator;
 
 public abstract class BaseBeverage implements Beverages {
   private String name;
@@ -9,10 +10,10 @@ public abstract class BaseBeverage implements Beverages {
   private String brand;
 
   protected BaseBeverage(String name, int counter, double price, String brand) {
-    this.name = name;
-    this.counter = counter;
-    this.price = price;
-    this.brand = brand;
+    this.setName(name);
+    this.setCounter(counter);
+    this.setPrice(price);
+    this.setBrand(brand);
   }
 
   @Override
@@ -33,5 +34,25 @@ public abstract class BaseBeverage implements Beverages {
   @Override
   public String getBrand() {
     return this.brand;
+  }
+
+  public void setName(String name) {
+    Validator.validateName(name);
+    this.name = name;
+  }
+
+  public void setCounter(int counter) {
+    Validator.validateCounter(counter);
+    this.counter = counter;
+  }
+
+  public void setPrice(double price) {
+    Validator.validatePrice(price);
+    this.price = price;
+  }
+
+  public void setBrand(String brand) {
+    Validator.validateBrand(brand);
+    this.brand = brand;
   }
 }
