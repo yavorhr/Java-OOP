@@ -31,61 +31,80 @@ public abstract class BaseTable implements Table {
 
   @Override
   public int getTableNumber() {
-    return 0;
+    return this.tableNumber;
   }
 
   @Override
   public int getSize() {
-    return 0;
+    return this.size;
   }
 
   @Override
   public int numberOfPeople() {
-    return 0;
+    return this.numberOfPeople;
   }
 
   @Override
   public double pricePerPerson() {
-    return 0;
+    return this.pricePerPerson;
   }
 
   @Override
   public boolean isReservedTable() {
-    return false;
+    return this.isReservedTable;
   }
 
   @Override
   public double allPeople() {
-    return 0;
+    return this.pricePerPerson * this.numberOfPeople;
   }
 
   @Override
   public void reserve(int numberOfPeople) {
-
+    this.numberOfPeople = numberOfPeople;
+    this.isReservedTable = true;
   }
 
   @Override
   public void orderHealthy(HealthyFood food) {
-
+    this.foods.add(food);
   }
 
   @Override
   public void orderBeverages(Beverages beverages) {
-
+    this.beverages.add(beverages);
   }
 
   @Override
   public double bill() {
-    return 0;
+    double beveragesBill = this.beverages.stream().mapToDouble(Beverages::getPrice).sum();
+    double foodBill = this.foods.stream().mapToDouble(HealthyFood::getPrice).sum();
+
+    return beveragesBill + foodBill;
   }
 
   @Override
   public void clear() {
-
+    this.foods.clear();
+    this.beverages.clear();
+    this.isReservedTable = false;
+    this.numberOfPeople = 0;
+    this.allPeople = 0;
   }
 
   @Override
   public String tableInformation() {
-    return null;
+    StringBuilder sb = new StringBuilder();
+
+    sb.append(String.format("Table - %d", this.tableNumber))
+            .append(System.lineSeparator());
+    sb.append(String.format("Size - %d", this.size))
+            .append(System.lineSeparator());
+    sb.append(String.format("Type - %s", this.getClass().getSimpleName()))
+            .append(System.lineSeparator());
+    sb.append(String.format("All price - %.2f", this.pricePerPerson))
+            .append(System.lineSeparator());
+
+    return sb.toString();
   }
 }
