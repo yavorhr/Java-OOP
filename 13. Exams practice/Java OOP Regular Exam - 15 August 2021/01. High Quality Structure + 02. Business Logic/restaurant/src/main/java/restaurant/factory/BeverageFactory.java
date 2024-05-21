@@ -12,7 +12,7 @@ public class BeverageFactory {
     switch (type) {
       case "Smoothie" -> beverages = new Smoothie(name, counter, brand);
       case "Fresh" -> beverages = new Fresh(name, counter, brand);
-      default -> throw new IllegalArgumentException("Invalid beverage type!")
+      default -> throw new IllegalArgumentException("Invalid beverage type!");
     }
     return beverages;
   }
