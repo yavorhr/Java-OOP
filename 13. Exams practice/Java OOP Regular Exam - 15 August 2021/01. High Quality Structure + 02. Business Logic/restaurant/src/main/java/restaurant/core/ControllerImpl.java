@@ -6,6 +6,7 @@ import restaurant.core.interfaces.Controller;
 import restaurant.entities.healthyFoods.interfaces.HealthyFood;
 import restaurant.entities.drinks.interfaces.Beverages;
 import restaurant.entities.tables.interfaces.Table;
+import restaurant.factory.BeverageFactory;
 import restaurant.factory.FoodFactory;
 import restaurant.repositories.interfaces.*;
 
@@ -24,7 +25,7 @@ public class ControllerImpl implements Controller {
   public String addHealthyFood(String type, double price, String name) {
     HealthyFood healthyFood = FoodFactory.create(type, price, name);
 
-    validateIfExist(healthyFood.getName());
+    validateIfFoodExist(healthyFood.getName());
 
     this.healthFoodRepository.add(healthyFood);
     return String.format(OutputMessages.FOOD_ADDED, name);
@@ -33,8 +34,12 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addBeverage(String type, int counter, String brand, String name) {
-    //TODO:
-    return null;
+    Beverages beverage = BeverageFactory.create(type, counter, brand, name);
+
+    validateIfBeverageExist(beverage.getName(), beverage.getBrand());
+    this.beverageRepository.add(beverage);
+
+    return String.format(OutputMessages.BEVERAGE_ADDED, type, brand);
   }
 
   @Override
@@ -74,9 +79,16 @@ public class ControllerImpl implements Controller {
   }
 
   // Helpers
-  private void validateIfExist(String name) {
+  private void validateIfFoodExist(String name) {
     if (this.healthFoodRepository.foodByName(name) != null) {
       throw new IllegalArgumentException(String.format(ExceptionMessages.FOOD_EXIST, name));
     }
   }
+
+  private void validateIfBeverageExist(String name, String brand) {
+    if (this.beverageRepository.beverageByName(name, brand) != null) {
+      throw new IllegalArgumentException(String.format(ExceptionMessages.BEVERAGE_EXIST, name));
+    }
+  }
+
 }
