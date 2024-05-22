@@ -14,12 +14,12 @@ import restaurant.repositories.interfaces.*;
 public class ControllerImpl implements Controller {
   private HealthFoodRepository<HealthyFood> healthFoodRepository;
   private BeverageRepository<Beverages> beverageRepository;
-  private TableRepository<Table> tableBeverageRepository;
+  private TableRepository<Table> tableRepository;
 
   public ControllerImpl(HealthFoodRepository<HealthyFood> healthFoodRepository, BeverageRepository<Beverages> beverageRepository, TableRepository<Table> tableRepository) {
     this.healthFoodRepository = healthFoodRepository;
     this.beverageRepository = beverageRepository;
-    this.tableBeverageRepository = tableRepository;
+    this.tableRepository = tableRepository;
   }
 
   @Override
@@ -48,14 +48,16 @@ public class ControllerImpl implements Controller {
     Table table = TableFactory.create(type, tableNumber, capacity);
 
     validateIfTableExist(table.getTableNumber());
-    this.tableBeverageRepository.add(table);
+    this.tableRepository.add(table);
 
     return String.format(OutputMessages.TABLE_ADDED, tableNumber);
   }
 
   @Override
   public String reserve(int numberOfPeople) {
+
     validateIfThereIsFreeTable(numberOfPeople);
+    Table table = getFirstAvailableTable();
     return null;
   }
 
@@ -97,20 +99,27 @@ public class ControllerImpl implements Controller {
   }
 
   private void validateIfTableExist(int tableNumber) {
-    if (this.tableBeverageRepository.byNumber(tableNumber) != null) {
+    if (this.tableRepository.byNumber(tableNumber) != null) {
       throw new IllegalArgumentException(String.format(ExceptionMessages.TABLE_EXIST, tableNumber));
     }
   }
 
   private void validateIfThereIsFreeTable(int numberOfPeople) {
-    boolean noFreeTable = this.tableBeverageRepository
-            .getAllEntities()
-            .stream()
-            .noneMatch(t -> !t.isReservedTable() && t.getSize() <= numberOfPeople);
+    Table table = getFirstAvailableTable(numberOfPeople);
 
-    if (noFreeTable) {
+    if (table == null) {
       throw new IllegalArgumentException(String.format(OutputMessages.RESERVATION_NOT_POSSIBLE, numberOfPeople));
     }
   }
+
+  private Table getFirstAvailableTable(int numberOfPeople) {
+    return this.tableRepository
+            .getAllEntities()
+            .stream()
+            .filter(t -> !t.isReservedTable() && t.getSize() <= numberOfPeople)
+            .findFirst()
+            .orElse(null);
+  }
+
 
 }
