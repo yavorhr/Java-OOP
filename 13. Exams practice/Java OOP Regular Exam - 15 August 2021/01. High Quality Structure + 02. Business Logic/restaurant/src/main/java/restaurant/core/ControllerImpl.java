@@ -12,6 +12,7 @@ import restaurant.factory.TableFactory;
 import restaurant.repositories.interfaces.*;
 
 public class ControllerImpl implements Controller {
+  private static double RESTAURANT_INCOME = 0.0;
   private HealthFoodRepository<HealthyFood> healthFoodRepository;
   private BeverageRepository<Beverages> beverageRepository;
   private TableRepository<Table> tableRepository;
@@ -93,8 +94,12 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String closedBill(int tableNumber) {
-    //TODO:
-    return null;
+    Table table = this.tableRepository.byNumber(tableNumber);
+    double bill = table.bill();
+    RESTAURANT_INCOME += bill;
+    table.clear();
+
+    return String.format(OutputMessages.BILL,tableNumber,bill);
   }
 
   @Override
