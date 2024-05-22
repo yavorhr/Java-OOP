@@ -27,7 +27,7 @@ public class ControllerImpl implements Controller {
   public String addHealthyFood(String type, double price, String name) {
     HealthyFood healthyFood = FoodFactory.create(type, price, name);
 
-    validateIfFoodExist(healthyFood.getName());
+    throwErrorIfFoodExist(healthyFood.getName());
 
     this.healthFoodRepository.add(healthyFood);
     return String.format(OutputMessages.FOOD_ADDED, name);
@@ -38,7 +38,7 @@ public class ControllerImpl implements Controller {
   public String addBeverage(String type, int counter, String brand, String name) {
     Beverages beverage = BeverageFactory.create(type, counter, brand, name);
 
-    validateIfBeverageExist(beverage.getName(), beverage.getBrand());
+    throwErrorIfDrinkExist(beverage.getName(), beverage.getBrand());
     this.beverageRepository.add(beverage);
 
     return String.format(OutputMessages.BEVERAGE_ADDED, type, brand);
@@ -48,7 +48,7 @@ public class ControllerImpl implements Controller {
   public String addTable(String type, int tableNumber, int capacity) {
     Table table = TableFactory.create(type, tableNumber, capacity);
 
-    validateIfTableExist(table.getTableNumber());
+    throwErrorIfTableExist(table.getTableNumber());
     this.tableRepository.add(table);
 
     return String.format(OutputMessages.TABLE_ADDED, tableNumber);
@@ -57,7 +57,7 @@ public class ControllerImpl implements Controller {
   @Override
   public String reserve(int numberOfPeople) {
 
-    validateIfThereIsFreeTable(numberOfPeople);
+    throwErrorIfNoFreeTable(numberOfPeople);
     Table table = getFirstAvailableTable(numberOfPeople);
 
     table.reserve(numberOfPeople);
@@ -70,8 +70,8 @@ public class ControllerImpl implements Controller {
     Table table = tableRepository.byNumber(tableNumber);
     HealthyFood food = healthFoodRepository.foodByName(healthyFoodName);
 
-    validateIfTableExist(tableNumber);
-    validateIfFoodDoesNotExist(food.getName());
+    throwErrorIfTableExist(tableNumber);
+    throwErrorIfFoodDoesNotExist(food.getName());
 
     table.orderHealthy(food);
 
@@ -84,8 +84,8 @@ public class ControllerImpl implements Controller {
     Table table = this.tableRepository.byNumber(tableNumber);
     Beverages beverage = this.beverageRepository.beverageByName(name, brand);
 
-    validateIfTableExist(tableNumber);
-    validateIfDrinkDoesNotExist(beverage.getBrand(), beverage.getName());
+    throwErrorIfTableExist(tableNumber);
+    throwErrorIfDrinkNotExist(beverage.getBrand(), beverage.getName());
 
     table.orderBeverages(beverage);
 
@@ -109,35 +109,41 @@ public class ControllerImpl implements Controller {
 
   // Helpers
 
-  private void validateIfFoodExist(String name) {
-    if (this.healthFoodRepository.foodByName(name) != null) {
+  private void throwErrorIfFoodExist(String name) {
+    if (doesFoodExist(name)) {
       throw new IllegalArgumentException(String.format(ExceptionMessages.FOOD_EXIST, name));
     }
   }
 
-  private void validateIfFoodDoesNotExist(String name) {
+  private void throwErrorIfFoodDoesNotExist(String name) {
     if (this.healthFoodRepository.foodByName(name) == null) {
       throw new IllegalArgumentException(String.format(OutputMessages.NONE_EXISTENT_FOOD, name));
     }
   }
 
-  private void validateIfBeverageExist(String name, String brand) {
-    if (this.beverageRepository.beverageByName(name, brand) != null) {
+  private void throwErrorIfDrinkExist(String name, String brand) {
+    if (doesDrinkExist(name, brand)) {
       throw new IllegalArgumentException(String.format(ExceptionMessages.BEVERAGE_EXIST, name));
     }
   }
 
-  private void validateIfTableExist(int tableNumber) {
-    if (this.tableRepository.byNumber(tableNumber) != null) {
+  private void throwErrorIfTableExist(int tableNumber) {
+    if (doesTableExist(tableNumber)) {
       throw new IllegalArgumentException(String.format(OutputMessages.WRONG_TABLE_NUMBER, tableNumber));
     }
   }
 
-  private void validateIfThereIsFreeTable(int numberOfPeople) {
+  private void throwErrorIfNoFreeTable(int numberOfPeople) {
     Table table = getFirstAvailableTable(numberOfPeople);
 
     if (table == null) {
       throw new IllegalArgumentException(String.format(OutputMessages.RESERVATION_NOT_POSSIBLE, numberOfPeople));
+    }
+  }
+
+  private void throwErrorIfDrinkNotExist(String name, String brand) {
+    if (!doesDrinkExist(name,brand)) {
+      throw new IllegalArgumentException(OutputMessages.NON_EXISTENT_DRINK);
     }
   }
 
@@ -150,9 +156,17 @@ public class ControllerImpl implements Controller {
             .orElse(null);
   }
 
-  private void validateIfDrinkDoesNotExist(String brand, String name) {
-    if (this.beverageRepository.beverageByName(name, brand) == null) {
-      throw new IllegalArgumentException(OutputMessages.NON_EXISTENT_DRINK);
-    }
+  // boolean check
+  private boolean doesFoodExist(String name) {
+    return this.healthFoodRepository.foodByName(name) != null;
   }
+
+  private boolean doesTableExist(int tableNumber) {
+    return this.tableRepository.byNumber(tableNumber) != null;
+  }
+
+  private boolean doesDrinkExist(String name, String brand) {
+    return this.beverageRepository.beverageByName(name, brand) != null;
+  }
+
 }
