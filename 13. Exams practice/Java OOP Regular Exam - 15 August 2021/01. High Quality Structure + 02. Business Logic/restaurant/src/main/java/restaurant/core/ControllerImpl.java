@@ -57,8 +57,11 @@ public class ControllerImpl implements Controller {
   public String reserve(int numberOfPeople) {
 
     validateIfThereIsFreeTable(numberOfPeople);
-    Table table = getFirstAvailableTable();
-    return null;
+    Table table = getFirstAvailableTable(numberOfPeople);
+
+    table.reserve(numberOfPeople);
+
+    return String.format(OutputMessages.TABLE_RESERVED,table.getTableNumber(), numberOfPeople);
   }
 
   @Override
