@@ -1,9 +1,11 @@
 package restaurant.core;
 
+import restaurant.common.OutputMessages;
 import restaurant.core.interfaces.Controller;
 import restaurant.entities.healthyFoods.interfaces.HealthyFood;
 import restaurant.entities.drinks.interfaces.Beverages;
 import restaurant.entities.tables.interfaces.Table;
+import restaurant.factory.FoodFactory;
 import restaurant.repositories.interfaces.*;
 
 public class ControllerImpl implements Controller {
@@ -19,8 +21,9 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addHealthyFood(String type, double price, String name) {
-    //TODO:
-    return null;
+    HealthyFood healthyFood = FoodFactory.create(type, price, name);
+    this.healthFoodRepository.add(healthyFood);
+    return String.format(OutputMessages.FOOD_ADDED, name);
   }
 
   @Override
