@@ -99,13 +99,12 @@ public class ControllerImpl implements Controller {
     RESTAURANT_INCOME += bill;
     table.clear();
 
-    return String.format(OutputMessages.BILL,tableNumber,bill);
+    return String.format(OutputMessages.BILL, tableNumber, bill);
   }
 
   @Override
   public String totalMoney() {
-    //TODO:
-    return null;
+    return String.format(OutputMessages.TOTAL_MONEY, RESTAURANT_INCOME);
   }
 
   // Helpers
