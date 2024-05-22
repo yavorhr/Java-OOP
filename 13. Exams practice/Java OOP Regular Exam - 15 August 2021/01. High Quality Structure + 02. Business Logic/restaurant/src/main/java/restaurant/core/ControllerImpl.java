@@ -145,7 +145,7 @@ public class ControllerImpl implements Controller {
     return this.tableRepository
             .getAllEntities()
             .stream()
-            .filter(t -> !t.isReservedTable() && t.getSize() <= numberOfPeople)
+            .filter(t -> !t.isReservedTable() && t.getSize() >= numberOfPeople)
             .findFirst()
             .orElse(null);
   }
