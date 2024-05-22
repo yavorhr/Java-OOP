@@ -33,10 +33,8 @@ public class EngineImpl implements Engine {
             } catch (IOException | IllegalArgumentException | NullPointerException e) {
                 result = e.getMessage();
             }
-
             this.writer.writeLine(result);
         }
-
     }
 
     private String processInput() throws IOException {
@@ -46,46 +44,24 @@ public class EngineImpl implements Engine {
         Commands command = Commands.valueOf(tokens[0]);
         String[] data = Arrays.stream(tokens).skip(1).toArray(String[]::new);
 
-        String result = null;
-
-        switch (command) {
-
-            case addHealthyFood:
-            result = this.controller.addHealthyFood(
+        String result = switch (command) {
+            case addHealthyFood -> this.controller.addHealthyFood(
                     data[0], Double.parseDouble(data[1]), data[2]
             );
-            break;
+            case addBeverage -> this.controller.addBeverage(
+                    data[0], Integer.parseInt(data[1]), data[2], data[3]
+            );
+            case addTable -> this.controller.addTable(
+                    data[0], Integer.parseInt(data[1]), Integer.parseInt(data[2])
+            );
+            case reserve -> this.controller.reserve(Integer.parseInt(data[0]));
+            case orderHealthyFood -> this.controller.orderHealthyFood(Integer.parseInt(data[0]), data[1]);
+            case orderBeverage -> this.controller.orderBeverage(Integer.parseInt(data[0]), data[1], data[2]);
+            case closedBill -> this.controller.closedBill(Integer.parseInt(data[0]));
+            case totalMoney -> this.controller.totalMoney();
+            case END -> Commands.END.name();
+        };
 
-            case addBeverage:
-                result = this.controller.addBeverage(
-                        data[0], Integer.parseInt(data[1]), data[2],  data[3]
-                );
-                break;
-
-            case addTable:
-                result = this.controller.addTable(
-                        data[0], Integer.parseInt(data[1]), Integer.parseInt(data[2])
-                );
-                break;
-            case reserve:
-                result = this.controller.reserve(Integer.parseInt(data[0]));
-                break;
-            case orderHealthyFood:
-                result = this.controller.orderHealthyFood(Integer.parseInt(data[0]), data[1]);
-                break;
-            case orderBeverage:
-                result = this.controller.orderBeverage(Integer.parseInt(data[0]), data[1], data[2]);
-                break;
-            case closedBill:
-                result = this.controller.closedBill(Integer.parseInt(data[0]));
-                break;
-            case totalMoney:
-                result = this.controller.totalMoney();
-                break;
-            case END:
-                result = Commands.END.name();
-                break;
-        }
         return result.trim();
     }
 

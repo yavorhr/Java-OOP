@@ -108,6 +108,7 @@ public class ControllerImpl implements Controller {
   }
 
   // Helpers
+
   private void validateIfFoodExist(String name) {
     if (this.healthFoodRepository.foodByName(name) != null) {
       throw new IllegalArgumentException(String.format(ExceptionMessages.FOOD_EXIST, name));
@@ -154,6 +155,4 @@ public class ControllerImpl implements Controller {
       throw new IllegalArgumentException(OutputMessages.NON_EXISTENT_DRINK);
     }
   }
-
-
 }
