@@ -74,14 +74,21 @@ public class ControllerImpl implements Controller {
 
     table.orderHealthy(food);
 
-    return String.format(OutputMessages.FOOD_ORDER_SUCCESSFUL,food.getName(), tableNumber);
+    return String.format(OutputMessages.FOOD_ORDER_SUCCESSFUL, food.getName(), tableNumber);
   }
 
 
   @Override
   public String orderBeverage(int tableNumber, String name, String brand) {
-    //TODO:
-    return null;
+    Table table = this.tableRepository.byNumber(tableNumber);
+    Beverages beverage = this.beverageRepository.beverageByName(name, brand);
+
+    validateIfTableExist(tableNumber);
+    validateIfDrinkDoesNotExist(beverage.getBrand(), beverage.getName());
+
+    table.orderBeverages(beverage);
+
+    return String.format(OutputMessages.BEVERAGE_ORDER_SUCCESSFUL, name, tableNumber);
   }
 
   @Override
@@ -136,6 +143,12 @@ public class ControllerImpl implements Controller {
             .filter(t -> !t.isReservedTable() && t.getSize() <= numberOfPeople)
             .findFirst()
             .orElse(null);
+  }
+
+  private void validateIfDrinkDoesNotExist(String brand, String name) {
+    if (this.beverageRepository.beverageByName(name, brand) == null) {
+      throw new IllegalArgumentException(OutputMessages.NON_EXISTENT_DRINK);
+    }
   }
 
 
