@@ -1,5 +1,6 @@
 package restaurant.core;
 
+import restaurant.common.ExceptionMessages;
 import restaurant.common.OutputMessages;
 import restaurant.core.interfaces.Controller;
 import restaurant.entities.healthyFoods.interfaces.HealthyFood;
@@ -22,9 +23,13 @@ public class ControllerImpl implements Controller {
   @Override
   public String addHealthyFood(String type, double price, String name) {
     HealthyFood healthyFood = FoodFactory.create(type, price, name);
+
+    validateIfExist(healthyFood.getName());
+
     this.healthFoodRepository.add(healthyFood);
     return String.format(OutputMessages.FOOD_ADDED, name);
   }
+
 
   @Override
   public String addBeverage(String type, int counter, String brand, String name) {
@@ -62,10 +67,16 @@ public class ControllerImpl implements Controller {
     return null;
   }
 
-
   @Override
   public String totalMoney() {
     //TODO:
     return null;
+  }
+
+  // Helpers
+  private void validateIfExist(String name) {
+    if (this.healthFoodRepository.foodByName(name) != null) {
+      throw new IllegalArgumentException(String.format(ExceptionMessages.FOOD_EXIST, name));
+    }
   }
 }
