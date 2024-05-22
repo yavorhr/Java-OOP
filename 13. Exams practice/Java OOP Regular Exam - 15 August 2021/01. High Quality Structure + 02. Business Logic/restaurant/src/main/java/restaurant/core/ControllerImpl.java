@@ -66,12 +66,12 @@ public class ControllerImpl implements Controller {
   }
 
   @Override
-  public String orderHealthyFood(int tableNumber, String healthyFoodName) {
+  public String orderHealthyFood(int tableNumber, String foodName) {
     Table table = tableRepository.byNumber(tableNumber);
-    HealthyFood food = healthFoodRepository.foodByName(healthyFoodName);
+    HealthyFood food = healthFoodRepository.foodByName(foodName);
 
-    throwErrorIfTableExist(tableNumber);
-    throwErrorIfFoodDoesNotExist(food.getName());
+    throwErrorIfTableDoesNotExist(tableNumber);
+    throwErrorIfFoodDoesNotExist(food, foodName);
 
     table.orderHealthy(food);
 
@@ -115,8 +115,8 @@ public class ControllerImpl implements Controller {
     }
   }
 
-  private void throwErrorIfFoodDoesNotExist(String name) {
-    if (this.healthFoodRepository.foodByName(name) == null) {
+  private void throwErrorIfFoodDoesNotExist(HealthyFood food, String name) {
+    if (food == null) {
       throw new IllegalArgumentException(String.format(OutputMessages.NONE_EXISTENT_FOOD, name));
     }
   }
@@ -129,6 +129,12 @@ public class ControllerImpl implements Controller {
 
   private void throwErrorIfTableExist(int tableNumber) {
     if (doesTableExist(tableNumber)) {
+      throw new IllegalArgumentException(String.format(ExceptionMessages.TABLE_IS_ALREADY_ADDED, tableNumber));
+    }
+  }
+
+  private void throwErrorIfTableDoesNotExist(int tableNumber) {
+    if (!doesTableExist(tableNumber)) {
       throw new IllegalArgumentException(String.format(OutputMessages.WRONG_TABLE_NUMBER, tableNumber));
     }
   }
