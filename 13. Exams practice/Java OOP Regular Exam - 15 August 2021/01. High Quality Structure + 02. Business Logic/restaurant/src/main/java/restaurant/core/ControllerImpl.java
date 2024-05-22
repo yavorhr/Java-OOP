@@ -61,14 +61,22 @@ public class ControllerImpl implements Controller {
 
     table.reserve(numberOfPeople);
 
-    return String.format(OutputMessages.TABLE_RESERVED,table.getTableNumber(), numberOfPeople);
+    return String.format(OutputMessages.TABLE_RESERVED, table.getTableNumber(), numberOfPeople);
   }
 
   @Override
   public String orderHealthyFood(int tableNumber, String healthyFoodName) {
-    //TODO:
-    return null;
+    Table table = tableRepository.byNumber(tableNumber);
+    HealthyFood food = healthFoodRepository.foodByName(healthyFoodName);
+
+    validateIfTableExist(tableNumber);
+    validateIfFoodDoesNotExist(food.getName());
+
+    table.orderHealthy(food);
+
+    return String.format(OutputMessages.FOOD_ORDER_SUCCESSFUL,food.getName(), tableNumber);
   }
+
 
   @Override
   public String orderBeverage(int tableNumber, String name, String brand) {
@@ -95,6 +103,12 @@ public class ControllerImpl implements Controller {
     }
   }
 
+  private void validateIfFoodDoesNotExist(String name) {
+    if (this.healthFoodRepository.foodByName(name) == null) {
+      throw new IllegalArgumentException(String.format(OutputMessages.NONE_EXISTENT_FOOD, name));
+    }
+  }
+
   private void validateIfBeverageExist(String name, String brand) {
     if (this.beverageRepository.beverageByName(name, brand) != null) {
       throw new IllegalArgumentException(String.format(ExceptionMessages.BEVERAGE_EXIST, name));
@@ -103,7 +117,7 @@ public class ControllerImpl implements Controller {
 
   private void validateIfTableExist(int tableNumber) {
     if (this.tableRepository.byNumber(tableNumber) != null) {
-      throw new IllegalArgumentException(String.format(ExceptionMessages.TABLE_EXIST, tableNumber));
+      throw new IllegalArgumentException(String.format(OutputMessages.WRONG_TABLE_NUMBER, tableNumber));
     }
   }
 
