@@ -55,7 +55,7 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String reserve(int numberOfPeople) {
-    //TODO:
+    validateIfThereIsFreeTable(numberOfPeople);
     return null;
   }
 
@@ -99,6 +99,17 @@ public class ControllerImpl implements Controller {
   private void validateIfTableExist(int tableNumber) {
     if (this.tableBeverageRepository.byNumber(tableNumber) != null) {
       throw new IllegalArgumentException(String.format(ExceptionMessages.TABLE_EXIST, tableNumber));
+    }
+  }
+
+  private void validateIfThereIsFreeTable(int numberOfPeople) {
+    boolean noFreeTable = this.tableBeverageRepository
+            .getAllEntities()
+            .stream()
+            .noneMatch(t -> !t.isReservedTable() && t.getSize() <= numberOfPeople);
+
+    if (noFreeTable) {
+      throw new IllegalArgumentException(String.format(OutputMessages.RESERVATION_NOT_POSSIBLE, numberOfPeople));
     }
   }
 
