@@ -40,7 +40,7 @@ public class Validator {
   }
 
   public static void validateNumberOfPeople(int numberOfPeople) {
-    if (numberOfPeople <= 0) {
+    if (numberOfPeople < 0) {
       throw new IllegalArgumentException(ExceptionMessages.INVALID_NUMBER_OF_PEOPLE);
     }
   }
