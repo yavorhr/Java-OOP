@@ -55,6 +55,13 @@ public class ShopTest {
     this.shop.addGoods("Shelves3", apple);
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testAddGoodsThrowErrorWhenShelfIsTaken() throws OperationNotSupportedException {
+    this.shop.addGoods("Shelves3", apple);
+    this.shop.addGoods("Shelves3", new Goods("banana", "321"));
+
+  }
+
 
 
 }
