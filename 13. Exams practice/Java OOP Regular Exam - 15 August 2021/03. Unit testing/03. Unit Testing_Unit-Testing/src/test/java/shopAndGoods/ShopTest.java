@@ -41,8 +41,15 @@ public class ShopTest {
     String expected = "Goods: 30 is placed successfully!";
     String actual = this.shop.addGoods("Shelves3", apple);
     Assert.assertEquals(expected, actual);
+  }
+
+  // test addGoods()
+  @Test(expected = IllegalArgumentException.class)
+  public void testAddGoodsToNoneExistingShelf() throws OperationNotSupportedException {
+    this.shop.addGoods("Shelves333", apple);
 
   }
+
 
 
 }
