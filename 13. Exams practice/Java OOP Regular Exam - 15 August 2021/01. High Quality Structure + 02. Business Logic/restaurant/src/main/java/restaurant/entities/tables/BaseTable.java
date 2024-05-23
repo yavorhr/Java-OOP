@@ -81,7 +81,7 @@ public abstract class BaseTable implements Table {
     double beveragesBill = this.beverages.stream().mapToDouble(Beverages::getPrice).sum();
     double foodBill = this.foods.stream().mapToDouble(HealthyFood::getPrice).sum();
 
-    return beveragesBill + foodBill;
+    return beveragesBill + foodBill + this.pricePerPerson * this.numberOfPeople;
   }
 
   @Override

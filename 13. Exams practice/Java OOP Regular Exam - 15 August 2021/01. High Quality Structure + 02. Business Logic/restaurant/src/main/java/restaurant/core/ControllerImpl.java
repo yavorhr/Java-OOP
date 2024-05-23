@@ -33,7 +33,6 @@ public class ControllerImpl implements Controller {
     return String.format(OutputMessages.FOOD_ADDED, name);
   }
 
-
   @Override
   public String addBeverage(String type, int counter, String brand, String name) {
     Beverages beverage = BeverageFactory.create(type, counter, brand, name);
