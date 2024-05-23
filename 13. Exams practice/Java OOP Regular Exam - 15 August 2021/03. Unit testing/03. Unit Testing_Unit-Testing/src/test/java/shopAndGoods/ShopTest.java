@@ -77,4 +77,9 @@ public class ShopTest {
     this.shop.removeGoods("Shelves111", this.apple);
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testRemoveGoodsThrowErrorWhenGoodIsNotOnTheShelf(){
+    this.shop.removeGoods("Shelves1", this.apple);
+  }
+
 }
