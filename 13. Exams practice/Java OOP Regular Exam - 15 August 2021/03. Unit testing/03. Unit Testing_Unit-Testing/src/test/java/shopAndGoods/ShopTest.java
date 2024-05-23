@@ -68,9 +68,13 @@ public class ShopTest {
     this.shop.addGoods("Shelves3", apple);
     String actual = this.shop.removeGoods("Shelves3", apple);
     String expected = "Goods: 30 is removed successfully!";
-    
+
     Assert.assertEquals(expected, actual);
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testRemoveGoodsThrowErrorWhenShelfDoesNotExist(){
+    this.shop.removeGoods("Shelves111", this.apple);
+  }
 
 }
