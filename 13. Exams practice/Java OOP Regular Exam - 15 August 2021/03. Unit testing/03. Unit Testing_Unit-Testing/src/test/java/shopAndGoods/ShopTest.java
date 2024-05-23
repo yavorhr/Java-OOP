@@ -11,8 +11,6 @@ import java.util.Map;
 public class ShopTest {
   private Shop shop;
   private Shop emptyShop;
-  private Goods tomato;
-  private Goods banana;
   private Goods apple;
 
   @Before
@@ -20,13 +18,7 @@ public class ShopTest {
     this.emptyShop = new Shop();
     this.shop = new Shop();
 
-    this.tomato = new Goods("tomato", "10");
-    this.banana = new Goods("banana", "20");
     this.apple = new Goods("apple", "30");
-
-    this.shop.addGoods("Shelves1", tomato);
-    this.shop.addGoods("Shelves2", banana);
-    this.shop.addGoods("Shelves3", apple);
   }
 
   //test constructors
@@ -39,13 +31,18 @@ public class ShopTest {
 
   @Test
   public void testGoodsConstructor() {
-    Assert.assertEquals("apple",apple.getName());
-    Assert.assertEquals("30",apple.getGoodsCode());
+    Assert.assertEquals("apple", apple.getName());
+    Assert.assertEquals("30", apple.getGoodsCode());
   }
 
+  // test addGoods()
+  @Test
+  public void testAddGoodsShouldWorksCorrect() throws OperationNotSupportedException {
+    String expected = "Goods: 30 is placed successfully!";
+    String actual = this.shop.addGoods("Shelves3", apple);
+    Assert.assertEquals(expected, actual);
 
-
-
+  }
 
 
 }
