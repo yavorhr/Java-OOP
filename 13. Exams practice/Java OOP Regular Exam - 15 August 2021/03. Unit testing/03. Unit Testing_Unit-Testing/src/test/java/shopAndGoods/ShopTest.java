@@ -36,6 +36,7 @@ public class ShopTest {
   }
 
   // test addGoods()
+
   @Test
   public void testAddGoodsShouldWorksCorrect() throws OperationNotSupportedException {
     String expected = "Goods: 30 is placed successfully!";
@@ -43,11 +44,15 @@ public class ShopTest {
     Assert.assertEquals(expected, actual);
   }
 
-  // test addGoods()
   @Test(expected = IllegalArgumentException.class)
-  public void testAddGoodsToNoneExistingShelf() throws OperationNotSupportedException {
+  public void testAddGoodsThrowErrorWhenShelfDoesNotExist() throws OperationNotSupportedException {
     this.shop.addGoods("Shelves333", apple);
+  }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testAddGoodsThrowErrorWhenProductAlreadyExist() throws OperationNotSupportedException {
+    this.shop.addGoods("Shelves3", apple);
+    this.shop.addGoods("Shelves3", apple);
   }
 
 
