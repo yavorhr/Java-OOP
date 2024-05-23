@@ -37,6 +37,14 @@ public class ShopTest {
     Assert.assertEquals(expected, actual);
   }
 
+  @Test
+  public void testGoodsConstructor() {
+    Assert.assertEquals("apple",apple.getName());
+    Assert.assertEquals("30",apple.getGoodsCode());
+  }
+
+
+
 
 
 
