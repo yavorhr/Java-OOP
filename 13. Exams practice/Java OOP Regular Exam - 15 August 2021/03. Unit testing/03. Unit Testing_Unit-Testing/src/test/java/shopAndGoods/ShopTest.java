@@ -59,9 +59,18 @@ public class ShopTest {
   public void testAddGoodsThrowErrorWhenShelfIsTaken() throws OperationNotSupportedException {
     this.shop.addGoods("Shelves3", apple);
     this.shop.addGoods("Shelves3", new Goods("banana", "321"));
-
   }
 
+  // test removeGoods()
+
+  @Test
+  public void testRemoveGoodsShouldWorksCorrect() throws OperationNotSupportedException {
+    this.shop.addGoods("Shelves3", apple);
+    String actual = this.shop.removeGoods("Shelves3", apple);
+    String expected = "Goods: 30 is removed successfully!";
+    
+    Assert.assertEquals(expected, actual);
+  }
 
 
 }
