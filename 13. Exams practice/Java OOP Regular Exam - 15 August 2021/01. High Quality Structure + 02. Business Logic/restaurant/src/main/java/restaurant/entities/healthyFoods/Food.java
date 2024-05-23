@@ -11,7 +11,7 @@ public abstract class Food implements HealthyFood {
   protected Food(String name, double portion, double price) {
     this.setName(name);
     this.setPortion(portion);
-    this.setPortion(price);
+    this.setPrice(price);
   }
 
   @Override

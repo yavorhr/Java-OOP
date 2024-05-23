@@ -107,7 +107,6 @@ public class ControllerImpl implements Controller {
   }
 
   // Helpers
-
   private void throwErrorIfFoodExist(String name) {
     if (doesFoodExist(name)) {
       throw new IllegalArgumentException(String.format(ExceptionMessages.FOOD_EXIST, name));
