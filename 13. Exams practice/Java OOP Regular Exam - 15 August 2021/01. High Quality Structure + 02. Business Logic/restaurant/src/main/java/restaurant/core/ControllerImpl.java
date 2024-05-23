@@ -84,8 +84,8 @@ public class ControllerImpl implements Controller {
     Table table = this.tableRepository.byNumber(tableNumber);
     Beverages beverage = this.beverageRepository.beverageByName(name, brand);
 
-    throwErrorIfTableExist(tableNumber);
-    throwErrorIfDrinkNotExist(beverage.getBrand(), beverage.getName());
+    throwErrorIfTableDoesNotExist(tableNumber);
+    throwErrorIfDrinkNotExist(beverage, name, brand);
 
     table.orderBeverages(beverage);
 
@@ -147,9 +147,9 @@ public class ControllerImpl implements Controller {
     }
   }
 
-  private void throwErrorIfDrinkNotExist(String name, String brand) {
-    if (!doesDrinkExist(name,brand)) {
-      throw new IllegalArgumentException(OutputMessages.NON_EXISTENT_DRINK);
+  private void throwErrorIfDrinkNotExist(Beverages beverage, String name, String brand) {
+    if (beverage == null) {
+      throw new IllegalArgumentException(String.format(OutputMessages.NON_EXISTENT_DRINK, name, brand));
     }
   }
 
