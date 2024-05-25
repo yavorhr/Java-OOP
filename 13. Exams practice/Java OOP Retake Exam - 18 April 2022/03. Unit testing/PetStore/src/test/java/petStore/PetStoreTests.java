@@ -28,5 +28,12 @@ public class PetStoreTests {
     Assert.assertEquals(0, this.emptyStore.getCount());
     Assert.assertEquals(0, this.emptyStore.getAnimals().size());
   }
+
+  @Test
+  public void testAnimalConstructorInitStore(){
+    Assert.assertEquals("cat", this.cat.getSpecie());
+    Assert.assertEquals(8, this.cat.getMaxKilograms());
+    Assert.assertEquals(50, this.cat.getPrice(),0);
+  }
 }
 
