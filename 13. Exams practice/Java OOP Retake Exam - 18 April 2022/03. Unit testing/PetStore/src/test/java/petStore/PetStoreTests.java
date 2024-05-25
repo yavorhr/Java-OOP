@@ -57,5 +57,10 @@ public class PetStoreTests {
     Assert.assertEquals(this.store.getCount(), 2);
     Assert.assertEquals(this.store.getAnimals().size(), 2);
   }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testAddAnimalShouldThrowErrorWhenNullIsGiven() {
+   this.store.addAnimal(null);
+  }
 }
 
