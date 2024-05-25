@@ -1,6 +1,8 @@
 package petStore;
 
+import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
 
 public class PetStoreTests {
   private PetStore store;
@@ -19,5 +21,12 @@ public class PetStoreTests {
     this.store.addAnimal(dog);
   }
 
+  // test constructors
+
+  @Test
+  public void testPetStoreConstructorInitStore(){
+    Assert.assertEquals(0, this.emptyStore.getCount());
+    Assert.assertEquals(0, this.emptyStore.getAnimals().size());
+  }
 }
 
