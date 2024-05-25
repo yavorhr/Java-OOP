@@ -71,5 +71,13 @@ public class PetStoreTests {
     Assert.assertEquals(animal.getSpecie(), "dog");
     Assert.assertEquals(animal.getPrice(), 100, 0);
   }
+
+  //getTheMostExpensiveAnimal()
+  @Test
+  public void testFindAllAnimalBySpecie() {
+    int actual = this.store.findAllAnimalBySpecie("dog").size();
+    int expected = 1;
+    Assert.assertEquals(expected,actual);
+  }
 }
 
