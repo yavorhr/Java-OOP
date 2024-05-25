@@ -4,8 +4,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
-
 public class PetStoreTests {
   private PetStore store;
   private PetStore emptyStore;
@@ -41,6 +39,8 @@ public class PetStoreTests {
     Assert.assertEquals("cat", this.cat.getSpecie());
     Assert.assertEquals(8, this.cat.getMaxKilograms());
     Assert.assertEquals(50, this.cat.getPrice(), 0);
+    this.dog.setAge(5);
+    Assert.assertEquals(5, this.dog.getAge());
   }
 
   // test findAllAnimalsWithMaxKilograms();
@@ -63,7 +63,7 @@ public class PetStoreTests {
     this.store.addAnimal(null);
   }
 
-  //getTheMostExpensiveAnimal()
+  //test getTheMostExpensiveAnimal()
   @Test
   public void testGetTheMostExpensiveAnimal() {
     Animal animal = this.store.getTheMostExpensiveAnimal();
@@ -72,7 +72,7 @@ public class PetStoreTests {
     Assert.assertEquals(animal.getPrice(), 100, 0);
   }
 
-  //getTheMostExpensiveAnimal()
+  //test getTheMostExpensiveAnimal()
   @Test
   public void testFindAllAnimalBySpecie() {
     int actual = this.store.findAllAnimalBySpecie("dog").size();
