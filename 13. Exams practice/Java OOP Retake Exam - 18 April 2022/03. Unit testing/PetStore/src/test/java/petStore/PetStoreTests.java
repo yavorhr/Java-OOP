@@ -77,7 +77,14 @@ public class PetStoreTests {
   public void testFindAllAnimalBySpecie() {
     int actual = this.store.findAllAnimalBySpecie("dog").size();
     int expected = 1;
-    Assert.assertEquals(expected,actual);
+    Assert.assertEquals(expected, actual);
+  }
+
+  @Test
+  public void testFindAllAnimalBySpecieShouldReturnEmptyList() {
+    int actual = this.store.findAllAnimalBySpecie("bird").size();
+    int expected = 0;
+    Assert.assertEquals(expected, actual);
   }
 }
 
