@@ -29,6 +29,11 @@ public class PetStoreTests {
     Assert.assertEquals(0, this.emptyStore.getAnimals().size());
   }
 
+  @Test(expected = UnsupportedOperationException.class)
+  public void testPetStoreConstructorReturnUnmodifiableList(){
+    this.store.getAnimals().remove(this.cat);
+  }
+
   @Test
   public void testAnimalConstructorInitStore(){
     Assert.assertEquals("cat", this.cat.getSpecie());
