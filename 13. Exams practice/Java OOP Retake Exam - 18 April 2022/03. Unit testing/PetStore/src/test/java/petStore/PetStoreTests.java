@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 public class PetStoreTests {
   private PetStore store;
   private PetStore emptyStore;
@@ -11,7 +13,7 @@ public class PetStoreTests {
   private Animal dog;
 
   @Before
-  public void setup(){
+  public void setup() {
     this.emptyStore = new PetStore();
 
     this.store = new PetStore();
@@ -24,21 +26,29 @@ public class PetStoreTests {
   // test constructors
 
   @Test
-  public void testPetStoreConstructorInitStore(){
+  public void testPetStoreConstructorInitStore() {
     Assert.assertEquals(0, this.emptyStore.getCount());
     Assert.assertEquals(0, this.emptyStore.getAnimals().size());
   }
 
   @Test(expected = UnsupportedOperationException.class)
-  public void testPetStoreConstructorReturnUnmodifiableList(){
+  public void testPetStoreConstructorReturnUnmodifiableList() {
     this.store.getAnimals().remove(this.cat);
   }
 
   @Test
-  public void testAnimalConstructorInitStore(){
+  public void testAnimalConstructorInitStore() {
     Assert.assertEquals("cat", this.cat.getSpecie());
     Assert.assertEquals(8, this.cat.getMaxKilograms());
-    Assert.assertEquals(50, this.cat.getPrice(),0);
+    Assert.assertEquals(50, this.cat.getPrice(), 0);
+  }
+
+  // test findAllAnimalsWithMaxKilograms();
+  @Test
+  public void testFindAllAnimalsWithMaxKilograms() {
+    int actual = this.store.findAllAnimalsWithMaxKilograms(8).size();
+    int expected = 1;
+    Assert.assertEquals(expected,actual);
   }
 }
 
