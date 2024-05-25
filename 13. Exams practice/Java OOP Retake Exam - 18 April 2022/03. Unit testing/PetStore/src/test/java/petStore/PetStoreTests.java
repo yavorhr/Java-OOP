@@ -60,7 +60,16 @@ public class PetStoreTests {
 
   @Test(expected = IllegalArgumentException.class)
   public void testAddAnimalShouldThrowErrorWhenNullIsGiven() {
-   this.store.addAnimal(null);
+    this.store.addAnimal(null);
+  }
+
+  //getTheMostExpensiveAnimal()
+  @Test
+  public void testGetTheMostExpensiveAnimal() {
+    Animal animal = this.store.getTheMostExpensiveAnimal();
+    Assert.assertEquals(animal, this.dog);
+    Assert.assertEquals(animal.getSpecie(), "dog");
+    Assert.assertEquals(animal.getPrice(), 100, 0);
   }
 }
 
