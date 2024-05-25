@@ -48,7 +48,14 @@ public class PetStoreTests {
   public void testFindAllAnimalsWithMaxKilograms() {
     int actual = this.store.findAllAnimalsWithMaxKilograms(8).size();
     int expected = 1;
-    Assert.assertEquals(expected,actual);
+    Assert.assertEquals(expected, actual);
+  }
+
+  // test addAnimal();
+  @Test
+  public void testAddAnimalShouldAddAnimalToColl() {
+    Assert.assertEquals(this.store.getCount(), 2);
+    Assert.assertEquals(this.store.getAnimals().size(), 2);
   }
 }
 
