@@ -28,8 +28,7 @@ public abstract class BaseAnimal implements Animal {
     return this.price;
   }
 
-  @Override
-  public void eat() {
-
+  protected void increaseWeight(double kg) {
+    this.kg += kg;
   }
 }

@@ -18,4 +18,6 @@ public abstract class BaseFood implements Food {
   public double getPrice() {
     return this.price;
   }
+
+
 }
