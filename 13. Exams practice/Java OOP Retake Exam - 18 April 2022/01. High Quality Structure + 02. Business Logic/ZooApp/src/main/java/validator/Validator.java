@@ -22,7 +22,7 @@ public class Validator {
     }
   }
 
-  public static void validateAnimalPrice(int price) {
+  public static void validateAnimalPrice(double price) {
     if (price <= 0) {
       throw new IllegalArgumentException(ExceptionMessages.ANIMAL_PRICE_BELOW_OR_EQUAL_ZERO);
     }

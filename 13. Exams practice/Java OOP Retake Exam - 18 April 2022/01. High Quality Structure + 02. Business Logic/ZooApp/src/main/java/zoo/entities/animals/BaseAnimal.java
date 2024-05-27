@@ -1,5 +1,7 @@
 package zoo.entities.animals;
 
+import validator.Validator;
+
 public abstract class BaseAnimal implements Animal {
   private String name;
   private String kind;
@@ -7,10 +9,10 @@ public abstract class BaseAnimal implements Animal {
   private double price;
 
   protected BaseAnimal(String name, String kind, double kg, double price) {
-    this.name = name;
-    this.kind = kind;
+    this.setName(name);
+    this.setKind(kind);
     this.kg = kg;
-    this.price = price;
+    this.setPrice(price);
   }
 
   @Override
@@ -30,5 +32,20 @@ public abstract class BaseAnimal implements Animal {
 
   protected void increaseWeight(double kg) {
     this.kg += kg;
+  }
+
+  private void setName(String name) {
+    Validator.validateAnimalName(name);
+    this.name = name;
+  }
+
+  private void setKind(String kind) {
+    Validator.validateAnimalKind(kind);
+    this.kind = kind;
+  }
+
+  private void setPrice(double price) {
+    Validator.validateAnimalPrice(price);
+    this.price = price;
   }
 }
