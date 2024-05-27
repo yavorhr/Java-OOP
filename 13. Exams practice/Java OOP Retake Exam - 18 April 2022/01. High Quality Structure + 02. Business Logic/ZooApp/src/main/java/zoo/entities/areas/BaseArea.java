@@ -6,6 +6,7 @@ import zoo.entities.foods.Food;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 public abstract class BaseArea implements Area {
   private String name;
@@ -68,6 +69,27 @@ public abstract class BaseArea implements Area {
 
   @Override
   public String getInfo() {
-    return null;
+    StringBuilder sb = new StringBuilder();
+    sb.append(String.format("%s (%s):", this.name, this.getClass().getSimpleName()))
+            .append(System.lineSeparator());
+    sb.append(String.format("Animals: %s", this.getAnimalNames()))
+            .append(System.lineSeparator());
+    sb.append(String.format("Foods: %d", this.foods.size()))
+            .append(System.lineSeparator());
+    sb.append(String.format("Calories: %d", this.sumCalories()))
+            .append(System.lineSeparator());
+
+    return sb.toString().trim();
+  }
+
+
+  // Helpers
+  protected String getAnimalNames() {
+    return this.animals.size() == 0
+            ? "None"
+            : this.animals
+            .stream()
+            .map(Animal::getName)
+            .collect(Collectors.joining(" "));
   }
 }
