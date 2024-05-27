@@ -15,7 +15,7 @@ public abstract class BaseArea implements Area {
   private Collection<Animal> animals;
 
   protected BaseArea(String name, int capacity) {
-    this.name = name;
+    this.setName(name);
     this.capacity = capacity;
     this.foods = new ArrayList<>();
     this.animals = new ArrayList<>();
@@ -91,5 +91,10 @@ public abstract class BaseArea implements Area {
             .stream()
             .map(Animal::getName)
             .collect(Collectors.joining(" "));
+  }
+
+  public void setName(String name) {
+    Validator.validateAAreaName(name);
+    this.name = name;
   }
 }

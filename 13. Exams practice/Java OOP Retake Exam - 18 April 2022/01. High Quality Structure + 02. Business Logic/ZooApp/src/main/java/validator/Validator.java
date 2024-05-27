@@ -27,5 +27,10 @@ public class Validator {
       throw new IllegalArgumentException(ExceptionMessages.ANIMAL_PRICE_BELOW_OR_EQUAL_ZERO);
     }
   }
+  public static void validateAAreaName(String name) {
+    if (name == null || name.trim().isEmpty()) {
+      throw new IllegalArgumentException(ExceptionMessages.AREA_NAME_NULL_OR_EMPTY);
+    }
+  }
 
 }
