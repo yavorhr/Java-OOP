@@ -58,12 +58,12 @@ public abstract class BaseArea implements Area {
 
   @Override
   public void addFood(Food food) {
-
+    this.foods.add(food);
   }
 
   @Override
   public void feed() {
-
+    this.animals.forEach(Animal::eat);
   }
 
   @Override
