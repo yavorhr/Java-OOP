@@ -1,5 +1,6 @@
 package zoo.entities.areas;
 
+import validator.Validator;
 import zoo.entities.animals.Animal;
 import zoo.entities.foods.Food;
 
@@ -44,12 +45,15 @@ public abstract class BaseArea implements Area {
 
   @Override
   public void addAnimal(Animal animal) {
-
+    Validator.validateCapacity(this.capacity);
+    this.animals.add(animal);
+    this.capacity--;
   }
 
   @Override
   public void removeAnimal(Animal animal) {
-
+    this.animals.remove(animal);
+    this.capacity++;
   }
 
   @Override
