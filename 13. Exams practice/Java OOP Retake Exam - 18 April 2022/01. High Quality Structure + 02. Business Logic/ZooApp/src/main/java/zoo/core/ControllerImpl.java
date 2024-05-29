@@ -1,6 +1,7 @@
 package zoo.core;
 
 import factory.AreaFactory;
+import factory.FoodFactory;
 import zoo.common.ConstantMessages;
 import zoo.entities.areas.Area;
 import zoo.repositories.FoodRepository;
@@ -27,6 +28,7 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String buyFood(String foodType) {
+    Food food = FoodFactory.create(foodType,)
     return null;
   }
 

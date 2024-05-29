@@ -10,8 +10,8 @@ public class FoodFactory {
     Food food = null;
 
     switch (type) {
-      case "Vegetable" -> food = new Vegetable(price);
-      case "Meat" -> food = new Meat(price);
+      case "Vegetable" -> food = new Vegetable();
+      case "Meat" -> food = new Meat();
       default -> throw new IllegalArgumentException(ExceptionMessages.INVALID_FOOD_TYPE);
     }
 
