@@ -4,8 +4,10 @@ import factory.AreaFactory;
 import factory.FoodFactory;
 import zoo.common.ConstantMessages;
 import zoo.entities.areas.Area;
+import zoo.entities.foods.Food;
 import zoo.repositories.FoodRepository;
 import zoo.repositories.FoodRepositoryImpl;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,8 +30,10 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String buyFood(String foodType) {
-    Food food = FoodFactory.create(foodType,)
-    return null;
+    Food food = FoodFactory.create(foodType);
+    this.foodRepository.add(food);
+
+    return String.format(ConstantMessages.SUCCESSFULLY_ADDED_FOOD_TYPE, foodType);
   }
 
   @Override

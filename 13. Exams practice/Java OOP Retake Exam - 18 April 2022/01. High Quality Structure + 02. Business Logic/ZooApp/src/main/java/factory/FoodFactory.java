@@ -6,7 +6,7 @@ import zoo.entities.foods.Meat;
 import zoo.entities.foods.Vegetable;
 
 public class FoodFactory {
-  public static Food create(String type, double price) {
+  public static Food create(String type) {
     Food food = null;
 
     switch (type) {
