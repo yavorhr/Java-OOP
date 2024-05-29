@@ -111,5 +111,4 @@ public class ControllerImpl implements Controller {
   private boolean areaIsFull(int capacity) {
     return capacity == 0;
   }
-
 }

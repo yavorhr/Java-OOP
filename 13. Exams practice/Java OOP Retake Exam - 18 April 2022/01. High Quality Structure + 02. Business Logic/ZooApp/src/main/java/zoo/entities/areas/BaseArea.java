@@ -84,7 +84,7 @@ public abstract class BaseArea implements Area {
     sb.append(String.format("Calories: %d", this.sumCalories()))
             .append(System.lineSeparator());
 
-    return sb.toString().trim();
+    return sb.toString();
   }
 
 
