@@ -3,16 +3,18 @@ package zoo.core;
 import factory.AreaFactory;
 import zoo.common.ConstantMessages;
 import zoo.entities.areas.Area;
-
-import java.util.ArrayList;
+import zoo.repositories.FoodRepository;
+import zoo.repositories.FoodRepositoryImpl;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ControllerImpl implements Controller {
   private Map<String, Area> areas;
+  private FoodRepository foodRepository;
 
   public ControllerImpl() {
     this.areas = new HashMap<>();
+    this.foodRepository = new FoodRepositoryImpl();
   }
 
   @Override
