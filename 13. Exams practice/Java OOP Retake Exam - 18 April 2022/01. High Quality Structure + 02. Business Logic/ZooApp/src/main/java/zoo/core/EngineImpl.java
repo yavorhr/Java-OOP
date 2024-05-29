@@ -78,7 +78,6 @@ public class EngineImpl implements Engine {
 
   private String calculateKg(String[] data) {
     return this.controller.calculateKg(data[0]);
-
   }
 
   private String getStatistics() {
