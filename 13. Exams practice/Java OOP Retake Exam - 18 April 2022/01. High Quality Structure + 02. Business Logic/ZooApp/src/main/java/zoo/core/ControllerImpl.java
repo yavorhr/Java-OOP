@@ -86,7 +86,10 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String getStatistics() {
-    return null;
+    StringBuilder sb = new StringBuilder();
+    this.areas.values().forEach(a -> sb.append(a.getInfo()));
+
+    return sb.toString().trim();
   }
 
   // Helpers
