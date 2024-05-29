@@ -77,7 +77,11 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String calculateKg(String areaName) {
-    return null;
+    Area area = this.getArea(areaName);
+
+    double totalKgInTheArea = area.getAnimals().stream().mapToDouble(Animal::getKg).sum();
+
+    return String.format(ConstantMessages.KILOGRAMS_AREA, areaName, totalKgInTheArea);
   }
 
   @Override
