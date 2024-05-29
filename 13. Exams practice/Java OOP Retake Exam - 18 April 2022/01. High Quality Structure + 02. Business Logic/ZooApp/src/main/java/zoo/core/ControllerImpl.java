@@ -1,9 +1,11 @@
 package zoo.core;
 
+import factory.AnimalFactory;
 import factory.AreaFactory;
 import factory.FoodFactory;
 import zoo.common.ConstantMessages;
 import zoo.common.ExceptionMessages;
+import zoo.entities.animals.Animal;
 import zoo.entities.areas.Area;
 import zoo.entities.foods.Food;
 import zoo.repositories.FoodRepository;
@@ -51,6 +53,8 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addAnimal(String areaName, String animalType, String animalName, String kind, double price) {
+    Animal animal = AnimalFactory.create(animalType,animalName,kind, price)
+
     return null;
   }
 

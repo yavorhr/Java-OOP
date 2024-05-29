@@ -14,7 +14,6 @@ public class AnimalFactory {
       case "TerrestrialAnimal" -> animal = new TerrestrialAnimal(name, kind, kg);
       default -> throw new IllegalArgumentException(ExceptionMessages.INVALID_ANIMAL_TYPE);
     }
-
     return animal;
   }
 }
