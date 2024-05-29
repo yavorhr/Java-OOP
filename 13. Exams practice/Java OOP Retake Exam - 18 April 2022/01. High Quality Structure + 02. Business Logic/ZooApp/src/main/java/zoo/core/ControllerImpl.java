@@ -53,9 +53,22 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addAnimal(String areaName, String animalType, String animalName, String kind, double price) {
-    Animal animal = AnimalFactory.create(animalType,animalName,kind, price)
+    Animal animal = AnimalFactory.create(animalType, animalName, kind, price);
+    Area area = this.getArea(areaName);
 
-    return null;
+    if (animalCanLiveInTheArea(animal.getClass().getSimpleName(), area.getClass().getSimpleName())) {
+      return ConstantMessages.AREA_NOT_SUITABLE;
+    }
+    if (areaIsFull(area.getCapacity())) {
+      return ConstantMessages.NOT_ENOUGH_AREA_CAPACITY;
+    }
+
+    area.addAnimal(animal);
+    return String.format(ConstantMessages.SUCCESSFULLY_ADDED_ANIMAL_IN_AREA, animalType, areaName);
+  }
+
+  private boolean areaIsFull(int capacity) {
+    return capacity == 0;
   }
 
   @Override
@@ -74,6 +87,11 @@ public class ControllerImpl implements Controller {
   }
 
   // Helpers
+  private boolean animalCanLiveInTheArea(String animalType, String areaType) {
+    return (animalType.equals("TerrestrialAnimal") && !areaType.equals("LandArea")
+            || animalType.equals("AquaticAnimal") && !areaType.equals("WaterArea"));
+  }
+
   private void validateIfFoodExist(Food food, String type) {
     if (food == null) {
       throw new IllegalArgumentException(String.format(ExceptionMessages.NO_FOOD_FOUND, type));

@@ -23,4 +23,6 @@ public interface Area {
     void feed();
 
     String getInfo();
+
+    int getCapacity();
 }

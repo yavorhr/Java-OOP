@@ -22,6 +22,11 @@ public abstract class BaseArea implements Area {
   }
 
   @Override
+  public int getCapacity() {
+    return capacity;
+  }
+
+  @Override
   public String getName() {
     return this.name;
   }

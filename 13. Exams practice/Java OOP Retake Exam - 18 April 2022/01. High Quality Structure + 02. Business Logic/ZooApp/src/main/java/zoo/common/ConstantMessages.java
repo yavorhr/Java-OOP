@@ -8,4 +8,5 @@ public class ConstantMessages {
     public static final String SUCCESSFULLY_ADDED_AREA_TYPE = "Successfully added %s.";
     public static final String SUCCESSFULLY_ADDED_FOOD_TYPE = "Successfully added %s.";
     public static final String KILOGRAMS_AREA = "The kilograms of Area %s is %.2f.";
+    public static final String NOT_ENOUGH_AREA_CAPACITY = "Not enough capacity.";
 }
