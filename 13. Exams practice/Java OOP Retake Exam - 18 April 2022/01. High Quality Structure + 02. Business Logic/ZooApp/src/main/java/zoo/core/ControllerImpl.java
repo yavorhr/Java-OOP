@@ -67,13 +67,12 @@ public class ControllerImpl implements Controller {
     return String.format(ConstantMessages.SUCCESSFULLY_ADDED_ANIMAL_IN_AREA, animalType, areaName);
   }
 
-  private boolean areaIsFull(int capacity) {
-    return capacity == 0;
-  }
-
   @Override
   public String feedAnimal(String areaName) {
-    return null;
+    Area area = this.getArea(areaName);
+    area.feed();
+
+    return String.format(ConstantMessages.ANIMALS_FED, area.getAnimals().size());
   }
 
   @Override
@@ -101,4 +100,9 @@ public class ControllerImpl implements Controller {
   private Area getArea(String areaName) {
     return areas.get(areaName);
   }
+
+  private boolean areaIsFull(int capacity) {
+    return capacity == 0;
+  }
+
 }
