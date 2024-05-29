@@ -41,32 +41,16 @@ public class EngineImpl implements Engine {
         String result = null;
         String[] data = Arrays.stream(tokens).skip(1).toArray(String[]::new);
 
-        switch (command) {
-            case AddArea:
-                result = addArea(data);
-                break;
-            case BuyFood:
-                result = buyFood(data);
-                break;
-            case FoodForArea:
-                result = foodForArea(data);
-                break;
-            case AddAnimal:
-                result = addAnimal(data);
-                break;
-            case FeedAnimal:
-                result = feedAnimal(data);
-                break;
-            case CalculateKg:
-                result = calculateKg(data);
-                break;
-            case GetStatistics:
-                result = getStatistics();
-                break;
-            case Exit:
-                result = Command.Exit.name();
-                break;
-        }
+        result = switch (command) {
+            case AddArea -> addArea(data);
+            case BuyFood -> buyFood(data);
+            case FoodForArea -> foodForArea(data);
+            case AddAnimal -> addAnimal(data);
+            case FeedAnimal -> feedAnimal(data);
+            case CalculateKg -> calculateKg(data);
+            case GetStatistics -> getStatistics();
+            case Exit -> Command.Exit.name();
+        };
         return result;
     }
     private String addArea(String[] data) {
