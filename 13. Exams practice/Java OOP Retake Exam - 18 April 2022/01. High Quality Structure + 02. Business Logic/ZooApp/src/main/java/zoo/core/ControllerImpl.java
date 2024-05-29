@@ -3,6 +3,7 @@ package zoo.core;
 import factory.AreaFactory;
 import factory.FoodFactory;
 import zoo.common.ConstantMessages;
+import zoo.common.ExceptionMessages;
 import zoo.entities.areas.Area;
 import zoo.entities.foods.Food;
 import zoo.repositories.FoodRepository;
@@ -38,7 +39,14 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String foodForArea(String areaName, String foodType) {
-    return null;
+    Food food = this.foodRepository.findByType(foodType);
+    validateIfFoodExist(food, foodType);
+
+    Area area = getArea(areaName);
+    area.addFood(food);
+    this.foodRepository.remove(food);
+
+    return String.format(ConstantMessages.SUCCESSFULLY_ADDED_FOOD_IN_AREA, foodType, areaName);
   }
 
   @Override
@@ -59,5 +67,16 @@ public class ControllerImpl implements Controller {
   @Override
   public String getStatistics() {
     return null;
+  }
+
+  // Helpers
+  private void validateIfFoodExist(Food food, String type) {
+    if (food == null) {
+      throw new IllegalArgumentException(String.format(ExceptionMessages.NO_FOOD_FOUND, type));
+    }
+  }
+
+  private Area getArea(String areaName) {
+    return areas.get(areaName);
   }
 }
