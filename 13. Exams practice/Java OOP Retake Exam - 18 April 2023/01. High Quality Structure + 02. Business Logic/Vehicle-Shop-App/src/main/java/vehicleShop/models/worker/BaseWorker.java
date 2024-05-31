@@ -47,6 +47,6 @@ public abstract class BaseWorker implements Worker {
 
   @Override
   public Collection<Tool> getTools() {
-    return Collections.unmodifiableList(this.tools;);
+    return Collections.unmodifiableCollection(this.tools);
   }
 }
