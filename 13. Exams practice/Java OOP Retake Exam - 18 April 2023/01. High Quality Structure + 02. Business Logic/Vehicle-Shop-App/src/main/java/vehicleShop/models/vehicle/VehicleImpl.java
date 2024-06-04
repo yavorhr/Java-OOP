@@ -1,12 +1,14 @@
 package vehicleShop.models.vehicle;
 
+import vehicleShop.validator.Validator;
+
 public class VehicleImpl implements Vehicle {
   private String name;
   private int strengthRequired;
 
   public VehicleImpl(String name, int strengthRequired) {
-    this.name = name;
-    this.strengthRequired = strengthRequired;
+    this.setName(name);
+    this.setStrengthRequired(strengthRequired);
   }
 
   @Override
@@ -17,6 +19,16 @@ public class VehicleImpl implements Vehicle {
   @Override
   public int getStrengthRequired() {
     return this.strengthRequired;
+  }
+
+  private void setName(String name) {
+    Validator.validateVehicleName(name);
+    this.name = name;
+  }
+
+  private void setStrengthRequired(int strengthRequired) {
+    Validator.validateRequiredStrength(strengthRequired);
+    this.strengthRequired = strengthRequired;
   }
 
   @Override

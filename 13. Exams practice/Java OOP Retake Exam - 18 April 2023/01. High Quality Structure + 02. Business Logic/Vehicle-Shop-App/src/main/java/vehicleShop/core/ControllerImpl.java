@@ -6,8 +6,6 @@ import vehicleShop.models.worker.Worker;
 import vehicleShop.repositories.Repository;
 import vehicleShop.repositories.WorkerRepository;
 
-import java.util.ArrayList;
-
 public class ControllerImpl implements Controller {
   private Repository<Worker> workerRepository;
 
