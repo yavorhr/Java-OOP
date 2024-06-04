@@ -43,5 +43,4 @@ public class VehicleImpl implements Vehicle {
       this.strengthRequired = 0;
     }
   }
-
 }
