@@ -1,7 +1,10 @@
 package vehicleShop.core;
 
 import vehicleShop.common.ConstantMessages;
+import vehicleShop.common.ExceptionMessages;
 import vehicleShop.factory.WorkerFactory;
+import vehicleShop.models.tool.Tool;
+import vehicleShop.models.tool.ToolImpl;
 import vehicleShop.models.vehicle.Vehicle;
 import vehicleShop.models.vehicle.VehicleImpl;
 import vehicleShop.models.worker.Worker;
@@ -36,7 +39,22 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addToolToWorker(String workerName, int power) {
-    return null;
+    Worker worker = getWorker(workerName);
+
+    Tool tool = new ToolImpl(power);
+    worker.addTool(tool);
+
+    return String.format(ConstantMessages.SUCCESSFULLY_ADDED_TOOL_TO_WORKER, power,workerName);
+  }
+
+  private Worker getWorker(String workerName) {
+    Worker worker = this.workerRepository.findByName(workerName);
+
+    if (worker == null) {
+      throw new IllegalArgumentException(ExceptionMessages.HELPER_DOESNT_EXIST);
+    }
+
+    return worker;
   }
 
   @Override
