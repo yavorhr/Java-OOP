@@ -49,4 +49,12 @@ public abstract class BaseWorker implements Worker {
   public Collection<Tool> getTools() {
     return Collections.unmodifiableCollection(this.tools);
   }
+
+  private void setName(String name) {
+    this.name = name;
+  }
+
+  private void setStrength(int strength) {
+    this.strength = strength;
+  }
 }
