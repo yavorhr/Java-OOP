@@ -14,4 +14,16 @@ public class Validator {
       throw new IllegalArgumentException(ExceptionMessages.WORKER_STRENGTH_LESS_THAN_ZERO);
     }
   }
+
+  public static void validateVehicleName(String name) {
+    if (name == null || name.trim().isEmpty()) {
+      throw new IllegalArgumentException(ExceptionMessages.VEHICLE_NAME_NULL_OR_EMPTY);
+    }
+  }
+
+  public static void validateRequiredStrength(int strength) {
+    if (strength < 0) {
+      throw new IllegalArgumentException(ExceptionMessages.VEHICLE_STRENGTH_LESS_THAN_ZERO);
+    }
+  }
 }
