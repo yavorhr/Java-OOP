@@ -1,9 +1,26 @@
 package vehicleShop.core;
 
-public class ControllerImpl implements Controller{
+import vehicleShop.common.ConstantMessages;
+import vehicleShop.factory.WorkerFactory;
+import vehicleShop.models.worker.Worker;
+import vehicleShop.repositories.Repository;
+import vehicleShop.repositories.WorkerRepository;
+
+import java.util.ArrayList;
+
+public class ControllerImpl implements Controller {
+  private Repository<Worker> workerRepository;
+
+  public ControllerImpl() {
+    this.workerRepository = new WorkerRepository();
+  }
+
   @Override
   public String addWorker(String type, String workerName) {
-    return null;
+    Worker worker = WorkerFactory.create(type, workerName);
+    this.workerRepository.add(worker);
+
+    return String.format(ConstantMessages.ADDED_WORKER,type, workerName);
   }
 
   @Override
