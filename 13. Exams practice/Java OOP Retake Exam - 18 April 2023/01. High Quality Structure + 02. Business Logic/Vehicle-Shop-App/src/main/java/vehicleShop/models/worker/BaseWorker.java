@@ -1,6 +1,7 @@
 package vehicleShop.models.worker;
 
 import vehicleShop.models.tool.Tool;
+import vehicleShop.validator.Validator;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,8 +13,8 @@ public abstract class BaseWorker implements Worker {
   private Collection<Tool> tools;
 
   protected BaseWorker(String name, int strength) {
-    this.name = name;
-    this.strength = strength;
+    this.setName(name);
+    this.setStrength(strength);
     this.tools = new ArrayList<>();
   }
 
@@ -51,10 +52,12 @@ public abstract class BaseWorker implements Worker {
   }
 
   private void setName(String name) {
+    Validator.validateWorkersName(name);
     this.name = name;
   }
 
   private void setStrength(int strength) {
+    Validator.validateStrength(strength);
     this.strength = strength;
   }
 }
