@@ -1,10 +1,8 @@
 package vehicleShop.repositories;
 
 import vehicleShop.models.worker.Worker;
-
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 
 public class WorkerRepository implements Repository<Worker> {
   private Collection<Worker> workers;
@@ -14,8 +12,8 @@ public class WorkerRepository implements Repository<Worker> {
   }
 
   @Override
-  public Collection<Worker> getWorkers() {
-    return Collections.unmodifiableCollection(this.workers);
+  public Collection<Worker> getModels() {
+    return this.workers;
   }
 
   @Override
