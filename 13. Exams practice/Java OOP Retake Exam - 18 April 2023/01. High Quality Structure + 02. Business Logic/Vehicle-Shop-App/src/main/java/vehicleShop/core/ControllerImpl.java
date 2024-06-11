@@ -81,8 +81,14 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String statistics() {
+    long size = getReachedVehicles();
 
-    return null;
+    List<String> collect = workerRepository.getModels().stream()
+            .map(helper -> String.format("Name: %s, Strength: %d%n" +
+                            "Tools: %d fit left%n", helper.getName(), helper.getStrength(),
+                    (int) helper.getTools().stream().filter(instrument -> !instrument.isUnfit()).count())).collect(Collectors.toList());
+
+    return String.format("%d vehicles are ready!%n", size) + String.format("Info for workers:%n") + String.join("", collect).trim();
   }
 
   // Helpers
@@ -95,10 +101,15 @@ public class ControllerImpl implements Controller {
     return worker;
   }
 
+  private long getReachedVehicles() {
+    return vehicleRepository.getModels().stream().filter(Vehicle::reached).count();
+  }
+
+
   private List<Worker> getWorkersWithEnergyAbove70() {
     List<Worker> workers =
             this.workerRepository
-                    .getWorkers()
+                    .getModels()
                     .stream()
                     .filter(w -> w.getStrength() > 70)
                     .collect(Collectors.toList());
@@ -107,14 +118,6 @@ public class ControllerImpl implements Controller {
       throw new IllegalArgumentException(ExceptionMessages.NO_WORKER_READY);
     }
     return workers;
-  }
-
-  private boolean noWorkersLeft(List<Worker> workers) {
-    return workers.stream().noneMatch(Worker::canWork);
-  }
-
-  private Worker findFirstWorkerWithEnoughStrength(List<Worker> workers) {
-    return workers.stream().filter(Worker::canWork).findFirst().orElse(null);
   }
 
 }
