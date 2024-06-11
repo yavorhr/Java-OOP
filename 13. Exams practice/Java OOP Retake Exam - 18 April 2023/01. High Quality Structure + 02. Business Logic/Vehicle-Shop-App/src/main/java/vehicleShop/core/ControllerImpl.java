@@ -81,6 +81,13 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String statistics() {
+    int size = (int) this.vehicleRepository.getModels().stream().filter(Vehicle::reached).count();
+    List<String> collect = workerRepository.getModels().stream()
+            .map(helper -> String.format("Name: %s, Strength: %d%n" +
+                            "Tools: %d fit left%n", helper.getName(), helper.getStrength(),
+                    (int) helper.getTools().stream().filter(instrument -> !instrument.isUnfit()).count())).collect(Collectors.toList());
+    return String.format("%d vehicles are ready!%n", size) + String.format("Info for workers:%n") + String.join("", collect).trim();
+
     return null;
   }
 
