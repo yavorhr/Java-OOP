@@ -59,11 +59,12 @@ public class ControllerImpl implements Controller {
     List<Worker> workers = getWorkersWithEnergyAbove70();
     Vehicle vehicle = this.vehicleRepository.findByName(vehicleName);
 
-    int brokenInstruments = 0;
+    long brokenInstruments = 0;
 
     for (Worker worker : workers) {
       shop.make(vehicle, worker);
-      brokenInstruments += (int) worker.getTools().stream().filter(Tool::isUnfit).count();
+      brokenInstruments += getCountBrokenTools(worker);
+
       if (vehicle.reached()) {
         break;
       }
@@ -105,7 +106,6 @@ public class ControllerImpl implements Controller {
     return vehicleRepository.getModels().stream().filter(Vehicle::reached).count();
   }
 
-
   private List<Worker> getWorkersWithEnergyAbove70() {
     List<Worker> workers =
             this.workerRepository
@@ -120,4 +120,7 @@ public class ControllerImpl implements Controller {
     return workers;
   }
 
+  private long getCountBrokenTools(Worker worker) {
+    return worker.getTools().stream().filter(Tool::isUnfit).count();
+  }
 }
