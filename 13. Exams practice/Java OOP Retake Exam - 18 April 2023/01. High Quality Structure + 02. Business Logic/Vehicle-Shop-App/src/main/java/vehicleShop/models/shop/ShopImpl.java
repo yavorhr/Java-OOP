@@ -8,7 +8,23 @@ public class ShopImpl implements Shop {
 
   @Override
   public void make(Vehicle vehicle, Worker worker) {
-
+    if (worker.canWork()) {
+      for (Tool tool : worker.getTools()) {
+        while (!tool.isUnfit()) {
+          if (!tool.isUnfit() && worker.canWork()) {
+            vehicle.making();
+            worker.working();
+            tool.decreasesPower();
+          }
+          if (vehicle.reached()) {
+            return;
+          }
+          if (!worker.canWork()) {
+            return;
+          }
+        }
+      }
+    }
   }
 
 }
