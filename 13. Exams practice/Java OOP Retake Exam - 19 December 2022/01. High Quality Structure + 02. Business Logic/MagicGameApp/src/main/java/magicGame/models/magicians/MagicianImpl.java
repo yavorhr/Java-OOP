@@ -9,7 +9,7 @@ public abstract class MagicianImpl implements Magician {
   private boolean isAlive;
   private Magic magic;
 
-  public MagicianImpl(String username, int health, int protection, Magic magic) {
+  protected MagicianImpl(String username, int health, int protection, Magic magic) {
     this.username = username;
     this.health = health;
     this.protection = protection;
