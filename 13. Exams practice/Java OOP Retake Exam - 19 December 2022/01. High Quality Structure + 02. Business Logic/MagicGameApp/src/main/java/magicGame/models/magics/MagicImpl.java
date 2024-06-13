@@ -1,12 +1,14 @@
 package magicGame.models.magics;
 
+import validator.Validator;
+
 public abstract class MagicImpl implements Magic {
   private String name;
   private int bulletsCount;
 
   public MagicImpl(String name, int bulletsCount) {
-    this.name = name;
-    this.bulletsCount = bulletsCount;
+    this.setName(name);
+    this.setBulletsCount(bulletsCount);
   }
 
   @Override
@@ -21,5 +23,15 @@ public abstract class MagicImpl implements Magic {
 
   protected void decreaseBulletsWhenShooting(int bullets) {
     this.bulletsCount -= bullets;
+  }
+
+  private void setName(String name) {
+    Validator.validateMagicName(name);
+    this.name = name;
+  }
+
+  private void setBulletsCount(int bulletsCount) {
+    Validator.validateBulletsCount(bulletsCount);
+    this.bulletsCount = bulletsCount;
   }
 }
