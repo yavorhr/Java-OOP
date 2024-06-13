@@ -1,8 +1,13 @@
 package magicGame.models.magics;
 
-public class MagicImpl implements Magic {
+public abstract class MagicImpl implements Magic {
   private String name;
   private int bulletsCount;
+
+  public MagicImpl(String name, int bulletsCount) {
+    this.name = name;
+    this.bulletsCount = bulletsCount;
+  }
 
   @Override
   public String getName() {
@@ -14,8 +19,7 @@ public class MagicImpl implements Magic {
     return this.bulletsCount;
   }
 
-  @Override
-  public int fire() {
-    return 0;
+  protected void decreaseBulletsWhenShooting(int bullets) {
+    this.bulletsCount -= bullets;
   }
 }
