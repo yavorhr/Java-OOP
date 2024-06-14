@@ -1,6 +1,7 @@
 package magicGame.models.magicians;
 
 import magicGame.models.magics.Magic;
+import validator.Validator;
 
 public abstract class MagicianImpl implements Magician {
   private String username;
@@ -10,10 +11,10 @@ public abstract class MagicianImpl implements Magician {
   private Magic magic;
 
   protected MagicianImpl(String username, int health, int protection, Magic magic) {
-    this.username = username;
-    this.health = health;
-    this.protection = protection;
-    this.magic = magic;
+    this.setUsername(username);
+    this.setHealth(health);
+    this.setProtection(protection);
+    this.setMagic(magic);
   }
 
   @Override
@@ -56,5 +57,25 @@ public abstract class MagicianImpl implements Magician {
     if (this.health < 0) {
       this.health = 0;
     }
+  }
+
+  private void setUsername(String username) {
+    Validator.validateUsername(username);
+    this.username = username;
+  }
+
+  private void setHealth(int health) {
+    Validator.validateHealthPoints(health);
+    this.health = health;
+  }
+
+  private void setProtection(int protection) {
+    Validator.validateProtectionPoints(protection);
+    this.protection = protection;
+  }
+
+  private void setMagic(Magic magic) {
+    Validator.validateMagic(magic);
+    this.magic = magic;
   }
 }

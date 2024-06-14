@@ -16,7 +16,7 @@ public class Validator {
     }
   }
 
-  public static void validateMagicianName(String name) {
+  public static void validateUsername(String name) {
     if (name == null || name.trim().isEmpty()) {
       throw new NullPointerException(ExceptionMessages.INVALID_MAGICIAN_NAME);
     }
