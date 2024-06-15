@@ -13,6 +13,7 @@ public class RedMagic extends MagicImpl {
       return 0;
     }
     super.decreaseBulletsWhenShooting(SHOOT_BULLET_PER_TIME);
+
     return SHOOT_BULLET_PER_TIME;
   }
 }
