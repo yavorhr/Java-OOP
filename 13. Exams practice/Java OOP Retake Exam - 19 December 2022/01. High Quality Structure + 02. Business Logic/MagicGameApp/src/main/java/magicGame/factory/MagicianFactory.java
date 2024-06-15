@@ -14,7 +14,7 @@ public class MagicianFactory {
     switch (type) {
       case "Wizard" -> magician = new Wizard(username, health, protection, magicName);
       case "BlackWidow" -> magician = new BlackWidow(username, health, protection, magicName);
-      default -> throw new IllegalArgumentException(ExceptionMessages.INVALID_MAGIC_TYPE);
+      default -> throw new IllegalArgumentException(ExceptionMessages.INVALID_MAGICIAN_TYPE);
     }
 
     return magician;

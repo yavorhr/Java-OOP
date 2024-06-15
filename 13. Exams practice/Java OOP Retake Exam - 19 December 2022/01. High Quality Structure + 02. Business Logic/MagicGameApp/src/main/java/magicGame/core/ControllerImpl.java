@@ -2,6 +2,7 @@ package magicGame.core;
 
 import magicGame.common.OutputMessages;
 import magicGame.factory.MagicFactory;
+import magicGame.factory.MagicianFactory;
 import magicGame.models.magicians.Magician;
 import magicGame.models.magics.Magic;
 import magicGame.models.region.Region;
@@ -33,9 +34,13 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addMagician(String type, String username, int health, int protection, String magicName) {
+    Magic magic = this.magicRepository.findByName(magicName);
+    Validator.validateIfMagicExists(magic);
 
+    Magician magician = MagicianFactory.create(type, username, health, protection, magic);
+    magicianRepository.addMagician(magician);
 
-    return null;
+    return String.format(OutputMessages.SUCCESSFULLY_ADDED_MAGICIAN, username);
   }
 
   @Override
