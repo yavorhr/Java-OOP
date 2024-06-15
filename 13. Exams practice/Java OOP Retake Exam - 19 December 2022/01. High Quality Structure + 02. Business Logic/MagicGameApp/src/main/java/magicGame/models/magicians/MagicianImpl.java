@@ -75,7 +75,7 @@ public abstract class MagicianImpl implements Magician {
   }
 
   private void setMagic(Magic magic) {
-    Validator.validateMagic(magic);
+    Validator.validateMagicWhenAddedToMagician(magic);
     this.magic = magic;
   }
 }

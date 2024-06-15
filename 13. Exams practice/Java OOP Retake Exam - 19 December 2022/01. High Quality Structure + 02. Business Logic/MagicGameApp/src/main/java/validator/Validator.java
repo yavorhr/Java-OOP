@@ -1,6 +1,7 @@
 package validator;
 
 import magicGame.common.ExceptionMessages;
+import magicGame.models.magicians.Magician;
 import magicGame.models.magics.Magic;
 
 public class Validator {
@@ -34,7 +35,7 @@ public class Validator {
     }
   }
 
-  public static void validateMagic(Magic magic) {
+  public static void validateMagicWhenAddedToMagician(Magic magic) {
     if (magic == null) {
       throw new NullPointerException(ExceptionMessages.INVALID_MAGIC);
     }
@@ -46,4 +47,15 @@ public class Validator {
     }
   }
 
+  public static void validateIfMagicIsNotNull(Magic magic) {
+    if (magic == null) {
+      throw new NullPointerException(ExceptionMessages.INVALID_MAGIC_REPOSITORY);
+    }
+  }
+
+  public static void validateIfMagicianIsNotNull(Magician magician) {
+    if (magician == null) {
+      throw new NullPointerException(ExceptionMessages.INVALID_MAGICIAN_REPOSITORY);
+    }
+  }
 }

@@ -2,6 +2,7 @@ package magicGame.repositories;
 
 import magicGame.models.magics.Magic;
 import magicGame.repositories.interfaces.MagicRepository;
+import validator.Validator;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,8 +21,9 @@ public class MagicRepositoryImpl implements MagicRepository<Magic> {
   }
 
   @Override
-  public void addMagic(Magic model) {
-    this.magics.add(model);
+  public void addMagic(Magic magic) {
+    Validator.validateIfMagicIsNotNull(magic);
+    this.magics.add(magic);
   }
 
   @Override
