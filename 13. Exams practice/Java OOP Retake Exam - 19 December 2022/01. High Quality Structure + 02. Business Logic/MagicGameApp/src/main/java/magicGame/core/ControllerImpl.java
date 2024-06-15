@@ -10,6 +10,7 @@ import magicGame.repositories.MagicRepositoryImpl;
 import magicGame.repositories.interfaces.MagicRepository;
 import magicGame.repositories.interfaces.MagicianRepository;
 import magicGame.repositories.interfaces.MagicianRepositoryImpl;
+import validator.Validator;
 
 public class ControllerImpl implements Controller {
   private MagicRepository<Magic> magicRepository;
@@ -32,6 +33,8 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addMagician(String type, String username, int health, int protection, String magicName) {
+
+
     return null;
   }
 

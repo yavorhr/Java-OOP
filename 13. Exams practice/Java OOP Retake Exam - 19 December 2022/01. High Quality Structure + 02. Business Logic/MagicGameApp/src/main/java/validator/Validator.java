@@ -40,4 +40,10 @@ public class Validator {
     }
   }
 
+  public static void validateIfMagicExists(Magic magic) {
+    if (magic == null) {
+      throw new NullPointerException(ExceptionMessages.MAGIC_CANNOT_BE_FOUND);
+    }
+  }
+
 }
