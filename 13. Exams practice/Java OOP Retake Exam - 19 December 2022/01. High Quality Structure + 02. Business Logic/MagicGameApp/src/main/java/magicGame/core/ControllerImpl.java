@@ -1,5 +1,7 @@
 package magicGame.core;
 
+import magicGame.common.OutputMessages;
+import magicGame.factory.MagicFactory;
 import magicGame.models.magicians.Magician;
 import magicGame.models.magics.Magic;
 import magicGame.models.region.Region;
@@ -22,7 +24,10 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addMagic(String type, String name, int bulletsCount) {
-    return null;
+    Magic magic = MagicFactory.create(type, name, bulletsCount);
+    this.magicRepository.addMagic(magic);
+
+    return String.format(OutputMessages.SUCCESSFULLY_ADDED_MAGIC, name);
   }
 
   @Override
