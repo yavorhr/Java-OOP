@@ -4,11 +4,16 @@ import magicGame.models.magicians.Magician;
 import magicGame.models.magics.Magic;
 import validator.Validator;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
 public class MagicianRepositoryImpl implements MagicianRepository<Magician> {
   private Collection<Magician> magicians;
+
+  public MagicianRepositoryImpl() {
+    this.magicians = new ArrayList<>();
+  }
 
   @Override
   public Collection<Magician> getData() {
