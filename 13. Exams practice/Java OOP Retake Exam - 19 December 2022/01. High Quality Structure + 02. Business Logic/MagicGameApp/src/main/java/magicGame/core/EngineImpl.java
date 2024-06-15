@@ -42,25 +42,15 @@ public class EngineImpl implements Engine {
     Command command = Command.valueOf(tokens[0]);
     String[] data = Arrays.stream(tokens).skip(1).toArray(String[]::new);
 
-    String result = null;
+    String result = switch (command) {
+      case AddMagician -> this.addMagician(data);
+      case AddMagic -> this.addMagic(data);
+      case StartGame -> this.start();
+      case Report -> this.report();
+      case Exit -> Command.Exit.name();
+      default -> null;
+    };
 
-    switch (command) {
-      case AddMagician:
-        result = this.addMagician(data);
-        break;
-      case AddMagic:
-        result = this.addMagic(data);
-        break;
-      case StartGame:
-        result = this.start();
-        break;
-      case Report:
-        result = this.report();
-        break;
-      case Exit:
-        result = Command.Exit.name();
-        break;
-    }
     return result;
   }
 
