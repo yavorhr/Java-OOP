@@ -13,6 +13,9 @@ import magicGame.repositories.interfaces.MagicianRepository;
 import magicGame.repositories.interfaces.MagicianRepositoryImpl;
 import validator.Validator;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class ControllerImpl implements Controller {
   private MagicRepository<Magic> magicRepository;
   private MagicianRepository<Magician> magicianRepository;
@@ -45,11 +48,23 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String startGame() {
-    return null;
+    List<Magician> magicians = getAllAliveMagicians();
+
+    return this.region.start(magicians);
   }
+
 
   @Override
   public String report() {
     return null;
+  }
+
+  // Helpers
+  private List<Magician> getAllAliveMagicians() {
+    return this.magicianRepository
+            .getData()
+            .stream()
+            .filter(Magician::isAlive)
+            .collect(Collectors.toList());
   }
 }
