@@ -15,6 +15,7 @@ public abstract class MagicianImpl implements Magician {
     this.setHealth(health);
     this.setProtection(protection);
     this.setMagic(magic);
+    this.isAlive = this.health > 0;
   }
 
   @Override
@@ -77,5 +78,20 @@ public abstract class MagicianImpl implements Magician {
   private void setMagic(Magic magic) {
     Validator.validateMagicWhenAddedToMagician(magic);
     this.magic = magic;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append(String.format("%s: %s", this.getClass().getSimpleName(), this.getUsername()))
+            .append(System.lineSeparator());
+    sb.append(String.format("Health: %d", this.getHealth()))
+            .append(System.lineSeparator());
+    sb.append(String.format("Protection: %d", this.getProtection()))
+            .append(System.lineSeparator());
+    sb.append(String.format("Magic: %s", this.getMagic().getName()))
+            .append(System.lineSeparator());
+
+    return sb.toString().trim();
   }
 }

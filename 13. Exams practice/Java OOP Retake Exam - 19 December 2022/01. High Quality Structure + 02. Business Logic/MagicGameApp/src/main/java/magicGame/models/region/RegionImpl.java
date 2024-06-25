@@ -17,7 +17,7 @@ public class RegionImpl implements Region {
   @Override
   public String start(Collection<Magician> magicians) {
     Collection<Magician> wizards = getMagicians(magicians, "Wizard");
-    Collection<Magician> blackWidows = getMagicians(magicians, "Black Widow");
+    Collection<Magician> blackWidows = getMagicians(magicians, "BlackWidow");
 
     while (aliveMagiciansLeft(wizards) && aliveMagiciansLeft(blackWidows)) {
       fight(wizards, blackWidows);

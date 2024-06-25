@@ -56,7 +56,8 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String report() {
-    return null;
+
+
   }
 
   // Helpers

@@ -14,4 +14,5 @@ public interface Magician {
     boolean isAlive();
 
     void takeDamage(int points);
+
 }
