@@ -92,6 +92,6 @@ public abstract class MagicianImpl implements Magician {
     sb.append(String.format("Magic: %s", this.getMagic().getName()))
             .append(System.lineSeparator());
 
-    return sb.toString().trim();
+    return sb.toString();
   }
 }
