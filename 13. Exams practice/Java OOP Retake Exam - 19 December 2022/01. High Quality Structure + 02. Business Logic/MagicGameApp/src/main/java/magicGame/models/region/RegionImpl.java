@@ -62,13 +62,12 @@ public class RegionImpl implements Region {
   private void fight(Collection<Magician> wizards, Collection<Magician> blackWidows) {
     for (Magician attacker : wizards) {
       for (Magician defender : blackWidows) {
-        int damage = attacker.getMagic().fire();
-
-        if (damage == 0) {
-          break;
+        while (attacker.getMagic().getBulletsCount() > 0 && defender.isAlive()) {
+          int damage = attacker.getMagic().fire();
+          defender.takeDamage(damage);
         }
-        defender.takeDamage(damage);
       }
     }
   }
+
 }
