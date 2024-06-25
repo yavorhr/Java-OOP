@@ -4,6 +4,7 @@ import magicGame.common.OutputMessages;
 import magicGame.factory.MagicFactory;
 import magicGame.factory.MagicianFactory;
 import magicGame.models.magicians.Magician;
+import magicGame.models.magicians.MagicianComparator;
 import magicGame.models.magics.Magic;
 import magicGame.models.region.Region;
 import magicGame.models.region.RegionImpl;
@@ -56,8 +57,15 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String report() {
+    StringBuilder sb = new StringBuilder();
 
+    this.magicianRepository
+            .getData()
+            .stream()
+            .sorted(new MagicianComparator())
+            .forEach(m -> sb.append(m.toString()));
 
+    return sb.toString();
   }
 
   // Helpers
