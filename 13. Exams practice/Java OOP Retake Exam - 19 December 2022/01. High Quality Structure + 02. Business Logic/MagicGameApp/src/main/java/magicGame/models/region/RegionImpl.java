@@ -16,15 +16,13 @@ public class RegionImpl implements Region {
 
   @Override
   public String start(Collection<Magician> magicians) {
-    Collection<Magician> wizards = getMagicians(magicians, "Wizard");
-    Collection<Magician> blackWidows = getMagicians(magicians, "BlackWidow");
+    List<Magician> wizards = getMagicians(magicians, "Wizard");
+    List<Magician> blackWidows = getMagicians(magicians, "BlackWidow");
 
     while (aliveMagiciansLeft(wizards) && aliveMagiciansLeft(blackWidows)) {
       fight(wizards, blackWidows);
 
       blackWidows = filterAliveMagicians(blackWidows);
-
-      fight(blackWidows, wizards);
 
       wizards = filterAliveMagicians(wizards);
     }
@@ -59,7 +57,7 @@ public class RegionImpl implements Region {
     return "Wizards win!";
   }
 
-  private void fight(Collection<Magician> wizards, Collection<Magician> blackWidows) {
+  private void fight(List<Magician> wizards, List<Magician> blackWidows) {
     for (Magician attacker : wizards) {
       for (Magician defender : blackWidows) {
         while (attacker.getMagic().getBulletsCount() > 0 && defender.isAlive()) {
