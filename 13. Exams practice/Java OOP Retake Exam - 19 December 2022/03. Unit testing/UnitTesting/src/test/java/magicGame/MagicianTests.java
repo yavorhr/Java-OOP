@@ -47,13 +47,22 @@ public class MagicianTests {
   // test getMagics()
   @Test(expected = UnsupportedOperationException.class)
   public void testGetMagicsReturnUnmodifiableCollection() {
-   this.magician.getMagics().remove(this.magic1);
+    this.magician.getMagics().remove(this.magic1);
   }
 
   //test takeDamage()
   @Test(expected = IllegalStateException.class)
-  public void testMagicianTakeDamage() {
+  public void testMagicianTakeDamageShouldThrowErrorWhenMagicianIsAlreadyWithZeroPoints() {
     this.magician.takeDamage(50);
     this.magician.takeDamage(50);
+  }
+
+  @Test
+  public void testMagicianTakeDamageShouldReduceMagicianHealthPoints() {
+    this.magician.takeDamage(20);
+    int expected = 30;
+    int actual = this.magician.getHealth();
+
+    Assert.assertEquals(expected,actual);
   }
 }
