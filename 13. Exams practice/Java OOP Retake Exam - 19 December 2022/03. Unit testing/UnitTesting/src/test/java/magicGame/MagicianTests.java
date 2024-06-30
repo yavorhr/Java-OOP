@@ -39,4 +39,9 @@ public class MagicianTests {
     new Magician(null, 50);
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testMagicianCtorThrowsIllegalExcWhenNegativeHealthsGiven() {
+    new Magician("validName", -50);
+  }
+
 }
