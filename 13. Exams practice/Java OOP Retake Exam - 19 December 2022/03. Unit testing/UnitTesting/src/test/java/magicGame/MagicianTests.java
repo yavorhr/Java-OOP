@@ -65,4 +65,15 @@ public class MagicianTests {
 
     Assert.assertEquals(expected,actual);
   }
+
+  //test addMagic()
+  @Test
+  public void testAddMagicShouldAddMagicCorrect() {
+    this.magician.takeDamage(20);
+    int expected = 2;
+    int actual = this.magician.getMagics().size();
+
+    Assert.assertEquals(expected,actual);
+  }
+
 }
