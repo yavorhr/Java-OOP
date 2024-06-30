@@ -21,10 +21,17 @@ public class MagicianTests {
     this.magician.addMagic(magic2);
   }
 
+  // test Magician constructor
   @Test
-  public void testMagicianCtorWorksCorrect(){
+  public void testMagicianCtorWorksCorrect() {
     Assert.assertEquals("test", this.magicianWithNoMagics.getUsername());
     Assert.assertEquals(100, this.magicianWithNoMagics.getHealth());
     Assert.assertEquals(0, this.magicianWithNoMagics.getMagics().size());
   }
+
+  @Test(expected = NullPointerException.class)
+  public void testMagicianCtorThrowsNullPointerWhenEmptyNameIsGiven() {
+    new Magician("", 50);
+  }
+
 }
