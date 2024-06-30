@@ -1,6 +1,8 @@
 package magicGame;
 
+import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
 
 public class MagicianTests {
   private Magician magician;
@@ -17,5 +19,12 @@ public class MagicianTests {
     this.magic2 = new Magic("Predator", 50);
     this.magician.addMagic(magic1);
     this.magician.addMagic(magic2);
+  }
+
+  @Test
+  public void testMagicianCtorWorksCorrect(){
+    Assert.assertEquals("test", this.magicianWithNoMagics.getUsername());
+    Assert.assertEquals(100, this.magicianWithNoMagics.getHealth());
+    Assert.assertEquals(0, this.magicianWithNoMagics.getMagics().size());
   }
 }
