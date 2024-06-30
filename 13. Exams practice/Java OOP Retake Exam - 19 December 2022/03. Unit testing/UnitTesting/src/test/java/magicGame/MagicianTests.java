@@ -87,4 +87,10 @@ public class MagicianTests {
     Assert.assertTrue(this.magician.removeMagic(magic));
   }
 
+  // getBullets();
+  @Test
+  public void testMagicConstructorShouldWorksCorrect() {
+   Assert.assertEquals("Oslo", magic1.getName());
+   Assert.assertEquals(30, magic1.getBullets());
+  }
 }
