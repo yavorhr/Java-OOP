@@ -50,4 +50,10 @@ public class MagicianTests {
    this.magician.getMagics().remove(this.magic1);
   }
 
+  //test takeDamage()
+  @Test(expected = IllegalStateException.class)
+  public void testMagicianTakeDamage() {
+    this.magician.takeDamage(50);
+    this.magician.takeDamage(50);
+  }
 }
