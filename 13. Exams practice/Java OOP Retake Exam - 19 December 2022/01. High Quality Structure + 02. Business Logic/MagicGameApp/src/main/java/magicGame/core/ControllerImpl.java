@@ -14,6 +14,7 @@ import magicGame.repositories.interfaces.MagicianRepository;
 import magicGame.repositories.interfaces.MagicianRepositoryImpl;
 import validator.Validator;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -59,12 +60,12 @@ public class ControllerImpl implements Controller {
   public String report() {
     StringBuilder sb = new StringBuilder();
 
-    this.magicianRepository
+    List<Magician> collect = this.magicianRepository
             .getData()
             .stream()
-            .sorted(new MagicianComparator())
-            .forEach(m -> sb.append(m.toString()));
+            .sorted(Comparator.comparing(Magician::getHealth).thenComparing(Magician::getUsername)).collect(Collectors.toList());
 
+    System.out.println();
     return sb.toString();
   }
 

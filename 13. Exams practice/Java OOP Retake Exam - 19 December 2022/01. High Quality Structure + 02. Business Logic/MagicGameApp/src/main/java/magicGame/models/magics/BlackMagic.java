@@ -9,7 +9,7 @@ public class BlackMagic extends MagicImpl {
 
   @Override
   public int fire() {
-    if (super.getBulletsCount() == 0) {
+    if (super.getBulletsCount() == 0 || super .getBulletsCount() < SHOOT_BULLET_PER_TIME) {
       return 0;
     }
     super.decreaseBulletsWhenShooting(SHOOT_BULLET_PER_TIME);
