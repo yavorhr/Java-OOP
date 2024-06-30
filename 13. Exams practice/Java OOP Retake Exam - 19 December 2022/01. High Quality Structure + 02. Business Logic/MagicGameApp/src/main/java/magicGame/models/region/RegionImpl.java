@@ -1,6 +1,5 @@
 package magicGame.models.region;
 
-import magicGame.common.OutputMessages;
 import magicGame.models.magicians.Magician;
 
 import java.util.Collection;
@@ -23,7 +22,13 @@ public class RegionImpl implements Region {
       fight(wizards, blackWidows);
 
       blackWidows = filterAliveMagicians(blackWidows);
+      wizards = filterAliveMagicians(wizards);
+    }
 
+    while (aliveMagiciansLeft(wizards) && aliveMagiciansLeft(blackWidows)) {
+      fight(blackWidows, wizards);
+
+      blackWidows = filterAliveMagicians(blackWidows);
       wizards = filterAliveMagicians(wizards);
     }
 
@@ -58,14 +63,19 @@ public class RegionImpl implements Region {
   }
 
   private void fight(List<Magician> wizards, List<Magician> blackWidows) {
-    for (Magician attacker : wizards) {
-      for (Magician defender : blackWidows) {
-        while (attacker.getMagic().getBulletsCount() > 0 && defender.isAlive()) {
-          int damage = attacker.getMagic().fire();
-          defender.takeDamage(damage);
-        }
-      }
+    Magician attacker = wizards.get(0);
+    Magician defender = blackWidows.get(0);
+
+    while (canShoot(attacker) && defender.isAlive()) {
+      int damage = attacker.getMagic().fire();
+      defender.takeDamage(damage);
     }
   }
+
+  private boolean canShoot(Magician attacker) {
+    return attacker.getMagic().getBulletsCount() > 0
+            && attacker.getMagic().getBulletsCount() >= attacker.getMagic().fire();
+  }
+
 
 }
