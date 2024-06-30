@@ -44,4 +44,10 @@ public class MagicianTests {
     new Magician("validName", -50);
   }
 
+  // test getMagics()
+  @Test(expected = UnsupportedOperationException.class)
+  public void testGetMagicsReturnUnmodifiableCollection() {
+   this.magician.getMagics().remove(this.magic1);
+  }
+
 }
