@@ -79,7 +79,12 @@ public class MagicianTests {
   @Test (expected = NullPointerException.class)
   public void testAddMagicShouldThrowErrorWhenNullIsAdded() {
     this.magician.addMagic(null);
+  }
 
+  @Test
+  public void testRemoveMagicShouldRemoveMagicFromTheMagician() {
+    Magic magic = this.magician.getMagic("Oslo");
+    Assert.assertTrue(this.magician.removeMagic(magic));
   }
 
 }
