@@ -34,4 +34,9 @@ public class MagicianTests {
     new Magician("", 50);
   }
 
+  @Test(expected = NullPointerException.class)
+  public void testMagicianCtorThrowsNullPointerWhenNullNameIsGiven() {
+    new Magician(null, 50);
+  }
+
 }
