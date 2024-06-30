@@ -76,4 +76,10 @@ public class MagicianTests {
     Assert.assertEquals(expected,actual);
   }
 
+  @Test (expected = NullPointerException.class)
+  public void testAddMagicShouldThrowErrorWhenNullIsAdded() {
+    this.magician.addMagic(null);
+
+  }
+
 }
