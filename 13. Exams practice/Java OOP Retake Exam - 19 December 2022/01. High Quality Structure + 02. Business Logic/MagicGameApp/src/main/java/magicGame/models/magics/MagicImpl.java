@@ -21,9 +21,6 @@ public abstract class MagicImpl implements Magic {
     return this.bulletsCount;
   }
 
-  protected void decreaseBulletsWhenShooting(int bullets) {
-    this.bulletsCount -= bullets;
-  }
 
   private void setName(String name) {
     Validator.validateMagicName(name);
@@ -34,4 +31,6 @@ public abstract class MagicImpl implements Magic {
     Validator.validateBulletsCount(bulletsCount);
     this.bulletsCount = bulletsCount;
   }
+
+
 }

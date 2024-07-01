@@ -51,7 +51,6 @@ public class ControllerImpl implements Controller {
   @Override
   public String startGame() {
     List<Magician> magicians = getAllAliveMagicians();
-
     return this.region.start(magicians);
   }
 

@@ -1,7 +1,10 @@
 package magicGame.models.region;
 
+import magicGame.models.magicians.BlackWidow;
 import magicGame.models.magicians.Magician;
+import magicGame.models.magicians.Wizard;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,22 +18,35 @@ public class RegionImpl implements Region {
 
   @Override
   public String start(Collection<Magician> magicians) {
-    List<Magician> wizards = divideMagiciansByType(magicians, "Wizard");
-    List<Magician> blackWidows = divideMagiciansByType(magicians, "BlackWidow");
+    List<Magician> wizardList = new ArrayList<>();
+    List<Magician> blackWidowList = new ArrayList<>();
 
-    while (aliveMagiciansLeft(wizards) && aliveMagiciansLeft(blackWidows)) {
-      fight(wizards, blackWidows);
-      blackWidows = filterLiveMagicians(blackWidows);
-
-      if (!aliveMagiciansLeft(blackWidows)){
-        break;
+    for (Magician magician : magicians) {
+      if (magician.getClass().getSimpleName().equals("Wizard")){
+        wizardList.add(magician);
+      } else if (magician.getClass().getSimpleName().equals("BlackWidow")){
+        blackWidowList.add(magician);
       }
-
-      fight(blackWidows, wizards);
-      wizards = filterLiveMagicians(wizards);
     }
+    while(!wizardList.isEmpty() && !blackWidowList.isEmpty()){
+      Wizard wizard = (Wizard) wizardList.get(0);
+      BlackWidow blackWidow = (BlackWidow) blackWidowList.get(0);
 
-    return getOutput(wizards);
+      blackWidow.takeDamage(wizard.getMagic().fire());
+      if (blackWidow.isAlive()){
+        wizard.takeDamage(blackWidow.getMagic().fire());
+        if (!wizard.isAlive()){
+          wizardList.remove(wizard);
+        }
+      } else {
+        blackWidowList.remove(blackWidow);
+      }
+    }
+    if (wizardList.size() > blackWidowList.size()){
+      return "Wizards win!";
+    } else {
+      return "Black widows win!";
+    }
   }
 
   // Helpers
@@ -50,26 +66,6 @@ public class RegionImpl implements Region {
             .stream()
             .filter(m -> m.getClass().getSimpleName().equals(type))
             .collect(Collectors.toList());
-  }
-
-
-  private void fight(List<Magician> wizards, List<Magician> blackWidows) {
-    Magician attacker = wizards.stream().filter(w -> w.getMagic().getBulletsCount() > 0).findFirst().orElse(null);
-    Magician defender = blackWidows.get(0);
-
-    while (canShoot(attacker) && defender.isAlive()) {
-      int damage = attacker.getMagic().fire();
-
-      if (damage == 0) {
-        break;
-      }
-
-      defender.takeDamage(damage);
-    }
-  }
-
-  private boolean canShoot(Magician attacker) {
-    return attacker.getMagic().getBulletsCount() > 0;
   }
 
   private String getOutput(Collection<Magician> wizards) {
