@@ -30,4 +30,8 @@ public abstract class BaseCar implements Car {
   public double calculateRacePoints(int laps) {
     return this.cubicCentimeters / this.horsePower * laps;
   }
+
+  protected void setHorsePower(int horsePower) {
+    this.horsePower = horsePower;
+  }
 }
