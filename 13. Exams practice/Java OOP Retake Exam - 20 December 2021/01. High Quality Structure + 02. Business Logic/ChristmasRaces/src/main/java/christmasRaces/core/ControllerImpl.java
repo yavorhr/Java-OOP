@@ -1,8 +1,10 @@
 package christmasRaces.core;
 
+import christmasRaces.common.OutputMessages;
 import christmasRaces.core.interfaces.Controller;
 import christmasRaces.entities.cars.Car;
 import christmasRaces.entities.drivers.Driver;
+import christmasRaces.entities.drivers.DriverImpl;
 import christmasRaces.entities.races.Race;
 import christmasRaces.repositories.interfaces.Repository;
 import validations.Validator;
@@ -19,10 +21,12 @@ public class ControllerImpl implements Controller {
   }
 
   @Override
-  public String createDriver(String driver) {
-    Validator.throwExceptionIfDriverAlreadyIsCreated(this.drivers.getAll(), driver);
+  public String createDriver(String driverName) {
+    Validator.throwExceptionIfDriverAlreadyIsCreated(this.drivers.getAll(), driverName);
+    Driver driver = new DriverImpl(driverName);
+    this.drivers.add(driver);
 
-    return null;
+    return String.format(OutputMessages.DRIVER_CREATED, driverName);
   }
 
   @Override
