@@ -31,6 +31,8 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String createCar(String type, String model, int horsePower) {
+    Validator.throwErrorIfCarModelIsAlreadyAddedToRepository(this.cars.getAll(), model);
+
     return null;
   }
 

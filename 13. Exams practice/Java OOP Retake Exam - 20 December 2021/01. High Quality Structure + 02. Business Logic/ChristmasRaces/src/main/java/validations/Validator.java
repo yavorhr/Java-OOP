@@ -33,7 +33,6 @@ public class Validator {
     }
   }
 
-
   // Driver
   public static void throwExceptionIfDriverIsNull(Driver driver) {
     if (driver == null) {
@@ -61,4 +60,11 @@ public class Validator {
       throw new IllegalArgumentException(String.format(ExceptionMessages.DRIVER_EXISTS, driver));
     }
   }
+
+  public static void throwErrorIfCarModelIsAlreadyAddedToRepository(Collection<Car> cars, String model) {
+    if (cars.stream().anyMatch(c -> c.getModel().equals(model))) {
+      throw new IllegalArgumentException(String.format(ExceptionMessages.CAR_EXISTS, model));
+    }
+  }
+
 }
