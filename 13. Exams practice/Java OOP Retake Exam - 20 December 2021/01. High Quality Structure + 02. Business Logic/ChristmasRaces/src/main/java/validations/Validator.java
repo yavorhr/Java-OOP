@@ -67,4 +67,16 @@ public class Validator {
     }
   }
 
+  public static void throwErrorIfDriverIsNotExistingInRepository(String driverName, Collection<Driver> drivers) {
+    if (drivers.stream().noneMatch(d -> d.getName().equals(driverName))) {
+      throw new IllegalArgumentException(String.format(ExceptionMessages.DRIVER_NOT_FOUND, driverName));
+    }
+  }
+
+  public static void throwErrorIfCarModelIsNotExistingInRepository(String carModel, Collection<Car> cars) {
+    if (cars.stream().noneMatch(d -> d.getModel().equals(carModel))) {
+      throw new IllegalArgumentException(String.format(ExceptionMessages.CAR_NOT_FOUND, carModel));
+    }
+  }
+
 }

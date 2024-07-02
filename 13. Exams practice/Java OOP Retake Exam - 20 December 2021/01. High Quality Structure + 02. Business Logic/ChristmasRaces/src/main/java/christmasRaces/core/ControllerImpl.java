@@ -42,7 +42,9 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addCarToDriver(String driverName, String carModel) {
-    return null;
+    Validator.throwErrorIfDriverIsNotExistingInRepository(driverName, this.drivers.getAll());
+    Validator.throwErrorIfCarModelIsNotExistingInRepository(carModel, this.cars.getAll());
+
   }
 
   @Override
