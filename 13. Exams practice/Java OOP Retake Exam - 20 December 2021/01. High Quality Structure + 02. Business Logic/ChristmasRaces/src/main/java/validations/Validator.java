@@ -3,6 +3,7 @@ package validations;
 import christmasRaces.common.ExceptionMessages;
 import christmasRaces.entities.cars.Car;
 import christmasRaces.entities.drivers.Driver;
+import christmasRaces.entities.races.Race;
 
 import java.util.Collection;
 import java.util.List;
@@ -76,6 +77,12 @@ public class Validator {
   public static void throwErrorIfCarModelIsNotExistingInRepository(String carModel, Collection<Car> cars) {
     if (cars.stream().noneMatch(d -> d.getModel().equals(carModel))) {
       throw new IllegalArgumentException(String.format(ExceptionMessages.CAR_NOT_FOUND, carModel));
+    }
+  }
+
+  public static void throwErrorIfRaceIsNotExistingInRepository(String raceName, Collection<Race> races) {
+    if (races.stream().noneMatch(d -> d.getName().equals(raceName))) {
+      throw new IllegalArgumentException(String.format(ExceptionMessages.RACE_NOT_FOUND, raceName));
     }
   }
 

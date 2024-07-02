@@ -53,6 +53,9 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String addDriverToRace(String raceName, String driverName) {
+    Validator.throwErrorIfRaceIsNotExistingInRepository(raceName, this.races.getAll());
+    Validator.throwErrorIfDriverIsNotExistingInRepository(driverName, this.drivers.getAll());
+
     return null;
   }
 
