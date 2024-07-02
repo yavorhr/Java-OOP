@@ -1,6 +1,6 @@
-package christmasRaces.entities.drivers;
+package christmasRaces.entities.races;
 
-import christmasRaces.entities.races.Race;
+import christmasRaces.entities.drivers.Driver;
 import validations.Validator;
 import java.util.ArrayList;
 import java.util.Collection;
