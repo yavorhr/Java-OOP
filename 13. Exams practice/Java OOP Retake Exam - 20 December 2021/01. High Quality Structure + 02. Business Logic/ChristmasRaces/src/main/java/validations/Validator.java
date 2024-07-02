@@ -2,6 +2,9 @@ package validations;
 
 import christmasRaces.common.ExceptionMessages;
 import christmasRaces.entities.cars.Car;
+import christmasRaces.entities.drivers.Driver;
+
+import java.util.List;
 
 public class Validator {
   // CAR
@@ -14,6 +17,29 @@ public class Validator {
   public static void throwExceptionIfCarIsNull(Car car) {
     if (car == null) {
       throw new IllegalArgumentException(ExceptionMessages.CAR_INVALID);
+    }
+  }
+
+  // RACE
+
+  // RACE
+  public static void throwExceptionIfDriverIsNull(Driver driver) {
+    if (driver == null) {
+      throw new IllegalArgumentException(ExceptionMessages.DRIVER_INVALID);
+    }
+  }
+
+  public static void throwExceptionIfDriverCannotParticipate(Driver driver) {
+    if (!driver.getCanParticipate()) {
+      throw new IllegalArgumentException(String.format(ExceptionMessages.DRIVER_NOT_PARTICIPATE, driver.getName()));
+    }
+  }
+
+  public static void throwExceptionIfDriverAlreadyExistsInTheRace(List<Driver> drivers, Driver driver, String raceName) {
+    if (drivers.contains(driver)) {
+      throw new IllegalArgumentException(String.format(ExceptionMessages.DRIVER_ALREADY_ADDED,
+              driver.getName(),
+              raceName));
     }
   }
 }
