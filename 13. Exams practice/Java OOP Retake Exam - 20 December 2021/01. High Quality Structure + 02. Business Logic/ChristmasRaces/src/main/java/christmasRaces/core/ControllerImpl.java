@@ -45,6 +45,10 @@ public class ControllerImpl implements Controller {
     Validator.throwErrorIfDriverIsNotExistingInRepository(driverName, this.drivers.getAll());
     Validator.throwErrorIfCarModelIsNotExistingInRepository(carModel, this.cars.getAll());
 
+    Car car = this.cars.getByName(carModel);
+    this.drivers.getByName(driverName).addCar(car);
+
+    return String.format(OutputMessages.CAR_ADDED, driverName, carModel);
   }
 
   @Override
