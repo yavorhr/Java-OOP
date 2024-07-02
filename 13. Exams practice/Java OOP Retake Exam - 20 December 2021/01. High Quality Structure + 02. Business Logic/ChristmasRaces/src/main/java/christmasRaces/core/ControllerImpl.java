@@ -6,6 +6,7 @@ import christmasRaces.entities.cars.Car;
 import christmasRaces.entities.drivers.Driver;
 import christmasRaces.entities.drivers.DriverImpl;
 import christmasRaces.entities.races.Race;
+import christmasRaces.factory.CarFactoryImpl;
 import christmasRaces.repositories.interfaces.Repository;
 import validations.Validator;
 
@@ -32,8 +33,11 @@ public class ControllerImpl implements Controller {
   @Override
   public String createCar(String type, String model, int horsePower) {
     Validator.throwErrorIfCarModelIsAlreadyAddedToRepository(this.cars.getAll(), model);
+    Car car = CarFactoryImpl.createCar(type, model, horsePower);
+    this.cars.add(car);
 
-    return null;
+    return String.format(OutputMessages.CAR_CREATED, type + "Car", model);
+
   }
 
   @Override
