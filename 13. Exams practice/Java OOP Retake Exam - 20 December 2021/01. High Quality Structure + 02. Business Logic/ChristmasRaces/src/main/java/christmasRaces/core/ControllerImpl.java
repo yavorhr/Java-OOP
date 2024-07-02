@@ -56,7 +56,10 @@ public class ControllerImpl implements Controller {
     Validator.throwErrorIfRaceIsNotExistingInRepository(raceName, this.races.getAll());
     Validator.throwErrorIfDriverIsNotExistingInRepository(driverName, this.drivers.getAll());
 
-    return null;
+    Driver driver = this.drivers.getByName(driverName);
+    races.getByName(raceName).addDriver(driver);
+
+    return String.format(OutputMessages.DRIVER_ADDED, driverName, raceName);
   }
 
   @Override
