@@ -42,12 +42,12 @@ public class RaceImpl implements Race {
   }
 
   private void setName(String name) {
-
+    Validator.throwExceptionIfEmptyName(name);
     this.name = name;
   }
 
   private void setLaps(int laps) {
-
+    Validator.throwExceptionIfLapsAreBelowOne(laps);
     this.laps = laps;
   }
 

@@ -14,15 +14,26 @@ public class Validator {
     }
   }
 
+  public static void throwExceptionIfLapsAreBelowOne(int laps) {
+    if (laps < 1) {
+      throw new IllegalArgumentException(ExceptionMessages.INVALID_NUMBER_OF_LAPS);
+    }
+  }
+
+  public static void throwExceptionIfEmptyName(String name) {
+    if (name == null || name.trim().isEmpty() || name.length() < 5) {
+      throw new IllegalArgumentException(String.format(ExceptionMessages.INVALID_NAME, name, 5));
+    }
+  }
+
   public static void throwExceptionIfCarIsNull(Car car) {
     if (car == null) {
       throw new IllegalArgumentException(ExceptionMessages.CAR_INVALID);
     }
   }
 
-  // RACE
 
-  // RACE
+  // Driver
   public static void throwExceptionIfDriverIsNull(Driver driver) {
     if (driver == null) {
       throw new IllegalArgumentException(ExceptionMessages.DRIVER_INVALID);
