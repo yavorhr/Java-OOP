@@ -5,6 +5,7 @@ import christmasRaces.entities.cars.Car;
 import christmasRaces.entities.drivers.Driver;
 import christmasRaces.entities.races.Race;
 import christmasRaces.repositories.interfaces.Repository;
+import validations.Validator;
 
 public class ControllerImpl implements Controller {
   private Repository<Car> cars;
@@ -19,6 +20,8 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String createDriver(String driver) {
+    Validator.throwExceptionIfDriverAlreadyIsCreated(this.drivers.getAll(), driver);
+
     return null;
   }
 

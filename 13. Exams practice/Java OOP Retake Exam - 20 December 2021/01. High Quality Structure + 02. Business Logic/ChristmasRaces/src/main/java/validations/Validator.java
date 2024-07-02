@@ -4,6 +4,7 @@ import christmasRaces.common.ExceptionMessages;
 import christmasRaces.entities.cars.Car;
 import christmasRaces.entities.drivers.Driver;
 
+import java.util.Collection;
 import java.util.List;
 
 public class Validator {
@@ -51,6 +52,13 @@ public class Validator {
       throw new IllegalArgumentException(String.format(ExceptionMessages.DRIVER_ALREADY_ADDED,
               driver.getName(),
               raceName));
+    }
+  }
+
+  // REPOSITORIES
+  public static void throwExceptionIfDriverAlreadyIsCreated(Collection<Driver> allDrivers, String driver) {
+    if (allDrivers.stream().anyMatch(d -> d.getName().equals(driver))) {
+      throw new IllegalArgumentException(String.format(ExceptionMessages.DRIVER_EXISTS, driver));
     }
   }
 }
