@@ -24,4 +24,11 @@ public class GarageTests {
 
     this.emptyGarage = new Garage();
   }
+
+  //Constructor tests
+  @Test
+  public void testGarageIsInitializedWithWithEmptyListOfCars() {
+    Assert.assertEquals(0, emptyGarage.getCount());
+  }
+
 }
