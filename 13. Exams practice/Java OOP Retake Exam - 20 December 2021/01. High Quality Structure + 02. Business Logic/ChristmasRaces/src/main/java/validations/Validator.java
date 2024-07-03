@@ -90,5 +90,10 @@ public class Validator {
       throw new IllegalArgumentException(String.format(ExceptionMessages.RACE_INVALID, raceName, 3));
     }
   }
+  public static void throwErrorIfRaceIsAlreadyExistingInRepository(String raceName, Collection<Race> races) {
+    if (races.stream().anyMatch(d -> d.getName().equals(raceName))) {
+      throw new IllegalArgumentException(String.format(ExceptionMessages.RACE_EXISTS, raceName));
+    }
+  }
 
 }

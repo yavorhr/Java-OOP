@@ -87,7 +87,9 @@ public class ControllerImpl implements Controller {
   }
 
   @Override
-  public String createRace(String name, int laps) {
+  public String createRace(String raceName, int laps) {
+    Validator.throwErrorIfRaceIsAlreadyExistingInRepository(raceName, this.races.getAll());
+
     return null;
   }
 
