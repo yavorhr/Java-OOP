@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 public class GarageTests {
   private Car bmw;
   private Car mercedes;
@@ -47,6 +49,13 @@ public class GarageTests {
   @Test(expected = IllegalArgumentException.class)
   public void testAddCarWithNullArgumentShouldThrowError() {
     this.garage.addCar(null);
+  }
+
+  //test findAllCarsWithMaxSpeedAbove()
+  @Test
+  public void testFindAllCarsWithMaxSpeedAboveShouldWorksCorrect() {
+    List<Car> carsList = this.garage.findAllCarsWithMaxSpeedAbove(100);
+    Assert.assertEquals(2, carsList.size());
   }
 
 
