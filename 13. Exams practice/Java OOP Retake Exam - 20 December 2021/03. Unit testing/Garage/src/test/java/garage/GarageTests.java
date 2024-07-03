@@ -25,7 +25,7 @@ public class GarageTests {
     this.emptyGarage = new Garage();
   }
 
-  //Constructor tests
+  //test Garage constructor
   @Test
   public void testGarageIsInitializedWithWithEmptyListOfCars() {
     Assert.assertEquals(0, emptyGarage.getCount());
@@ -36,5 +36,18 @@ public class GarageTests {
   public void testGetCarsReturnsUnmodifiableCollection() {
     this.garage.getCars().add(new Car("test_car", 0, 0));
   }
+
+  //test : addCar()
+  @Test
+  public void testAddCarShouldWorksCorrect() {
+    Assert.assertEquals(3, this.garage.getCars().size());
+    Assert.assertEquals("Trabant", this.garage.getCars().get(2).getBrand());
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testAddCarWithNullArgumentShouldThrowError() {
+    this.garage.addCar(null);
+  }
+
 
 }
