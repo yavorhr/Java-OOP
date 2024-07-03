@@ -104,7 +104,6 @@ public class Validator {
   public static void throwErrorIfDriversAreLessThan3(List<Driver> fastestDrivers, String raceName) {
     if (fastestDrivers.size() < 3) {
       throw new IllegalArgumentException(String.format(ExceptionMessages.RACE_INVALID, raceName, 3));
-
     }
   }
 }

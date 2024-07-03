@@ -10,6 +10,9 @@ import christmasRaces.factory.CarFactoryImpl;
 import christmasRaces.repositories.interfaces.Repository;
 import validations.Validator;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class ControllerImpl implements Controller {
   private Repository<Car> cars;
   private Repository<Driver> drivers;
@@ -64,11 +67,39 @@ public class ControllerImpl implements Controller {
 
   @Override
   public String startRace(String raceName) {
-    return null;
+    Validator.throwErrorIfRaceIsNotExistingInRepository(raceName, this.races.getAll());
+
+    Race race = this.races.getByName(raceName);
+
+    List<Driver> fastestDrivers =
+            race.getDrivers().stream().sorted((d1, d2) ->
+                    Double.compare(
+                            d2.getCar().calculateRacePoints(race.getLaps()),
+                            d1.getCar().calculateRacePoints(race.getLaps())))
+                    .limit(3)
+                    .collect(Collectors.toList());
+
+    fastestDrivers.get(0).winRace();
+
+    Validator.throwErrorIfDriversAreLessThan3(fastestDrivers, raceName);
+
+    return result(fastestDrivers, raceName);
   }
 
   @Override
   public String createRace(String name, int laps) {
     return null;
+  }
+
+  // Helpers
+
+  private String result(List<Driver> fastestDrivers, String raceName) {
+    StringBuilder sb = new StringBuilder();
+
+    sb.append(String.format(OutputMessages.DRIVER_FIRST_POSITION, fastestDrivers.get(0).getName(), raceName)).append(System.lineSeparator());
+    sb.append(String.format(OutputMessages.DRIVER_SECOND_POSITION, fastestDrivers.get(1).getName(), raceName)).append(System.lineSeparator());
+    sb.append(String.format(OutputMessages.DRIVER_THIRD_POSITION, fastestDrivers.get(2).getName(), raceName)).append(System.lineSeparator());
+
+    return sb.toString().trim();
   }
 }
