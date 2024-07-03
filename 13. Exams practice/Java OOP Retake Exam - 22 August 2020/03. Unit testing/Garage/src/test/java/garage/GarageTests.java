@@ -28,42 +28,38 @@ public class GarageTests {
     this.emptyGarage = new Garage();
   }
 
-  //Constructor tests
-
+  //test Garage constructor
   @Test
   public void testGarageIsInitializedWithWithEmptyListOfCars() {
     Assert.assertEquals(0, emptyGarage.getCount());
   }
 
-  //Unmodifiable list test
-
+  //test if getCars() returns Unmodifiable list
   @Test(expected = UnsupportedOperationException.class)
   public void testGetCarsReturnsUnmodifiableCollection() {
     this.garage.getCars().add(new Car("test_car", 0, 0));
   }
 
-  //addCar tests
+  //tests addCar()
   @Test
   public void testAddCarShouldWorksCorrect() {
     Assert.assertEquals(3, this.garage.getCars().size());
     Assert.assertEquals("Trabant", this.garage.getCars().get(2).getBrand());
   }
 
-  //addCar tests
   @Test(expected = IllegalArgumentException.class)
   public void testAddCarWithNullArgumentShouldThrowError() {
     this.garage.addCar(null);
   }
 
-  //findAllCarsWithMaxSpeedAbove test
+  //test findAllCarsWithMaxSpeedAbove()
   @Test
   public void testFindAllCarsWithMaxSpeedAboveShouldWorksCorrect() {
     List<Car> carsList = this.garage.findAllCarsWithMaxSpeedAbove(100);
     Assert.assertEquals(2, carsList.size());
   }
 
-  //getTheMostExpensiveCar test
-
+  //tests getTheMostExpensiveCar()
   @Test
   public void testGetTheMostExpensiveCarShouldWorksCorrect() {
     Car car = this.garage.getTheMostExpensiveCar();
@@ -77,12 +73,11 @@ public class GarageTests {
     Assert.assertNull(theMostExpensiveCar);
   }
 
-  //findByBrand test
+  //test findByBrand()
   @Test
   public void testFindByBrandShouldWorksCorrect() {
     List<Car> bmwList = this.garage.findAllCarsByBrand("BMW");
     Assert.assertEquals("BMW", bmwList.get(0).getBrand());
     Assert.assertEquals(45000, bmwList.get(0).getPrice(),0);
-
   }
 }
