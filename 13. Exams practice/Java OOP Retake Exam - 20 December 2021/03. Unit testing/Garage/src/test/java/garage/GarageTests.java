@@ -66,5 +66,11 @@ public class GarageTests {
     Assert.assertEquals("Mercedes-Benz", car.getBrand());
   }
 
+  @Test
+  public void testGetTheMostExpensiveCarShouldReturnNull() {
+    Car theMostExpensiveCar = this.emptyGarage.getTheMostExpensiveCar();
+    Assert.assertNull(theMostExpensiveCar);
+  }
+
 
 }
