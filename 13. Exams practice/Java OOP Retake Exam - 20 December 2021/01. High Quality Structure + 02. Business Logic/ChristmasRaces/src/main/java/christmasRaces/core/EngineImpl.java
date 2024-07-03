@@ -50,57 +50,28 @@ public class EngineImpl implements Engine {
 
         switch (command) {
             case AddDriverToRace:
-                result = this.addDriver(data);
+                result = this.controller.addDriverToRace(data[0], data[1]);
                 break;
             case End:
                 result = Command.End.name();
                 break;
             case StartRace:
-                result = this.startRace(data);
+                result = this.controller.startRace(data[0]);
                 break;
             case CreateDriver:
-                result = this.createDriver(data);
+                result = this.controller.createDriver(data[0]);
                 break;
             case AddCarToDriver:
-                result = this.addCar(data);
+                result = this.controller.addCarToDriver(data[0], data[1]);
                 break;
             case CreateCar:
-                result = this.createCar(data);
+                result = this.controller.createCar(data[0], data[1], Integer.parseInt(data[2]));
                 break;
             case CreateRace:
-                result = this.createRace(data);
+                result = this.controller.createRace(data[0], Integer.parseInt(data[1]));
                 break;
         }
+
         return result;
-    }
-
-    private String createRace(String[] data) {
-        // TODO
-        return null;
-    }
-
-    private String addDriver(String[] data) {
-        // TODO
-        return null;
-    }
-
-    private String startRace(String[] data) {
-        // TODO
-        return null;
-    }
-
-    private String addCar(String[] data) {
-        // TODO
-        return null;
-    }
-
-    private String createCar(String[] data) {
-        // TODO
-        return null;
-    }
-
-    private String createDriver(String[] data) {
-        // TODO
-        return null;
     }
 }
