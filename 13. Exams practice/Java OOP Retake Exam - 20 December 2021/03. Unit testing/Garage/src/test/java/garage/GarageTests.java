@@ -31,4 +31,10 @@ public class GarageTests {
     Assert.assertEquals(0, emptyGarage.getCount());
   }
 
+  //Unmodifiable list test
+  @Test(expected = UnsupportedOperationException.class)
+  public void testGetCarsReturnsUnmodifiableCollection() {
+    this.garage.getCars().add(new Car("test_car", 0, 0));
+  }
+
 }
