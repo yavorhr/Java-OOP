@@ -58,5 +58,13 @@ public class GarageTests {
     Assert.assertEquals(2, carsList.size());
   }
 
+  //test getTheMostExpensiveCar()
+  @Test
+  public void testGetTheMostExpensiveCarShouldWorksCorrect() {
+    Car car = this.garage.getTheMostExpensiveCar();
+    Assert.assertEquals(50000, car.getPrice(), 0);
+    Assert.assertEquals("Mercedes-Benz", car.getBrand());
+  }
+
 
 }
