@@ -19,29 +19,30 @@ public class ControllerImpl implements Controller {
   private Repository<Driver> drivers;
   private Repository<Race> races;
 
-  public ControllerImpl(Repository<Driver> drivers, Repository<Car> cars, Repository<Race> races) {
-    this.drivers = drivers;
+  public ControllerImpl(Repository<Car> cars, Repository<Driver> drivers, Repository<Race> races) {
     this.cars = cars;
+    this.drivers = drivers;
     this.races = races;
   }
 
   @Override
-  public String createDriver(String driverName) {
-    Validator.throwExceptionIfDriverAlreadyIsCreated(this.drivers.getAll(), driverName);
-    Driver driver = new DriverImpl(driverName);
+  public String createDriver(String name) {
+    Validator.throwExceptionIfDriverAlreadyIsCreated(this.drivers.getAll(), name);
+
+    Driver driver = new DriverImpl(name);
     this.drivers.add(driver);
 
-    return String.format(OutputMessages.DRIVER_CREATED, driverName);
+    return String.format(OutputMessages.DRIVER_CREATED, name);
   }
 
   @Override
   public String createCar(String type, String model, int horsePower) {
     Validator.throwErrorIfCarModelIsAlreadyAddedToRepository(this.cars.getAll(), model);
+
     Car car = CarFactoryImpl.createCar(type, model, horsePower);
     this.cars.add(car);
 
     return String.format(OutputMessages.CAR_CREATED, type + "Car", model);
-
   }
 
   @Override
@@ -81,7 +82,6 @@ public class ControllerImpl implements Controller {
                     .collect(Collectors.toList());
 
     fastestDrivers.get(0).winRace();
-
     Validator.throwErrorIfDriversAreLessThan3(fastestDrivers, raceName);
 
     return result(fastestDrivers, raceName);
@@ -97,9 +97,7 @@ public class ControllerImpl implements Controller {
     return String.format(OutputMessages.RACE_CREATED, raceName);
   }
 
-
   // Helpers
-
   private String result(List<Driver> fastestDrivers, String raceName) {
     StringBuilder sb = new StringBuilder();
 

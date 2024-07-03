@@ -19,7 +19,7 @@ public class Main {
         Repository<Race> raceRepository = new RaceRepository();
         Repository<Driver> driverRepository = new DriverRepository();
 
-        Controller controller = new ControllerImpl(driverRepository, carRepository, raceRepository);
+        Controller controller = new ControllerImpl(carRepository, driverRepository, raceRepository);
 
         ConsoleReader reader = new ConsoleReader();
         ConsoleWriter writer = new ConsoleWriter();
