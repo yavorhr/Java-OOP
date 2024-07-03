@@ -98,7 +98,6 @@ public class ControllerImpl implements Controller {
   }
 
   // Helpers
-
   private String result(List<Driver> fastestDrivers, String raceName) {
     StringBuilder sb = new StringBuilder();
 

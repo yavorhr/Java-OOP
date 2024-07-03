@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class Validator {
+
   // CAR
   public static void throwExceptionIfInvalidHorsePower(int horsePower, int lowerBound, int upperBound) {
     if (horsePower < lowerBound || horsePower > upperBound) {
@@ -16,12 +17,13 @@ public class Validator {
     }
   }
 
-  public static void throwExceptionIfLapsAreBelowOne(int laps) {
-    if (laps < 1) {
-      throw new IllegalArgumentException(ExceptionMessages.INVALID_NUMBER_OF_LAPS);
+  public static void throwExceptionIfInvalidModel(String model) {
+    if (model == null || model.trim().isEmpty() || model.length() < 4) {
+      throw new IllegalArgumentException(String.format(ExceptionMessages.INVALID_MODEL, model, 4));
     }
   }
 
+  // DRIVER
   public static void throwExceptionIfEmptyName(String name) {
     if (name == null || name.trim().isEmpty() || name.length() < 5) {
       throw new IllegalArgumentException(String.format(ExceptionMessages.INVALID_NAME, name, 5));
@@ -34,7 +36,13 @@ public class Validator {
     }
   }
 
-  // Driver
+  // RACE
+  public static void throwExceptionIfLapsAreBelowOne(int laps) {
+    if (laps < 1) {
+      throw new IllegalArgumentException(ExceptionMessages.INVALID_NUMBER_OF_LAPS);
+    }
+  }
+
   public static void throwExceptionIfDriverIsNull(Driver driver) {
     if (driver == null) {
       throw new IllegalArgumentException(ExceptionMessages.DRIVER_INVALID);
@@ -85,15 +93,16 @@ public class Validator {
       throw new IllegalArgumentException(String.format(ExceptionMessages.RACE_NOT_FOUND, raceName));
     }
   }
-  public static void throwErrorIfDriversAreLessThan3(List<Driver> fastestDrivers, String raceName) {
-    if (fastestDrivers.size() < 3) {
-      throw new IllegalArgumentException(String.format(ExceptionMessages.RACE_INVALID, raceName, 3));
-    }
-  }
+
   public static void throwErrorIfRaceIsAlreadyExistingInRepository(String raceName, Collection<Race> races) {
     if (races.stream().anyMatch(d -> d.getName().equals(raceName))) {
       throw new IllegalArgumentException(String.format(ExceptionMessages.RACE_EXISTS, raceName));
     }
   }
 
+  public static void throwErrorIfDriversAreLessThan3(List<Driver> fastestDrivers, String raceName) {
+    if (fastestDrivers.size() < 3) {
+      throw new IllegalArgumentException(String.format(ExceptionMessages.RACE_INVALID, raceName, 3));
+    }
+  }
 }
