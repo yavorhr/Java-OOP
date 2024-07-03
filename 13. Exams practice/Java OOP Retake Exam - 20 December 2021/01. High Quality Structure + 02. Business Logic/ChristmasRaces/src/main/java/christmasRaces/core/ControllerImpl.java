@@ -81,8 +81,8 @@ public class ControllerImpl implements Controller {
                     .limit(3)
                     .collect(Collectors.toList());
 
-    fastestDrivers.get(0).winRace();
     Validator.throwErrorIfDriversAreLessThan3(fastestDrivers, raceName);
+    fastestDrivers.get(0).winRace();
 
     return result(fastestDrivers, raceName);
   }
