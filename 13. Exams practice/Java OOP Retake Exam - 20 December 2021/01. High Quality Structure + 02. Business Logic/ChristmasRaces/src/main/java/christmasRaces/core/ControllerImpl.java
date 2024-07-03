@@ -6,6 +6,7 @@ import christmasRaces.entities.cars.Car;
 import christmasRaces.entities.drivers.Driver;
 import christmasRaces.entities.drivers.DriverImpl;
 import christmasRaces.entities.races.Race;
+import christmasRaces.entities.races.RaceImpl;
 import christmasRaces.factory.CarFactoryImpl;
 import christmasRaces.repositories.interfaces.Repository;
 import validations.Validator;
@@ -90,8 +91,12 @@ public class ControllerImpl implements Controller {
   public String createRace(String raceName, int laps) {
     Validator.throwErrorIfRaceIsAlreadyExistingInRepository(raceName, this.races.getAll());
 
-    return null;
+    Race race = new RaceImpl(raceName, laps);
+    this.races.add(race);
+
+    return String.format(OutputMessages.RACE_CREATED, raceName);
   }
+
 
   // Helpers
 
